@@ -1,0 +1,4 @@
+# VIETNAMESE FOOD RESTAURANT
+
+---
+The project is about creating an online food ordering system for a Vietnamese restaurant, with three primary roles: the Restaurant Owner, Customer, and Restaurant Staff. Customers can browse the available menu, receive dish recommendations, search for food using images, place orders, add items to their cart, view transaction history, like, and rate dishes. The Restaurant Owner has the ability to manage sales reports by day, month, or custom date range, oversee the menu, manage customers, staff, and all orders. Restaurant Staff are responsible for managing customer orders, tracking sales statistics, and managing the menu and customer information. This system aims to streamline operations for the restaurant while enhancing the customer experience.
