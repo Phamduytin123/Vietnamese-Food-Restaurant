@@ -62,9 +62,9 @@ export class Account {
 
     @UpdateDateColumn({
         type: 'timestamp',
-        onUpdate: 'CURRENT_TIMESTAMP',
+        nullable : true,
     })
-    updatedAt: Date;
+    updatedAt: Date = null;
 
     @OneToMany(() => Cart, cart => cart.account)
     carts: Cart[];

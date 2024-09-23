@@ -7,7 +7,10 @@ export class Category {
     id: number;
 
     @Column()
-    name: string;
+    name_vi: string;
+
+    @Column()
+    name_en: string;
 
     @Column()
     isFood: boolean;

@@ -3,6 +3,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    JoinColumn,
     ManyToOne,
     OneToMany,
     PrimaryGeneratedColumn,
@@ -19,7 +20,10 @@ export class Item {
     id: number;
 
     @Column()
-    name: string;
+    name_vi: string;
+
+    @Column()
+    name_en: string;
 
     @Column({
         default: 0,
@@ -42,7 +46,10 @@ export class Item {
     fiber: number;
 
     @Column()
-    description: string;
+    description_vi: string;
+
+    @Column()
+    description_en: string;
 
     @Column({
         default: ItemAvailabilityEnum.IN_STOCK,
@@ -59,7 +66,19 @@ export class Item {
         type: 'varchar',
         default: '[]',
     })
-    ingredients: string;
+    ingredients_vi: string;
+
+    @Column({
+        type: 'varchar',
+        default: '[]',
+    })
+    ingredients_en: string;
+
+    @Column()
+    unit_vi: string;
+
+    @Column()
+    unit_en: string;
 
     @Column({
         type: 'varchar',
@@ -68,7 +87,10 @@ export class Item {
     images: string;
 
     @Column()
-    regional: string;
+    regional_vi: string;
+
+    @Column()
+    regional_en: string;
 
     @Column({
         default: true,
@@ -80,6 +102,9 @@ export class Item {
     })
     isDeleted: boolean;
 
+    @Column()
+    categoryId : number;
+
     @CreateDateColumn({
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
@@ -88,11 +113,12 @@ export class Item {
 
     @UpdateDateColumn({
         type: 'timestamp',
-        onUpdate: 'CURRENT_TIMESTAMP',
+        nullable: true,
     })
-    updatedAt: Date;
+    updatedAt: Date = null;
 
     @ManyToOne(() => Category, category => category.items)
+    @JoinColumn({name : "categoryId"})
     category: Category;
 
     @OneToMany(() => ItemSize, itemSize => itemSize.item)
