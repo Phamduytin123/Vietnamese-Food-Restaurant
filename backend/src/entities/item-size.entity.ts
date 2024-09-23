@@ -25,10 +25,10 @@ export class ItemSize {
     price: number;
 
     @Column()
-    itemId : number;
+    itemId: number;
 
     @ManyToOne(() => Item, item => item.itemSizes)
-    @JoinColumn({name : 'itemId'})
+    @JoinColumn({ name: 'itemId' })
     item: Item;
 
     @OneToMany(() => Cart, cart => cart.itemSize)

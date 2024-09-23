@@ -4,7 +4,6 @@ import { DataSource } from 'typeorm';
 
 const drinkData = require('./drink_data.json');
 
-
 export default class DrinkSeeder implements Seeder {
     private dataSource: DataSource;
 

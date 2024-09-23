@@ -103,7 +103,7 @@ export class Item {
     isDeleted: boolean;
 
     @Column()
-    categoryId : number;
+    categoryId: number;
 
     @CreateDateColumn({
         type: 'timestamp',
@@ -118,7 +118,7 @@ export class Item {
     updatedAt: Date = null;
 
     @ManyToOne(() => Category, category => category.items)
-    @JoinColumn({name : "categoryId"})
+    @JoinColumn({ name: 'categoryId' })
     category: Category;
 
     @OneToMany(() => ItemSize, itemSize => itemSize.item)

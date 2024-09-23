@@ -62,7 +62,7 @@ export class Account {
 
     @UpdateDateColumn({
         type: 'timestamp',
-        nullable : true,
+        nullable: true,
     })
     updatedAt: Date = null;
 
