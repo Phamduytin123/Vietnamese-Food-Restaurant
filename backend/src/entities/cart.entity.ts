@@ -18,6 +18,12 @@ export class Cart {
     @Column()
     quantity: number;
 
+    @Column()
+    accountId : number;
+
+    @Column()
+    itemSizeId : number;
+
     @CreateDateColumn({
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
@@ -26,13 +32,15 @@ export class Cart {
 
     @UpdateDateColumn({
         type: 'timestamp',
-        onUpdate: 'CURRENT_TIMESTAMP',
+        nullable: true,
     })
-    updatedAt: Date;
+    updatedAt: Date = null;
 
     @ManyToOne(() => Account, account => account.carts)
+    @JoinColumn({name : "accountId"})
     account: Account;
 
     @ManyToOne(() => ItemSize, itemSize => itemSize.carts)
+    @JoinColumn({name : "itemSizeId"})
     itemSize: ItemSize;
 }

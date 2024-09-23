@@ -2,6 +2,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    JoinColumn,
     ManyToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
@@ -20,6 +21,12 @@ export class Review {
     @Column()
     comment: string;
 
+    @Column()
+    itemId : number;
+
+    @Column()
+    accountId : number;
+
     @CreateDateColumn({
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
@@ -28,13 +35,15 @@ export class Review {
 
     @UpdateDateColumn({
         type: 'timestamp',
-        onUpdate: 'CURRENT_TIMESTAMP',
+        nullable: true,
     })
-    updatedAt: Date;
+    updatedAt: Date = null;
 
     @ManyToOne(() => Item, item => item.reviews)
+    @JoinColumn({name : "itemId"})
     item: Item;
 
     @ManyToOne(() => Account, account => account.reviews)
+    @JoinColumn({name : "accountId"})
     account: Account;
 }

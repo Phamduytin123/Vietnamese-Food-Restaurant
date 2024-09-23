@@ -2,6 +2,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    JoinColumn,
     ManyToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
@@ -14,6 +15,12 @@ export class Like {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @Column()
+    accountId : number;
+
+    @Column()
+    itemId : number;
+
     @CreateDateColumn({
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
@@ -22,13 +29,15 @@ export class Like {
 
     @UpdateDateColumn({
         type: 'timestamp',
-        onUpdate: 'CURRENT_TIMESTAMP',
+        nullable: true,
     })
-    updatedAt: Date;
+    updatedAt: Date = null;
 
     @ManyToOne(() => Account, account => account.likes)
+    @JoinColumn({name : "accountId"})
     account: Account;
 
     @ManyToOne(() => Item, item => item.likes)
+    @JoinColumn({name : "itemId"})
     item: Item;
 }

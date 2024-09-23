@@ -14,7 +14,10 @@ export class Voucher {
     id: number;
 
     @Column()
-    name: string;
+    name_vi: string;
+
+    @Column()
+    name_en: string;
 
     @Column()
     discount: number;
@@ -41,9 +44,9 @@ export class Voucher {
 
     @UpdateDateColumn({
         type: 'timestamp',
-        onUpdate: 'CURRENT_TIMESTAMP',
+        nullable: true,
     })
-    updatedAt: Date;
+    updatedAt: Date = null;
 
     @OneToMany(() => Order, order => order.voucher)
     orders: Order;

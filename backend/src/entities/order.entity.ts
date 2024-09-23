@@ -4,6 +4,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    JoinColumn,
     ManyToOne,
     OneToMany,
     PrimaryGeneratedColumn,
@@ -51,6 +52,12 @@ export class Order {
     @Column()
     note: string;
 
+    @Column()
+    accountId : number;
+
+    @Column()
+    voucherId : number;
+
     @CreateDateColumn({
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP',
@@ -59,16 +66,18 @@ export class Order {
 
     @UpdateDateColumn({
         type: 'timestamp',
-        onUpdate: 'CURRENT_TIMESTAMP',
+        nullable: true,
     })
-    updatedAt: Date;
+    updatedAt: Date = null;
 
     @ManyToOne(() => Account, account => account.orders)
+    @JoinColumn({name : "accountId"})
     account: Account;
 
     @OneToMany(() => OrderDetail, orderDetail => orderDetail.order)
     orderDetails: OrderDetail[];
 
     @ManyToOne(() => Voucher, voucher => voucher.orders)
+    @JoinColumn({name : "voucherId"})
     voucher: Voucher;
 }
