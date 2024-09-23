@@ -12,7 +12,12 @@ const categoryData = [
     { id: 6, name_vi: 'Món ăn kèm', name_en: 'Side dish', isFood: true },
     { id: 7, name_vi: 'Món khác', name_en: 'Other dishes', isFood: true },
     // drink
-    { id: 8, name_vi: 'Nước trái cây', name_en: 'Fresh fruit juice', isFood: false },
+    {
+        id: 8,
+        name_vi: 'Nước trái cây',
+        name_en: 'Fresh fruit juice',
+        isFood: false,
+    },
     { id: 9, name_vi: 'Trà', name_en: 'Tea', isFood: false },
     { id: 10, name_vi: 'Nước ngọt', name_en: 'Soft drinks', isFood: false },
     { id: 11, name_vi: 'Sinh tố', name_en: 'Smoothies', isFood: false },
@@ -21,7 +26,12 @@ const categoryData = [
     { id: 14, name_vi: 'Cocktail', name_en: 'Cocktail', isFood: false },
     { id: 15, name_vi: 'Cà phê', name_en: 'Coffee', isFood: false },
     { id: 16, name_vi: 'Trà sữa', name_en: 'Milk tea', isFood: false },
-    { id: 17, name_vi: 'Nước uống khác', name_en: 'Other beverages', isFood: false },
+    {
+        id: 17,
+        name_vi: 'Nước uống khác',
+        name_en: 'Other beverages',
+        isFood: false,
+    },
 ];
 
 export default class CategorySeeder implements Seeder {

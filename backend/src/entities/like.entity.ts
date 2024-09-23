@@ -16,10 +16,10 @@ export class Like {
     id: number;
 
     @Column()
-    accountId : number;
+    accountId: number;
 
     @Column()
-    itemId : number;
+    itemId: number;
 
     @CreateDateColumn({
         type: 'timestamp',
@@ -34,10 +34,10 @@ export class Like {
     updatedAt: Date = null;
 
     @ManyToOne(() => Account, account => account.likes)
-    @JoinColumn({name : "accountId"})
+    @JoinColumn({ name: 'accountId' })
     account: Account;
 
     @ManyToOne(() => Item, item => item.likes)
-    @JoinColumn({name : "itemId"})
+    @JoinColumn({ name: 'itemId' })
     item: Item;
 }

@@ -2,7 +2,7 @@ import { Seeder } from 'typeorm-extension';
 import { Item } from '../../entities';
 import { DataSource } from 'typeorm';
 
-const foodData = require('./food_data.json')
+const foodData = require('./food_data.json');
 
 export default class FoodSeeder implements Seeder {
     private dataSource: DataSource;

@@ -19,10 +19,10 @@ export class Cart {
     quantity: number;
 
     @Column()
-    accountId : number;
+    accountId: number;
 
     @Column()
-    itemSizeId : number;
+    itemSizeId: number;
 
     @CreateDateColumn({
         type: 'timestamp',
@@ -37,10 +37,10 @@ export class Cart {
     updatedAt: Date = null;
 
     @ManyToOne(() => Account, account => account.carts)
-    @JoinColumn({name : "accountId"})
+    @JoinColumn({ name: 'accountId' })
     account: Account;
 
     @ManyToOne(() => ItemSize, itemSize => itemSize.carts)
-    @JoinColumn({name : "itemSizeId"})
+    @JoinColumn({ name: 'itemSizeId' })
     itemSize: ItemSize;
 }

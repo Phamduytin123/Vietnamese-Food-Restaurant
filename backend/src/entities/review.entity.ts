@@ -22,10 +22,10 @@ export class Review {
     comment: string;
 
     @Column()
-    itemId : number;
+    itemId: number;
 
     @Column()
-    accountId : number;
+    accountId: number;
 
     @CreateDateColumn({
         type: 'timestamp',
@@ -40,10 +40,10 @@ export class Review {
     updatedAt: Date = null;
 
     @ManyToOne(() => Item, item => item.reviews)
-    @JoinColumn({name : "itemId"})
+    @JoinColumn({ name: 'itemId' })
     item: Item;
 
     @ManyToOne(() => Account, account => account.reviews)
-    @JoinColumn({name : "accountId"})
+    @JoinColumn({ name: 'accountId' })
     account: Account;
 }

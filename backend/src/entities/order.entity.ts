@@ -53,10 +53,10 @@ export class Order {
     note: string;
 
     @Column()
-    accountId : number;
+    accountId: number;
 
     @Column()
-    voucherId : number;
+    voucherId: number;
 
     @CreateDateColumn({
         type: 'timestamp',
@@ -71,13 +71,13 @@ export class Order {
     updatedAt: Date = null;
 
     @ManyToOne(() => Account, account => account.orders)
-    @JoinColumn({name : "accountId"})
+    @JoinColumn({ name: 'accountId' })
     account: Account;
 
     @OneToMany(() => OrderDetail, orderDetail => orderDetail.order)
     orderDetails: OrderDetail[];
 
     @ManyToOne(() => Voucher, voucher => voucher.orders)
-    @JoinColumn({name : "voucherId"})
+    @JoinColumn({ name: 'voucherId' })
     voucher: Voucher;
 }

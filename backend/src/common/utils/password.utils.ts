@@ -10,7 +10,10 @@ export class PasswordUtils {
     }
 
     // Phương thức để kiểm tra password (đồng bộ)
-    static checkPassword(plainPassword: string, hashedPassword: string): boolean {
+    static checkPassword(
+        plainPassword: string,
+        hashedPassword: string
+    ): boolean {
         return bcrypt.compareSync(plainPassword, hashedPassword);
     }
 }
