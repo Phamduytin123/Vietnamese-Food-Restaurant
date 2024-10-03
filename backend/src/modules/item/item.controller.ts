@@ -1,12 +1,17 @@
-import { Body, Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Param } from '@nestjs/common';
 import { ItemService } from './item.service';
 
-@Controller('items')
+@Controller('/:lang/items')
 export class ItemController {
     constructor(private readonly itemService: ItemService) {}
 
     @Get()
-    getListItem(@Body() body: any) {
-        return this.itemService.getListItem(body);
+    getListItem(@Param('lang') lang: string, @Body() body: any) {
+        return this.itemService.getListItem(lang, body);
+    }
+
+    @Get('/:id')
+    getItemDetail(@Param('lang') lang: string, @Param('id') id: number) {
+        return this.itemService.getItemDetail(lang, id);
     }
 }

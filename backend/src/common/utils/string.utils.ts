@@ -6,4 +6,9 @@ export class StringUtils {
 
         return stringArray;
     }
+
+    static toMoneyString(price: number): string {
+        const formattedPrice = (price * 1000).toLocaleString('vi-VN');
+        return `${formattedPrice} VND`;
+    }
 }
