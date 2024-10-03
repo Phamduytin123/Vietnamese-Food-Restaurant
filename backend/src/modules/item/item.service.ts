@@ -101,7 +101,7 @@ export class ItemService {
         );
 
         // filter data
-        var newItems: any = items.map(item => {
+        var filterItems: any = items.map(item => {
             const {
                 name_vi,
                 name_en,
@@ -152,7 +152,7 @@ export class ItemService {
 
         // sort data by price
         if (sortBy === 'price') {
-            newItems = newItems.sort((a: any, b: any) => {
+            filterItems = filterItems.sort((a: any, b: any) => {
                 if (sortOrder.toUpperCase() === 'ASC') {
                     return a.maxPrice - b.maxPrice;
                 } else {
@@ -162,7 +162,7 @@ export class ItemService {
         }
 
         return {
-            items: newItems,
+            items: filterItems,
             totalItems: totalItems,
             currentPage: page,
             totalPages: Math.ceil(totalItems / limit),
