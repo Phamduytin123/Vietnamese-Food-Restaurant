@@ -5,8 +5,8 @@ import { ItemController } from './item.controller';
 import { Item, ItemSize } from '../../entities';
 
 @Module({
-  imports : [TypeOrmModule.forFeature([Item, ItemSize])],
-  providers: [ItemService],
-  controllers: [ItemController]
+    imports: [TypeOrmModule.forFeature([Item, ItemSize])],
+    providers: [ItemService],
+    controllers: [ItemController],
 })
 export class ItemModule {}

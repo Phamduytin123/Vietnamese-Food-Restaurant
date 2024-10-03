@@ -1,5 +1,9 @@
-import { Category } from './../../entities/category.entity';
-import { Body, Injectable } from '@nestjs/common';
+import {
+    BadRequestException,
+    Body,
+    Injectable,
+    NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Item, ItemSize } from '../../entities';
 import {
@@ -23,7 +27,7 @@ export class ItemService {
         private readonly itemSizeRepo: Repository<ItemSize>
     ) {}
 
-    async getListItem(@Body() body: any) {
+    async getListItem(lang: string, @Body() body: any) {
         const {
             page = 1,
             limit = 12,
@@ -32,7 +36,6 @@ export class ItemService {
             txtSearch,
             isFood = true,
             sortBy = 'name',
-            lang = 'vi',
             sortOrder = 'ASC',
             isDiscount = false,
             categoryId,
@@ -132,9 +135,9 @@ export class ItemService {
                 ingredients: StringUtils.toArray(item[ingredientsField]),
                 unit: item[unitField],
                 regional: item[regionalField],
-                ammount_of_money: `${min}-${max}`,
-                minPrice: min,
-                maxPrice: max,
+                ammount_of_money: `${StringUtils.toMoneyString(min)} - ${StringUtils.toMoneyString(max)}`,
+                minPrice: StringUtils.toMoneyString(min),
+                maxPrice: StringUtils.toMoneyString(max),
                 ...restItem,
                 category: {
                     id: item.category.id,
@@ -144,7 +147,7 @@ export class ItemService {
                 itemSizes: item.itemSizes.map(itemSize => ({
                     id: itemSize.id,
                     size: itemSize[`size_${lang}`],
-                    price: itemSize.price,
+                    price: StringUtils.toMoneyString(itemSize.price),
                     itemId: itemSize.itemId,
                 })),
             };
@@ -153,10 +156,20 @@ export class ItemService {
         // sort data by price
         if (sortBy === 'price') {
             filterItems = filterItems.sort((a: any, b: any) => {
+                // Chuyển đổi chuỗi tiền tệ thành số
+                const priceA = parseInt(
+                    a.maxPrice.replace(/\./g, '').replace(' VND', ''),
+                    10
+                );
+                const priceB = parseInt(
+                    b.maxPrice.replace(/\./g, '').replace(' VND', ''),
+                    10
+                );
+
                 if (sortOrder.toUpperCase() === 'ASC') {
-                    return a.maxPrice - b.maxPrice;
+                    return priceA - priceB;
                 } else {
-                    return b.minPrice - a.minPrice;
+                    return priceB - priceA;
                 }
             });
         }
@@ -167,5 +180,90 @@ export class ItemService {
             currentPage: page,
             totalPages: Math.ceil(totalItems / limit),
         };
+    }
+
+    async getItemDetail(lang: string, id: number) {
+        try {
+            if (isNaN(id)) {
+                throw new BadRequestException('ID must be a number');
+            }
+
+            const itemDetail = await this.itemRepo.findOne({
+                where: { id },
+                relations: [
+                    'category',
+                    'itemSizes',
+                    'reviews',
+                    'reviews.account',
+                ],
+            });
+
+            if (!itemDetail) {
+                throw new NotFoundException(`Item with ID ${id} not found`);
+            }
+
+            const {
+                name_vi,
+                name_en,
+                description_vi,
+                description_en,
+                ingredients_vi,
+                ingredients_en,
+                unit_en,
+                unit_vi,
+                regional_en,
+                regional_vi,
+                images,
+                ...restItemDetail
+            } = itemDetail;
+
+            var min = Infinity;
+            var max = -1;
+
+            itemDetail.itemSizes.forEach(itemSize => {
+                min = min > itemSize.price ? itemSize.price : min;
+                max = max < itemSize.price ? itemSize.price : max;
+            });
+
+            return {
+                name: itemDetail[`name_${lang}`],
+                images: StringUtils.toArray(itemDetail.images),
+                description: itemDetail[`description_${lang}`],
+                ingredients: StringUtils.toArray(
+                    itemDetail[`ingredients_${lang}`]
+                ),
+                unit: itemDetail[`unit_${lang}`],
+                regional: itemDetail[`regional_${lang}`],
+                ammount_of_money: `${StringUtils.toMoneyString(min)} - ${StringUtils.toMoneyString(max)}`,
+                minPrice: StringUtils.toMoneyString(min),
+                maxPrice: StringUtils.toMoneyString(max),
+                ...restItemDetail,
+                category: {
+                    id: itemDetail.category.id,
+                    name: itemDetail.category[`name_${lang}`],
+                    isFood: itemDetail.category.isFood,
+                },
+                itemSizes: itemDetail.itemSizes.map(itemSize => ({
+                    id: itemSize.id,
+                    size: itemSize[`size_${lang}`],
+                    price: StringUtils.toMoneyString(itemSize.price),
+                    itemId: itemSize.itemId,
+                })),
+                reviews: itemDetail.reviews.map(review => {
+                    const { password, role, ...restAccountReview } =
+                        review.account;
+
+                    return {
+                        ...review,
+                        account: restAccountReview,
+                    };
+                }),
+            };
+        } catch (error: any) {
+            return {
+                statusCode: error?.status || 500,
+                message: error?.message || 'Internal server error',
+            };
+        }
     }
 }
