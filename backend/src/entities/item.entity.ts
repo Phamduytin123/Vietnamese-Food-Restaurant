@@ -81,7 +81,7 @@ export class Item {
     unit_en: string;
 
     @Column({
-        type: 'varchar',
+        type: 'text',
         default: '[]',
     })
     images: string;
