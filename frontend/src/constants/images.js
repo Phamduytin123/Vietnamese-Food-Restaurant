@@ -1,0 +1,20 @@
+export const IMAGES = {
+    image_bgr: require('../assets/images/img-bgr.png'),
+    image_bgr_footer: require('../assets/images/img-bgr-footer.png'),
+    image_slide_test1: require('../assets/images/image-slide-test1.png'),
+    image_slide_test2: require('../assets/images/image-slide-test2.png'),
+    image_slide_test3: require('../assets/images/image-slide-test3.png'),
+    image_slide_test4: require('../assets/images/image-slide-test4.png'),
+    image_slide_test5: require('../assets/images/image-slide-test5.png'),
+    image_category1: require('../assets/images/img-category1.png'),
+    image_category2: require('../assets/images/img-category2.png'),
+    image_category3: require('../assets/images/img-category3.png'),
+    image_category4: require('../assets/images/img-category4.png'),
+    image_category5: require('../assets/images/img-category5.png'),
+    image_category6: require('../assets/images/img-category6.png'),
+    background: require('../assets/images/Background.png'),
+    appdetect: require('../assets/images/appdetect.jpg'),
+    img_show1: require('../assets/images/img-show1.jpg'),
+    img_show2: require('../assets/images/img-show2.jpg'),
+    img_show3: require('../assets/images/img-show3.jpg')
+};    
