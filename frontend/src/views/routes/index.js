@@ -3,9 +3,7 @@ import { Routes, Route} from "react-router-dom";
 import PublicRoute from "./public-route";
 import React, { useEffect } from 'react';
 import WebFont from 'webfontloader';
-import Header from "../../components/headers";
-import Footer from "../../components/footers";
-import MainLayout from '../../components/layouts/MainLayout';
+import HomePage from '../pages/homepage';
 
 const AllRoutes = () => {
     useEffect(() => {
@@ -24,7 +22,7 @@ const AllRoutes = () => {
                 <Route
                     path="/"
                     element={
-                        <MainLayout />
+                        <HomePage />
                     }
                 />
             </Route>
