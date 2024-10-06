@@ -3,11 +3,13 @@ import Header from "../headers";
 import React from "react";
 import "./MainLayout.scss";
 
-function MainLayout() {
+function MainLayout(props) {
   return (
     <div className="frame-wrapper">
       <Header />
-
+        <div class='frame-body'>
+          <props.component/>
+        </div>
       <Footer />
     </div>
   );

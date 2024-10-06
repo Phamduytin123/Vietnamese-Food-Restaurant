@@ -1,0 +1,55 @@
+@import '../../constants/colors.scss';
+.frame_wrapper {
+  position: relative;
+  background-size: cover;    /* Ảnh sẽ bao phủ toàn bộ thẻ div */
+  background-position: center; /* Căn giữa ảnh trong thẻ div */
+  background-repeat: no-repeat; /* Không lặp lại ảnh */
+  background-image: url('../../assets/images/backgroundLogin-395.png');
+  width: 100%;
+  min-height: 800px;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(241, 114, 40, 0.5);
+    z-index: 1;
+  }
+}
+
+.form {
+  width: 30%;
+  z-index: 2;
+  background-color: $form-data-background-color;
+  border-radius: 10px;
+  .tab_button {
+    width: 50%;
+    color: $text-color__gray;
+    font-size: 20px;
+    font-weight: 600;
+    border: none;
+    background-color: $white-color;
+    padding: 16px 24px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    &.actived{
+      border-bottom: solid 3px #FA8232;
+      color: $text-color__black;
+    }
+  }
+  .form-data {
+    width: 100%;
+    padding: 4px;
+  }
+}
+.hide-password {
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer
+}
+.text-color__black {
+  color: $text-color__black;
+}
