@@ -14,6 +14,9 @@ export const dataSourceOptions: DataSourceOptions = {
     entities: Object.values(entities),
     migrations: ['dist/database/migrations/*.js'],
     synchronize: true,
+    extra: {
+        connectionLimit: 3, 
+    },
 };
 
 const dataSource = new DataSource(dataSourceOptions);

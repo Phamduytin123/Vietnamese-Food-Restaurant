@@ -12,6 +12,11 @@ export class Category {
     @Column()
     name_en: string;
 
+    @Column({
+        default : "https://res.cloudinary.com/deei5izfg/image/upload/v1728210344/VietnameseFoodRestaurant/default_category.png"
+    })
+    url : String;
+
     @Column()
     isFood: boolean;
 

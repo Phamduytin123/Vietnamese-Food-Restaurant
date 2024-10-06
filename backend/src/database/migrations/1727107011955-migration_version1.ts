@@ -5,7 +5,7 @@ export class Version11727107011955 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(
-            `CREATE TABLE \`category\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name_vi\` varchar(255) NOT NULL, \`name_en\` varchar(255) NOT NULL, \`isFood\` tinyint NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`
+            `CREATE TABLE \`category\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name_vi\` varchar(255) NOT NULL, \`name_en\` varchar(255) NOT NULL, \`url\` varchar(255) NOT NULL DEFAULT 'https://res.cloudinary.com/deei5izfg/image/upload/v1728210344/VietnameseFoodRestaurant/default_category.png', \`isFood\` tinyint NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`
         );
         await queryRunner.query(
             `CREATE TABLE \`like\` (\`id\` int NOT NULL AUTO_INCREMENT, \`accountId\` int NOT NULL, \`itemId\` int NOT NULL, \`createdAt\` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP, \`updatedAt\` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`
