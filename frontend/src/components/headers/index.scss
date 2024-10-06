@@ -1,0 +1,117 @@
+*,p {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito Sans', sans-serif; 
+}
+
+.navbar{
+  padding: 0 !important;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  background: #ffffff;
+}
+
+/* Container for the entire page */
+.container-header {
+  width: 100%;
+}
+
+.logo-header {
+  width: 70px;
+  height: 70px;
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 25.11px;
+  color: #f17228ff;
+  letter-spacing: -0.78px;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: #f17228ff !important; /* Loại bỏ màu hover */
+  }
+}
+
+
+.deliver-address {
+  display: flex;
+  align-items: center;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  margin-left: 12px;
+    a{
+      text-decoration: none;
+      font-weight: 800;
+      color: rgba(0,0,0,0.65);
+      &:hover,
+      &:focus,
+      &:active {
+        color: rgba(0,0,0,0.65) !important; /* Loại bỏ màu hover */
+      }
+    }
+    .deliver{
+      font-weight: 800;
+      margin-right: 6px;
+    }
+    .cur-location{
+      margin-right: 5px;
+    }
+
+}
+
+.location-icon {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-style: normal;
+  font-size: 18px;
+  color: #ffb30eff;
+}
+
+.btn-login {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 14px 24px;
+  margin-left: 30px;
+  border: none;
+  box-shadow: 
+    0px 5px 10px rgba(255, 174, 0, 0.26),
+    0px 20px 40px rgba(255, 174, 0, 0.29); 
+  transition: all 0.3s ease; 
+  &:hover {
+    box-shadow: 
+      0px 10px 20px rgba(255, 174, 0, 0.6), 
+      0px 30px 50px rgba(255, 174, 0, 0.4); 
+    background: #ffffff !important;
+    color: #ffffff !important;
+  }
+}
+
+.login-icon {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-style: normal;
+  font-size: 18px;
+  color: rgba(255,138,0,1);
+  margin-right: 10px;
+}
+
+.login-text {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 100%;
+  background: linear-gradient(92.84deg, rgba(255,184,0,1) 47.7%, rgba(255,138,0,1) 136.8%);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
