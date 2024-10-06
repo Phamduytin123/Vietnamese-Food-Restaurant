@@ -8,7 +8,7 @@ export class AccountService {
     constructor(
         @InjectRepository(Account)
         private readonly accountRepo: Repository<Account>
-    ) {}
+    ) { }
 
     async findAll(): Promise<Account[]> {
         return this.accountRepo.find();
@@ -25,5 +25,9 @@ export class AccountService {
 
         const account = this.accountRepo.create(newAccount);
         return this.accountRepo.save(account);
+    }
+
+    findByEmail(email: string): Promise<Account | null> {
+        return this.accountRepo.findOneBy({ email });
     }
 }
