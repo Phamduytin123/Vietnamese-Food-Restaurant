@@ -36,14 +36,10 @@ export class Voucher {
     })
     count: number;
 
-    @CreateDateColumn({
-        type: 'timestamp',
-        default: () => 'CURRENT_TIMESTAMP',
-    })
+    @CreateDateColumn()
     createdAt: Date;
 
     @UpdateDateColumn({
-        type: 'timestamp',
         nullable: true,
     })
     updatedAt: Date = null;

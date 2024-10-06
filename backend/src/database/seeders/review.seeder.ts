@@ -20,7 +20,7 @@ export default class ReviewSeeder implements Seeder {
 
                 const review: Partial<Review> = {
                     rating: Math.floor(Math.random() * 5) + 1,
-                    comment: faker.lorem.sentences(),
+                    comment: faker.lorem.sentences().substring(0, 900),
                     itemId: itemId,
                     accountId: accountId,
                     createdAt: new Date(),

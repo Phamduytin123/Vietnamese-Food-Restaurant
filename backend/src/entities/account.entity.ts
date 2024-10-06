@@ -54,15 +54,12 @@ export class Account {
     })
     role: AccountRoleEnum;
 
-    @CreateDateColumn({
-        type: 'timestamp',
-        default: () => 'CURRENT_TIMESTAMP',
-    })
+    @CreateDateColumn()
     createdAt: Date;
 
     @UpdateDateColumn({
-        type: 'timestamp',
         nullable: true,
+        default: null,
     })
     updatedAt: Date = null;
 

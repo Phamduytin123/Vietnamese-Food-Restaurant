@@ -30,19 +30,29 @@ export class Item {
     })
     discount: number;
 
-    @Column()
+    @Column({
+        nullable : true,
+    })
     carbohydrates: number;
 
-    @Column()
+    @Column({
+        nullable: true,
+    })
     protein: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     cholesterol: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     sodium: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     fiber: number;
 
     @Column()
@@ -65,12 +75,14 @@ export class Item {
     @Column({
         type: 'varchar',
         default: '[]',
+        length: 1000,
     })
     ingredients_vi: string;
 
     @Column({
         type: 'varchar',
         default: '[]',
+        length: 1000,
     })
     ingredients_en: string;
 
@@ -81,15 +93,20 @@ export class Item {
     unit_en: string;
 
     @Column({
-        type: 'text',
+        type: 'varchar',
         default: '[]',
+        length: 2000,
     })
     images: string;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     regional_vi: string;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     regional_en: string;
 
     @Column({
@@ -105,14 +122,10 @@ export class Item {
     @Column()
     categoryId: number;
 
-    @CreateDateColumn({
-        type: 'timestamp',
-        default: () => 'CURRENT_TIMESTAMP',
-    })
+    @CreateDateColumn()
     createdAt: Date;
 
     @UpdateDateColumn({
-        type: 'timestamp',
         nullable: true,
     })
     updatedAt: Date = null;
