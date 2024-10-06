@@ -5,10 +5,13 @@ import { AccountModule } from './modules/account/account.module';
 import { DatabaseModule } from './common/config/database.config.module';
 import { ItemModule } from './modules/item/item.module';
 import { CategoryModule } from './modules/category/category.module';
-
+import { AuthModule } from './modules/auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
 @Module({
-    imports: [DatabaseModule, AccountModule, ItemModule, CategoryModule],
+    imports: [DatabaseModule, AccountModule, ItemModule, CategoryModule, AuthModule],
     controllers: [AppController],
-    providers: [AppService],
+    providers: [
+        AppService,
+    ],
 })
-export class AppModule {}
+export class AppModule { }
