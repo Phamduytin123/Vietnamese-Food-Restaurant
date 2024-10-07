@@ -1,6 +1,5 @@
-import { DEFAULT_AVA } from '../common/constants';
-import { AccountGenderEnum } from '../common/enums/account-gender.enum';
-import { AccountRoleEnum } from '../common/enums/account-role.enum';
+import { DEFAULT_AVA, AccountGenderEnum, AccountRoleEnum } from '../common';
+
 import {
     Column,
     CreateDateColumn,

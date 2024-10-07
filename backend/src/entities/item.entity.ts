@@ -1,4 +1,4 @@
-import { ItemAvailabilityEnum } from '../common/enums/item-availability.enum';
+import { ItemAvailabilityEnum } from '../common';
 import {
     Column,
     CreateDateColumn,
@@ -31,7 +31,7 @@ export class Item {
     discount: number;
 
     @Column({
-        nullable : true,
+        nullable: true,
     })
     carbohydrates: number;
 
@@ -41,17 +41,17 @@ export class Item {
     protein: number;
 
     @Column({
-        nullable: true
+        nullable: true,
     })
     cholesterol: number;
 
     @Column({
-        nullable: true
+        nullable: true,
     })
     sodium: number;
 
     @Column({
-        nullable: true
+        nullable: true,
     })
     fiber: number;
 
@@ -100,12 +100,12 @@ export class Item {
     images: string;
 
     @Column({
-        nullable: true
+        nullable: true,
     })
     regional_vi: string;
 
     @Column({
-        nullable: true
+        nullable: true,
     })
     regional_en: string;
 

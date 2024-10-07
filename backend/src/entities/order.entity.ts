@@ -1,5 +1,5 @@
-import { OrderPaymentMethodEnum } from '../common/enums/order-payment-method.enum';
-import { OrderStatusEnum } from '../common/enums/order-status.enum';
+import { OrderPaymentMethodEnum, OrderStatusEnum } from '../common';
+
 import {
     Column,
     CreateDateColumn,

@@ -1,13 +1,14 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { Account } from '../../entities';
 import { AccountService } from './account.service';
-import { AuthGuard } from '../../common/guards/auth.guard';
 // import { CurrentAccount } from '../../common/decorator/currentAccount.decorator';
+import { AccountRoleEnum } from '../../common';
 import { RoleGuard } from '../../common/guards/role.guard';
+import { AuthGuard } from '../../common/guards/auth.guard';
 
 @Controller('accounts')
 export class AccountController {
-    constructor(private readonly accountService: AccountService) { }
+    constructor(private readonly accountService: AccountService) {}
 
     @Post()
     async create(@Body() requestBody: any): Promise<Account> {
@@ -15,7 +16,7 @@ export class AccountController {
     }
 
     @Get()
-    @UseGuards(new RoleGuard(['admin', 'staff']))
+    @UseGuards(new RoleGuard([AccountRoleEnum.ADMIN, AccountRoleEnum.STAFF]))
     @UseGuards(AuthGuard)
     getListAccount() {
         // getListAccount(@CurrentAccount() currentAccount: Account) {

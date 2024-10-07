@@ -1,9 +1,11 @@
 import { Seeder } from 'typeorm-extension';
 import { Account } from '../../entities';
 import { DataSource } from 'typeorm';
-import { AccountGenderEnum } from '../../common/enums/account-gender.enum';
-import { PasswordUtils } from '../../common/utils/password.utils';
-import { AccountRoleEnum } from '../../common/enums/account-role.enum';
+import {
+    AccountGenderEnum,
+    PasswordUtils,
+    AccountRoleEnum,
+} from '../../common';
 
 const accountData = [
     {

@@ -1,36 +1,42 @@
-import { Injectable, CanActivate, ExecutionContext, UnauthorizedException, BadRequestException } from '@nestjs/common';
+import {
+    Injectable,
+    CanActivate,
+    ExecutionContext,
+    UnauthorizedException,
+    BadRequestException,
+} from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { AccountService } from '../../modules/account/account.service';
 @Injectable()
 export class AuthGuard implements CanActivate {
-    constructor(private jwtService: JwtService, private accountService: AccountService) { }
-    async canActivate(
-        context: ExecutionContext,
-    ): Promise<boolean> {
+    constructor(
+        private accountService: AccountService,
+        private jwtService: JwtService
+    ) {}
+    async canActivate(context: ExecutionContext): Promise<boolean> {
         const request = context.switchToHttp().getRequest();
         const token = this.extractTokenFromHeader(request);
         if (!token) {
             throw new UnauthorizedException();
         }
         try {
-            const payload = await this.jwtService.verifyAsync(
-                token,
-                {
-                    secret: process.env.JWT_SECRET
-                }
-            );
+            const payload = await this.jwtService.verifyAsync(token, {
+                secret: process.env.JWT_SECRET,
+            });
             // 💡 We're assigning the payload to the request object here
             // so that we can access it in our route handlers
             // console.log(payload);
-            const account = await this.accountService.findByEmail(payload.email)
+            const account = await this.accountService.findByEmail(
+                payload.email
+            );
             if (!account) {
-                throw new BadRequestException('account not belong to token, please try again')
+                throw new BadRequestException(
+                    'account not belong to token, please try again'
+                );
             }
             request.currentaccount = account;
-            console.log(request.currentaccount);
-
         } catch {
             throw new UnauthorizedException();
         }
