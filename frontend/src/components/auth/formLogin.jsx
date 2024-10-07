@@ -1,18 +1,21 @@
 import styles from "./FormAuth.scss";
 import { ICONS } from "../../constants/icons";
 import { useState } from "react";
-const FormLogin = () => {
+import { useNavigate } from 'react-router-dom';
 
+const FormLogin = () => {
+  const navigate = useNavigate()
   const [showPassword, setPassword] = useState(false);
 
   const handleHidePassword = () => {
     setPassword(prevState => !prevState)
   }
+
   return (
     <div className="justify-content-center form">
       <div className="w-100">
-        <button className="tab_button actived">Sign In</button>
-        <button className="tab_button">Sign Up</button>
+        <button className="tab_button actived" >Sign In</button>
+        <button className="tab_button" onClick={() =>{navigate('/auth/register')}}>Sign Up</button>
       </div>
       <div className="form-data p-4">
         <div className="form-group mb-3">
