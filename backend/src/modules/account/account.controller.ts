@@ -8,7 +8,7 @@ import { AuthGuard } from '../../common/guards/auth.guard';
 
 @Controller('accounts')
 export class AccountController {
-    constructor(private readonly accountService: AccountService) {}
+    constructor(private readonly accountService: AccountService) { }
 
     @Post()
     async create(@Body() requestBody: any): Promise<Account> {
@@ -16,7 +16,8 @@ export class AccountController {
     }
 
     @Get()
-    @UseGuards(new RoleGuard([AccountRoleEnum.ADMIN, AccountRoleEnum.STAFF]))
+    // @UseGuards(new RoleGuard(['admin', 'staff']))
+    @UseGuards(new RoleGuard([AccountRoleEnum.STAFF, AccountRoleEnum.ADMIN]))
     @UseGuards(AuthGuard)
     getListAccount() {
         // getListAccount(@CurrentAccount() currentAccount: Account) {
