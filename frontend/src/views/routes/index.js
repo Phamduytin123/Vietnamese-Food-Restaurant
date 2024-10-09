@@ -6,6 +6,7 @@ import WebFont from 'webfontloader';
 import HomePage from '../pages/homepage';
 import Login from '../pages/login';
 import Register from '../pages/register';
+import FoodDetail from '../pages/fooddetail';
 import MainLayout from '../../components/layouts/MainLayout';
 
 const AllRoutes = () => {
@@ -25,6 +26,7 @@ const AllRoutes = () => {
         <Route path="/" element={<MainLayout component={HomePage} />} />
         <Route path="/auth/login" element={<MainLayout component={Login} />} />
         <Route path="/auth/register" element={<MainLayout component={Register} />} />
+        <Route path="/food/:id" element={<MainLayout component={FoodDetail} />} />
       </Route>
     </Routes>
   );

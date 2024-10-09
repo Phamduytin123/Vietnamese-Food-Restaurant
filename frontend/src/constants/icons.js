@@ -19,4 +19,10 @@ export const ICONS = {
   icon_logout: require('../assets/icons/icon-logout.png'),
   arrow_right: require('../assets/icons/arrowRight.png'),
   eye: require('../assets/icons/eye.png'),
+  plus: require('../assets/icons/macOS_Maximize.png'),
+  minus: require('../assets/icons/minus.png'),
+  cart: require('../assets/icons/vector.png'),
+  arrow_right: require('../assets/icons/arrow_right.png'),
+  arrow_left: require('../assets/icons/arrow_left.png'),
+  time_span: require('../assets/icons/time_span.png'),
 };

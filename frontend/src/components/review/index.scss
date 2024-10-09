@@ -1,0 +1,35 @@
+@import "../../constants/colors.scss";
+
+.comment-list {
+  margin: 20px;
+  margin-top: 50px;
+  width: 82%;
+}
+
+.comment {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-bottom: 2px solid $text-color__black;
+  .comment-header {
+    margin-left: 12px;
+    .comment-name {
+      color: $text-color__black;
+      font-weight: 600;
+      font-size: 26px;
+    }
+    .comment-time-img {
+      margin: 0px -25px;
+      width: 70px;
+    }
+    .comment-time {
+      color: $text-color__gray;
+      font-size: 12px;
+    }
+  }
+
+}
+
+.comment-details {
+  margin: 20px;
+  margin-bottom: 30px;
+}

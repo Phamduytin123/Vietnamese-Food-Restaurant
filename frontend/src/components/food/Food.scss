@@ -1,0 +1,102 @@
+@import "../../constants/colors.scss";
+
+.container-info {
+  width: 50%;
+  border: solid 2px $food-info-container-border-color;
+  border-radius: 20px;
+  background-color: $food-info-container-background-color;
+  padding: 12px 24px;
+  .info-name {
+    color: $food-name-color;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .info-price {
+    color: $food-price-color;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .info-quantity {
+    width: 10%;
+    min-width: 80px;
+    padding: 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 18px;
+    margin: 0 14px 0;
+    border-radius: 12px;
+  }
+  .info-rcm-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: $text-color__black;
+  }
+}
+/* Chrome, Safari, Edge, Opera */
+.no-spinners::-webkit-outer-spin-button,
+.no-spinners::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Ẩn các nút tăng giảm trên Firefox cho thẻ có class no-spinners */
+.no-spinners {
+  -moz-appearance: textfield;
+}
+
+.food-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  button {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin: 0 -40px;
+  }
+
+  .items-container {
+    display: flex;
+    overflow: hidden; // Ẩn phần hình ảnh ngoài vùng nhìn thấy
+  }
+
+  .food-item {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px; // Khoảng cách giữa các món ăn
+    img {
+      border-radius: 14px ;
+      max-width: 100%;
+      max-height: 200px; // Đặt kích thước tối đa cho hình ảnh
+    }
+    h5 {
+      margin: 5px 0;
+      color: $text-color__black;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 14px;
+      color: $text-color__gray;
+    }
+}
+
+}
+
+.food-images {
+  width: 30%;
+  margin-right: 30px;
+  .food-image {
+    background-image: url(../../assets//images/foodImage_background.png);
+    background-size: cover; /* Để hình ảnh chiếm toàn bộ khu vực */
+    background-position: center;
+  }
+  .food-image-view {
+    background-color: $background-color__gray;
+    padding: 16px;
+    border-radius: 20px;
+  }
+}
