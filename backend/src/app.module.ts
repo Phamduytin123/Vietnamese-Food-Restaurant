@@ -8,6 +8,7 @@ import { CategoryModule } from './modules/category/category.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { PaymentModule } from './modules/payment/payment.module';
 import { ConfigModule } from '@nestjs/config';
+import { CartModule } from './modules/cart/cart.module';
 @Module({
     imports: [
         DatabaseModule,
@@ -17,6 +18,7 @@ import { ConfigModule } from '@nestjs/config';
         AuthModule,
         PaymentModule,
         ConfigModule.forRoot({ isGlobal: true }),
+        CartModule,
     ],
     controllers: [AppController],
     providers: [AppService],
