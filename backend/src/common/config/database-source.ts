@@ -15,7 +15,7 @@ export const dataSourceOptions: DataSourceOptions = {
     migrations: ['dist/database/migrations/*.js'],
     synchronize: true,
     extra: {
-        connectionLimit: 3, 
+        connectionLimit: 3,
     },
 };
 

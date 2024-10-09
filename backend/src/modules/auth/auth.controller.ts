@@ -4,9 +4,9 @@ import { AuthService } from './auth.service';
 
 @Controller('/auth')
 export class AuthController {
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService) {}
     @Post('/login')
     loginUser(@Body() requestBody: LoginDto) {
-        return this.authService.login(requestBody)
+        return this.authService.login(requestBody);
     }
 }

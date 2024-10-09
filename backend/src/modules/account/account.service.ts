@@ -8,7 +8,7 @@ export class AccountService {
     constructor(
         @InjectRepository(Account)
         private readonly accountRepo: Repository<Account>
-    ) { }
+    ) {}
 
     async findAll(): Promise<Account[]> {
         return this.accountRepo.find();

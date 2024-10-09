@@ -6,17 +6,25 @@ import { LoginDto } from './dtos/loginDtio';
 
 @Injectable()
 export class AuthService {
-    constructor(private accountService: AccountService, private jwtService: JwtService) { }
+    constructor(
+        private accountService: AccountService,
+        private jwtService: JwtService
+    ) {}
 
     async login(requestBody: LoginDto) {
         //check email exist
-        const accountByEmail = await this.accountService.findByEmail(requestBody.email);
+        const accountByEmail = await this.accountService.findByEmail(
+            requestBody.email
+        );
         if (!accountByEmail) {
             throw new BadRequestException('Invalid Credentials!');
         }
 
-        //check password 
-        const isMatchPassword = await bcrypt.compare(requestBody.password, accountByEmail.password);
+        //check password
+        const isMatchPassword = await bcrypt.compare(
+            requestBody.password,
+            accountByEmail.password
+        );
         if (!isMatchPassword) {
             throw new BadRequestException('Invalid Credentials!');
         }
@@ -26,17 +34,16 @@ export class AuthService {
             name: accountByEmail.name,
             address: accountByEmail.address,
             email: accountByEmail.email,
-            role: accountByEmail.role
+            role: accountByEmail.role,
         };
 
         const acess_token = await this.jwtService.signAsync(payload, {
             secret: process.env.JWT_SECRET,
-
-        })
+        });
 
         return {
             msg: 'User has been login successfully!',
             acess_token,
-        }
+        };
     }
 }

@@ -7,8 +7,8 @@ import { AuthGuard } from '../../common/guards/auth.guard';
 
 @Module({
     imports: [TypeOrmModule.forFeature([Account])],
-    providers: [AccountService, AuthGuard],
+    providers: [AuthGuard, AccountService],
     controllers: [AccountController],
     exports: [AccountService],
 })
-export class AccountModule { }
+export class AccountModule {}
