@@ -10,9 +10,11 @@ export class CategoryService {
         private readonly categoryRepo: Repository<Category>
     ) {}
 
-    async getListCategory(@Body() body: any) {
-        const { isFood = true, lang = 'vi' } = body;
-
+    async getListCategory(lang: string, query: any) {
+        var { isFood = true } = query;
+        
+        isFood = isFood.toLowerCase() === 'true';
+        
         const [categories, categoriesCount] =
             await this.categoryRepo.findAndCount({
                 where: {

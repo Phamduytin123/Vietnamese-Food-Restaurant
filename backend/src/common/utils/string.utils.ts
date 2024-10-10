@@ -1,6 +1,8 @@
 export class StringUtils {
     static toArray(stringInput: string): string[] {
+        console.log("1234",stringInput)
         const formattedStringArray = stringInput.replace(/'/g, '"');
+
 
         const stringArray = JSON.parse(formattedStringArray);
 
