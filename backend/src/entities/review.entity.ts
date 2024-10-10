@@ -30,10 +30,8 @@ export class Review {
     @CreateDateColumn()
     createdAt: Date;
 
-    @UpdateDateColumn({
-        nullable: true,
-    })
-    updatedAt: Date = null;
+    @UpdateDateColumn()
+    updatedAt: Date;
 
     @ManyToOne(() => Item, item => item.reviews)
     @JoinColumn({ name: 'itemId' })

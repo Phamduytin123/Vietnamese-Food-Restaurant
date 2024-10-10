@@ -24,10 +24,8 @@ export class Like {
     @CreateDateColumn()
     createdAt: Date;
 
-    @UpdateDateColumn({
-        nullable: true,
-    })
-    updatedAt: Date = null;
+    @UpdateDateColumn()
+    updatedAt: Date;
 
     @ManyToOne(() => Account, account => account.likes)
     @JoinColumn({ name: 'accountId' })

@@ -1,6 +1,5 @@
 import {
     BadRequestException,
-    Body,
     Injectable,
     NotFoundException,
 } from '@nestjs/common';
@@ -15,7 +14,7 @@ import {
     MoreThanOrEqual,
     Repository,
 } from 'typeorm';
-import { clean, OrTypeOrm, StringUtils } from '../../common';
+import { clean, ItemFilterUtils, OrTypeOrm, StringUtils } from '../../common';
 
 @Injectable()
 export class ItemService {
@@ -25,8 +24,8 @@ export class ItemService {
         private readonly itemSizeRepo: Repository<ItemSize>
     ) {}
 
-    async getListItem(lang: string, @Body() body: any) {
-        const {
+    async getListItem(lang: string, query: any) {
+        var {
             page = 1,
             limit = 12,
             minPrice,
@@ -37,7 +36,14 @@ export class ItemService {
             sortOrder = 'ASC',
             isDiscount = false,
             categoryId,
-        } = body;
+        } = query;
+
+        page = isNaN(parseInt(page, 10)) ? 1 : parseInt(page, 10);
+        limit = isNaN(parseInt(limit, 10)) ? 12 : parseInt(limit, 10);
+        minPrice = minPrice ? parseFloat(minPrice) : undefined;
+        maxPrice = maxPrice ? parseFloat(maxPrice) : undefined;
+        isFood = isFood.toLowerCase() === 'true';
+        isDiscount = isDiscount.toLowerCase() === 'true';
 
         // Paging
         const skip = (page - 1) * limit;
@@ -53,29 +59,10 @@ export class ItemService {
         const descriptionField = `description_${lang}`;
         const ingredientsField = `ingredients_${lang}`;
         const regionalField = `regional_${lang}`;
-        const unitField = `unit_${lang}`;
-
-        const conditionsItemSize: any = clean({
-            price:
-                maxPrice && minPrice
-                    ? Between(minPrice, maxPrice)
-                    : maxPrice
-                      ? LessThanOrEqual(maxPrice)
-                      : minPrice && MoreThanOrEqual(minPrice),
-        });
-
-        const itemSizes = await this.itemSizeRepo.find(
-            clean({
-                where: conditionsItemSize,
-            })
-        );
-
-        const itemSizeIds = itemSizes.map(itemSize => itemSize.id);
 
         var conditions: any = clean({
             categoryId: categoryId,
             isFood: isFood,
-            id: itemSizeIds.length > 0 ? In(itemSizeIds) : -1,
             isDeleted: false,
             discount: isDiscount && MoreThan(0),
         });
@@ -91,7 +78,7 @@ export class ItemService {
             conditions = OrTypeOrm(searchConditions, conditions);
         }
 
-        var [items, totalItems] = await this.itemRepo.findAndCount(
+        var [items, _totalItems] = await this.itemRepo.findAndCount(
             clean({
                 where: conditions,
                 skip: skip,
@@ -102,59 +89,30 @@ export class ItemService {
         );
 
         // filter data
-        var filterItems: any = items.map(item => {
-            const {
-                name_vi,
-                name_en,
-                description_vi,
-                description_en,
-                ingredients_vi,
-                ingredients_en,
-                unit_en,
-                unit_vi,
-                regional_en,
-                regional_vi,
-                images,
-                ...restItem
-            } = item;
+        var filterItems: any = items.map(item =>
+            ItemFilterUtils.filterResponseData(item, lang)
+        );
 
-            var min = Infinity;
-            var max = -1;
+        // Lọc theo giá tiền
+        if (minPrice || maxPrice) {
+            filterItems = filterItems.filter((item: any) => {
+                const itemMinPrice = parseFloat(
+                    item.minPrice.replace(/\./g, '').replace(' VND', '')
+                );
+                const itemMaxPrice = parseFloat(
+                    item.maxPrice.replace(/\./g, '').replace(' VND', '')
+                );
 
-            item.itemSizes.forEach(itemSize => {
-                min = min > itemSize.price ? itemSize.price : min;
-                max = max < itemSize.price ? itemSize.price : max;
+                return (
+                    (!minPrice || itemMaxPrice/1000 <= maxPrice) &&
+                    (!maxPrice || itemMinPrice/1000 >= minPrice)
+                );
             });
-
-            return {
-                name: item[nameField],
-                images: StringUtils.toArray(item.images),
-                description: item[descriptionField],
-                ingredients: StringUtils.toArray(item[ingredientsField]),
-                unit: item[unitField],
-                regional: item[regionalField],
-                ammount_of_money: `${StringUtils.toMoneyString(min)} - ${StringUtils.toMoneyString(max)}`,
-                minPrice: StringUtils.toMoneyString(min),
-                maxPrice: StringUtils.toMoneyString(max),
-                ...restItem,
-                category: {
-                    id: item.category.id,
-                    name: item.category[nameField],
-                    isFood: item.category.isFood,
-                },
-                itemSizes: item.itemSizes.map(itemSize => ({
-                    id: itemSize.id,
-                    size: itemSize[`size_${lang}`],
-                    price: StringUtils.toMoneyString(itemSize.price),
-                    itemId: itemSize.itemId,
-                })),
-            };
-        });
+        }
 
         // sort data by price
         if (sortBy === 'price') {
             filterItems = filterItems.sort((a: any, b: any) => {
-                // Chuyển đổi chuỗi tiền tệ thành số
                 const priceA = parseInt(
                     a.maxPrice.replace(/\./g, '').replace(' VND', ''),
                     10
@@ -172,11 +130,18 @@ export class ItemService {
             });
         }
 
+        // Cập nhật lại totalItems sau khi lọc
+        const totalItems = filterItems.length;
+
+        // Tính toán lại số trang hiện tại nếu cần
+        const totalPages = Math.ceil(totalItems / limit);
+        const currentPage = page > totalPages ? totalPages : page;
+
         return {
-            items: filterItems,
+            items: filterItems.slice(skip, skip + limit),
             totalItems: totalItems,
-            currentPage: page,
-            totalPages: Math.ceil(totalItems / limit),
+            currentPage: currentPage,
+            totalPages: totalPages,
         };
     }
 
@@ -200,53 +165,15 @@ export class ItemService {
                 throw new NotFoundException(`Item with ID ${id} not found`);
             }
 
-            const {
-                name_vi,
-                name_en,
-                description_vi,
-                description_en,
-                ingredients_vi,
-                ingredients_en,
-                unit_en,
-                unit_vi,
-                regional_en,
-                regional_vi,
-                images,
-                ...restItemDetail
-            } = itemDetail;
+            console.log(itemDetail.images)
 
-            var min = Infinity;
-            var max = -1;
-
-            itemDetail.itemSizes.forEach(itemSize => {
-                min = min > itemSize.price ? itemSize.price : min;
-                max = max < itemSize.price ? itemSize.price : max;
-            });
+            const filterItem = ItemFilterUtils.filterResponseData(
+                itemDetail,
+                lang
+            );
 
             return {
-                name: itemDetail[`name_${lang}`],
-                images: StringUtils.toArray(itemDetail.images),
-                description: itemDetail[`description_${lang}`],
-                ingredients: StringUtils.toArray(
-                    itemDetail[`ingredients_${lang}`]
-                ),
-                unit: itemDetail[`unit_${lang}`],
-                regional: itemDetail[`regional_${lang}`],
-                ammount_of_money: `${StringUtils.toMoneyString(min)} - ${StringUtils.toMoneyString(max)}`,
-                minPrice: StringUtils.toMoneyString(min),
-                maxPrice: StringUtils.toMoneyString(max),
-                ...restItemDetail,
-                category: {
-                    id: itemDetail.category.id,
-                    name: itemDetail.category[`name_${lang}`],
-                    isFood: itemDetail.category.isFood,
-                },
-                itemSizes: itemDetail.itemSizes.map(itemSize => ({
-                    id: itemSize.id,
-                    size: itemSize[`size_${lang}`],
-                    price: StringUtils.toMoneyString(itemSize.price),
-                    itemId: itemSize.itemId,
-                })),
+                ...filterItem,
                 reviews: itemDetail.reviews.map(review => {
                     const { password, role, ...restAccountReview } =
                         review.account;

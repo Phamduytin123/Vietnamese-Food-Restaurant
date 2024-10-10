@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Query } from '@nestjs/common';
 import { ItemService } from './item.service';
 
 @Controller('/:lang/items')
@@ -6,8 +6,8 @@ export class ItemController {
     constructor(private readonly itemService: ItemService) {}
 
     @Get()
-    getListItem(@Param('lang') lang: string, @Body() body: any) {
-        return this.itemService.getListItem(lang, body);
+    getListItem(@Param('lang') lang: string, @Query() query: any) {
+        return this.itemService.getListItem(lang, query);
     }
 
     @Get('/:id')

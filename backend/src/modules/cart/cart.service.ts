@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Cart, ItemSize } from '../../entities';
+import { Account, Cart, ItemSize } from '../../entities';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { F } from '@faker-js/faker/dist/airline-C5Qwd7_q';
+import { ItemFilterUtils } from '../../common';
 
 @Injectable()
 export class CartService {
@@ -13,8 +13,8 @@ export class CartService {
         private readonly itemSizeRepository: Repository<ItemSize>
     ) {}
 
-    async createCart(request: any) {
-        const { user, body } = request;
+    async createCart(request: any, currentAccount: Account) {
+        const { body } = request;
         const { itemSizes } = body;
 
         const cartsToSave = [];
@@ -32,14 +32,14 @@ export class CartService {
             }
 
             let cart = await this.cartRepository.findOne({
-                where: { accountId: user.id, itemSizeId: itemSizeId },
+                where: { accountId: currentAccount.id, itemSizeId: itemSizeId },
             });
 
             if (cart) {
                 cart.quantity += quantity;
             } else {
                 cart = new Cart();
-                cart.accountId = user.id;
+                cart.accountId = currentAccount.id;
                 cart.itemSizeId = itemSizeId;
                 cart.quantity = quantity;
             }
@@ -50,5 +50,27 @@ export class CartService {
         }
 
         return cartsToSave;
+    }
+
+    async getListCart(lang: string, currentAccount: Account) {
+        const carts = await this.cartRepository.find({
+            where: { accountId: currentAccount.id },
+            order: {
+                updatedAt: 'DESC',
+                createdAt: 'DESC',
+            },
+            relations: ['itemSize', 'itemSize.item'],
+        });
+
+        return carts.map(cart => ({
+            ...cart,
+            itemSize: {
+                ...cart.itemSize,
+                item: ItemFilterUtils.filterResponseData(
+                    cart.itemSize.item,
+                    lang
+                ),
+            },
+        }));
     }
 }

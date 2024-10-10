@@ -39,10 +39,8 @@ export class Voucher {
     @CreateDateColumn()
     createdAt: Date;
 
-    @UpdateDateColumn({
-        nullable: true,
-    })
-    updatedAt: Date = null;
+    @UpdateDateColumn()
+    updatedAt: Date;
 
     @OneToMany(() => Order, order => order.voucher)
     orders: Order;
