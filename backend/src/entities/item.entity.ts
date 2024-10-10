@@ -125,7 +125,9 @@ export class Item {
     @CreateDateColumn()
     createdAt: Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({
+        nullable: true,
+    })
     updatedAt: Date;
 
     @ManyToOne(() => Category, category => category.items)

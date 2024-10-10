@@ -1,0 +1,6 @@
+{
+    "cart": {
+        "cartNotFound": "The '{cartId}' cart is not found in your cart",
+        "itemStatusIsNotInStock": "The item with {itemId} id is {itemStatus}, please choose another one"
+    }
+}

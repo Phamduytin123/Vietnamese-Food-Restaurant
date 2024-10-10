@@ -58,9 +58,8 @@ export class Account {
 
     @UpdateDateColumn({
         nullable: true,
-        default: null,
     })
-    updatedAt: Date = null;
+    updatedAt: Date;
 
     @OneToMany(() => Cart, cart => cart.account)
     carts: Cart[];

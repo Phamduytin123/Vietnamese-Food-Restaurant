@@ -1,17 +1,38 @@
+import { OrderService } from './../order/order.service';
 import { CurrentAccount } from './../../common/decorator/currentAccount.decorator';
 import { Account } from './../../entities/account.entity';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+    ForbiddenException,
+    HttpException,
+    HttpStatus,
+    Injectable,
+    NotFoundException,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
 import * as CryptoJS from 'crypto-js';
 import * as moment from 'moment';
 import * as qs from 'qs';
+import { OrderRequest } from '../order/dtos/orderRequest';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Cart } from '../../entities';
+import { I18nService } from 'nestjs-i18n';
+import { ItemAvailabilityEnum, OrderPaymentMethodEnum } from '../../common';
 
 @Injectable()
 export class ZaloPaymentService {
-    constructor(private configService: ConfigService) {}
+    constructor(
+        private configService: ConfigService,
+        @InjectRepository(Cart)
+        private readonly cartRepository: Repository<Cart>,
+        private readonly i18n: I18nService,
+        private readonly orderService: OrderService
+    ) {}
 
-    async createPayment(body: any, req: any) {
+    async createPayment(lang: string, body: OrderRequest, req: any) {
+        const { carts } = body;
+
         const deployedLink = this.configService.get<string>(
             'DEPLOY_SERVICE_LINK'
         );
@@ -28,11 +49,49 @@ export class ZaloPaymentService {
         };
         const items = [
             {
-                itemSizeId: body.itemSizeId,
-                quantity: body.quantity,
-                cartId: body.cartId,
+                ...body,
+                paymentMethod: OrderPaymentMethodEnum.ZALOPAY,
+                lang: lang,
             },
         ];
+
+        const foundCarts = [];
+
+        for (const cart of carts) {
+            const foundCart = await this.cartRepository.findOne({
+                where: { id: cart.id, accountId: req.user.id },
+                relations: ['itemSize', 'itemSize.item'],
+            });
+
+            if (!foundCart) {
+                return new NotFoundException(
+                    this.i18n.t('error.cart.cartNotFound', {
+                        args: { cartId: cart.id },
+                    })
+                );
+            }
+
+            if (
+                foundCart.itemSize.item.availability !==
+                ItemAvailabilityEnum.IN_STOCK
+            ) {
+                return new ForbiddenException(
+                    this.i18n.t('error.cart.itemStatusIsNotInStock', {
+                        args: {
+                            itemId: foundCart.itemSize.item.id,
+                            itemStatus: foundCart.itemSize.item.availability,
+                        },
+                    })
+                );
+            }
+
+            foundCarts.push(foundCart);
+        }
+
+        const totalPrice = foundCarts.reduce((totalPrice, foundCart) => {
+            return totalPrice + foundCart.itemSize.price * foundCart.quantity;
+        }, 0);
+
         const transID = Math.floor(Math.random() * 1000000);
 
         const order = {
@@ -42,7 +101,7 @@ export class ZaloPaymentService {
             app_time: Date.now(),
             item: JSON.stringify(items),
             embed_data: JSON.stringify(embed_data),
-            amount: body.amount,
+            amount: totalPrice * 1000,
             description: `Lazada - Payment for the order #${transID}`,
             bank_code: '',
             callback_url: `${deployedLink}/payment/zalo/callback`,
@@ -61,7 +120,7 @@ export class ZaloPaymentService {
         }
     }
 
-    handleZaloCallback(body: any) {
+    async handleZaloCallback(body: any) {
         const { data: dataStr, mac: reqMac } = body;
 
         console.log('callback');
@@ -88,7 +147,22 @@ export class ZaloPaymentService {
                     dataJson['app_trans_id']
                 );
 
-                console.log(`data : ${dataJson.item[0].itemSizeId}`);
+                const item = JSON.parse(dataJson.item);
+
+                const orderReq: OrderRequest = item[0];
+                const { lang } = item[0];
+                const account = new Account();
+                account.id = dataJson.app_user;
+
+                console.log(orderReq, lang, account);
+
+                const newOrder = await this.orderService.createOrder(
+                    lang,
+                    account,
+                    orderReq
+                );
+
+                console.log(newOrder);
 
                 result.return_code = 1;
                 result.return_message = 'success';

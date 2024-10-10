@@ -104,8 +104,8 @@ export class ItemService {
                 );
 
                 return (
-                    (!minPrice || itemMaxPrice/1000 <= maxPrice) &&
-                    (!maxPrice || itemMinPrice/1000 >= minPrice)
+                    (!minPrice || itemMaxPrice / 1000 <= maxPrice) &&
+                    (!maxPrice || itemMinPrice / 1000 >= minPrice)
                 );
             });
         }
@@ -164,8 +164,6 @@ export class ItemService {
             if (!itemDetail) {
                 throw new NotFoundException(`Item with ID ${id} not found`);
             }
-
-            console.log(itemDetail.images)
 
             const filterItem = ItemFilterUtils.filterResponseData(
                 itemDetail,

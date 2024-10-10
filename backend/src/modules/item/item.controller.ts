@@ -1,17 +1,19 @@
 import { Body, Controller, Get, Param, Query } from '@nestjs/common';
 import { ItemService } from './item.service';
+import { I18n, I18nContext } from 'nestjs-i18n';
+import { Lang } from '../../common';
 
-@Controller('/:lang/items')
+@Controller('/items')
 export class ItemController {
     constructor(private readonly itemService: ItemService) {}
 
     @Get()
-    getListItem(@Param('lang') lang: string, @Query() query: any) {
+    getListItem(@Lang() lang: string, @Query() query: any) {
         return this.itemService.getListItem(lang, query);
     }
 
     @Get('/:id')
-    getItemDetail(@Param('lang') lang: string, @Param('id') id: number) {
+    getItemDetail(@Lang() lang: string, @Param('id') id: number) {
         return this.itemService.getItemDetail(lang, id);
     }
 }
