@@ -55,13 +55,17 @@ export class Order {
     @Column()
     accountId: number;
 
-    @Column()
+    @Column({
+        nullable: true,
+    })
     voucherId: number;
 
     @CreateDateColumn()
     createdAt: Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({
+        nullable: true,
+    })
     updatedAt: Date;
 
     @ManyToOne(() => Account, account => account.orders)

@@ -27,7 +27,9 @@ export class Cart {
     @CreateDateColumn()
     createdAt: Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({
+        nullable: true,
+    })
     updatedAt: Date;
 
     @ManyToOne(() => Account, account => account.carts)

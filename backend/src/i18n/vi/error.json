@@ -1,0 +1,6 @@
+{
+    "cart": {
+        "cartNotFound": "Không thể tìm thấy giỏ hàng '{cartId}' trong giỏ hàng của bạn",
+        "itemStatusIsNotInStock": "Sản phẩm với {itemId} id hiện tại đang {itemStatus}, vui lòng chọn những sản phẩm khác"
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "cartsRequired": "Giỏ hàng không được để trống",
+    "phoneInvalid": "Số điện thoại không hợp lệ",
+    "receiverInvalid": "Người nhận không được để trống",
+    "addressInvalid": "Địa chỉ không được để trống",
+    "paymentMethodInvalid": "Phương thức thanh toán không hợp lệ",
+    "emailInvalid": "Email không hợp lệ",
+    "nameRequired": "Tên không được để trống"
+}

@@ -10,8 +10,6 @@ export class ItemFilterUtils {
         const regionalField = `regional_${lang}`;
         const unitField = `unit_${lang}`;
 
-        console.log(123)
-
         const {
             name_vi,
             name_en,

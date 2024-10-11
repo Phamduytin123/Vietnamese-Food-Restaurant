@@ -8,7 +8,7 @@ import { AuthGuard } from '../../common/guards/auth.guard';
 
 @Controller('accounts')
 export class AccountController {
-    constructor(private readonly accountService: AccountService) { }
+    constructor(private readonly accountService: AccountService) {}
 
     @Post()
     async create(@Body() requestBody: any): Promise<Account> {

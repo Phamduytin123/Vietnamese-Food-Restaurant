@@ -30,7 +30,9 @@ export class Review {
     @CreateDateColumn()
     createdAt: Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({
+        nullable: true,
+    })
     updatedAt: Date;
 
     @ManyToOne(() => Item, item => item.reviews)

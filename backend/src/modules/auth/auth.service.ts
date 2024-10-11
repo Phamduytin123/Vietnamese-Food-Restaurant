@@ -44,6 +44,14 @@ export class AuthService {
         return {
             msg: 'User has been login successfully!',
             acess_token,
+            name: accountByEmail.name,
+            displayName: accountByEmail.displayName,
+            address: accountByEmail.address,
+            email: accountByEmail.email,
+            tel: accountByEmail.tel,
+            avatar: accountByEmail.avatar,
+            gender: accountByEmail.gender,
+            role: accountByEmail.role,
         };
     }
 }

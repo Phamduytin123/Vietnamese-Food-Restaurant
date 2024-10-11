@@ -10,12 +10,29 @@ import { AuthGuard } from '../../common/guards/auth.guard';
 import { JwtMiddleware } from '../../common';
 import { AccountService } from '../account/account.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Account } from '../../entities';
+import {
+    Account,
+    Cart,
+    Item,
+    ItemSize,
+    Order,
+    OrderDetail,
+} from '../../entities';
+import { OrderService } from '../order/order.service';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Account])],
+    imports: [
+        TypeOrmModule.forFeature([
+            Order,
+            OrderDetail,
+            Account,
+            Cart,
+            Item,
+            ItemSize,
+        ]),
+    ],
     controllers: [ZaloPaymentController],
-    providers: [ZaloPaymentService, AuthGuard, AccountService],
+    providers: [ZaloPaymentService, AuthGuard, AccountService, OrderService],
 })
 export class PaymentModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {

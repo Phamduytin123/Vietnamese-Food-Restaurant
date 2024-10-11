@@ -9,6 +9,14 @@ import { AuthModule } from './modules/auth/auth.module';
 import { PaymentModule } from './modules/payment/payment.module';
 import { ConfigModule } from '@nestjs/config';
 import { CartModule } from './modules/cart/cart.module';
+import { OrderModule } from './modules/order/order.module';
+import {
+    I18nModule,
+    HeaderResolver,
+    QueryResolver,
+    AcceptLanguageResolver,
+} from 'nestjs-i18n';
+import * as path from 'path';
 @Module({
     imports: [
         DatabaseModule,
@@ -19,6 +27,19 @@ import { CartModule } from './modules/cart/cart.module';
         PaymentModule,
         ConfigModule.forRoot({ isGlobal: true }),
         CartModule,
+        OrderModule,
+        I18nModule.forRoot({
+            fallbackLanguage: 'en',
+            loaderOptions: {
+                path: path.join(__dirname, '/i18n/'),
+                watch: true,
+            },
+            resolvers: [
+                { use: QueryResolver, options: ['lang'] },
+                AcceptLanguageResolver,
+                new HeaderResolver(['x-lang']),
+            ],
+        }),
     ],
     controllers: [AppController],
     providers: [AppService],

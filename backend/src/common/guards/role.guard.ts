@@ -4,7 +4,7 @@ import { AccountRoleEnum } from '../enums/account-role.enum';
 
 @Injectable()
 export class RoleGuard implements CanActivate {
-    constructor(private roles: AccountRoleEnum[]) { }
+    constructor(private roles: AccountRoleEnum[]) {}
     canActivate(
         context: ExecutionContext
     ): boolean | Promise<boolean> | Observable<boolean> {

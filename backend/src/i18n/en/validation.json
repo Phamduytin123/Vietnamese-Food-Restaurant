@@ -1,0 +1,9 @@
+{
+    "cartsRequired": "Carts are required",
+    "phoneInvalid": "Invalid phone number",
+    "receiverInvalid": "Receiver cannot be empty",
+    "addressInvalid": "Address cannot be empty",
+    "paymentMethodInvalid": "Invalid payment method",
+    "emailInvalid": "Invalid email",
+    "nameRequired": "Name is required"
+}

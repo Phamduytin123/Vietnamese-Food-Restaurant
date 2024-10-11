@@ -12,9 +12,9 @@ export class CategoryService {
 
     async getListCategory(lang: string, query: any) {
         var { isFood = true } = query;
-        
+
         isFood = isFood.toLowerCase() === 'true';
-        
+
         const [categories, categoriesCount] =
             await this.categoryRepo.findAndCount({
                 where: {
