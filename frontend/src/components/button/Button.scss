@@ -1,0 +1,16 @@
+@import "../../constants/colors.scss";
+
+.btn-primary {
+  min-width: 100px;
+  padding: 10px;
+  background-color: #FFFFFF;
+  color: #000000;
+  border: solid 1px #FA8232;
+  border-radius: 12px;
+  font-weight: 550;
+  margin-right: 20px;
+  &.actived{
+    background-color: #FA8232;
+    color: #FFFFFF;
+  }
+}

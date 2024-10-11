@@ -1,9 +1,4 @@
 
-* {
-    margin: 0;
-    padding: 0;
-}
-
 html, body {
     font-size: 16px;
 }
@@ -61,22 +56,22 @@ html, body {
 
     .show-shop{
         display: inline-block;
-        color: #ffffff; 
-        font-size: 24px; 
-        font-weight: bold; 
-        padding: 10px 20px; 
-        text-decoration: none; 
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: bold;
+        padding: 10px 20px;
+        text-decoration: none;
         position: relative;
         padding-left: 0;
         transition: background-color 0.3s ease, transform 0.3s ease;
 
     &::after{
-        content: ''; 
+        content: '';
         position: absolute;
         left: 0;
         bottom: 0;
         width: 100%;
-        height: 4px; 
+        height: 4px;
         background-color: #ffffff;
     }
     &:hover{
@@ -176,8 +171,8 @@ html, body {
         }
     }
     .card-container-wrapper {
-        overflow: hidden; 
-        width: 90%; 
+        overflow: hidden;
+        width: 90%;
         transition: transform 2s ease;
         scroll-behavior: smooth;
     }
@@ -206,7 +201,7 @@ html, body {
     }
 
     .card:hover .card-image {
-        transform: scale(1.05); 
+        transform: scale(1.05);
     }
 
     .card-details {
@@ -235,7 +230,7 @@ html, body {
         font-weight: 700;
         font-size: 22px;
         color: #212121;
-        
+
     }
 
     .order-now-button {
@@ -248,10 +243,10 @@ html, body {
         padding: 10px 20px;
         font-size: 18px;
         cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.3s ease; 
+        transition: background-color 0.3s ease, transform 0.3s ease;
          &:hover {
-            background-color: #e85a0d; 
-            transform: scale(1.05); 
+            background-color: #e85a0d;
+            transform: scale(1.05);
         }
     }
 

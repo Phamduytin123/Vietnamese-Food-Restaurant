@@ -17,4 +17,6 @@ export const IMAGES = {
   img_show1: require('../assets/images/img-show1.jpg'),
   img_show2: require('../assets/images/img-show2.jpg'),
   background_auth: require('../assets/images/backgroundLogin-395.png'),
+  foodImage: require('../assets/images/foodImage.png'),
+  foodImage_background: require('../assets/images/foodImage_background.png'),
 };
