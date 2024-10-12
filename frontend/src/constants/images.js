@@ -19,4 +19,5 @@ export const IMAGES = {
   background_auth: require('../assets/images/backgroundLogin-395.png'),
   foodImage: require('../assets/images/foodImage.png'),
   foodImage_background: require('../assets/images/foodImage_background.png'),
+  upload_image: require('../assets/images/upload_image.png'),
 };
