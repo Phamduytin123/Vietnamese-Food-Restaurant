@@ -8,10 +8,11 @@ import {
     Req,
     UseGuards,
 } from '@nestjs/common';
-import { AccountRoleEnum, Lang } from '../../common';
+import { AccountRoleEnum, CurrentAccount, Lang } from '../../common';
 import { AuthGuard } from '../../common/guards/auth.guard';
 import { RoleGuard } from '../../common/guards/role.guard';
 import { OrderRequest } from '../order/dtos/orderRequest';
+import { Account } from '../../entities';
 
 @Controller('payment/zalo')
 export class ZaloPaymentController {
@@ -23,12 +24,14 @@ export class ZaloPaymentController {
     async createPayment(
         @Lang() lang: string,
         @Body() orderRequest: OrderRequest,
-        @Req() req: any
+        @Req() req: any,
+        @CurrentAccount() account : Account
     ) {
         return await this.ZaloPaymentService.createPayment(
             lang,
             orderRequest,
-            req
+            req,
+            account
         );
     }
 

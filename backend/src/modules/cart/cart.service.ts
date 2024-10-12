@@ -1,8 +1,10 @@
+import { CurrentAccount } from './../../common/decorator/currentAccount.decorator';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Account, Cart, ItemSize } from '../../entities';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ItemFilterUtils } from '../../common';
+import { I18nService } from 'nestjs-i18n';
 
 @Injectable()
 export class CartService {
@@ -10,7 +12,8 @@ export class CartService {
         @InjectRepository(Cart)
         private readonly cartRepository: Repository<Cart>,
         @InjectRepository(ItemSize)
-        private readonly itemSizeRepository: Repository<ItemSize>
+        private readonly itemSizeRepository: Repository<ItemSize>,
+        private readonly i18n: I18nService
     ) {}
 
     async createCart(request: any, currentAccount: Account) {
@@ -27,7 +30,11 @@ export class CartService {
             });
             if (!FoundItemSize) {
                 throw new NotFoundException(
-                    `Item size with id ${itemSizeId} not found`
+                    this.i18n.t('error.item.itemNotFound', {
+                        args: {
+                            itemId: itemSizeId,
+                        },
+                    })
                 );
             }
 
@@ -72,5 +79,66 @@ export class CartService {
                 ),
             },
         }));
+    }
+
+    async updateCart(body: any, id: number, currentAccount: Account) {
+        const { quantity } = body;
+
+        var foundCart = await this.cartRepository.findOne({
+            where: { id: id, accountId: currentAccount.id },
+            relations: ['itemSize', 'itemSize.item'],
+        });
+
+        if (!foundCart) {
+            return new NotFoundException(
+                this.i18n.t('error.cart.cartNotFound', {
+                    args: { cartId: id },
+                })
+            );
+        }
+
+        if (quantity) {
+            if (quantity <= 0) {
+                await this.cartRepository.remove(foundCart);
+                return {
+                    message: this.i18n.t('success.cart.removed', {
+                        args: {
+                            cartId: id,
+                        },
+                    }),
+                };
+            }
+
+            foundCart.quantity = quantity;
+        }
+
+        await this.cartRepository.save(foundCart);
+
+        return foundCart;
+    }
+
+    async deleteCart(id: number, currentAccount: Account) {
+        var foundCart = await this.cartRepository.findOne({
+            where: { id: id, accountId: currentAccount.id },
+            relations: ['itemSize', 'itemSize.item'],
+        });
+
+        if (!foundCart) {
+            return new NotFoundException(
+                this.i18n.t('error.cart.cartNotFound', {
+                    args: { cartId: id },
+                })
+            );
+        }
+
+        await this.cartRepository.remove(foundCart);
+
+        return {
+            message: this.i18n.t('success.cart.removed', {
+                args: {
+                    cartId: id,
+                },
+            }),
+        };
     }
 }

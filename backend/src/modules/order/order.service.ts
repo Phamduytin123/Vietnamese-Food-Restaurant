@@ -51,18 +51,41 @@ export class OrderService {
 
         const foundCarts = [];
 
-        for (const cart of carts) {
-            const foundCart = await this.cartRepository.findOne({
-                where: { id: cart.id, accountId: account.id },
-                relations: ['itemSize', 'itemSize.item'],
-            });
+        var isCart = true;
 
-            if (!foundCart) {
-                return new NotFoundException(
-                    this.i18n.t('error.cart.cartNotFound', {
-                        args: { cartId: cart.id },
-                    })
-                );
+        for (const cart of carts) {
+            var foundCart = new Cart();
+
+            if (cart.id) {
+                foundCart = await this.cartRepository.findOne({
+                    where: { id: cart.id, accountId: account.id },
+                    relations: ['itemSize', 'itemSize.item'],
+                });
+
+                if (!foundCart) {
+                    return new NotFoundException(
+                        this.i18n.t('error.cart.cartNotFound', {
+                            args: { cartId: cart.id },
+                        })
+                    );
+                }
+            } else {
+                isCart = false;
+                foundCart = cart;
+                const itemSize = await this.itemSizeRepository.findOne({
+                    where: { id: cart.itemSizeId },
+                    relations: ['item'],
+                });
+
+                if (!itemSize) {
+                    return new NotFoundException(
+                        this.i18n.t('error.item.itemNotFound', {
+                            args: { itemId: cart.itemSizeId },
+                        })
+                    );
+                }
+
+                foundCart.itemSize = itemSize;
             }
 
             if (
@@ -103,6 +126,8 @@ export class OrderService {
 
         order.orderDetails = [];
 
+        // Xóa cart
+
         foundCarts.forEach(cart => {
             const orderDetail: OrderDetail = this.orderDetailRepository.create({
                 price: cart.itemSize.price,
@@ -111,7 +136,10 @@ export class OrderService {
                 quantity: cart.quantity,
             });
             order.orderDetails.push(orderDetail);
-            this.cartRepository.delete({ id: cart.id });
+            this.orderDetailRepository.save(orderDetail);
+            if (isCart) {
+                this.cartRepository.delete({ id: cart.id });
+            }
         });
 
         return order;

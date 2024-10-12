@@ -16,7 +16,7 @@ import * as qs from 'qs';
 import { OrderRequest } from '../order/dtos/orderRequest';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Cart } from '../../entities';
+import { Cart, ItemSize } from '../../entities';
 import { I18nService } from 'nestjs-i18n';
 import { ItemAvailabilityEnum, OrderPaymentMethodEnum } from '../../common';
 
@@ -26,11 +26,13 @@ export class ZaloPaymentService {
         private configService: ConfigService,
         @InjectRepository(Cart)
         private readonly cartRepository: Repository<Cart>,
+        @InjectRepository(ItemSize)
+        private readonly itemSizeRepository: Repository<ItemSize>,
         private readonly i18n: I18nService,
         private readonly orderService: OrderService
     ) {}
 
-    async createPayment(lang: string, body: OrderRequest, req: any) {
+    async createPayment(lang: string, body: OrderRequest, req: any, account : Account) {
         const { carts } = body;
 
         const deployedLink = this.configService.get<string>(
@@ -58,17 +60,37 @@ export class ZaloPaymentService {
         const foundCarts = [];
 
         for (const cart of carts) {
-            const foundCart = await this.cartRepository.findOne({
-                where: { id: cart.id, accountId: req.user.id },
-                relations: ['itemSize', 'itemSize.item'],
-            });
+            var foundCart = new Cart();
 
-            if (!foundCart) {
-                return new NotFoundException(
-                    this.i18n.t('error.cart.cartNotFound', {
-                        args: { cartId: cart.id },
-                    })
-                );
+            if (cart.id) {
+                foundCart = await this.cartRepository.findOne({
+                    where: { id: cart.id, accountId: account.id },
+                    relations: ['itemSize', 'itemSize.item'],
+                });
+
+                if (!foundCart) {
+                    return new NotFoundException(
+                        this.i18n.t('error.cart.cartNotFound', {
+                            args: { cartId: cart.id },
+                        })
+                    );
+                }
+            } else {
+                foundCart = cart;
+                const itemSize = await this.itemSizeRepository.findOne({
+                    where: { id: cart.itemSizeId },
+                    relations: ['item'],
+                });
+
+                if (!itemSize) {
+                    return new NotFoundException(
+                        this.i18n.t('error.item.itemNotFound', {
+                            args: { itemId: cart.itemSizeId },
+                        })
+                    );
+                }
+
+                foundCart.itemSize = itemSize;
             }
 
             if (
@@ -102,7 +124,7 @@ export class ZaloPaymentService {
             item: JSON.stringify(items),
             embed_data: JSON.stringify(embed_data),
             amount: totalPrice * 1000,
-            description: `Lazada - Payment for the order #${transID}`,
+            description: `Product - Payment for the order #${transID}`,
             bank_code: '',
             callback_url: `${deployedLink}/payment/zalo/callback`,
         };
