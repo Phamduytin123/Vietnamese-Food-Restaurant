@@ -13,4 +13,8 @@
     background-color: #FA8232;
     color: #FFFFFF;
   }
+  &.disabled{
+    background-color: #DEB7AA;
+    border: solid 1px #DEB7AA;
+  }
 }

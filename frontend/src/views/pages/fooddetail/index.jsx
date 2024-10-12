@@ -1,3 +1,4 @@
+import UploadModal from '../../../components/detect_modal/UploadModal';
 import FoodImage from '../../../components/food/FoodImage';
 import FoodInfo from '../../../components/food/FoodInfo';
 import Reviews from '../../../components/review';
@@ -11,6 +12,7 @@ const FoodDetail = () => {
       <div className="d-flex justify-content-center">
         <Reviews />
       </div>
+      <UploadModal />
     </div>
   );
 };
