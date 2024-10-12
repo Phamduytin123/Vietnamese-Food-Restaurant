@@ -17,6 +17,7 @@ import {
     AcceptLanguageResolver,
 } from 'nestjs-i18n';
 import * as path from 'path';
+import { RecipeModule } from './modules/recipe/recipe.module';
 @Module({
     imports: [
         DatabaseModule,
@@ -25,6 +26,7 @@ import * as path from 'path';
         CategoryModule,
         AuthModule,
         PaymentModule,
+        RecipeModule,
         ConfigModule.forRoot({ isGlobal: true }),
         CartModule,
         OrderModule,
@@ -44,4 +46,4 @@ import * as path from 'path';
     controllers: [AppController],
     providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

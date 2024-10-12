@@ -22,7 +22,7 @@ export class ItemService {
         @InjectRepository(Item) private readonly itemRepo: Repository<Item>,
         @InjectRepository(ItemSize)
         private readonly itemSizeRepo: Repository<ItemSize>
-    ) {}
+    ) { }
 
     async getListItem(lang: string, query: any) {
         var {
@@ -189,4 +189,74 @@ export class ItemService {
             };
         }
     }
+
+    async getListItemsByIds(lang: string, listIds: number[]) {
+        try {
+            // Kiểm tra nếu listIds không phải là một mảng hoặc rỗng
+            if (listIds.length === 0) {
+                throw new BadRequestException('List of IDs must be a non-empty array');
+            }
+
+            // Tìm các item dựa trên danh sách ID
+            const items = await this.itemRepo.find({
+                where: {
+                    id: In(listIds),
+                    isDeleted: false, // Giả sử điều kiện không lấy các item đã bị xóa
+                },
+                relations: ['category', 'itemSizes'],
+            });
+
+            // Nếu không tìm thấy item nào, ném lỗi NotFoundException
+            if (!items || items.length === 0) {
+                throw new NotFoundException('Items not found with the provided IDs');
+            }
+
+            // Áp dụng filter để lấy dữ liệu theo ngôn ngữ
+            const filterItems = items.map(item =>
+                ItemFilterUtils.filterResponseData(item, lang)
+            );
+
+            return filterItems;
+        } catch (error: any) {
+            return {
+                statusCode: error?.status || 500,
+                message: error?.message || 'Internal server error',
+            };
+        }
+    }
+
+    async getItemByName(lang: string, name: string) {
+        try {
+            // Kiểm tra nếu name không hợp lệ
+            if (!name) {
+                throw new BadRequestException('Name must be provided');
+            }
+
+            // Tìm item dựa trên tên (name_en)
+            const nameField = `name_en`; // Giả sử trường ngôn ngữ là dạng name_en hoặc name_vi, etc.
+            const item = await this.itemRepo.findOne({
+                where: {
+                    [nameField]: name,
+                    isDeleted: false, // Giả sử điều kiện không lấy các item đã bị xóa
+                },
+                relations: ['category', 'itemSizes'],
+            });
+
+            // Nếu không tìm thấy item nào, ném lỗi NotFoundException
+            if (!item) {
+                throw new NotFoundException(`Item not found with name: ${name}`);
+            }
+
+            // Áp dụng filter để lấy dữ liệu theo ngôn ngữ
+            const filteredItem = ItemFilterUtils.filterResponseData(item, lang);
+
+            return filteredItem;
+        } catch (error: any) {
+            return {
+                statusCode: error?.status || 500,
+                message: error?.message || 'Internal server error',
+            };
+        }
+    }
+
 }
