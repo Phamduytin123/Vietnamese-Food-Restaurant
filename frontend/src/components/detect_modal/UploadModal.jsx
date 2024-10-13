@@ -5,6 +5,7 @@ import { IMAGES } from '../../constants/images';
 import ButtonPrimary from '../button/ButtonPrimary';
 import ClipLoader from 'react-spinners/ClipLoader'; // Import spinner
 import modalStyles from './constant';
+import { ICONS } from '../../constants/icons';
 
 const UploadModal = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -64,7 +65,10 @@ const UploadModal = () => {
   }
   return (
     <div>
-      <button onClick={openModal}>Open Modal</button>
+      <button className="option-button" onClick={openModal}>
+        <img src={ICONS.camera} alt="Camera" />
+        <span>Tìm kiếm bằng hình ảnh</span>
+      </button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -72,7 +76,7 @@ const UploadModal = () => {
         contentLabel="Example Modal"
         overlayClassName="overlay"
       >
-        <div className="position-relative">
+        <div>
           <p className="modal-title">Upload Image</p>
           <form
             id="form"

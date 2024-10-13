@@ -21,18 +21,18 @@ const props = {
   sodium: 500,
   fiber: 2,
   categoryId: 1,
-  description_vi: `
+  description: `
     Gà rán giòn tan, thơm ngon. Gà rán giòn tan, thơm ngon. Gà rán giòn tan, thơm ngon.
     Gà rán giòn tan, thơm ngon. Gà rán giòn tan, thơm ngon. Gà rán giòn tan, thơm ngon.
     Gà rán giòn tan, thơm ngon. Gà rán giòn tan, thơm ngon. Gà rán giòn tan, thơm ngon.
     Gà rán giòn tan, thơm ngon. Gà rán giòn tan, thơm ngon. Gà rán giòn
     `,
-  description_en: 'Crispy and delicious fried chicken.',
+  description: 'Crispy and delicious fried chicken.',
   availability: 'AVAILABLE', // Assuming ItemAvailabilityEnum has values like AVAILABLE, UNAVAILABLE, etc.
   rating: 4.5,
-  ingredients_vi: ['gà', 'bột mì', 'gia vị'],
+  ingredients: ['gà', 'bột mì', 'gia vị'],
   ingredients_en: JSON.stringify(['chicken', 'flour', 'spices']),
-  unit_vi: 'phần',
+  unit: 'phần',
   unit_en: 'serving',
   images: JSON.stringify(['image1.jpg', 'image2.jpg']),
   regional: 'Miền Nam', // Assuming regional refers to the geographic region
@@ -75,15 +75,14 @@ const foodItems = [
   },
   // Thêm các món ăn khác
 ];
-const FoodInfo = (
-  {
-    // props
-  },
-) => {
+const FoodInfo = ({ food }) => {
+  console.log('Food Info:', food);
   const [activeButton, setActiveButton] = useState(null); // State to track active button
+  const [price, setPrice] = useState(food.minPrice);
 
   const handleClick = (size) => {
-    setActiveButton(size); // Set active button on click
+    setActiveButton(size);
+    setPrice(food.itemSizes[size].price);
   };
 
   const [value, setValue] = useState(1);
@@ -112,41 +111,36 @@ const FoodInfo = (
     <div className="container-info">
       <div class="d-flex justify-content-between align-items-center">
         {/* check i18n isEn ? props.name_en : props.name_vn */}
-        <p class="p-2 info-name">{props.name_en}</p>
-        <ReactStars count={5} edit={false} value={props.rating} size={44} activeColor="#ffd700" isHalf={true} />
+        <p class="p-2 info-name">{food.name}</p>
+        <ReactStars count={5} edit={false} value={food.rating} size={44} activeColor="#ffd700" isHalf={true} />
       </div>
       <div class="align-items-center">
-        <p class="p-2 info-price">{props.price}đ</p>
+        <p class="p-2 info-price">{price}</p>
       </div>
       <div class="align-items-center">
-        <p class="p-2">{props.description_vi}</p>
+        <p class="p-2">{food.description}</p>
       </div>
       <div class="d-flex align-items-center">
         <p class="p-2 fw-bold">Thành phần chính: </p>
-        <p>{props.ingredients_vi.join(', ')}</p>
+        <p>{food.ingredients.join(', ')}</p>
       </div>
       <div class="d-flex align-items-center">
         <p class="p-2 fw-bold">Đặc sản:</p>
-        <p class="p-2">{props.regional}</p>
+        <p class="p-2">{food.regional}</p>
       </div>
       <div class="d-flex align-items-center">
         <p class="p-2 fw-bold">Thành phần dinh dưỡng: </p>
-        <p>{props.ingredients_vi.join(', ')}</p>
+        <p>{food.ingredients.join(', ')}</p>
       </div>
-      <Table scroll={{ x: 400 }} dataSource={[props]} columns={columns} pagination={false} />
+      <Table scroll={{ x: 400 }} dataSource={[food]} columns={columns} pagination={false} />
       <div class="align-items-center">
         <span class="p-2 fw-bold">Chọn kích thước: </span>
         <div className="p-2 d-block">
-          {/* sau nay doi thanh cac key de ban biet button, key dua vao vong lap cac size cua food */}
-          <ButtonPrimary isActive={activeButton === '1'} onClick={() => handleClick('1')}>
-            Nhỏ
-          </ButtonPrimary>
-          <ButtonPrimary isActive={activeButton === '2'} onClick={() => handleClick('2')}>
-            Vừa
-          </ButtonPrimary>
-          <ButtonPrimary isActive={activeButton === '3'} onClick={() => handleClick('3')}>
-            Lớn
-          </ButtonPrimary>
+          {food.itemSizes.map((itemSize, index) => (
+            <ButtonPrimary key={index} isActive={activeButton === index} onClick={() => handleClick(index)}>
+              {itemSize.size}
+            </ButtonPrimary>
+          ))}
         </div>
       </div>
       <div class="d-flex flex-row align-items-center" style={{ marginTop: '12px' }}>

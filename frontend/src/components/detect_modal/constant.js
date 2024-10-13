@@ -1,5 +1,8 @@
+import { BsZoomIn } from 'react-icons/bs';
+
 const modalStyles = {
   content: {
+    position: 'absolute',
     width: '35%',
     top: '50%',
     left: '50%',
@@ -10,6 +13,7 @@ const modalStyles = {
     borderRadius: '12px',
     backgroundColor: '#FFFFFF',
     padding: '24px 30px',
+    zIndex: '999',
   },
 };
 

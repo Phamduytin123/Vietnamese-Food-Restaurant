@@ -1,19 +1,29 @@
-import React from "react";
-import { useState } from "react";
-import { ICONS } from "../../constants/icons";
-import { IMAGES } from "../../constants/images";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Dropdown from "react-bootstrap/Dropdown";
-import { IoLocationSharp } from "react-icons/io5";
-import { IoMdPerson } from "react-icons/io";
-import "./index.scss";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { ICONS } from '../../constants/icons';
+import { IMAGES } from '../../constants/images';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import Dropdown from 'react-bootstrap/Dropdown';
+import { IoLocationSharp } from 'react-icons/io5';
+import { IoMdPerson } from 'react-icons/io';
+import './index.scss';
 
-const Header = () => {
-  // State quản lý trạng thái đăng nhập
+const Header = ({ userInfo }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [profile, setProfile] = useState(null);
+
+  const getProfile = () => {
+    if (userInfo) {
+      setProfile(userInfo);
+      setIsLoggedIn(true);
+    }
+  };
+  useEffect(() => {
+    getProfile();
+  }, []);
   return (
     <div className="container-header">
       <Navbar expand="lg">
@@ -24,11 +34,7 @@ const Header = () => {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
-            >
+            <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
               <Navbar.Text className="location">
                 <p className="deliver">Deliver to:</p>
                 <IoLocationSharp className="location-icon" />
@@ -42,7 +48,7 @@ const Header = () => {
               <Button
                 className="btn-login"
                 onClick={() => {
-                  console.log("Login button clicked");
+                  console.log('Login button clicked');
                   setIsLoggedIn(true);
                 }}
               >
@@ -53,10 +59,7 @@ const Header = () => {
               // Nếu đã đăng nhập, hiển thị icon cart và user
               <div className="navbar-icons d-flex align-items-center">
                 {/* Cart icon */}
-                <div
-                  className="cart-icon position-relative me-3"
-                  style={{ cursor: "pointer" }}
-                >
+                <div className="cart-icon position-relative me-3" style={{ cursor: 'pointer' }}>
                   <span className="cart-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     2
                   </span>
@@ -64,73 +67,46 @@ const Header = () => {
                     src={ICONS.cart}
                     alt="Cart"
                     className="cart-icon-img"
-                    style={{ width: "28px", height: "28px" }}
+                    style={{ width: '28px', height: '28px' }}
                   />
                 </div>
 
                 {/* User icon với Dropdown */}
                 <Dropdown align="end">
-                  <Dropdown.Toggle
-                    variant="link"
-                    id="dropdown-user"
-                    className="user-dropdown-toggle"
-                  >
+                  <Dropdown.Toggle variant="link" id="dropdown-user" className="user-dropdown-toggle d-flex">
                     <img
-                      src={ICONS.user}
+                      src={profile.avatar}
                       alt="User"
                       className="user-icon"
-                      style={{ width: "28px", height: "28px" }}
+                      style={{ width: '28px', height: '28px' }}
                     />
+                    <p className="user-name">{profile.name}</p>
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu className="custom-dropdown-menu">
                     <Dropdown.Item href="#/dashboard">
-                      <img
-                        src={ICONS.icon_homepage}
-                        alt="Dashboard"
-                        className="menu-icon"
-                      />
+                      <img src={ICONS.icon_homepage} alt="Dashboard" className="menu-icon" />
                       Homepage
                     </Dropdown.Item>
                     <Dropdown.Item href="#/order-history">
-                      <img
-                        src={ICONS.icon_order}
-                        alt="Order History"
-                        className="menu-icon"
-                      />
+                      <img src={ICONS.icon_order} alt="Order History" className="menu-icon" />
                       Lịch sử đơn hàng
                     </Dropdown.Item>
                     <Dropdown.Item href="#/cart">
-                      <img
-                        src={ICONS.icon_cart}
-                        alt="Cart"
-                        className="menu-icon"
-                      />
+                      <img src={ICONS.icon_cart} alt="Cart" className="menu-icon" />
                       Giỏ hàng
                     </Dropdown.Item>
                     <Dropdown.Item href="#/favorites">
-                      <img
-                        src={ICONS.icon_heart}
-                        alt="Favorites"
-                        className="menu-icon"
-                      />
+                      <img src={ICONS.icon_heart} alt="Favorites" className="menu-icon" />
                       Danh sách món ăn đã thích
                     </Dropdown.Item>
                     <Dropdown.Item href="#/settings">
-                      <img
-                        src={ICONS.icon_setting}
-                        alt="Settings"
-                        className="menu-icon"
-                      />
+                      <img src={ICONS.icon_setting} alt="Settings" className="menu-icon" />
                       Cài đặt
                     </Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item href="#/logout">
-                      <img
-                        src={ICONS.icon_logout}
-                        alt="Logout"
-                        className="menu-icon"
-                      />
+                      <img src={ICONS.icon_logout} alt="Logout" className="menu-icon" />
                       Log-out
                     </Dropdown.Item>
                   </Dropdown.Menu>

@@ -1,8 +1,9 @@
-import StarRatingComponent from "react-star-rating-component";
-import { IMAGES } from "../../constants/images";
-import { ICONS } from "../../constants/icons";
-import { useState } from "react";
-import "./index.scss";
+import StarRatingComponent from 'react-star-rating-component';
+import { IMAGES } from '../../constants/images';
+import { ICONS } from '../../constants/icons';
+import { useState } from 'react';
+import './index.scss';
+import { Link } from 'react-router-dom';
 const ProductCardGrid = (props) => {
   const { product } = props;
   const [isFavorite, setIsFavorite] = useState(false);
@@ -15,10 +16,10 @@ const ProductCardGrid = (props) => {
     }
   };
   const discountPrice = (price, discount) => {
-    const cleanedPrice = price.replace(" VND", "").replace(/\./g, "");
+    const cleanedPrice = price.replace(' VND', '').replace(/\./g, '');
     const minPrice = parseFloat(cleanedPrice);
     const discountedPrice = (minPrice * discount) / 100;
-    const formattedPrice = discountedPrice.toLocaleString("vi-VN") + " VND";
+    const formattedPrice = discountedPrice.toLocaleString('vi-VN') + ' VND';
     return formattedPrice;
   };
   return (
@@ -27,15 +28,14 @@ const ProductCardGrid = (props) => {
         <img src={IMAGES.label_hot} alt="Hot" className="label-background" />
         <span>HOT</span>
       </div>
-      <img
-        src={
-          product.images && product.images.length > 0
-            ? product.images[0]
-            : IMAGES.img_product
-        }
-        alt={product.name}
-        className="product-image"
-      />
+      <Link to={`food/${product.id}`}>
+        <img
+          src={product.images && product.images.length > 0 ? product.images[0] : IMAGES.img_product}
+          alt={product.name}
+          className="product-image"
+        />
+      </Link>
+
       <div className="product-details">
         <div className="rate">
           <h3 className="product-name">{product.name}</h3>
@@ -56,10 +56,7 @@ const ProductCardGrid = (props) => {
                 const fraction = product.rating - Math.floor(product.rating); // Tính phần thập phân
                 return (
                   <span className="custom-star partial">
-                    <span
-                      className="partial-star"
-                      style={{ width: `${fraction * 100}%` }}
-                    >
+                    <span className="partial-star" style={{ width: `${fraction * 100}%` }}>
                       &#9733;
                     </span>
                     <span className="empty-star">&#9733;</span>
@@ -74,9 +71,7 @@ const ProductCardGrid = (props) => {
         </div>
         {product.discount != 0 ? (
           <div className="price">
-            <span className="current-price">
-              {discountPrice(product.minPrice, product.discount)}
-            </span>
+            <span className="current-price">{discountPrice(product.minPrice, product.discount)}</span>
             <div className="original-price">
               <span className="strikethrough">{product.minPrice}</span>
               <span className="discount">{product.discount}% Off</span>
@@ -96,10 +91,7 @@ const ProductCardGrid = (props) => {
           <img src={ICONS.cart_2} alt="Add to Cart" />
         </div>
         <div className="icon-wrapper" onClick={toggleFavorite}>
-          <img
-            src={isFavorite ? ICONS.fill_heart : ICONS.hearts}
-            alt="Wishlist"
-          />
+          <img src={isFavorite ? ICONS.fill_heart : ICONS.hearts} alt="Wishlist" />
         </div>
       </div>
     </div>

@@ -1,14 +1,14 @@
 .product-card {
-    position: relative;
+  position: relative;
   background-color: #fff;
   border-radius: 4px;
   text-align: center;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease; 
+  transition: background-color 0.3s ease, transform 0.3s ease;
     &:hover .icon-wrapper{
-        background-color: #e85a0d; 
-        transform: scale(1.05); 
+        background-color: #e85a0d;
+        transform: scale(1.05);
     }
   .label {
     position: absolute;
@@ -88,7 +88,7 @@
       }
     }
 
-    
+
 
     .price {
       display: flex;
@@ -127,8 +127,8 @@
   flex-direction: column;
   gap: 10px;
 
-   
-  
+
+
   .icon-wrapper {
     width: 36px;
     height: 36px;
@@ -138,12 +138,12 @@
     justify-content: center;
     align-items: center;
 
-    transition: background-color 0.3s ease, transform 0.3s ease; 
+    transition: background-color 0.3s ease, transform 0.3s ease;
     &:hover {
-        background-color: #e85a0d; 
-        transform: scale(1.05); 
+        background-color: #e85a0d;
+        transform: scale(1.05);
     }
-    
+
     img {
       width: 16px; // Adjust image size as needed
       height: 16px;

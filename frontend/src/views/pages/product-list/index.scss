@@ -152,7 +152,6 @@ body, html {
   width: 100%;
   background-color: #fff;
   margin-bottom: 16px;
-
   .option-button {
   display: flex;
   align-items: center;
@@ -160,12 +159,13 @@ body, html {
   color: #fff;
   padding: 10px 15px;
   border-radius: 5px;
+  border: none;
   cursor: pointer;
 
-  transition: background-color 0.3s ease, transform 0.3s ease; 
+  transition: background-color 0.3s ease, transform 0.3s ease;
   &:hover {
-    background-color: #e85a0d; 
-    transform: scale(1.05); 
+    background-color: #e85a0d;
+    transform: scale(1.05);
   }
 }
 

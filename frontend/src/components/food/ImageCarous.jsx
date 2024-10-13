@@ -18,19 +18,19 @@ const ImageCarousel = ({ foodImages }) => {
   };
 
   return (
-    <div className="food-carousel d-flex align-items-centers">
+    <div className="food-carousel d-flex align-items-centers ">
       <button onClick={prevImages}>
-        <img style={{ height: '100px' }} src={ICONS.arrow_left} alt="arrow left" />
+        <img className="height-100" src={ICONS.arrow_left} alt="arrow left" />
       </button>
       <div className="items-container">
         {foodImages.slice(currentIndex, currentIndex + imagesToShow).map((foodImage, index) => (
           <div className="food-item" key={index}>
-            <img style={{ height: '120px' }} src={foodImage.image} alt={foodImage.name} />
+            <img style={{ height: '80px' }} src={foodImage} alt={foodImage.name} />
           </div>
         ))}
       </div>
       <button onClick={nextImages}>
-        <img style={{ height: '100px' }} src={ICONS.arrow_right} alt="arrow right" />
+        <img className="height-100" src={ICONS.arrow_right} alt="arrow right" />
       </button>
     </div>
   );

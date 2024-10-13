@@ -68,18 +68,14 @@ const foodItems = [
   // Thêm các món ăn khác
 ];
 
-const FoodImage = (
-  {
-    // props
-  },
-) => {
+const FoodImage = ({ images }) => {
   return (
     <div className="food-images">
       <div className="food-image">
-        <img style={{ padding: '32px', width: '100%' }} src={IMAGES.foodImage} alt="" />
+        <img className="border-radius-16" style={{ padding: '40px', width: '100%' }} src={images[0]} alt="" />
       </div>
       <div className="food-image-view">
-        <ImageCarousel foodImages={foodItems} />
+        <ImageCarousel foodImages={images} />
       </div>
     </div>
   );

@@ -1,35 +1,37 @@
-import React from "react";
-import { useState } from "react";
-import "./index.scss";
-import { IMAGES } from "../../../constants/images";
-import { ICONS } from "../../../constants/icons";
-import { BsGrid3X3Gap } from "react-icons/bs";
-import { BsList } from "react-icons/bs";
-import Form from "react-bootstrap/Form";
-import { IoIosSearch } from "react-icons/io";
-import { FiArrowRight } from "react-icons/fi";
-import { FiArrowLeft } from "react-icons/fi";
-import ProductCardList from "../../../components/product-card-list";
-import ProductCardGrid from "../../../components/product-card-grid";
-import productAPI from "../../../api/productAPI";
-import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React from 'react';
+import { useState } from 'react';
+import './index.scss';
+import { IMAGES } from '../../../constants/images';
+import { ICONS } from '../../../constants/icons';
+import { BsGrid3X3Gap } from 'react-icons/bs';
+import { BsList } from 'react-icons/bs';
+import Form from 'react-bootstrap/Form';
+import { IoIosSearch } from 'react-icons/io';
+import { FiArrowRight } from 'react-icons/fi';
+import { FiArrowLeft } from 'react-icons/fi';
+import ProductCardList from '../../../components/product-card-list';
+import ProductCardGrid from '../../../components/product-card-grid';
+import productAPI from '../../../api/productAPI';
+import { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import UploadModal from '../../../components/detect_modal/UploadModal';
+import RecommendModal from '../../../components/recommend_modal/RecommendModal';
 const ProductList = () => {
   const location = useLocation();
-  const [viewMode, setViewMode] = useState("grid");
+  const [viewMode, setViewMode] = useState('grid');
   const [products, setProducts] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
   const [isFood, setIsFood] = useState(true);
-  const [txtSearch, setTxtSearch] = useState("");
+  const [txtSearch, setTxtSearch] = useState('');
   const [limit, setLimit] = useState(6);
-  const [showBy, setShowBy] = useState("name");
+  const [showBy, setShowBy] = useState('name');
   const [minPrice, setMinPrice] = useState(null);
   const [maxPrice, setMaxPrice] = useState(null);
 
   useEffect(() => {
-    setTxtSearch("");
+    setTxtSearch('');
   }, [location]);
   const handleInputChange = (event) => {
     setTxtSearch(event.target.value);
@@ -43,31 +45,31 @@ const ProductList = () => {
   const handlePriceChange = (event) => {
     const value = event.target.value;
     switch (value) {
-      case "all":
+      case 'all':
         setMinPrice(null);
         setMaxPrice(null);
         break;
-      case "under30":
+      case 'under30':
         setMinPrice(0);
         setMaxPrice(30);
         break;
-      case "30to60":
+      case '30to60':
         setMinPrice(30);
         setMaxPrice(60);
         break;
-      case "60to90":
+      case '60to90':
         setMinPrice(60);
         setMaxPrice(90);
         break;
-      case "90to120":
+      case '90to120':
         setMinPrice(90);
         setMaxPrice(120);
         break;
-      case "120to150":
+      case '120to150':
         setMinPrice(120);
         setMaxPrice(150);
         break;
-      case "over150":
+      case 'over150':
         setMinPrice(150);
         setMaxPrice(null);
         break;
@@ -105,14 +107,14 @@ const ProductList = () => {
         isFood, // isFood
         showBy, // sortBy
         false, // isDiscount
-        null // categoryId
+        null, // categoryId
       );
       setProducts(productList.data.items);
       setTotalPages(productList.data.totalPages);
-      console.log("Product:", productList);
-      console.log("Product list:", productList.data.totalPages);
+      console.log('Product:', productList);
+      console.log('Product list:', productList.data.totalPages);
     } catch (error) {
-      console.error("Error fetching products:", error);
+      console.error('Error fetching products:', error);
     }
   };
 
@@ -154,72 +156,37 @@ const ProductList = () => {
           <h3>Price Range</h3>
           <div className="radio-options">
             <label className="radio-label">
-              <input
-                type="radio"
-                name="price"
-                value="all"
-                onChange={handlePriceChange}
-              />
+              <input type="radio" name="price" value="all" onChange={handlePriceChange} />
               <span className="radio-text">All Price</span>
             </label>
 
             <label className="radio-label">
-              <input
-                type="radio"
-                name="price"
-                value="under30"
-                onChange={handlePriceChange}
-              />
+              <input type="radio" name="price" value="under30" onChange={handlePriceChange} />
               <span className="radio-text">Under 30.000 VND</span>
             </label>
 
             <label className="radio-label">
-              <input
-                type="radio"
-                name="price"
-                value="30to60"
-                onChange={handlePriceChange}
-              />
+              <input type="radio" name="price" value="30to60" onChange={handlePriceChange} />
               <span className="radio-text">30.000 to 60.000 VND</span>
             </label>
 
             <label className="radio-label">
-              <input
-                type="radio"
-                name="price"
-                value="60to90"
-                onChange={handlePriceChange}
-              />
+              <input type="radio" name="price" value="60to90" onChange={handlePriceChange} />
               <span className="radio-text">60.000 to 90.000 VND</span>
             </label>
 
             <label className="radio-label">
-              <input
-                type="radio"
-                name="price"
-                value="90to120"
-                onChange={handlePriceChange}
-              />
+              <input type="radio" name="price" value="90to120" onChange={handlePriceChange} />
               <span className="radio-text">90.000 to 120.000 VND</span>
             </label>
 
             <label className="radio-label">
-              <input
-                type="radio"
-                name="price"
-                value="120to150"
-                onChange={handlePriceChange}
-              />
+              <input type="radio" name="price" value="120to150" onChange={handlePriceChange} />
               <span className="radio-text">120.000 to 150.000 VND</span>
             </label>
 
             <label className="radio-label">
-              <input
-                type="radio"
-                name="price"
-                value="over150"
-                onChange={handlePriceChange}
-              />
+              <input type="radio" name="price" value="over150" onChange={handlePriceChange} />
               <span className="radio-text">Over 150.000 VND</span>
             </label>
           </div>
@@ -230,18 +197,10 @@ const ProductList = () => {
           <Link to="/" className="nav-item">
             HOME
           </Link>
-          <Link
-            to="/items"
-            className={`nav-item ${isFood ? "active" : ""}`}
-            onClick={() => setIsFood(true)}
-          >
+          <Link to="/items" className={`nav-item ${isFood ? 'active' : ''}`} onClick={() => setIsFood(true)}>
             FOOD
           </Link>
-          <Link
-            to="/items"
-            className={`nav-item ${!isFood ? "active" : ""}`}
-            onClick={() => setIsFood(false)}
-          >
+          <Link to="/items" className={`nav-item ${!isFood ? 'active' : ''}`} onClick={() => setIsFood(false)}>
             DRINK
           </Link>
           <Link to="/" className="nav-item">
@@ -251,21 +210,10 @@ const ProductList = () => {
         <div className="search-filter-components">
           <div className="search-bar">
             <IoIosSearch />
-            <input
-              type="text"
-              placeholder="Search"
-              value={txtSearch}
-              onChange={handleInputChange}
-            />
+            <input type="text" placeholder="Search" value={txtSearch} onChange={handleInputChange} />
           </div>
-          <div className="option-button">
-            <img src={ICONS.camera} alt="Camera" />
-            <span>Tìm kiếm bằng hình ảnh</span>
-          </div>
-          <div className="option-button">
-            <img src={ICONS.lightbulb} alt="Lightbulb" />
-            <span>Gợi ý đồ ăn</span>
-          </div>
+          <UploadModal />
+          <RecommendModal />
         </div>
         <div className="product-banner-container">
           <div className="content">
@@ -273,10 +221,7 @@ const ProductList = () => {
             <p>Mang đậm bản sắc dân tộc</p>
           </div>
           <div className="image-container">
-            <img
-              src={IMAGES.product_banner}
-              alt="Traditional Vietnamese Food"
-            />
+            <img src={IMAGES.product_banner} alt="Traditional Vietnamese Food" />
           </div>
         </div>
         <div className="filter-container">
@@ -314,14 +259,8 @@ const ProductList = () => {
               </Form.Select>
             </div>
             <div className="switches">
-              <BsGrid3X3Gap
-                onClick={() => setViewMode("grid")}
-                className={viewMode === "grid" ? "active" : ""}
-              />
-              <BsList
-                onClick={() => setViewMode("list")}
-                className={viewMode === "list" ? "active" : ""}
-              />
+              <BsGrid3X3Gap onClick={() => setViewMode('grid')} className={viewMode === 'grid' ? 'active' : ''} />
+              <BsList onClick={() => setViewMode('list')} className={viewMode === 'list' ? 'active' : ''} />
             </div>
           </div>
         </div>
@@ -331,7 +270,7 @@ const ProductList = () => {
           </div>
         ) : (
           <>
-            {viewMode === "grid" ? (
+            {viewMode === 'grid' ? (
               <div className="product-grid">
                 {products.map((product) => (
                   <ProductCardGrid key={product.id} product={product} />
@@ -353,9 +292,7 @@ const ProductList = () => {
               <div className="pages">
                 {Array.from({ length: totalPages }, (_, index) => (
                   <div
-                    className={`page ${
-                      currentPage === index + 1 ? "active" : ""
-                    }`}
+                    className={`page ${currentPage === index + 1 ? 'active' : ''}`}
                     key={index}
                     onClick={() => handlePageClick(index + 1)}
                   >
