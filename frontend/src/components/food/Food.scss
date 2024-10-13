@@ -62,6 +62,11 @@
     overflow: hidden; // Ẩn phần hình ảnh ngoài vùng nhìn thấy
   }
 
+  .left-arrow-btn{
+    position: absolute;
+    top: 100%;
+    height: 100px;
+  }
   .food-item {
     display: flex;
     flex-direction: column;
@@ -90,13 +95,18 @@
   width: 30%;
   margin-right: 30px;
   .food-image {
-    background-image: url(../../assets//images/foodImage_background.png);
-    background-size: cover; /* Để hình ảnh chiếm toàn bộ khu vực */
-    background-position: center;
+    border: 2px dashed #8A8585;
+    background-color: $background-color__gray;
+    border-radius: 16px;
+    margin-bottom: 30px;
   }
   .food-image-view {
     background-color: $background-color__gray;
     padding: 16px;
     border-radius: 20px;
   }
+}
+
+.height-100{
+  height: 100px;
 }

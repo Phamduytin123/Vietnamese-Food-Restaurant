@@ -1,13 +1,15 @@
-import Footer from "../footers";
-import Header from "../headers";
-import React from "react";
+import Footer from '../footers';
+import Header from '../headers';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
-import "./MainLayout.scss";
+import './MainLayout.scss';
 
 function MainLayout(props) {
+  const userInfo = JSON.parse(localStorage.getItem('user_info')) || {};
+
   return (
     <div className="frame-wrapper">
-      <Header />
+      <Header userInfo={userInfo} />
       <div className="frame-body">
         <props.component />
       </div>
