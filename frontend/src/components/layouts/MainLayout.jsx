@@ -8,9 +8,9 @@ function MainLayout(props) {
   return (
     <div className="frame-wrapper">
       <Header />
-        <div class='frame-body'>
-          <props.component/>
-        </div>
+      <div className="frame-body">
+        <props.component />
+      </div>
       <Footer />
     </div>
   );

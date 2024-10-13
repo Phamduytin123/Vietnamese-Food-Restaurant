@@ -1,0 +1,171 @@
+// Product List
+  .product-card-list {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.product-image {
+  position: relative;
+  .icon-wrapper {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #f17228; // Use your desired background color
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 10px;
+    position: absolute;
+    top: 10px;
+
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+    &:hover {
+        background-color: #e85a0d; 
+        transform: scale(1.05); 
+    }
+    
+    img {
+      width: 16px; // Adjust image size as needed
+      height: 16px;
+      cursor: pointer;
+    }
+  }
+  .label {
+    position: absolute;
+    top: 5px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+
+    .label-background {
+      width: 81px;
+      height: 35px;
+    }
+
+    span {
+      position: absolute;
+      font-size: 18px;
+      color: #fff;
+      line-height: 22px;
+      padding-left: 10px;
+    }
+  }
+
+  .img-item{
+    width: 400px;
+    display: block;
+    height: 300px;
+    object-fit: cover;
+  }
+}
+
+.product-info {
+  padding: 20px;
+  position: relative;
+}
+
+.product-info h2 {
+  margin: 0 0 10px;
+  font-size: 1.5rem;
+  color: #223263;
+}
+
+.pricing {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .discounted-price {
+    font-weight: 700;
+    color: #bb8d4f;
+    font-size: 1.2rem;
+  }
+
+  .original-price {
+    text-decoration: line-through;
+    color: #9098b1;
+  }
+
+  .discount {
+    color: #f17228;
+  }
+}
+
+
+.rating img {
+  margin-right: 5px;
+}
+
+.custom-star {
+  font-size: 24px;
+  display: inline-block;
+  position: relative;
+}
+
+      .full {
+        color: gold;
+      }
+
+      .empty {
+        color: lightgray;
+      }
+
+      .partial {
+        position: relative;
+      }
+
+      .partial-star {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: gold; /* Màu cho phần đã chọn */
+        overflow: hidden;
+      }
+
+      .empty-star {
+        color: lightgray; /* Màu cho phần chưa chọn */
+      }
+
+.description {
+  margin: 10px 0;
+  color: #232323;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  bottom: 12px;
+
+  .btn-view, .btn-cart {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border: none;
+    background: #f17228;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+      &:hover {
+          background-color: #e85a0d; 
+          transform: scale(1.05); 
+      }
+  }
+
+  .btn-view img, .btn-cart img {
+    margin-right: 10px;
+  }
+
+  .btn-view{
+    svg {
+      width: 26px;
+      height: 26px;
+      margin-right: 3px;
+    }
+  }
+}
+
