@@ -45,5 +45,5 @@ export class Voucher {
     updatedAt: Date;
 
     @OneToMany(() => Order, order => order.voucher)
-    orders: Order;
+    orders: Order[];
 }

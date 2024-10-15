@@ -94,7 +94,6 @@ export class Item {
 
     @Column({
         type: 'varchar',
-        default: '[]',
         length: 1000,
     })
     images: string;

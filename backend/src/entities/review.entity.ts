@@ -18,7 +18,10 @@ export class Review {
     @Column()
     rating: number;
 
-    @Column()
+    @Column({
+        type : 'varchar',
+        length : 255,
+    })
     comment: string;
 
     @Column()

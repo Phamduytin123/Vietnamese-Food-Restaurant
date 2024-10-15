@@ -1,0 +1,5 @@
+{
+    "cart" : {
+        "removed" : "Xóa giỏ hàng có id là '{cartId}' thành công"
+    }
+}

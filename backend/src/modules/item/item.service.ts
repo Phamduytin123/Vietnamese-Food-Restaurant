@@ -31,10 +31,10 @@ export class ItemService {
             minPrice,
             maxPrice,
             txtSearch,
-            isFood = true,
+            isFood = 'true',
             sortBy = 'name',
             sortOrder = 'ASC',
-            isDiscount = false,
+            isDiscount = 'false',
             categoryId,
         } = query;
 
@@ -81,8 +81,6 @@ export class ItemService {
         var [items, _totalItems] = await this.itemRepo.findAndCount(
             clean({
                 where: conditions,
-                skip: skip,
-                take: limit,
                 order: orderField !== 'price' && order,
                 relations: ['category', 'itemSizes'],
             })
@@ -104,8 +102,8 @@ export class ItemService {
                 );
 
                 return (
-                    (!minPrice || itemMaxPrice / 1000 <= maxPrice) &&
-                    (!maxPrice || itemMinPrice / 1000 >= minPrice)
+                    (!minPrice || itemMinPrice / 1000 >= minPrice) &&
+                    (!maxPrice || itemMaxPrice / 1000 <= maxPrice)
                 );
             });
         }

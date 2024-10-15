@@ -1,0 +1,5 @@
+{
+    "cart" : {
+        "removed" : "Delete cart with '{cartId}' id successfully"
+    }
+}
