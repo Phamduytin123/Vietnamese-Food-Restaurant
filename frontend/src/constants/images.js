@@ -24,4 +24,12 @@ export const IMAGES = {
     foodImage: require('../assets/images/foodImage.png'),
     foodImage_background: require('../assets/images/foodImage_background.png'),
     upload_image: require('../assets/images/upload_image.png'),
+    img_zalopay: require('../assets/images/img_zalopay.png'),
+    img_momo: require('../assets/images/img_momo.png'),
+    img_vietelpay: require('../assets/images/img_vietelpay.png'),
+    img_vnpay: require('../assets/images/img_vnpay.png'),
+    img_creditpay: require('../assets/images/img_creditcard.png'),
+    img_test_checkout: require('../assets/images/img_test_checkout.png'),
+    img_checkout_success: require('../assets/images/img_checkout_success.png'),
+    img_card_test: require('../assets/images/img_card_test.png'),
 };    

@@ -29,4 +29,6 @@ export const ICONS = {
   arrow_right: require('../assets/icons/arrow_right.png'),
   arrow_left: require('../assets/icons/arrow_left.png'),
   time_span: require('../assets/icons/time_span.png'),
+  icon_back_home: require('../assets/icons/icon_back_home.png'),
+  icon_xproduct: require('../assets/icons/XProduct.png'),
 };
