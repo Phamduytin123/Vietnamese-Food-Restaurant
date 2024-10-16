@@ -46,7 +46,9 @@ export class Order {
     })
     status: OrderStatusEnum;
 
-    @Column()
+    @Column({
+        default: ''
+    })
     reasonCancel: string;
 
     @Column()

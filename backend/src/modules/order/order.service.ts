@@ -21,6 +21,7 @@ import {
     ItemAvailabilityEnum,
     OrderStatusEnum,
 } from '../../common';
+import { log } from 'console';
 
 @Injectable()
 export class OrderService {
@@ -36,7 +37,7 @@ export class OrderService {
         @InjectRepository(ItemSize)
         private readonly itemSizeRepository: Repository<ItemSize>,
         private readonly i18n: I18nService
-    ) {}
+    ) { }
 
     async createOrder(lang: string, account: Account, orderReq: OrderRequest) {
         const {
@@ -128,19 +129,21 @@ export class OrderService {
 
         // Xóa cart
 
-        foundCarts.forEach(cart => {
+        for (const cart of foundCarts) {
             const orderDetail: OrderDetail = this.orderDetailRepository.create({
                 price: cart.itemSize.price,
                 orderId: order.id,
                 itemSizeId: cart.itemSizeId,
                 quantity: cart.quantity,
             });
+            // Save each OrderDetail to the database
+            // const savedOrderDetail = this.orderDetailRepository.save(orderDetail);
             order.orderDetails.push(orderDetail);
             this.orderDetailRepository.save(orderDetail);
             if (isCart) {
                 this.cartRepository.delete({ id: cart.id });
             }
-        });
+        };
 
         return order;
     }
