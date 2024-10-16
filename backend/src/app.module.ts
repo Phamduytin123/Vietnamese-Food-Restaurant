@@ -18,6 +18,7 @@ import {
 } from 'nestjs-i18n';
 import * as path from 'path';
 import { RecipeModule } from './modules/recipe/recipe.module';
+import { MomoPaymentModule } from './modules/momo-payment/momo-payment.module';
 @Module({
     imports: [
         DatabaseModule,
@@ -42,6 +43,7 @@ import { RecipeModule } from './modules/recipe/recipe.module';
                 new HeaderResolver(['x-lang']),
             ],
         }),
+        MomoPaymentModule,
     ],
     controllers: [AppController],
     providers: [AppService],
