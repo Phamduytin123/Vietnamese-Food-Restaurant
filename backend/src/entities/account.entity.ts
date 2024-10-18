@@ -21,10 +21,10 @@ export class Account {
     @Column()
     name: string;
 
-    @Column()
+    @Column({ nullable: true })
     displayName: string;
 
-    @Column()
+    @Column({ nullable: true })
     address: string;
 
     @Column()
@@ -32,6 +32,7 @@ export class Account {
 
     @Column({
         length: 10,
+        nullable: true
     })
     tel: string;
 
