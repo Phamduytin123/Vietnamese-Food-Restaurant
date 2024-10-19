@@ -25,14 +25,7 @@ export class MomoPaymentService {
         req: any) {
 
         const { carts } = body;
-        const dataCallback = [
-            {
-                ...body,
-                paymentMethod: OrderPaymentMethodEnum.MOMO,
-                lang: lang,
-                currentAccount: currentAccount,
-            },
-        ];
+        
 
         const foundCarts = [];
 
@@ -67,7 +60,7 @@ export class MomoPaymentService {
         }
 
         const totalPrice = await foundCarts.reduce((totalPrice, foundCart) => {
-            return totalPrice + foundCart.itemSize.price * foundCart.quantity;
+            return totalPrice + foundCart.itemSize.getActualPrice() * foundCart.quantity;
         }, 0) * 1000;
         console.log(totalPrice);
 
@@ -93,11 +86,22 @@ export class MomoPaymentService {
         const orderInfo = 'pay with MoMo';
         const partnerCode = 'MOMO';
         const redirectUrl = process.env.MOMO_REDIRC_URL;
-        const ipnUrl = process.env.MOMO_NGROK_LINK + '/momo-payment/callback';
+        const ipnUrl = process.env.DEPLOY_SERVICE_LINK + '/momo-payment/callback';
+        // const ipnUrl = 'https://dc61-2402-800-629c-1fd3-6186-8883-cf12-7a5c.ngrok-free.app/momo-payment/callback';
         const requestType = "payWithMethod";
         const amount = `${totalPrice}`;
         const orderId = partnerCode + new Date().getTime();
         const requestId = orderId;
+        const dataCallback = [
+            {
+                ...body,
+                paymentMethod: OrderPaymentMethodEnum.MOMO,
+                lang: lang,
+                currentAccount: currentAccount,
+                isPaid: true,
+                paymentCode: orderId,
+            },
+        ];
         const extraData = Buffer.from(JSON.stringify(dataCallback)).toString('base64'); // Mã hóa base64
 
         // const orderGroupId = '';

@@ -58,6 +58,16 @@ export class Order {
     accountId: number;
 
     @Column({
+        default : false
+    })
+    isPaid: boolean;
+
+    @Column({
+        nullable : true
+    })
+    paymentCode: string;
+
+    @Column({
         nullable: true,
     })
     voucherId: number;

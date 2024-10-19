@@ -37,4 +37,10 @@ export class OrderRequest {
 
     @IsEmail({}, { message: i18nValidationMessage('validation.emailInvalid') })
     email: string;
+
+    @IsOptional()
+    isPaid: boolean = false;
+
+    @IsOptional()
+    paymentCode: string = null;
 }

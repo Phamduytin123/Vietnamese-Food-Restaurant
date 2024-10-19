@@ -19,7 +19,7 @@ import {
 import * as path from 'path';
 import { RecipeModule } from './modules/recipe/recipe.module';
 import { CustomMailerModule } from './modules/mailer/mailer.module';
-import { MomoPaymentModule } from './modules/momo-payment/momo-payment.module';
+import { LikeModule } from './modules/like/like.module';
 @Module({
     imports: [
         DatabaseModule,
@@ -45,7 +45,7 @@ import { MomoPaymentModule } from './modules/momo-payment/momo-payment.module';
             ],
         }),
         CustomMailerModule,
-        MomoPaymentModule,
+        LikeModule,
     ],
     controllers: [AppController],
     providers: [AppService],

@@ -1,6 +1,6 @@
-import { OrderService } from './../order/order.service';
-import { CurrentAccount } from './../../common/decorator/currentAccount.decorator';
-import { Account } from './../../entities/account.entity';
+import { OrderService } from '../order/order.service';
+import { CurrentAccount } from '../../common/decorator/currentAccount.decorator';
+import { Account } from '../../entities/account.entity';
 import {
     ForbiddenException,
     HttpException,
@@ -32,7 +32,12 @@ export class ZaloPaymentService {
         private readonly orderService: OrderService
     ) {}
 
-    async createPayment(lang: string, body: OrderRequest, req: any, account : Account) {
+    async createPayment(
+        lang: string,
+        body: OrderRequest,
+        req: any,
+        account: Account
+    ) {
         const { carts } = body;
 
         const deployedLink = this.configService.get<string>(
@@ -49,10 +54,17 @@ export class ZaloPaymentService {
         const embed_data = {
             redirecturl: this.configService.get<string>('ZALOPAY_REDIRC_URL'),
         };
+
+        const transID = Math.floor(Math.random() * 1000000);
+
+        const appTransId = `${moment().format('YYMMDD')}_${transID}`;
+
         const items = [
             {
                 ...body,
                 paymentMethod: OrderPaymentMethodEnum.ZALOPAY,
+                isPaid: true,
+                paymentCode: appTransId,
                 lang: lang,
             },
         ];
@@ -111,14 +123,15 @@ export class ZaloPaymentService {
         }
 
         const totalPrice = foundCarts.reduce((totalPrice, foundCart) => {
-            return totalPrice + foundCart.itemSize.price * foundCart.quantity;
+            return (
+                totalPrice +
+                foundCart.itemSize.getActualPrice() * foundCart.quantity
+            );
         }, 0);
-
-        const transID = Math.floor(Math.random() * 1000000);
 
         const order = {
             app_id: config.app_id,
-            app_trans_id: `${moment().format('YYMMDD')}_${transID}`,
+            app_trans_id: appTransId,
             app_user: req.user.id,
             app_time: Date.now(),
             item: JSON.stringify(items),
@@ -127,6 +140,7 @@ export class ZaloPaymentService {
             description: `Product - Payment for the order #${transID}`,
             bank_code: '',
             callback_url: `${deployedLink}/payment/zalo/callback`,
+            // callback_url: `https://dc61-2402-800-629c-1fd3-6186-8883-cf12-7a5c.ngrok-free.app/payment/zalo/callback`,
         };
 
         const data = `${config.app_id}|${order.app_trans_id}|${order.app_user}|${order.amount}|${order.app_time}|${order.embed_data}|${order.item}`;
@@ -149,16 +163,13 @@ export class ZaloPaymentService {
         let result: any = {};
 
         try {
-            // Tạo mac để kiểm tra tính hợp lệ
             const mac = CryptoJS.HmacSHA256(
                 dataStr,
                 this.configService.get<string>('ZALOPAY_KEY2')
             ).toString();
             console.log('Generated mac =', mac);
 
-            // Kiểm tra tính hợp lệ của callback (từ ZaloPay server)
             if (reqMac !== mac) {
-                // Callback không hợp lệ
                 result.return_code = -1;
                 result.return_message = 'mac not equal';
             } else {

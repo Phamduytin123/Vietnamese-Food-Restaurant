@@ -20,6 +20,9 @@ export class Voucher {
     name_en: string;
 
     @Column()
+    code: string;
+
+    @Column()
     discount: number;
 
     @Column()

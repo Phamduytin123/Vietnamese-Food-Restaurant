@@ -4,8 +4,7 @@ import {
     NestModule,
     RequestMethod,
 } from '@nestjs/common';
-import { ZaloPaymentController } from './zaloPayment.controller';
-import { ZaloPaymentService } from './zaloPayment.service';
+import { ZaloPaymentService } from './zalo-payment.service';
 import { AuthGuard } from '../../common/guards/auth.guard';
 import { JwtMiddleware } from '../../common';
 import { AccountService } from '../account/account.service';
@@ -19,6 +18,9 @@ import {
     OrderDetail,
 } from '../../entities';
 import { OrderService } from '../order/order.service';
+import { MomoPaymentController } from './momo-payment.controller';
+import { MomoPaymentService } from './momo-payment.service';
+import { ZaloPaymentController } from './zalo-payment.controller';
 
 @Module({
     imports: [
@@ -31,8 +33,15 @@ import { OrderService } from '../order/order.service';
             ItemSize,
         ]),
     ],
-    controllers: [ZaloPaymentController],
-    providers: [ZaloPaymentService, AuthGuard, AccountService, OrderService],
+    controllers: [ZaloPaymentController, MomoPaymentController],
+    providers: [
+        ZaloPaymentService,
+        AuthGuard,
+        AccountService,
+        OrderService,
+        MomoPaymentService,
+    ],
+    exports: [MomoPaymentService, ZaloPaymentService],
 })
 export class PaymentModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {

@@ -1,4 +1,4 @@
-import { ZaloPaymentService } from './zaloPayment.service';
+import { ZaloPaymentService } from './zalo-payment.service';
 import {
     Body,
     Controller,
@@ -14,7 +14,7 @@ import { RoleGuard } from '../../common/guards/role.guard';
 import { OrderRequest } from '../order/dtos/orderRequest';
 import { Account } from '../../entities';
 
-@Controller('payment/zalo')
+@Controller('zalo-payment')
 export class ZaloPaymentController {
     constructor(private readonly ZaloPaymentService: ZaloPaymentService) {}
 
@@ -25,7 +25,7 @@ export class ZaloPaymentController {
         @Lang() lang: string,
         @Body() orderRequest: OrderRequest,
         @Req() req: any,
-        @CurrentAccount() account : Account
+        @CurrentAccount() account: Account
     ) {
         return await this.ZaloPaymentService.createPayment(
             lang,
