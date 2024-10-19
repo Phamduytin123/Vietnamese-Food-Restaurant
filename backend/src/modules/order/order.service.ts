@@ -37,7 +37,7 @@ export class OrderService {
         @InjectRepository(ItemSize)
         private readonly itemSizeRepository: Repository<ItemSize>,
         private readonly i18n: I18nService
-    ) { }
+    ) {}
 
     async createOrder(lang: string, account: Account, orderReq: OrderRequest) {
         const {
@@ -48,6 +48,8 @@ export class OrderService {
             note,
             paymentMethod,
             email,
+            isPaid,
+            paymentCode,
         } = orderReq;
 
         const foundCarts = [];
@@ -107,7 +109,10 @@ export class OrderService {
         }
 
         const totalPrice = foundCarts.reduce((totalPrice, foundCart) => {
-            return totalPrice + foundCart.itemSize.price * foundCart.quantity;
+            return (
+                totalPrice +
+                foundCart.itemSize.getActualPrice() * foundCart.quantity
+            );
         }, 0);
 
         const newOrder: Order = this.orderRepository.create({
@@ -120,6 +125,8 @@ export class OrderService {
             receiver: receiver,
             totalPrice: totalPrice,
             status: OrderStatusEnum.WAIT,
+            isPaid: isPaid,
+            paymentCode: paymentCode,
         });
 
         // Tạo orderDetail
@@ -131,7 +138,7 @@ export class OrderService {
 
         for (const cart of foundCarts) {
             const orderDetail: OrderDetail = this.orderDetailRepository.create({
-                price: cart.itemSize.price,
+                price: cart.itemSize.getActualPrice(),
                 orderId: order.id,
                 itemSizeId: cart.itemSizeId,
                 quantity: cart.quantity,
@@ -143,7 +150,7 @@ export class OrderService {
             if (isCart) {
                 this.cartRepository.delete({ id: cart.id });
             }
-        };
+        }
 
         return order;
     }
