@@ -84,7 +84,7 @@ export class OrderService {
 
                 if (!itemSize) {
                     return new NotFoundException(
-                        this.i18n.t('error.item.itemNotFound', {
+                        this.i18n.t('error.item.itemSizeNotFound', {
                             args: { itemId: cart.itemSizeId },
                         })
                     );

@@ -157,6 +157,12 @@ export class ItemService {
                     'reviews',
                     'reviews.account',
                 ],
+                order: {
+                    reviews: {
+                        updatedAt: 'DESC',
+                        createdAt: 'DESC',
+                    },
+                },
             });
 
             if (!itemDetail) {

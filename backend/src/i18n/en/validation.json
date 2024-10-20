@@ -6,5 +6,11 @@
     "paymentMethodInvalid": "Invalid payment method",
     "emailInvalid": "Invalid email",
     "nameRequired": "Name is required",
-    "totalPriceRequired": "Total price is requierd"
+    "totalPriceRequired": "Total price is requierd",
+    "commentRequired": "Comment is required.",
+    "ratingRequired": "Rating is required.",
+    "ratingMustBeInteger": "Rating must be an integer.",
+    "ratingMin": "Rating must be at least 0.",
+    "ratingMax": "Rating must not exceed 5.",
+    "itemIdRequired": "Item ID is required."
 }
