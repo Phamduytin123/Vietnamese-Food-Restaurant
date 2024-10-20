@@ -42,7 +42,7 @@ export class ItemFilterUtils {
             ingredients: StringUtils.toArray(item[ingredientsField]),
             unit: item[unitField],
             regional: item[regionalField],
-            ammount_of_money: `${StringUtils.toMoneyString(min)} - ${StringUtils.toMoneyString(max)}`,
+            ammount_of_money: item.itemSizes ?`${StringUtils.toMoneyString(min)} - ${StringUtils.toMoneyString(max)}` : null,
             minPrice: item.itemSizes ? StringUtils.toMoneyString(min) : null,
             maxPrice: item.itemSizes ? StringUtils.toMoneyString(max) : null,
             ...restItem,
@@ -54,7 +54,7 @@ export class ItemFilterUtils {
                   }
                 : null,
             itemSizes: item.itemSizes
-                ? item.itemSizes.map(itemSize => ({
+                ? item.itemSizes.map((itemSize: any) => ({
                       id: itemSize.id,
                       size: itemSize[`size_${lang}`],
                       price: StringUtils.toMoneyString(itemSize.price),

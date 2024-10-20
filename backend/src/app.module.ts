@@ -22,6 +22,7 @@ import { CustomMailerModule } from './modules/mailer/mailer.module';
 import { LikeModule } from './modules/like/like.module';
 import { VoucherModule } from './modules/voucher/voucher.module';
 import { ReviewModule } from './modules/review/review.module';
+import { RevenueModule } from './modules/revenue/revenue.module';
 @Module({
     imports: [
         DatabaseModule,
@@ -50,6 +51,7 @@ import { ReviewModule } from './modules/review/review.module';
         LikeModule,
         VoucherModule,
         ReviewModule,
+        RevenueModule,
     ],
     controllers: [AppController],
     providers: [AppService],
