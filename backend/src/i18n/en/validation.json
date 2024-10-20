@@ -4,6 +4,7 @@
     "receiverInvalid": "Receiver cannot be empty",
     "addressInvalid": "Address cannot be empty",
     "paymentMethodInvalid": "Invalid payment method",
+    "orderStatusInvalid": "Invalid order status",
     "emailInvalid": "Invalid email",
     "nameRequired": "Name is required",
     "totalPriceRequired": "Total price is requierd",

@@ -1,3 +1,4 @@
+import { Lang } from '../../common';
 import { VoucherService } from './voucher.service';
 import { Controller, Get } from '@nestjs/common';
 
@@ -6,7 +7,7 @@ export class VoucherController {
     constructor(private readonly voucherService: VoucherService){}
 
     @Get('/valid/')
-    async validVouchers(){
-        return this.voucherService.getValidVoucher()
+    async validVouchers(@Lang() lang:string){
+        return this.voucherService.getValidVoucher(lang)
     }
 }

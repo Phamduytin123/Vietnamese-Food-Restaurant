@@ -17,11 +17,14 @@ import { Repository } from 'typeorm';
 import { OrderRequest } from './dtos/orderRequest';
 import { I18nService } from 'nestjs-i18n';
 import {
+    clean,
     CustomTranslateOptions,
     ItemAvailabilityEnum,
+    ItemFilterUtils,
     OrderStatusEnum,
 } from '../../common';
 import { log } from 'console';
+import { OrdersRequest } from './dtos/ordersRequest';
 
 @Injectable()
 export class OrderService {
@@ -149,5 +152,57 @@ export class OrderService {
         }
 
         return order;
+    }
+
+    async getOrders(lang: string, account: Account, query: OrdersRequest) {
+        
+        const conditions = clean({
+            status: query.status,
+            isPaid: query.isPaid === 'true',
+            accountId : account.id,
+        });
+
+        const ordersFound = await this.orderRepository.find({
+            where: conditions,
+            relations: [
+                'orderDetails',
+                'voucher',
+                'orderDetails.itemSize',
+                'orderDetails.itemSize.item',
+            ],
+            order: {
+                updatedAt: 'DESC',
+                createdAt: 'DESC',
+            },
+        });
+
+        const orders = ordersFound.map(orderFound => {
+            const {name_vi, name_en, ...voucherFilter} = orderFound.voucher
+
+            return ({
+            ...orderFound,
+            orderDetails: orderFound.orderDetails.map(orderDetailFound => {
+                const { size_en, size_vi, ...itemSizeFilter } =
+                    orderDetailFound.itemSize;
+
+                return {
+                    ...orderDetailFound,
+                    itemSize: {
+                        ...itemSizeFilter,
+                        size: orderDetailFound.itemSize[`size_${lang}`],
+                        item: ItemFilterUtils.filterResponseData(
+                            orderDetailFound.itemSize.item,
+                            lang
+                        ),
+                    },
+                };
+            }),
+            voucher : {
+                ...voucherFilter,
+                name : orderFound.voucher[`name_${lang}`]
+            }
+        })});
+
+        return orders;
     }
 }

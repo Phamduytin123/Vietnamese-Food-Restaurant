@@ -10,11 +10,18 @@ export class VoucherService {
         private readonly voucherRepository: Repository<Voucher>
     ) {}
 
-    async getValidVoucher() {
+    async getValidVoucher(lang: string) {
         const validVoucherFound = await this.voucherRepository.find({
             where: { endAt: MoreThan(new Date()), count: MoreThan(0) },
         });
 
-        return validVoucherFound;
+        const validVouchers = validVoucherFound.map(validVoucher=>{
+            const {name_en, name_vi, ...voucherFilter} = validVoucher;
+            return ({
+                ...voucherFilter,
+                name : validVoucher[`name_${lang}`]
+            })})
+
+        return validVouchers;
     }
 }
