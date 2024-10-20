@@ -37,8 +37,19 @@ export class OrderController {
     async getOrder(
         @Lang() lang: string,
         @CurrentAccount() account: Account,
-        @Query() query: OrdersRequest,
+        @Query() query: OrdersRequest
     ) {
         return this.orderService.getOrders(lang, account, query);
+    }
+
+    @Get('/:id')
+    @UseGuards(new RoleGuard([AccountRoleEnum.CUSTOMER]))
+    @UseGuards(AuthGuard)
+    async getOrderDetail(
+        @Lang() lang: string,
+        @Param('id') id : number,
+        @CurrentAccount() account : Account,
+    ) {
+        return this.orderService.getOrderDetail(lang, id, account);
     }
 }

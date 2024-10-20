@@ -6,5 +6,8 @@
     "item": {
         "itemSizeNotFound": "Không thể tìm thấy sản phẩm có size id '{itemId}' trong hệ thống",
         "itemNotFound": "Không thể tìm thấy sản phẩm có id '{itemId}' trong hệ thống"
+    },
+    "order": {
+        "orderNotFound": "Không thể tìm thấy đơn hàng có id '{orderId}' trong hệ thống"
     }
 }

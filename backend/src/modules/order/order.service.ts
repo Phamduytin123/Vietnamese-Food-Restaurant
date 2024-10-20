@@ -155,11 +155,10 @@ export class OrderService {
     }
 
     async getOrders(lang: string, account: Account, query: OrdersRequest) {
-        
         const conditions = clean({
             status: query.status,
             isPaid: query.isPaid === 'true',
-            accountId : account.id,
+            accountId: account.id,
         });
 
         const ordersFound = await this.orderRepository.find({
@@ -177,9 +176,58 @@ export class OrderService {
         });
 
         const orders = ordersFound.map(orderFound => {
-            const {name_vi, name_en, ...voucherFilter} = orderFound.voucher
+            const { name_vi, name_en, ...voucherFilter } = orderFound.voucher;
 
-            return ({
+            return {
+                ...orderFound,
+                orderDetails: orderFound.orderDetails.map(orderDetailFound => {
+                    const { size_en, size_vi, ...itemSizeFilter } =
+                        orderDetailFound.itemSize;
+
+                    return {
+                        ...orderDetailFound,
+                        itemSize: {
+                            ...itemSizeFilter,
+                            size: orderDetailFound.itemSize[`size_${lang}`],
+                            item: ItemFilterUtils.filterResponseData(
+                                orderDetailFound.itemSize.item,
+                                lang
+                            ),
+                        },
+                    };
+                }),
+                voucher: {
+                    ...voucherFilter,
+                    name: orderFound.voucher[`name_${lang}`],
+                },
+            };
+        });
+
+        return orders;
+    }
+
+    async getOrderDetail(lang: string, id: number, account: Account) {
+        const orderFound = await this.orderRepository.findOne({
+            where: { id: id, accountId: account.id },
+            relations: [
+                'orderDetails',
+                'voucher',
+                'orderDetails.itemSize',
+                'orderDetails.itemSize.item',
+            ],
+        });
+
+        if (!orderFound) {
+            return new NotFoundException(
+                this.i18n.t('error.order.orderNotFound', {
+                    args: { orderId: id },
+                })
+            );
+        }
+
+        const { name_vi, name_en, ...voucherFilter } = orderFound.voucher;
+
+        const order = {
             ...orderFound,
             orderDetails: orderFound.orderDetails.map(orderDetailFound => {
                 const { size_en, size_vi, ...itemSizeFilter } =
@@ -197,12 +245,12 @@ export class OrderService {
                     },
                 };
             }),
-            voucher : {
+            voucher: {
                 ...voucherFilter,
-                name : orderFound.voucher[`name_${lang}`]
-            }
-        })});
+                name: orderFound.voucher[`name_${lang}`],
+            },
+        };
 
-        return orders;
+        return order;
     }
 }
