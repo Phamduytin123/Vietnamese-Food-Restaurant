@@ -3,7 +3,8 @@
         "cartNotFound": "The '{cartId}' cart is not found in your cart",
         "itemStatusIsNotInStock": "The item with {itemId} id is {itemStatus}, please choose another one"
     },
-    "item" : {
-        "itemNotFound": "The '{itemId}' item size is not found in the system"
+    "item": {
+        "itemSizeNotFound": "The '{itemId}' item size is not found in the system",
+        "itemNotFound": "The '{itemId}' item is not found in the system"
     }
 }

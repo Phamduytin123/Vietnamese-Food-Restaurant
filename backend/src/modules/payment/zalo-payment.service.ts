@@ -32,11 +32,7 @@ export class ZaloPaymentService {
         private readonly orderService: OrderService
     ) {}
 
-    async createPayment(
-        lang: string,
-        body: OrderRequest,
-        account: Account
-    ) {
+    async createPayment(lang: string, body: OrderRequest, account: Account) {
         const { carts, totalPrice } = body;
 
         const deployedLink = this.configService.get<string>(
@@ -95,7 +91,7 @@ export class ZaloPaymentService {
 
                 if (!itemSize) {
                     return new NotFoundException(
-                        this.i18n.t('error.item.itemNotFound', {
+                        this.i18n.t('error.item.itemSizeNotFound', {
                             args: { itemId: cart.itemSizeId },
                         })
                     );

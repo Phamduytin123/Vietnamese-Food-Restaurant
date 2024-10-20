@@ -6,5 +6,11 @@
     "paymentMethodInvalid": "Phương thức thanh toán không hợp lệ",
     "emailInvalid": "Email không hợp lệ",
     "nameRequired": "Tên không được để trống",
-    "totalPriceRequired": "Tổng giá trị không được để trống"
+    "totalPriceRequired": "Tổng giá trị không được để trống",
+    "commentRequired": "Bình luận không được để trống.",
+    "ratingRequired": "Đánh giá không được để trống.",
+    "ratingMustBeInteger": "Đánh giá phải là số nguyên.",
+    "ratingMin": "Đánh giá phải ít nhất là 0.",
+    "ratingMax": "Đánh giá không được vượt quá 5.",
+    "itemIdRequired": "Mã sản phẩm không được để trống."
 }
