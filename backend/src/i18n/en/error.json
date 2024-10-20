@@ -6,5 +6,8 @@
     "item": {
         "itemSizeNotFound": "The '{itemId}' item size is not found in the system",
         "itemNotFound": "The '{itemId}' item is not found in the system"
+    },
+    "order": {
+        "orderNotFound": "The '{orderId}' order is not found in the system"
     }
 }
