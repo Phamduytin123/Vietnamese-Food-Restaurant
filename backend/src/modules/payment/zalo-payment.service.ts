@@ -35,10 +35,9 @@ export class ZaloPaymentService {
     async createPayment(
         lang: string,
         body: OrderRequest,
-        req: any,
         account: Account
     ) {
-        const { carts } = body;
+        const { carts, totalPrice } = body;
 
         const deployedLink = this.configService.get<string>(
             'DEPLOY_SERVICE_LINK'
@@ -122,17 +121,10 @@ export class ZaloPaymentService {
             foundCarts.push(foundCart);
         }
 
-        const totalPrice = foundCarts.reduce((totalPrice, foundCart) => {
-            return (
-                totalPrice +
-                foundCart.itemSize.getActualPrice() * foundCart.quantity
-            );
-        }, 0);
-
         const order = {
             app_id: config.app_id,
             app_trans_id: appTransId,
-            app_user: req.user.id,
+            app_user: account.id,
             app_time: Date.now(),
             item: JSON.stringify(items),
             embed_data: JSON.stringify(embed_data),

@@ -50,6 +50,8 @@ export class OrderService {
             email,
             isPaid,
             paymentCode,
+            totalPrice,
+            voucherId,
         } = orderReq;
 
         const foundCarts = [];
@@ -108,13 +110,6 @@ export class OrderService {
             foundCarts.push(foundCart);
         }
 
-        const totalPrice = foundCarts.reduce((totalPrice, foundCart) => {
-            return (
-                totalPrice +
-                foundCart.itemSize.getActualPrice() * foundCart.quantity
-            );
-        }, 0);
-
         const newOrder: Order = this.orderRepository.create({
             accountId: account.id,
             address: address,
@@ -127,6 +122,7 @@ export class OrderService {
             status: OrderStatusEnum.WAIT,
             isPaid: isPaid,
             paymentCode: paymentCode,
+            voucherId: voucherId,
         });
 
         // Tạo orderDetail

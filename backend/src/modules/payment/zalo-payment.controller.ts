@@ -24,13 +24,11 @@ export class ZaloPaymentController {
     async createPayment(
         @Lang() lang: string,
         @Body() orderRequest: OrderRequest,
-        @Req() req: any,
         @CurrentAccount() account: Account
     ) {
         return await this.ZaloPaymentService.createPayment(
             lang,
             orderRequest,
-            req,
             account
         );
     }

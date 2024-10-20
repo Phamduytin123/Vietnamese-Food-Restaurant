@@ -43,11 +43,4 @@ import { ZaloPaymentController } from './zalo-payment.controller';
     ],
     exports: [MomoPaymentService, ZaloPaymentService],
 })
-export class PaymentModule implements NestModule {
-    configure(consumer: MiddlewareConsumer) {
-        consumer.apply(JwtMiddleware).forRoutes({
-            path: 'payment/zalo/payment',
-            method: RequestMethod.POST,
-        });
-    }
-}
+export class PaymentModule {}
