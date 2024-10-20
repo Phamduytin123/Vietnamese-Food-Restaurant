@@ -13,7 +13,7 @@ export default class ReviewSeeder implements Seeder {
     public async run(): Promise<void> {
         const reviews: Partial<Review>[] = [];
 
-        for (let j = 1; j < 66; j++) {
+        for (let j = 1; j < 65; j++) {
             for (let i = 0; i < 20; i++) {
                 const itemId = j;
                 const accountId = Math.floor(Math.random() * 3) + 1;

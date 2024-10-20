@@ -33,6 +33,16 @@ export class Item {
     @Column({
         nullable: true,
     })
+    calories: number;
+
+    @Column({
+        nullable: true,
+    })
+    fat: number;
+
+    @Column({
+        nullable: true,
+    })
     carbohydrates: number;
 
     @Column({

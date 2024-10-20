@@ -23,8 +23,7 @@
         "regional_vi": "Huế",
         "regional_en": "Hue",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
         "id": 2,
@@ -50,38 +49,10 @@
         "regional_vi": "Huế",
         "regional_en": "Hue",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
         "id": 3,
-        "name_vi": "Bánh Căn",
-        "name_en": "Banh Can",
-        "discount": 0,
-        "calories": 300,
-        "fat": 10,
-        "carbohydrates": 40,
-        "protein": 10,
-        "cholesterol": 20,
-        "sodium": 500,
-        "fiber": 2,
-        "categoryId": 1,
-        "description_vi": "Bánh căn vàng giòn, ăn kèm với nước chấm đặc biệt và các loại rau sống.",
-        "description_en": "Crispy Banh Can served with special dipping sauce and fresh vegetables.",
-        "rating": 5.0,
-        "ingredients_vi": "['bột gạo', 'nước chấm', 'tôm', 'trứng cút', 'rau sống', 'hành lá']",
-        "ingredients_en": "['rice flour', 'dipping sauce', 'shrimp', 'quail eggs', 'raw vegetables', 'green onions']",
-        "unit_vi": "Đĩa",
-        "unit_en": "Plate",
-        "images": "['https://res.cloudinary.com/deei5izfg/image/upload/v1727077391/VietnameseFoodRestaurant/Food/banh_can/okf4uoteolmguyrctkdv.jpg', 'https://res.cloudinary.com/deei5izfg/image/upload/v1727077392/VietnameseFoodRestaurant/Food/banh_can/iewhjkm8icxaneaj9xdf.jpg', 'https://res.cloudinary.com/deei5izfg/image/upload/v1727077393/VietnameseFoodRestaurant/Food/banh_can/ugftys6lpit4owpjnl4t.jpg', 'https://res.cloudinary.com/deei5izfg/image/upload/v1727077393/VietnameseFoodRestaurant/Food/banh_can/eg0k5jlnttntotj7rvye.jpg', 'https://res.cloudinary.com/deei5izfg/image/upload/v1727077394/VietnameseFoodRestaurant/Food/banh_can/sjwmhersimorsdafcvzj.jpg']",
-        "regional_vi": "Nha Trang",
-        "regional_en": "Nha Trang",
-        "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
-    },
-    {
-        "id": 4,
         "name_vi": "Bánh Canh",
         "name_en": "Banh Canh",
         "discount": 0,
@@ -104,11 +75,10 @@
         "regional_vi": "Quảng Ngãi",
         "regional_en": "Quang Ngai",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 5,
+        "id": 4,
         "name_vi": "Bánh Chưng",
         "name_en": "Banh Chung",
         "discount": 0,
@@ -131,11 +101,10 @@
         "regional_vi": "Toàn quốc, đặc biệt trong dịp Tết Nguyên Đán",
         "regional_en": "Nationwide, especially during Tet",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 6,
+        "id": 5,
         "name_vi": "Bánh Cu Đơ",
         "name_en": "Banh Cu Do",
         "discount": 0,
@@ -158,11 +127,10 @@
         "regional_vi": "Hà Tĩnh",
         "regional_en": "Ha Tinh",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 7,
+        "id": 6,
         "name_vi": "Bánh Cuốn",
         "name_en": "Banh Cuon",
         "discount": 0,
@@ -185,11 +153,10 @@
         "regional_vi": "Hà Nội",
         "regional_en": "Hanoi",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 8,
+        "id": 7,
         "name_vi": "Bánh Đúc",
         "name_en": "Banh Duc",
         "discount": 0,
@@ -212,11 +179,10 @@
         "regional_vi": "Miền Bắc",
         "regional_en": "Northern Vietnam",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 9,
+        "id": 8,
         "name_vi": "Bánh Đậu Xanh",
         "name_en": "Banh Dau Xanh",
         "discount": 0,
@@ -239,11 +205,10 @@
         "regional_vi": "Hải Dương",
         "regional_en": "Hai Duong",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 10,
+        "id": 9,
         "name_vi": "Bánh Giò",
         "name_en": "Banh Gio",
         "discount": 0,
@@ -266,11 +231,10 @@
         "regional_vi": "Miền Bắc",
         "regional_en": "Northern Vietnam",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 11,
+        "id": 10,
         "name_vi": "Bánh Khọt",
         "name_en": "Banh Khot",
         "discount": 0,
@@ -293,11 +257,10 @@
         "regional_vi": "Vũng Tàu",
         "regional_en": "Vung Tau",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 12,
+        "id": 11,
         "name_vi": "Bánh Mì",
         "name_en": "Banh Mi",
         "discount": 0,
@@ -320,11 +283,10 @@
         "regional_vi": "Hà Nội, Sài Gòn",
         "regional_en": "Hanoi, Saigon",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 13,
+        "id": 12,
         "name_vi": "Bánh Pía",
         "name_en": "Banh Pia",
         "discount": 0,
@@ -347,11 +309,10 @@
         "regional_vi": "Sóc Trăng",
         "regional_en": "Soc Trang",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 14,
+        "id": 13,
         "name_vi": "Bánh Tét",
         "name_en": "Banh Tet",
         "discount": 0,
@@ -374,11 +335,10 @@
         "regional_vi": "Nam Bộ",
         "regional_en": "Southern Vietnam",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 15,
+        "id": 14,
         "name_vi": "Bánh Tráng Nướng",
         "name_en": "Banh Trang Nuong",
         "discount": 0,
@@ -401,11 +361,10 @@
         "regional_vi": "Đà Lạt",
         "regional_en": "Dalat",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 16,
+        "id": 15,
         "name_vi": "Bánh Xèo",
         "name_en": "Banh Xeo",
         "discount": 0,
@@ -428,11 +387,10 @@
         "regional_vi": "Miền Tây",
         "regional_en": "Mekong Delta",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 17,
+        "id": 16,
         "name_vi": "Bánh Bò",
         "name_en": "Banh Bo",
         "discount": 0,
@@ -455,11 +413,10 @@
         "regional_vi": "Nam Bộ",
         "regional_en": "Southern Vietnam",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 18,
+        "id": 17,
         "name_vi": "Bánh Cống",
         "name_en": "Banh Cong",
         "discount": 0,
@@ -482,11 +439,10 @@
         "regional_vi": "Sóc Trăng",
         "regional_en": "Soc Trang",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 19,
+        "id": 18,
         "name_vi": "Bánh Da Lợn",
         "name_en": "Pork Skin Cake",
         "discount": 0,
@@ -509,11 +465,10 @@
         "regional_vi": "Nam Bộ",
         "regional_en": "Southern Vietnam",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 20,
+        "id": 19,
         "name_vi": "Bánh Tai Heo",
         "name_en": "Pig Ear Cake",
         "discount": 0,
@@ -536,11 +491,10 @@
         "regional_vi": "Miền Trung",
         "regional_en": "Central Vietnam",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 21,
+        "id": 20,
         "name_vi": "Bánh Tiêu",
         "name_en": "Banh Tieu",
         "discount": 0,
@@ -563,11 +517,10 @@
         "regional_vi": "Miền Nam",
         "regional_en": "Southern Vietnam",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 22,
+        "id": 21,
         "name_vi": "Bánh Trung Thu",
         "name_en": "Moon Cake",
         "discount": 0,
@@ -590,11 +543,10 @@
         "regional_vi": "Toàn Quốc",
         "regional_en": "Nationwide",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 23,
+        "id": 22,
         "name_vi": "Bún Bò Huế",
         "name_en": "Hue Beef Noodles",
         "discount": 0,
@@ -617,11 +569,10 @@
         "regional_vi": "Huế",
         "regional_en": "Hue",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 24,
+        "id": 23,
         "name_vi": "Bún Đậu Mắm Tôm",
         "name_en": "Vermicelli with Fried Tofu and Fermented Shrimp Paste",
         "discount": 0,
@@ -644,11 +595,10 @@
         "regional_vi": "Hà Nội",
         "regional_en": "Hanoi",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 25,
+        "id": 24,
         "name_vi": "Bún Mắm",
         "name_en": "Fermented Fish Noodle Soup",
         "discount": 0,
@@ -671,11 +621,10 @@
         "regional_vi": "Miền Tây",
         "regional_en": "Mekong Delta",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 26,
+        "id": 25,
         "name_vi": "Bún Riêu",
         "name_en": "Crab Noodle Soup",
         "discount": 0,
@@ -698,11 +647,10 @@
         "regional_vi": "Miền Bắc",
         "regional_en": "Northern Vietnam",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 27,
+        "id": 26,
         "name_vi": "Bún Thịt Nướng",
         "name_en": "Grilled Pork Noodles",
         "discount": 0,
@@ -725,11 +673,10 @@
         "regional_vi": "Miền Nam",
         "regional_en": "Southern Vietnam",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 28,
+        "id": 27,
         "name_vi": "Cá Kho Tộ",
         "name_en": "Braised Fish",
         "discount": 0,
@@ -752,11 +699,10 @@
         "regional_vi": "Miền Nam",
         "regional_en": "Southern Vietnam",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 29,
+        "id": 28,
         "name_vi": "Canh Chua",
         "name_en": "Sour Soup",
         "discount": 0,
@@ -779,11 +725,10 @@
         "regional_vi": "Miền Nam",
         "regional_en": "Southern Vietnam",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 30,
+        "id": 29,
         "name_vi": "Cao Lầu",
         "name_en": "Cao Lau",
         "discount": 0,
@@ -806,11 +751,10 @@
         "regional_vi": "Hội An",
         "regional_en": "Hoi An",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 31,
+        "id": 30,
         "name_vi": "Cháo Lòng",
         "name_en": "Liver Porridge",
         "discount": 0,
@@ -833,11 +777,10 @@
         "regional_vi": "Miền Bắc",
         "regional_en": "Northern Vietnam",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 32,
+        "id": 31,
         "name_vi": "Cơm Tấm",
         "name_en": "Broken Rice",
         "discount": 0,
@@ -860,11 +803,10 @@
         "regional_vi": "Miền Nam",
         "regional_en": "Southern Vietnam",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 33,
+        "id": 32,
         "name_vi": "Cơm Cháy",
         "name_en": "Crispy Rice",
         "discount": 0,
@@ -887,11 +829,10 @@
         "regional_vi": "Ninh Bình",
         "regional_en": "Ninh Binh",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 34,
+        "id": 33,
         "name_vi": "Gỏi Cuốn",
         "name_en": "Spring Rolls",
         "discount": 0,
@@ -914,11 +855,10 @@
         "regional_vi": "Miền Nam",
         "regional_en": "Southern Vietnam",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 35,
+        "id": 34,
         "name_vi": "Hủ Tiếu",
         "name_en": "Hu Tieu",
         "discount": 0,
@@ -941,11 +881,10 @@
         "regional_vi": "Miền Nam",
         "regional_en": "Southern Vietnam",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 36,
+        "id": 35,
         "name_vi": "Mì Quảng",
         "name_en": "Mi Quang",
         "discount": 0,
@@ -968,11 +907,10 @@
         "regional_vi": "Miền Trung",
         "regional_en": "Central Vietnam",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 37,
+        "id": 36,
         "name_vi": "Nem Chua",
         "name_en": "Fermented Pork",
         "discount": 0,
@@ -995,11 +933,10 @@
         "regional_vi": "Thanh Hóa",
         "regional_en": "Thanh Hoa",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 38,
+        "id": 37,
         "name_vi": "Nem Nướng",
         "name_en": "Grilled Pork Sausage",
         "discount": 0,
@@ -1022,11 +959,10 @@
         "regional_vi": "Nha Trang",
         "regional_en": "Nha Trang",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 39,
+        "id": 38,
         "name_vi": "Phở",
         "name_en": "Pho",
         "discount": 0,
@@ -1049,11 +985,10 @@
         "regional_vi": "Hà Nội",
         "regional_en": "Hanoi",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     },
     {
-        "id": 40,
+        "id": 39,
         "name_vi": "Xôi Xéo",
         "name_en": "Sticky Rice with Mung Beans",
         "discount": 0,
@@ -1076,7 +1011,6 @@
         "regional_vi": "Hà Nội",
         "regional_en": "Hanoi",
         "isFood": true,
-        "isDeleted": false,
-        "updatedAt": null
+        "isDeleted": false
     }
 ]
