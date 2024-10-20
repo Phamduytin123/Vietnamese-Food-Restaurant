@@ -1,4 +1,8 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+    ForbiddenException,
+    Injectable,
+    NotFoundException,
+} from '@nestjs/common';
 import { OrderRequest } from '../order/dtos/orderRequest';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -7,7 +11,11 @@ import { Repository } from 'typeorm';
 import { I18nService } from 'nestjs-i18n';
 import { OrderService } from '../order/order.service';
 import axios from 'axios';
-import { CurrentAccount, ItemAvailabilityEnum, OrderPaymentMethodEnum } from '../../common';
+import {
+    CurrentAccount,
+    ItemAvailabilityEnum,
+    OrderPaymentMethodEnum,
+} from '../../common';
 import { log } from 'console';
 
 @Injectable()
@@ -18,14 +26,13 @@ export class MomoPaymentService {
         private readonly cartRepository: Repository<Cart>,
         private readonly i18n: I18nService,
         private readonly orderService: OrderService
-    ) { }
-    async createPayment(lang: string,
+    ) {}
+    async createPayment(
+        lang: string,
         body: OrderRequest,
-        @CurrentAccount() currentAccount: Account,
-        req: any) {
-
-        const { carts } = body;
-        
+        @CurrentAccount() currentAccount: Account
+    ) {
+        const { carts, totalPrice } = body;
 
         const foundCarts = [];
 
@@ -44,7 +51,8 @@ export class MomoPaymentService {
             }
 
             if (
-                foundCart.itemSize.item.availability !== ItemAvailabilityEnum.IN_STOCK
+                foundCart.itemSize.item.availability !==
+                ItemAvailabilityEnum.IN_STOCK
             ) {
                 return new ForbiddenException(
                     this.i18n.t('error.cart.itemStatusIsNotInStock', {
@@ -59,11 +67,6 @@ export class MomoPaymentService {
             foundCarts.push(foundCart);
         }
 
-        const totalPrice = await foundCarts.reduce((totalPrice, foundCart) => {
-            return totalPrice + foundCart.itemSize.getActualPrice() * foundCart.quantity;
-        }, 0) * 1000;
-        console.log(totalPrice);
-
         //https://developers.momo.vn/#/docs/en/aiov2/?id=payment-method
         //parameters
         // console.log(foundCarts);
@@ -76,7 +79,7 @@ export class MomoPaymentService {
                 imageUrl: null, // Bạn có thể thêm link hình ảnh sản phẩm thực nếu cần
                 name: itemName,
                 quantity: quantity,
-                price: price
+                price: price,
             };
         });
         console.log(items);
@@ -86,9 +89,10 @@ export class MomoPaymentService {
         const orderInfo = 'pay with MoMo';
         const partnerCode = 'MOMO';
         const redirectUrl = process.env.MOMO_REDIRC_URL;
-        const ipnUrl = process.env.DEPLOY_SERVICE_LINK + '/momo-payment/callback';
+        const ipnUrl =
+            process.env.DEPLOY_SERVICE_LINK + '/momo-payment/callback';
         // const ipnUrl = 'https://dc61-2402-800-629c-1fd3-6186-8883-cf12-7a5c.ngrok-free.app/momo-payment/callback';
-        const requestType = "payWithMethod";
+        const requestType = 'payWithMethod';
         const amount = `${totalPrice}`;
         const orderId = partnerCode + new Date().getTime();
         const requestId = orderId;
@@ -102,30 +106,53 @@ export class MomoPaymentService {
                 paymentCode: orderId,
             },
         ];
-        const extraData = Buffer.from(JSON.stringify(dataCallback)).toString('base64'); // Mã hóa base64
+        const extraData = Buffer.from(JSON.stringify(dataCallback)).toString(
+            'base64'
+        ); // Mã hóa base64
 
         // const orderGroupId = '';
         const autoCapture = true;
 
         //before sign HMAC SHA256 with format
         //accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl&orderId=$orderId&orderInfo=$orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl&requestId=$requestId&requestType=$requestType
-        const rawSignature = "accessKey=" + accessKey + "&amount=" + amount + "&extraData=" + extraData + "&ipnUrl=" + ipnUrl + "&orderId=" + orderId + "&orderInfo=" + orderInfo + "&partnerCode=" + partnerCode + "&redirectUrl=" + redirectUrl + "&requestId=" + requestId + "&requestType=" + requestType;
+        const rawSignature =
+            'accessKey=' +
+            accessKey +
+            '&amount=' +
+            amount +
+            '&extraData=' +
+            extraData +
+            '&ipnUrl=' +
+            ipnUrl +
+            '&orderId=' +
+            orderId +
+            '&orderInfo=' +
+            orderInfo +
+            '&partnerCode=' +
+            partnerCode +
+            '&redirectUrl=' +
+            redirectUrl +
+            '&requestId=' +
+            requestId +
+            '&requestType=' +
+            requestType;
         //puts raw signature
-        console.log("--------------------RAW SIGNATURE----------------")
-        console.log(rawSignature)
+        console.log('--------------------RAW SIGNATURE----------------');
+        console.log(rawSignature);
         //signature
         const crypto = require('crypto');
-        const signature = crypto.createHmac('sha256', secretKey)
+        const signature = crypto
+            .createHmac('sha256', secretKey)
             .update(rawSignature)
             .digest('hex');
-        console.log("--------------------SIGNATURE----------------")
-        console.log(signature)
+        console.log('--------------------SIGNATURE----------------');
+        console.log(signature);
 
         //json object send to MoMo endpoint
         const requestBody = JSON.stringify({
             partnerCode: partnerCode,
-            partnerName: "Test",
-            storeId: "MomoTestStore",
+            partnerName: 'Test',
+            storeId: 'MomoTestStore',
             requestId: requestId,
             amount: amount,
             orderId: orderId,
@@ -139,7 +166,7 @@ export class MomoPaymentService {
             autoCapture: autoCapture,
             extraData: extraData,
             // orderGroupId: orderGroupId,
-            signature: signature
+            signature: signature,
         });
         console.log(requestBody);
 
@@ -177,7 +204,11 @@ export class MomoPaymentService {
             console.log('Payment Successful:', response);
             // Bạn có thể lưu thông tin thanh toán vào cơ sở dữ liệu hoặc xử lý tiếp theo tại đây
 
-            const extraData = response.extraData ? JSON.parse(Buffer.from(response.extraData, 'base64').toString()) : null;
+            const extraData = response.extraData
+                ? JSON.parse(
+                      Buffer.from(response.extraData, 'base64').toString()
+                  )
+                : null;
             console.log('Extra Data:', extraData);
             console.log(extraData[0].carts);
 

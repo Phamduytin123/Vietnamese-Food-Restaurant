@@ -43,4 +43,12 @@ export class OrderRequest {
 
     @IsOptional()
     paymentCode: string = null;
+
+    @IsNotEmpty({
+        message: i18nValidationMessage('validation.totalPriceRequired'),
+    })
+    totalPrice: number;
+
+    @IsOptional()
+    voucherId: number;
 }

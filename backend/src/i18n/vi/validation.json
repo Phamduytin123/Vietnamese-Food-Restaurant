@@ -5,5 +5,6 @@
     "addressInvalid": "Địa chỉ không được để trống",
     "paymentMethodInvalid": "Phương thức thanh toán không hợp lệ",
     "emailInvalid": "Email không hợp lệ",
-    "nameRequired": "Tên không được để trống"
+    "nameRequired": "Tên không được để trống",
+    "totalPriceRequired": "Tổng giá trị không được để trống"
 }

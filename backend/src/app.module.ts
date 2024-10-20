@@ -20,6 +20,7 @@ import * as path from 'path';
 import { RecipeModule } from './modules/recipe/recipe.module';
 import { CustomMailerModule } from './modules/mailer/mailer.module';
 import { LikeModule } from './modules/like/like.module';
+import { VoucherModule } from './modules/voucher/voucher.module';
 @Module({
     imports: [
         DatabaseModule,
@@ -46,6 +47,7 @@ import { LikeModule } from './modules/like/like.module';
         }),
         CustomMailerModule,
         LikeModule,
+        VoucherModule,
     ],
     controllers: [AppController],
     providers: [AppService],
