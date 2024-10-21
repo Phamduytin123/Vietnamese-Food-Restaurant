@@ -9,16 +9,59 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.pipeline import Pipeline
 from flask_cors import CORS
+from sqlalchemy import create_engine
 
 app = Flask(__name__)
 # Them cors vao flask app
 CORS(app)
+
+# Chuan bi file csv
+# Kết nối tới cơ sở dữ liệu
+DATABASE_URI = (
+    "mysql+pymysql://root:duytin123@localhost:3309/vietnamese_food_restaurant"
+)
+engine = create_engine(DATABASE_URI)
+
+# Truy vấn 40 hàng đầu tiên từ bảng item với điều kiện isFood == 1
+query = "SELECT * FROM item WHERE isFood = 1"
+
+# Đọc dữ liệu vào DataFrame
+df = pd.read_sql(query, engine)
+
+# Ghi dữ liệu ra file CSV
+df.to_csv("40FoodRec.csv", index=False)
+
+print("Đã ghi dữ liệu thành công vào file '40FoodRec.csv'")
+
+
+# Tai file model tu drive
+import gdown
+import os
+
+# File ID from the Google Drive link
+file_id = "1-Lt6P-8ZqXnpyLzFwm9oFHPfktSJ71cC"  # Replace with your file's ID
+
+# Generate the download URL
+download_url = f"https://drive.google.com/uc?id={file_id}"
+
+# Output file name where you want to save the model
+output = "model_from_drive.h5"  # Replace with your desired output file name
+
+# Kiểm tra nếu file đã tồn tại
+if os.path.exists(output):
+    print(f"File '{output}' đã tồn tại, không cần tải xuống.")
+else:
+    # Tải file xuống nếu file chưa tồn tại
+    gdown.download(download_url, output, quiet=False)
+    print(f"Đã tải file thành công vào '{output}'")
+
 # Tải mô hình đã huấn luyện
-model_path = "model/base_model_trained.h5"
+# model_path = "model/base_model_trained.h5"
+model_path = "model_from_drive.h5"
 model = tf.keras.models.load_model(model_path)
 
 # Tai du lieu file csv data recommend40Food
-file_path = "data/40FoodRec.csv"
+file_path = "40FoodRec.csv"
 recipe_df = pd.read_csv(file_path)
 
 print(recipe_df.shape)
