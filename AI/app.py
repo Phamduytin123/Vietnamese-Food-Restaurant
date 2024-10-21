@@ -18,7 +18,8 @@ CORS(app)
 # Chuan bi file csv
 # Kết nối tới cơ sở dữ liệu
 DATABASE_URI = (
-    "mysql+pymysql://root:duytin123@localhost:3309/vietnamese_food_restaurant"
+    # "mysql+pymysql://root:duytin123@localhost:3309/vietnamese_food_restaurant"
+    "mysql+pymysql://uwxjbky2aluatwli:jphzC5dxzM8lvHk5HAeN@bjadxephj3unaibvmzro-mysql.services.clever-cloud.com:3306/bjadxephj3unaibvmzro"
 )
 engine = create_engine(DATABASE_URI)
 
