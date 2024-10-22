@@ -164,10 +164,10 @@ const ProductList = () => {
         <div className="box">
           <h3>Hot Deals</h3>
           <ul>
-            {categories.map((categorie) => (
-              <li onClick={(event) => handleCategoryClick(event, categorie.id)}>
-                {categorie.name}{' '}
-                <span className={categorie.numberOfFood > 0 ? 'count special' : 'count'}>{categorie.numberOfFood}</span>
+            {hotdeals.map((hotdeal) => (
+              <li key={hotdeal.id} onClick={(event) => handleHotDealClick(event, hotdeal.id)}>
+                {hotdeal.name}
+                <span className={hotdeal.numberOfFood > 0 ? 'count special' : 'count'}>{hotdeal.numberOfFood}</span>
               </li>
             ))}
           </ul>
@@ -176,10 +176,10 @@ const ProductList = () => {
         <div className="box">
           <h3>Category</h3>
           <ul>
-            {hotdeals.map((hotdeal) => (
-              <li key={hotdeal.id} onClick={(event) => handleHotDealClick(event, hotdeal.id)}>
-                {hotdeal.name}
-                <span className={hotdeal.numberOfFood > 0 ? 'count special' : 'count'}>{hotdeal.numberOfFood}</span>
+            {categories.map((categorie) => (
+              <li onClick={(event) => handleCategoryClick(event, categorie.id)}>
+                {categorie.name}{' '}
+                <span className={categorie.numberOfFood > 0 ? 'count special' : 'count'}>{categorie.numberOfFood}</span>
               </li>
             ))}
           </ul>
@@ -245,14 +245,14 @@ const ProductList = () => {
             <IoIosSearch />
             <input type="text" placeholder="Search" value={txtSearch} onChange={handleInputChange} />
           </div>
-          <div className="option-button">
+          {/* <div className="option-button">
             <img src={ICONS.camera} alt="Camera" />
             <span>Tìm kiếm bằng hình ảnh</span>
           </div>
           <div className="option-button">
             <img src={ICONS.lightbulb} alt="Lightbulb" />
             <span>Gợi ý đồ ăn</span>
-          </div>
+          </div> */}
           <UploadModal />
           <RecommendModal />
         </div>

@@ -46,10 +46,10 @@ const AllRoutes = () => {
                 <Route path="/auth/register" element={<MainLayout component={Register} />} />
                 <Route path="/food/:id" element={<MainLayout component={FoodDetail} />} />
                 <Route path="/checkout/order" element={<MainLayout component={CheckoutOrder} />} />
-                <Route path="/checkout/success" element={<MainLayout component={CheckoutSuccess} />} />
-                <Route path="/card" element={<MainLayout component={ShoppingCart} />} />
+                <Route path="/checkout/:method/:code" element={<MainLayout component={CheckoutSuccess} />} />
+                <Route path="/cart" element={<MainLayout component={ShoppingCart} />} />
             </Route>
-        </Routes>
+    </Routes>
     );
 }
 

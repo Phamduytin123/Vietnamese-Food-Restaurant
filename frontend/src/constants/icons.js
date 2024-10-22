@@ -1,3 +1,5 @@
+import { remove } from 'lodash';
+
 export const ICONS = {
   logo: require('../assets/icons/logo-notext.png'),
   icon_donut: require('../assets/icons/icon-donut.png'),
@@ -25,10 +27,10 @@ export const ICONS = {
   eye: require('../assets/icons/eye.png'),
   plus: require('../assets/icons/macOS_Maximize.png'),
   minus: require('../assets/icons/minus.png'),
-  cart: require('../assets/icons/vector.png'),
   arrow_right: require('../assets/icons/arrow_right.png'),
   arrow_left: require('../assets/icons/arrow_left.png'),
   time_span: require('../assets/icons/time_span.png'),
   icon_back_home: require('../assets/icons/icon_back_home.png'),
   icon_xproduct: require('../assets/icons/XProduct.png'),
+  remove: require('../assets/icons/remove.png'),
 };

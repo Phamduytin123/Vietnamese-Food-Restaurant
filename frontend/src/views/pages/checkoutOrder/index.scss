@@ -1,9 +1,7 @@
 /* CheckoutPage.css */
 
 .checkout-page {
-  display: flex;
-  gap: 24px;
-  padding: 72px 24px;
+  padding: 72px 72px;
 }
 
 .section-title {
@@ -24,6 +22,13 @@
   display: block;
 }
 
+.form{
+    background-color: #ffffff;
+    display: flex;
+    gap: 24px;
+    width: 100%;
+}
+
 .form-group {
   display: flex;
   flex-direction: column;
@@ -41,6 +46,8 @@
   flex-direction: column;
   gap: 8px;
   width: 100%;
+  min-height: 86px;
+  max-height: 86px;
 }
 
 .input-field input,
@@ -85,6 +92,9 @@
     text-align: center;
     gap: 8px;
     padding: 10px 18px;
+    span{
+      min-height: 52px;
+    }
 
     img{
       width: 52px;
@@ -132,6 +142,20 @@
 
 .additional-info {
   margin-top: 56px;
+  min-height: 246px;
+
+  .custom-textarea {
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+  border: 1px solid #e4e7e9;
+  font-size: 16px;
+  line-height: 1.5;
+  resize: none;
+  overflow-y: auto;
+  border-radius: 4px;
+  min-height: 170px;
+}
 }
 
 
@@ -225,26 +249,18 @@
     background-color: #e85a0d; 
     transform: scale(1.05); 
   }
+  input{
+    color: white;
+    background-color: transparent;
+    border: none;
+  }
 }
 
 .vertical-line {
-  width: 1px;             /* Độ rộng của đường */
-  height: 50px;          /* Chiều dài của đường dọc */
-  background-color: black; /* Màu của đường */
-  border: none;           /* Bỏ đường viền mặc định của thẻ hr */
-  transform: rotate(180deg); /* Xoay 90 độ để nó nằm dọc */
-  margin: 0;              /* Loại bỏ khoảng cách mặc định của thẻ hr */
-}
-
-.custom-textarea {
-  width: 100%;
-  height: 200px;
-  padding: 15px;
-  box-sizing: border-box;
-  border: 1px solid #e4e7e9;
-  font-size: 16px;
-  line-height: 1.5;
-  resize: none;
-  overflow-y: auto;
-  border-radius: 4px;
+  width: 1px;             
+  height: 50px;         
+  background-color: black;
+  border: none;          
+  transform: rotate(180deg); 
+  margin: 0;              
 }

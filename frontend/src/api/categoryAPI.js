@@ -6,7 +6,7 @@ const CategorieAPI = {
         const params = {
             isFood
         };
-        return axiosClient.application.get(url, { params });
+        return axiosClient.applicationNoAuth.get(url, { params });
     },
 }
 
