@@ -28,7 +28,7 @@ const ProductCardGrid = (props) => {
         <img src={IMAGES.label_hot} alt="Hot" className="label-background" />
         <span>HOT</span>
       </div>
-      <Link to={`food/${product.id}`}>
+      <Link to={`/food/${product.id}`}>
         <img
           src={product.images && product.images.length > 0 ? product.images[0] : IMAGES.img_product}
           alt={product.name}

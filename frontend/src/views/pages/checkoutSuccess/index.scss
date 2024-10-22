@@ -1,0 +1,83 @@
+.success-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 124px 0;
+  background-color: #fff;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+}
+
+.success-icon {
+  width: 88px;
+  height: 88px;
+}
+
+.success-title {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  color: #191c1f;
+  line-height: 32px;
+}
+
+.success-message {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #5f6c72;
+  line-height: 20px;
+  max-width: 500px;
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.button-outline,
+.button-filled {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.192px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.button-outline {
+  border: 2px solid #ffe7d6;
+  color: #fa8232;
+  background-color: transparent;
+
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+  &:hover {
+    border: 2px solid #fa8232;
+    transform: scale(1.05); 
+  }
+}
+
+.button-filled {
+  background-color: #fa8232;
+  color: #fff;
+  border: none;
+
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+  &:hover {
+    background-color: #e85a0d; 
+    transform: scale(1.05); 
+  }
+}

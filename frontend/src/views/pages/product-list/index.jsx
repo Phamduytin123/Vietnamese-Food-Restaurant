@@ -12,14 +12,19 @@ import { FiArrowLeft } from 'react-icons/fi';
 import ProductCardList from '../../../components/product-card-list';
 import ProductCardGrid from '../../../components/product-card-grid';
 import productAPI from '../../../api/productAPI';
-import { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import UploadModal from '../../../components/detect_modal/UploadModal';
 import RecommendModal from '../../../components/recommend_modal/RecommendModal';
+import categoryAPI from '../../../api/categoryAPI';
+import { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { set } from 'lodash';
+
 const ProductList = () => {
   const location = useLocation();
   const [viewMode, setViewMode] = useState('grid');
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [hotdeals, setHotdeals] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -29,17 +34,22 @@ const ProductList = () => {
   const [showBy, setShowBy] = useState('name');
   const [minPrice, setMinPrice] = useState(null);
   const [maxPrice, setMaxPrice] = useState(null);
-
+  const [isDiscount, setIsDiscount] = useState(false);
+  const [categoryId, setCategoryId] = useState(null);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     setTxtSearch('');
   }, [location]);
   const handleInputChange = (event) => {
+    setCurrentPage(1);
     setTxtSearch(event.target.value);
   };
   const handleLimitChange = (event) => {
+    setCurrentPage(1);
     setLimit(Number(event.target.value));
   };
   const handleShowByChange = (event) => {
+    setCurrentPage(1);
     setShowBy(event.target.value);
   };
   const handlePriceChange = (event) => {
@@ -95,32 +105,58 @@ const ProductList = () => {
       setCurrentPage(newPage);
     }
   };
+  const handleCategoryClick = (event, categoryId) => {
+    setCurrentPage(1);
+    setCategoryId(categoryId);
+    setIsDiscount(false);
+  };
+
+  const handleHotDealClick = (event, hotDealId) => {
+    setCurrentPage(1);
+    setCategoryId(hotDealId);
+    setIsDiscount(true);
+  };
 
   const fetchProducts = async () => {
     try {
+      setLoading(true);
       const productList = await productAPI.getListItems(
-        currentPage, // page
-        limit, // limit
-        minPrice, // minPrice
-        maxPrice, // maxPrice
-        txtSearch, // txtSearch
-        isFood, // isFood
-        showBy, // sortBy
-        false, // isDiscount
-        null, // categoryId
+        currentPage,
+        limit,
+        minPrice,
+        maxPrice,
+        txtSearch,
+        isFood,
+        showBy,
+        isDiscount,
+        categoryId,
       );
       setProducts(productList.data.items);
       setTotalPages(productList.data.totalPages);
-      console.log('Product:', productList);
-      console.log('Product list:', productList.data.totalPages);
     } catch (error) {
       console.error('Error fetching products:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const fetchCategories = async () => {
+    try {
+      setLoading(true);
+      const categories = await categoryAPI.getListCategories(isFood);
+      setCategories(categories.data.categories.categories);
+      setHotdeals(categories.data.hotDeals.hotDeals);
+      console.log('Categories:', categories);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchProducts();
-  }, [isFood, txtSearch, limit, showBy, currentPage, minPrice, maxPrice]);
+    fetchCategories();
+  }, [isFood, txtSearch, limit, showBy, currentPage, minPrice, maxPrice, isDiscount, categoryId]);
 
   return (
     <div className="shop-page">
@@ -128,27 +164,24 @@ const ProductList = () => {
         <div className="box">
           <h3>Hot Deals</h3>
           <ul>
-            <li>
-              Đồ tráng miệng <span className="count special">2</span>
-            </li>
-            <li>
-              Đồ tráng miệng <span className="count special">48</span>
-            </li>
-            <li>
-              Đồ tráng miệng <span className="count special">14</span>
-            </li>
+            {hotdeals.map((hotdeal) => (
+              <li key={hotdeal.id} onClick={(event) => handleHotDealClick(event, hotdeal.id)}>
+                {hotdeal.name}
+                <span className={hotdeal.numberOfFood > 0 ? 'count special' : 'count'}>{hotdeal.numberOfFood}</span>
+              </li>
+            ))}
           </ul>
         </div>
 
         <div className="box">
           <h3>Category</h3>
           <ul>
-            <li>
-              Đồ tráng miệng <span className="count special">99</span>
-            </li>
-            <li>
-              Đồ tráng miệng <span className="count special">89</span>
-            </li>
+            {categories.map((categorie) => (
+              <li onClick={(event) => handleCategoryClick(event, categorie.id)}>
+                {categorie.name}{' '}
+                <span className={categorie.numberOfFood > 0 ? 'count special' : 'count'}>{categorie.numberOfFood}</span>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -212,6 +245,14 @@ const ProductList = () => {
             <IoIosSearch />
             <input type="text" placeholder="Search" value={txtSearch} onChange={handleInputChange} />
           </div>
+          {/* <div className="option-button">
+            <img src={ICONS.camera} alt="Camera" />
+            <span>Tìm kiếm bằng hình ảnh</span>
+          </div>
+          <div className="option-button">
+            <img src={ICONS.lightbulb} alt="Lightbulb" />
+            <span>Gợi ý đồ ăn</span>
+          </div> */}
           <UploadModal />
           <RecommendModal />
         </div>
@@ -264,46 +305,52 @@ const ProductList = () => {
             </div>
           </div>
         </div>
-        {products.length === 0 ? (
-          <div className="no-products">
-            <p>Không có sản phẩm hợp lệ</p>
-          </div>
+        {loading ? (
+          <div className="loading-spinner"></div>
         ) : (
           <>
-            {viewMode === 'grid' ? (
-              <div className="product-grid">
-                {products.map((product) => (
-                  <ProductCardGrid key={product.id} product={product} />
-                ))}
+            {products.length === 0 ? (
+              <div className="no-products">
+                <p>Không có sản phẩm hợp lệ</p>
               </div>
             ) : (
-              <div className="product-list">
-                {products.map((product) => (
-                  <ProductCardList key={product.id} product={product} />
-                ))}
-              </div>
-            )}
-
-            {/* Pagination */}
-            <div className="pagination">
-              <div className="arrow-button" onClick={handlePrevPage}>
-                <FiArrowLeft className="arrow-paging" />
-              </div>
-              <div className="pages">
-                {Array.from({ length: totalPages }, (_, index) => (
-                  <div
-                    className={`page ${currentPage === index + 1 ? 'active' : ''}`}
-                    key={index}
-                    onClick={() => handlePageClick(index + 1)}
-                  >
-                    {index + 1 < 10 ? `0${index + 1}` : index + 1}
+              <>
+                {viewMode === 'grid' ? (
+                  <div className="product-grid">
+                    {products.map((product) => (
+                      <ProductCardGrid key={product.id} product={product} />
+                    ))}
                   </div>
-                ))}
-              </div>
-              <div className="arrow-button" onClick={handleNextPage}>
-                <FiArrowRight className="arrow-paging" />
-              </div>
-            </div>
+                ) : (
+                  <div className="product-list">
+                    {products.map((product) => (
+                      <ProductCardList key={product.id} product={product} />
+                    ))}
+                  </div>
+                )}
+
+                {/* Pagination */}
+                <div className="pagination">
+                  <div className="arrow-button" onClick={handlePrevPage}>
+                    <FiArrowLeft className="arrow-paging" />
+                  </div>
+                  <div className="pages">
+                    {Array.from({ length: totalPages }, (_, index) => (
+                      <div
+                        className={`page ${currentPage === index + 1 ? 'active' : ''}`}
+                        key={index}
+                        onClick={() => handlePageClick(index + 1)}
+                      >
+                        {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="arrow-button" onClick={handleNextPage}>
+                    <FiArrowRight className="arrow-paging" />
+                  </div>
+                </div>
+              </>
+            )}
           </>
         )}
       </div>

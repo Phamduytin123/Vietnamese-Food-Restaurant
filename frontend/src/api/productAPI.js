@@ -14,7 +14,7 @@ const productAPI = {
             isDiscount,
             categoryId
         };
-        return axiosClient.application.get(url, { params });
+        return axiosClient.applicationNoAuth.get(url, { params });
     },
 }
 
