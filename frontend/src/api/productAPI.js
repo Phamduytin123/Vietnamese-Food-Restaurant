@@ -1,21 +1,21 @@
-import axiosClient from "../utils/axiosCustomize";
+import axiosClient from '../utils/axiosCustomize';
 
 const productAPI = {
-    getListItems: (page, limit, minPrice, maxPrice, txtSearch, isFood, sortBy, isDiscount, categoryId) => {
-        const url = '/items';
-        const params = {
-            page,
-            limit,
-            minPrice,
-            maxPrice,
-            txtSearch,
-            isFood,
-            sortBy,
-            isDiscount,
-            categoryId
-        };
-        return axiosClient.applicationNoAuth.get(url, { params });
-    },
-}
+  getListItems: (page, limit, minPrice, maxPrice, txtSearch, isFood, sortBy, isDiscount, categoryId) => {
+    const url = '/items';
+    const params = {
+      page,
+      limit,
+      minPrice,
+      maxPrice,
+      txtSearch,
+      isFood,
+      sortBy,
+      isDiscount,
+      categoryId,
+    };
+    return axiosClient.applicationNoAuth.get(url, { params });
+  },
+};
 
 export default productAPI;

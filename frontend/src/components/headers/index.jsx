@@ -1,4 +1,9 @@
 import React from 'react';
+import { IoCartOutline } from 'react-icons/io5';
+import { IoMdHeartEmpty } from 'react-icons/io';
+import { RiStackLine } from 'react-icons/ri';
+import { MdOutlineHistory } from 'react-icons/md';
+import { IoSettingsOutline, IoLogOutOutline } from 'react-icons/io5';
 import { useState, useEffect } from 'react';
 import { ICONS } from '../../constants/icons';
 import { IMAGES } from '../../constants/images';
@@ -10,20 +15,33 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { IoLocationSharp } from 'react-icons/io5';
 import { IoMdPerson } from 'react-icons/io';
 import './index.scss';
+import { useNavigate } from 'react-router-dom';
+import { HistoryOutlined } from '@ant-design/icons';
 
 const Header = ({ userInfo }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profile, setProfile] = useState(null);
+  const navigage = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('user_info');
+
+    navigage('/');
+  };
 
   const getProfile = () => {
     if (userInfo) {
       setProfile(userInfo);
       setIsLoggedIn(true);
     }
+    if (!localStorage.getItem('access_token')) {
+      setIsLoggedIn(false);
+    }
   };
   useEffect(() => {
     getProfile();
-  }, []);
+  }, [localStorage.getItem('access_token')]);
   return (
     <div className="container-header">
       <Navbar expand="lg">
@@ -44,18 +62,20 @@ const Header = ({ userInfo }) => {
             </Nav>
             {/* Điều kiện hiển thị */}
             {!isLoggedIn ? (
-              // Nếu chưa đăng nhập, hiển thị nút Login
-              <Button
-                className="btn-login"
-                onClick={() => {
-                  console.log('Login button clicked');
-                  setIsLoggedIn(true);
-                }}
-              >
-                <IoMdPerson className="login-icon" />
-                <div className="login-text">Login</div>
-              </Button>
+              <div>
+                <Button
+                  className="btn-login"
+                  onClick={() => {
+                    navigage('/auth/login');
+                  }}
+                >
+                  <IoMdPerson className="login-icon" />
+                  <div className="login-text">Login</div>
+                </Button>
+              </div>
             ) : (
+              // Nếu chưa đăng nhập, hiển thị nút Login
+
               // Nếu đã đăng nhập, hiển thị icon cart và user
               <div className="navbar-icons d-flex align-items-center">
                 {/* Cart icon */}
@@ -63,11 +83,13 @@ const Header = ({ userInfo }) => {
                   <span className="cart-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     2
                   </span>
-                  <img
-                    src={ICONS.cart}
-                    alt="Cart"
+
+                  <IoCartOutline
                     className="cart-icon-img"
-                    style={{ width: '28px', height: '28px' }}
+                    alt="Cart"
+                    onClick={() => {
+                      navigage('/cart');
+                    }}
                   />
                 </div>
 
@@ -85,28 +107,28 @@ const Header = ({ userInfo }) => {
 
                   <Dropdown.Menu className="custom-dropdown-menu">
                     <Dropdown.Item href="#/dashboard">
-                      <img src={ICONS.icon_homepage} alt="Dashboard" className="menu-icon" />
+                      <RiStackLine className="dropdown-icon" />
                       Homepage
                     </Dropdown.Item>
                     <Dropdown.Item href="#/order-history">
-                      <img src={ICONS.icon_order} alt="Order History" className="menu-icon" />
+                      <MdOutlineHistory className="dropdown-icon" />
                       Lịch sử đơn hàng
                     </Dropdown.Item>
-                    <Dropdown.Item href="#/cart">
-                      <img src={ICONS.icon_cart} alt="Cart" className="menu-icon" />
-                      Giỏ hàng
-                    </Dropdown.Item>
-                    <Dropdown.Item href="#/favorites">
-                      <img src={ICONS.icon_heart} alt="Favorites" className="menu-icon" />
+                    <Dropdown.Item
+                      onClick={() => {
+                        navigage('/wishlist');
+                      }}
+                    >
+                      <IoMdHeartEmpty className="dropdown-icon" />
                       Danh sách món ăn đã thích
                     </Dropdown.Item>
                     <Dropdown.Item href="#/settings">
-                      <img src={ICONS.icon_setting} alt="Settings" className="menu-icon" />
+                      <IoSettingsOutline className="dropdown-icon" />
                       Cài đặt
                     </Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Item href="#/logout">
-                      <img src={ICONS.icon_logout} alt="Logout" className="menu-icon" />
+                    <Dropdown.Divider className="dropdown-icon" />
+                    <Dropdown.Item href="#/logout" onClick={handleLogout}>
+                      <IoLogOutOutline className="dropdown-icon" />
                       Log-out
                     </Dropdown.Item>
                   </Dropdown.Menu>

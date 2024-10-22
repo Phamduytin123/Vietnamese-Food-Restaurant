@@ -1,0 +1,61 @@
+.wishlist{
+  margin: 30px 0;
+  .wishlist-container {
+    margin-left: 20px;
+    width: 50%;
+    .ant-table-content {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Đổ bóng */
+      transition: box-shadow 0.3s ease;
+      border-radius: 8px;
+    }
+    .wishlist-item-image{
+      width: 60px;
+      height: 60px;
+      margin-right: 10px;
+      border-radius: 4px;
+    }
+    .wishlist-item-text{
+      font-weight: 600;
+      color: #223263;
+    }
+    .wishlist-item-status{
+      font-weight: 600;
+      color: #2DB224;
+      &.out-of-stock{
+        color: #eb3a3a;
+      }
+      &.not-today{
+        color: #2472B2;
+      }
+      &.comming-soon{
+        color: #fb7932;
+      }
+    }
+  }
+}
+.add-cart-btn {
+  background-color: #FA8232;
+  color: #FFFFFF;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  margin-right: 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  p {
+    line-height: 18px;
+    margin-right: 12px;
+  }
+  .sidebar-icon{
+    color: #FFFFFF;
+    font-size: 20px;
+  }
+  &.unactived {
+    background-color: rgba(128, 128, 128, 0.3);
+  }
+}
+
+.remove-btn {
+  font-size: 20px;
+  cursor: pointer;
+}
