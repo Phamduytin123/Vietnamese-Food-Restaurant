@@ -1,0 +1,24 @@
+.sidebar-container{
+  width: 18%;
+  padding: 20px 0;
+  background-color: #FFFFFF;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Đổ bóng */
+  transition: box-shadow 0.3s ease;
+  border-radius: 8px;
+  .sidebar-item {
+    padding: 8px 20px;
+    cursor: pointer;
+    &.actived {
+      background-color: #FA8232;
+      color: #FFFFFF;
+    }
+    .sidebar-icon{
+      color: gray;
+      font-size: 20px;
+      margin-right: 14px;
+      &.actived {
+        color: #FFFFFF
+      }
+    }
+  }
+}
