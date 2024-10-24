@@ -1,4 +1,17 @@
 [
+    
+    {
+        "name_vi": "Nước Dừa",
+        "name_en": "Coconut Water",
+        "unit_vi": "Ly",
+        "unit_en": "Glass",
+        "categoryId": 17,
+        "images": "['https://res.cloudinary.com/deei5izfg/image/upload/v1727019975/VietnameseFoodRestaurant/Drink/CoconutWater/ccbsitrbh32jbbfdkkt3.jpg','https://res.cloudinary.com/deei5izfg/image/upload/v1727019976/VietnameseFoodRestaurant/Drink/CoconutWater/hbvui5e7s0uouprei1ks.jpg','https://res.cloudinary.com/deei5izfg/image/upload/v1727019976/VietnameseFoodRestaurant/Drink/CoconutWater/dufxsf2ymutrxohxglol.jpg']",
+        "description_vi": "Nước dừa tươi mát.",
+        "description_en": "Fresh coconut water.",
+        "isFood": false,
+        "isDeleted": false
+    },
     {
         "name_vi": "Nước Cam",
         "name_en": "Orange Juice",
@@ -284,18 +297,6 @@
         "images": "['https://res.cloudinary.com/deei5izfg/image/upload/v1727019979/VietnameseFoodRestaurant/Drink/Aquafina/x0ep7cdukyilionbxpnd.jpg','https://res.cloudinary.com/deei5izfg/image/upload/v1727019979/VietnameseFoodRestaurant/Drink/Aquafina/jckyqahnoya7hcb12lwn.jpg','https://res.cloudinary.com/deei5izfg/image/upload/v1727019979/VietnameseFoodRestaurant/Drink/Aquafina/tooqakh27xc1oxzbkts6.png']",
         "description_vi": "Nước lọc tinh khiết.",
         "description_en": "Pure water.",
-        "isFood": false,
-        "isDeleted": false
-    },
-    {
-        "name_vi": "Nước Dừa",
-        "name_en": "Coconut Water",
-        "unit_vi": "Ly",
-        "unit_en": "Glass",
-        "categoryId": 17,
-        "images": "['https://res.cloudinary.com/deei5izfg/image/upload/v1727019975/VietnameseFoodRestaurant/Drink/CoconutWater/ccbsitrbh32jbbfdkkt3.jpg','https://res.cloudinary.com/deei5izfg/image/upload/v1727019976/VietnameseFoodRestaurant/Drink/CoconutWater/hbvui5e7s0uouprei1ks.jpg','https://res.cloudinary.com/deei5izfg/image/upload/v1727019976/VietnameseFoodRestaurant/Drink/CoconutWater/dufxsf2ymutrxohxglol.jpg']",
-        "description_vi": "Nước dừa tươi mát.",
-        "description_en": "Fresh coconut water.",
         "isFood": false,
         "isDeleted": false
     }

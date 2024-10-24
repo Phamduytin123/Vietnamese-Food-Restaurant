@@ -31,7 +31,6 @@ const FoodDetail = () => {
           <div className="d-flex justify-content-center">
             <Reviews />
           </div>
-          <UploadModal />
         </div>
       )}
     </div>

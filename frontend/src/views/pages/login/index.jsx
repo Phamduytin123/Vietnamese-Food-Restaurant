@@ -1,4 +1,4 @@
-import FormLogin from '../../../components/auth/FormLogin';
+import FormLogin from '../../../components/auth/formLogin';
 import "./index.scss";
 const Login = () => {
   return (

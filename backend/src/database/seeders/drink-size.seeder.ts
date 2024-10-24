@@ -3,6 +3,11 @@ import { ItemSize } from '../../entities';
 import { DataSource } from 'typeorm';
 
 const drinkSizeData = [
+    // Nước Dừa (Coconut Water)
+    { size_vi: 'Ly Nhỏ', size_en: 'Small Glass', price: 30000, itemId: 40 },
+    { size_vi: 'Ly Vừa', size_en: 'Medium Glass', price: 32000, itemId: 40 },
+    { size_vi: 'Ly Lớn', size_en: 'Large Glass', price: 35000, itemId: 40 },
+
     // Nước Cam (Orange Juice)
     { size_vi: 'Ly Nhỏ', size_en: 'Small Glass', price: 30000, itemId: 41 },
     { size_vi: 'Ly Vừa', size_en: 'Medium Glass', price: 32000, itemId: 41 },
@@ -112,11 +117,6 @@ const drinkSizeData = [
 
     // Nước Lọc (Water)
     { size_vi: '355ml', size_en: '355ml', price: 10000, itemId: 64 },
-
-    // Nước Dừa (Coconut Water)
-    { size_vi: 'Ly Nhỏ', size_en: 'Small Glass', price: 30000, itemId: 65 },
-    { size_vi: 'Ly Vừa', size_en: 'Medium Glass', price: 32000, itemId: 65 },
-    { size_vi: 'Ly Lớn', size_en: 'Large Glass', price: 35000, itemId: 65 },
 ];
 export default class DrinkSizeSeeder implements Seeder {
     private dataSource: DataSource;

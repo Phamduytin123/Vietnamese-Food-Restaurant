@@ -39,6 +39,8 @@ export class ZaloPaymentService {
             'DEPLOY_SERVICE_LINK'
         );
 
+        console.log(deployedLink)
+
         const config = {
             app_id: this.configService.get<string>('ZALOPAY_APP_ID'),
             key1: this.configService.get<string>('ZALOPAY_KEY1'),
@@ -127,7 +129,7 @@ export class ZaloPaymentService {
             amount: totalPrice * 1000,
             description: `Product - Payment for the order #${transID}`,
             bank_code: '',
-            callback_url: `${deployedLink}/payment/zalo/callback`,
+            callback_url: `${deployedLink}/zalo-payment/callback`,
             // callback_url: `https://dc61-2402-800-629c-1fd3-6186-8883-cf12-7a5c.ngrok-free.app/payment/zalo/callback`,
         };
 

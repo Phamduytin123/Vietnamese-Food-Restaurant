@@ -66,7 +66,7 @@ export class CartService {
                 updatedAt: 'DESC',
                 createdAt: 'DESC',
             },
-            relations: ['itemSize', 'itemSize.item'],
+            relations: ['itemSize', 'itemSize.item', 'itemSize.item.itemSizes'],
         });
 
         return carts.map(cart => ({
@@ -82,7 +82,7 @@ export class CartService {
     }
 
     async updateCart(body: any, id: number, currentAccount: Account) {
-        const { quantity } = body;
+        const { quantity, itemSizeId } = body;
 
         var foundCart = await this.cartRepository.findOne({
             where: { id: id, accountId: currentAccount.id },
@@ -110,6 +110,21 @@ export class CartService {
             }
 
             foundCart.quantity = quantity;
+        }
+        if(itemSizeId){
+            var foundItemSizeId = await this.itemSizeRepository.findOne({
+                where: { id: itemSizeId},
+            });
+    
+            if (!foundItemSizeId) {
+                return new NotFoundException(
+                    this.i18n.t('error.item.itemSizeNotFound', {
+                        args: { itemId: itemSizeId },
+                    })
+                );
+            }
+
+            foundCart.itemSizeId = itemSizeId;
         }
 
         await this.cartRepository.save(foundCart);
