@@ -25,6 +25,7 @@ import {
 } from '../../common';
 import { log } from 'console';
 import { OrdersRequest } from './dtos/ordersRequest';
+import { CusCancelRequest } from './dtos/cusCancelRequest';
 
 @Injectable()
 export class OrderService {
@@ -40,7 +41,7 @@ export class OrderService {
         @InjectRepository(ItemSize)
         private readonly itemSizeRepository: Repository<ItemSize>,
         private readonly i18n: I18nService
-    ) {}
+    ) { }
 
     async createOrder(lang: string, account: Account, orderReq: OrderRequest) {
         const {
@@ -252,5 +253,40 @@ export class OrderService {
         };
 
         return order;
+    }
+    async CancelOrderById(lang: string, cusCancelRequest: CusCancelRequest, account: Account) {
+        const orderFound = await this.orderRepository.findOne({
+            where: { id: cusCancelRequest.id },
+            relations: [
+                'orderDetails',
+                'account',
+                'orderDetails.itemSize',
+                'orderDetails.itemSize.item',
+            ],
+        });
+        if (!orderFound) {
+            return new NotFoundException(
+                this.i18n.t('error.order.orderNotFound', {
+                    args: { orderId: cusCancelRequest.id },
+                })
+            );
+        }
+        if (account.id !== orderFound.account.id) {
+            return new BadRequestException(
+                this.i18n.t('error.auth.accountPermissionDenied', {
+                    args: { orderId: cusCancelRequest.id },
+                })
+            );
+        }
+        if (orderFound.status !== OrderStatusEnum.WAIT) {
+            return new BadRequestException(
+                this.i18n.t('error.order.orderCannotBeCancelled', {
+                    args: { orderId: cusCancelRequest.id },
+                })
+            )
+        }
+        orderFound.reasonCancel = cusCancelRequest.reasonCancel;
+        orderFound.status = OrderStatusEnum.CANCEL;
+        return this.orderRepository.save(orderFound);
     }
 }

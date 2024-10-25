@@ -13,5 +13,7 @@
     "ratingMustBeInteger": "Rating must be an integer.",
     "ratingMin": "Rating must be at least 0.",
     "ratingMax": "Rating must not exceed 5.",
-    "itemIdRequired": "Item ID is required."
+    "itemIdRequired": "Item ID is required.",
+    "orderIdRequired": "Order ID is required.",
+    "reasonCancelRequired": "Reason why cancel is required."
 }

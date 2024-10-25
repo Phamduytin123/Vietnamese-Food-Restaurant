@@ -13,5 +13,7 @@
     "ratingMustBeInteger": "Đánh giá phải là số nguyên.",
     "ratingMin": "Đánh giá phải ít nhất là 0.",
     "ratingMax": "Đánh giá không được vượt quá 5.",
-    "itemIdRequired": "Mã sản phẩm không được để trống."
+    "itemIdRequired": "Mã sản phẩm không được để trống.",
+    "orderIdRequired": "ID Hóa đơn không được để trống.",
+    "reasonCancelRequired": "Lý do hủy đơn không được để trống."
 }
