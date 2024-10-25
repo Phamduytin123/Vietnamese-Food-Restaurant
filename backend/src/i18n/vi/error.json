@@ -8,6 +8,10 @@
         "itemNotFound": "Không thể tìm thấy sản phẩm có id '{itemId}' trong hệ thống"
     },
     "order": {
-        "orderNotFound": "Không thể tìm thấy đơn hàng có id '{orderId}' trong hệ thống"
+        "orderNotFound": "Không thể tìm thấy đơn hàng có id '{orderId}' trong hệ thống",
+        "orderCannotBeCancelled": "Đơn hàng với mã '{orderId}' không thể hủy vì cửa hàng đã xác nhận. Vui lòng liên hệ bộ phận hỗ trợ nếu cần thêm trợ giúp."
+    },
+    "auth": {
+        "accountPermissionDenied": "Bạn không có quyền truy cập vào đơn hàng với mã '{orderId}'"
     }
 }

@@ -8,6 +8,10 @@
         "itemNotFound": "The '{itemId}' item is not found in the system"
     },
     "order": {
-        "orderNotFound": "The '{orderId}' order is not found in the system"
+        "orderNotFound": "The '{orderId}' order is not found in the system",
+        "orderCannotBeCancelled": "The order with ID '{orderId}' cannot be canceled since the shop has already accepted it. Please contact support for further assistance if needed."
+    },
+    "auth": {
+        "accountPermissionDenied": "You do not have permission to access the order with ID '{orderId}'"
     }
 }
