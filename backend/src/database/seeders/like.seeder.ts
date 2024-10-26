@@ -1,5 +1,5 @@
 import { Seeder } from 'typeorm-extension';
-import { Like } from '../../entities';
+import { LikeItem } from '../../entities';
 import { DataSource } from 'typeorm';
 
 const likeDate = [
@@ -45,7 +45,7 @@ export default class LikeSeeder implements Seeder {
     }
 
     public async run(): Promise<void> {
-        const likeRepo = this.dataSource.getRepository(Like);
+        const likeRepo = this.dataSource.getRepository(LikeItem);
 
         await likeRepo.save(likeDate);
 

@@ -23,6 +23,10 @@ import { LikeModule } from './modules/like/like.module';
 import { VoucherModule } from './modules/voucher/voucher.module';
 import { ReviewModule } from './modules/review/review.module';
 import { RevenueModule } from './modules/revenue/revenue.module';
+import { UploadModule } from './modules/upload/upload.module';
+import { CloudinaryConfig } from './common/config/cloudinary.config';
+import { AdminItemModule } from './modules/admin/item/item.module';
+import { AdminOrderModule } from './modules/admin/order/order.module';
 @Module({
     imports: [
         DatabaseModule,
@@ -52,8 +56,13 @@ import { RevenueModule } from './modules/revenue/revenue.module';
         VoucherModule,
         ReviewModule,
         RevenueModule,
+        UploadModule,
+        ConfigModule.forRoot(),
+        AdminItemModule,
+        AdminOrderModule,
     ],
     controllers: [AppController],
-    providers: [AppService],
+    providers: [AppService, CloudinaryConfig],
+    exports: [CloudinaryConfig],
 })
-export class AppModule { }
+export class AppModule {}

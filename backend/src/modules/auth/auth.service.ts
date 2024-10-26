@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+    BadRequestException,
+    Injectable,
+    UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AccountService } from '../account/account.service';
 import * as bcrypt from 'bcrypt';
@@ -18,7 +22,7 @@ export class AuthService {
         private accountService: AccountService,
         private jwtService: JwtService,
         private readonly customMailerService: CustomMailerService
-    ) { }
+    ) {}
 
     async login(requestBody: LoginDto) {
         //check email exist
@@ -70,7 +74,7 @@ export class AuthService {
 
         const verificationToken = await this.jwtService.signAsync(
             { newAccount: accountData },
-            { secret: process.env.JWT_SECRET, expiresIn: '1d' },
+            { secret: process.env.JWT_SECRET, expiresIn: '1d' }
         );
 
         const verificationLink = `http://localhost:8000/auth/verify?token=${verificationToken}`;
@@ -81,7 +85,9 @@ export class AuthService {
         return { email: accountData.email, verificationLink };
     }
     async verifyEmail(token: string) {
-        const payload = await this.jwtService.verifyAsync(token, { secret: process.env.JWT_SECRET });
+        const payload = await this.jwtService.verifyAsync(token, {
+            secret: process.env.JWT_SECRET,
+        });
         console.log(payload.newAccount.email);
 
         const user = await this.accountService.create(payload.newAccount);
@@ -103,7 +109,7 @@ export class AuthService {
 
         const resetToken = await this.jwtService.signAsync(
             { email: account.email },
-            { secret: process.env.JWT_SECRET, expiresIn: '1h' },
+            { secret: process.env.JWT_SECRET, expiresIn: '1h' }
         );
 
         const resetLink = `http://localhost:8000/auth/get-reset-password?token=${resetToken}`;
@@ -115,7 +121,9 @@ export class AuthService {
     }
     async resetPassword(token: string) {
         // Xác minh token
-        const payload = await this.jwtService.verifyAsync(token, { secret: process.env.JWT_SECRET });
+        const payload = await this.jwtService.verifyAsync(token, {
+            secret: process.env.JWT_SECRET,
+        });
 
         if (!payload) {
             throw new UnauthorizedException('Invalid token or email');
@@ -128,11 +136,14 @@ export class AuthService {
         }
 
         // Đặt mật khẩu mới thành "88888888"
-        account.password = PasswordUtils.hashPassword("88888888");
+        account.password = PasswordUtils.hashPassword('88888888');
 
         // Cập nhật thông tin tài khoản
         await this.accountRepo.update(account.id, account);
 
-        return { message: 'Password has been reset successfully.', emailreset: account.email };
+        return {
+            message: 'Password has been reset successfully.',
+            emailreset: account.email,
+        };
     }
 }

@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 import { Cart } from './cart.entity';
 import { Order } from './order.entity';
-import { Like } from './like.entity';
+import { LikeItem } from './like.entity';
 import { Review } from './review.entity';
 
 @Entity()
@@ -68,9 +68,9 @@ export class Account {
     @OneToMany(() => Order, order => order.account)
     orders: Order[];
 
-    @OneToMany(() => Like, like => like.account)
-    likes: Like[];
+    @OneToMany(() => LikeItem, like => like.account)
+    likes: LikeItem[];
 
     @OneToMany(() => Review, review => review.account)
-    reviews: Like[];
+    reviews: Review[];
 }

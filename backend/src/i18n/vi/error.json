@@ -13,5 +13,8 @@
     },
     "auth": {
         "accountPermissionDenied": "Bạn không có quyền truy cập vào đơn hàng với mã '{orderId}'"
+    },
+    "category": {
+        "categoryNotFound" : "Không thể tìm thấy loại có categoryId {categoryId} trong hệ thống"
     }
 }

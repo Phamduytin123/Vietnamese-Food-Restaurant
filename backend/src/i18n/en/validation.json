@@ -15,5 +15,20 @@
     "ratingMax": "Rating must not exceed 5.",
     "itemIdRequired": "Item ID is required.",
     "orderIdRequired": "Order ID is required.",
-    "reasonCancelRequired": "Reason why cancel is required."
+    "reasonCancelRequired": "Reason why cancel is required.",
+    "item": {
+        "name_en_required": "Name in English is required.",
+        "name_vi_required": "Name in Vietnamese is required.",
+        "categoryId_required": "Category ID is required.",
+        "description_vi_required": "Description in Vietnamese is required.",
+        "description_en_required": "Description in English is required.",
+        "ingredients_vi_required": "Ingredients in Vietnamese are required.",
+        "ingredients_en_required": "Ingredients in English are required.",
+        "unit_vi_required": "Unit in Vietnamese is required.",
+        "unit_en_required": "Unit in English is required.",
+        "regional_vi_required": "Regional information in Vietnamese is required.",
+        "regional_en_required": "Regional information in English is required.",
+        "itemSizes_required": "Item sizes are required.",
+        "availability_invalid": "Availability of item must be a valid option."
+    }
 }
