@@ -12,8 +12,6 @@ import {
 } from '../../entities';
 import { AuthGuard } from '../../common/guards/auth.guard';
 import { AccountService } from '../account/account.service';
-import { AdminOrderController } from './admin.order.controller';
-import { AdminOrderService } from './admin.order.service';
 
 @Module({
     imports: [
@@ -26,8 +24,8 @@ import { AdminOrderService } from './admin.order.service';
             ItemSize,
         ]),
     ],
-    controllers: [OrderController, AdminOrderController],
-    providers: [OrderService, AuthGuard, AccountService, AdminOrderService],
+    controllers: [OrderController],
+    providers: [OrderService, AuthGuard, AccountService],
     exports: [OrderService],
 })
 export class OrderModule {}

@@ -11,7 +11,7 @@ import {
 } from 'typeorm';
 import { ItemSize } from './item-size.entity';
 import { Category } from './category.entity';
-import { Like } from './like.entity';
+import { LikeItem } from './like.entity';
 import { Review } from './review.entity';
 
 @Entity()
@@ -146,8 +146,8 @@ export class Item {
     @OneToMany(() => ItemSize, itemSize => itemSize.item)
     itemSizes: ItemSize[];
 
-    @OneToMany(() => Like, like => like.item)
-    likes: Like[];
+    @OneToMany(() => LikeItem, like => like.item)
+    likes: LikeItem[];
 
     @OneToMany(() => Review, review => review.item)
     reviews: Review[];

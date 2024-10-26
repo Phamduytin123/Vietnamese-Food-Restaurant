@@ -1,7 +1,7 @@
 import { CurrentAccount } from './../../common/decorator/currentAccount.decorator';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Account, Item, Like } from '../../entities';
+import { Account, Item, LikeItem } from '../../entities';
 import { Repository } from 'typeorm';
 import { ItemFilterUtils } from '../../common';
 import { I18nService } from 'nestjs-i18n';
@@ -9,8 +9,8 @@ import { I18nService } from 'nestjs-i18n';
 @Injectable()
 export class LikeService {
     constructor(
-        @InjectRepository(Like)
-        private readonly likeRepository: Repository<Like>,
+        @InjectRepository(LikeItem)
+        private readonly likeRepository: Repository<LikeItem>,
         @InjectRepository(Item)
         private readonly itemRepository: Repository<Item>,
         private readonly i18n: I18nService

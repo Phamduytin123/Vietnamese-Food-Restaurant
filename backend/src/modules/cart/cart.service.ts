@@ -84,7 +84,7 @@ export class CartService {
     async updateCart(body: any, id: number, currentAccount: Account) {
         const { quantity, itemSizeId } = body;
 
-        var foundCart = await this.cartRepository.findOne({
+        const foundCart = await this.cartRepository.findOne({
             where: { id: id, accountId: currentAccount.id },
             relations: ['itemSize', 'itemSize.item'],
         });
@@ -96,6 +96,12 @@ export class CartService {
                 })
             );
         }
+
+        const newCart = {
+            id: foundCart.id,
+            quantity: foundCart.quantity,
+            itemSizeId: foundCart.itemSizeId,
+        };
 
         if (quantity) {
             if (quantity <= 0) {
@@ -109,13 +115,13 @@ export class CartService {
                 };
             }
 
-            foundCart.quantity = quantity;
+            newCart.quantity = quantity;
         }
-        if(itemSizeId){
+        if (itemSizeId) {
             var foundItemSizeId = await this.itemSizeRepository.findOne({
-                where: { id: itemSizeId},
+                where: { id: itemSizeId },
             });
-    
+
             if (!foundItemSizeId) {
                 return new NotFoundException(
                     this.i18n.t('error.item.itemSizeNotFound', {
@@ -124,12 +130,10 @@ export class CartService {
                 );
             }
 
-            foundCart.itemSizeId = itemSizeId;
+            newCart.itemSizeId = itemSizeId;
         }
 
-        await this.cartRepository.save(foundCart);
-
-        return foundCart;
+        return await this.cartRepository.save(newCart);
     }
 
     async deleteCart(id: number, currentAccount: Account) {

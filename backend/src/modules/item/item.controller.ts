@@ -1,15 +1,28 @@
-import { Body, Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query, Req } from '@nestjs/common';
 import { ItemService } from './item.service';
-import { I18n, I18nContext } from 'nestjs-i18n';
 import { Lang } from '../../common';
+import * as jwt from 'jsonwebtoken';
 
 @Controller('/items')
 export class ItemController {
     constructor(private readonly itemService: ItemService) {}
 
+    getAccountFromToken(token: string) {
+        return token ? jwt.verify(token, process.env.JWT_SECRET) : null;
+    }
+
     @Get()
-    getListItem(@Lang() lang: string, @Query() query: any) {
-        return this.itemService.getListItem(lang, query);
+    getListItem(@Lang() lang: string, @Query() query: any, @Req() req: any) {
+        const authHeader = req.headers.authorization;
+        let currentAccount = null;
+
+        // Kiểm tra xem header có tồn tại và định dạng có đúng không
+        if (authHeader && authHeader.startsWith('Bearer ')) {
+            const token = authHeader.split(' ')[1];
+            currentAccount = this.getAccountFromToken(token);
+        }
+
+        return this.itemService.getListItem(currentAccount, lang, query);
     }
 
     @Get('/:id')

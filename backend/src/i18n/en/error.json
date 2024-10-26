@@ -13,5 +13,8 @@
     },
     "auth": {
         "accountPermissionDenied": "You do not have permission to access the order with ID '{orderId}'"
+    },
+    "category": {
+        "categoryNotFound" : "The {categoryId} category is not found in the system"
     }
 }

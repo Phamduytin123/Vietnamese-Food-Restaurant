@@ -4,27 +4,19 @@ import {
     NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Item, ItemSize } from '../../entities';
-import {
-    Between,
-    In,
-    LessThanOrEqual,
-    Like,
-    MoreThan,
-    MoreThanOrEqual,
-    Repository,
-} from 'typeorm';
+import { Account, Item, LikeItem } from '../../entities';
+import { In, Like, MoreThan, Repository } from 'typeorm';
 import { clean, ItemFilterUtils, OrTypeOrm, StringUtils } from '../../common';
 
 @Injectable()
 export class ItemService {
     constructor(
         @InjectRepository(Item) private readonly itemRepo: Repository<Item>,
-        @InjectRepository(ItemSize)
-        private readonly itemSizeRepo: Repository<ItemSize>
-    ) { }
+        @InjectRepository(LikeItem)
+        private readonly likeRepository: Repository<LikeItem>
+    ) {}
 
-    async getListItem(lang: string, query: any) {
+    async getListItem(account: any, lang: string, query: any) {
         var {
             page = 1,
             limit = 12,
@@ -128,6 +120,19 @@ export class ItemService {
             });
         }
 
+        // nếu có account thì thêm like
+        if (account) {
+            console.log(account);
+            const likedList = await this.likeRepository.find({
+                where: { accountId: account.id },
+            });
+
+            filterItems = filterItems.map((item: any) => ({
+                ...item,
+                isLike: likedList.some(like => like.itemId === item.id),
+            }));
+        }
+
         // Cập nhật lại totalItems sau khi lọc
         const totalItems = filterItems.length;
 
@@ -198,7 +203,9 @@ export class ItemService {
         try {
             // Kiểm tra nếu listIds không phải là một mảng hoặc rỗng
             if (listIds.length === 0) {
-                throw new BadRequestException('List of IDs must be a non-empty array');
+                throw new BadRequestException(
+                    'List of IDs must be a non-empty array'
+                );
             }
 
             // Tìm các item dựa trên danh sách ID
@@ -212,7 +219,9 @@ export class ItemService {
 
             // Nếu không tìm thấy item nào, ném lỗi NotFoundException
             if (!items || items.length === 0) {
-                throw new NotFoundException('Items not found with the provided IDs');
+                throw new NotFoundException(
+                    'Items not found with the provided IDs'
+                );
             }
 
             // Áp dụng filter để lấy dữ liệu theo ngôn ngữ
@@ -248,7 +257,9 @@ export class ItemService {
 
             // Nếu không tìm thấy item nào, ném lỗi NotFoundException
             if (!item) {
-                throw new NotFoundException(`Item not found with name: ${name}`);
+                throw new NotFoundException(
+                    `Item not found with name: ${name}`
+                );
             }
 
             // Áp dụng filter để lấy dữ liệu theo ngôn ngữ
@@ -262,5 +273,4 @@ export class ItemService {
             };
         }
     }
-
 }

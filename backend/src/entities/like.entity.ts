@@ -10,8 +10,8 @@ import {
 import { Account } from './account.entity';
 import { Item } from './item.entity';
 
-@Entity()
-export class Like {
+@Entity({ name: 'like' })
+export class LikeItem {
     @PrimaryGeneratedColumn()
     id: number;
 
