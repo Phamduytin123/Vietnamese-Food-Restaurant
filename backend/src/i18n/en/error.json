@@ -9,17 +9,17 @@
     },
     "order": {
         "orderNotFound": "The '{orderId}' order is not found in the system",
-        "orderCannotBeCancelled": "The order with ID '{orderId}' cannot be canceled since the shop has already accepted it. Please contact support for further assistance if needed."
+        "orderCannotBeCancelled": "The order with ID '{orderId}' cannot be canceled since the shop has already accepted it. Please contact support for further assistance if needed.",
+        "orderStatusCannotBeUpdated": "The order with ID '{orderId}' cannot be updated since the customer has already cancelled it. Please contact again with customer.",
+        "invalidOrderStatusTransition": "The order with ID '{orderId}' cannot be updated due to an invalid status update sequence."
     },
     "auth": {
         "accountPermissionDenied": "You do not have permission to access the order with ID '{orderId}'"
     },
-<<<<<<< Updated upstream
     "category": {
-        "categoryNotFound" : "The {categoryId} category is not found in the system"
-=======
+        "categoryNotFound": "The {categoryId} category is not found in the system"
+    },
     "account": {
         "accountNotFound": "Account with ID '{accountId}' not found in the system"
->>>>>>> Stashed changes
     }
 }
