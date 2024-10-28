@@ -33,7 +33,7 @@ export class AccountController {
     }
     @Post('/update')
     @UseInterceptors(ClassSerializerInterceptor)
-    @UseGuards(new RoleGuard([AccountRoleEnum.STAFF, AccountRoleEnum.CUSTOMER]))
+    @UseGuards(new RoleGuard([AccountRoleEnum.STAFF, AccountRoleEnum.CUSTOMER, AccountRoleEnum.ADMIN]))
     @UseGuards(AuthGuard)
     UpdateInforAccount(@Lang() lang: string, @CurrentAccount() currentAccount: Account, @Body() updateAccount: AccountUpdateDto) {
         return this.accountService.updateAccount(lang, currentAccount, updateAccount);

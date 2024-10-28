@@ -16,6 +16,7 @@ import { Account } from '../../entities';
 import { OrderRequest } from './dtos/orderRequest';
 import { OrdersRequest } from './dtos/ordersRequest';
 import { CusCancelRequest } from './dtos/cusCancelRequest';
+import { UpdateStatusDto } from './dtos/updateStatusDto';
 
 @Controller('/orders')
 export class OrderController {
@@ -53,6 +54,19 @@ export class OrderController {
     ) {
         return this.orderService.getOrderDetail(lang, id, account);
     }
+
+    @Post('/updateStatus')
+    @UseGuards(new RoleGuard([AccountRoleEnum.STAFF, AccountRoleEnum.ADMIN]))
+    @UseGuards(AuthGuard)
+    async UpdateStatus(
+        @Lang() lang: string,
+        @Body() updateStatusRequest: UpdateStatusDto,
+    ) {
+        console.log(updateStatusRequest);
+
+        return this.orderService.updateStatusOrder(lang, updateStatusRequest)
+    }
+
     @Post('/cancel')
     @UseGuards(new RoleGuard([AccountRoleEnum.CUSTOMER]))
     @UseGuards(AuthGuard)
@@ -63,4 +77,6 @@ export class OrderController {
     ) {
         return this.orderService.CancelOrderById(lang, cusCancelRequest, account)
     }
+
+
 }

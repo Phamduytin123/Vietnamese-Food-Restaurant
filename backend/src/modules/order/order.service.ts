@@ -23,9 +23,10 @@ import {
     ItemFilterUtils,
     OrderStatusEnum,
 } from '../../common';
-import { log } from 'console';
 import { OrdersRequest } from './dtos/ordersRequest';
 import { CusCancelRequest } from './dtos/cusCancelRequest';
+import { UpdateStatusDto } from './dtos/updateStatusDto';
+import { OrderStatusUtils } from '../../common/utils/orderStatus.utils';
 
 @Injectable()
 export class OrderService {
@@ -289,4 +290,44 @@ export class OrderService {
         orderFound.status = OrderStatusEnum.CANCEL;
         return this.orderRepository.save(orderFound);
     }
+    async updateStatusOrder(lang: string, updateStatusRequest: UpdateStatusDto) {
+        const orderFound = await this.orderRepository.findOne({
+            where: { id: updateStatusRequest.id },
+            relations: [
+                'orderDetails',
+                'account',
+                'orderDetails.itemSize',
+                'orderDetails.itemSize.item',
+            ],
+        });
+        console.log(orderFound);
+
+        if (!orderFound) {
+            return new NotFoundException(
+                this.i18n.t('error.order.orderNotFound', {
+                    args: { orderId: updateStatusRequest.id },
+                })
+            );
+        }
+        if (orderFound.status === OrderStatusEnum.CANCEL) {
+            return new BadRequestException(
+                this.i18n.t('error.order.orderStatusCannotBeUpdated', {
+                    args: { orderId: updateStatusRequest.id },
+                })
+            );
+        }
+
+        if (!OrderStatusUtils.isNextStatusValid(orderFound.status, updateStatusRequest.status)) {
+            throw new BadRequestException(
+                this.i18n.t('error.order.invalidOrderStatusTransition', {
+                    args: { orderId: updateStatusRequest.id },
+                })
+            );
+        }
+
+        orderFound.status = updateStatusRequest.status;
+        return this.orderRepository.save(orderFound);
+    }
+
+
 }

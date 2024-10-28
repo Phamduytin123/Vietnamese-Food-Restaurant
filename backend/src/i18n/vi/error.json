@@ -9,17 +9,17 @@
     },
     "order": {
         "orderNotFound": "Không thể tìm thấy đơn hàng có id '{orderId}' trong hệ thống",
-        "orderCannotBeCancelled": "Đơn hàng với mã '{orderId}' không thể hủy vì cửa hàng đã xác nhận. Vui lòng liên hệ bộ phận hỗ trợ nếu cần thêm trợ giúp."
+        "orderCannotBeCancelled": "Đơn hàng với mã '{orderId}' không thể hủy vì cửa hàng đã xác nhận. Vui lòng liên hệ bộ phận hỗ trợ nếu cần thêm trợ giúp.",
+        "orderStatusCannotBeUpdated": "Đơn hàng với mã '{orderId}' không thể cập nhập trạng thái vì khách hàng đã hủy đơn hàng. Vui lòng xác nhận lại với khách hàng.",
+        "invalidOrderStatusTransition": "Đơn hàng với mã '{orderId}' không thể cập nhập vì thứ tự cập nhập trạng thái không hợp lệ."
     },
     "auth": {
         "accountPermissionDenied": "Bạn không có quyền truy cập vào đơn hàng với mã '{orderId}'"
     },
-<<<<<<< Updated upstream
     "category": {
-        "categoryNotFound" : "Không thể tìm thấy loại có categoryId {categoryId} trong hệ thống"
-=======
+        "categoryNotFound": "Không thể tìm thấy loại có categoryId {categoryId} trong hệ thống"
+    },
     "account": {
         "accountNotFound": "Không thể tìm thấy tài khoản vói Id '{accountId}' trong hệ thống"
->>>>>>> Stashed changes
     }
 }
