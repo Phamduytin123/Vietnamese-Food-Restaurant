@@ -14,7 +14,12 @@
     "auth": {
         "accountPermissionDenied": "You do not have permission to access the order with ID '{orderId}'"
     },
+<<<<<<< Updated upstream
     "category": {
         "categoryNotFound" : "The {categoryId} category is not found in the system"
+=======
+    "account": {
+        "accountNotFound": "Account with ID '{accountId}' not found in the system"
+>>>>>>> Stashed changes
     }
 }
