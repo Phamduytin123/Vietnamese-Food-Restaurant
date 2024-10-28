@@ -12,6 +12,7 @@ import { Cart } from './cart.entity';
 import { Order } from './order.entity';
 import { LikeItem } from './like.entity';
 import { Review } from './review.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class Account {
@@ -46,6 +47,7 @@ export class Account {
     })
     gender: AccountGenderEnum;
 
+    @Exclude()
     @Column()
     password: string;
 

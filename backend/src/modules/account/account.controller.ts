@@ -1,10 +1,11 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Get, Post, UseGuards, UseInterceptors } from '@nestjs/common';
 import { Account } from '../../entities';
 import { AccountService } from './account.service';
 // import { CurrentAccount } from '../../common/decorator/currentAccount.decorator';
-import { AccountRoleEnum, CurrentAccount } from '../../common';
+import { AccountRoleEnum, CurrentAccount, Lang } from '../../common';
 import { RoleGuard } from '../../common/guards/role.guard';
 import { AuthGuard } from '../../common/guards/auth.guard';
+import { AccountUpdateDto } from './dtos/accountUpdateDto';
 
 @Controller('accounts')
 export class AccountController {
@@ -29,5 +30,12 @@ export class AccountController {
     @UseGuards(AuthGuard)
     GetInforAccount(@CurrentAccount() account: Account) {
         return account
+    }
+    @Post('/update')
+    @UseInterceptors(ClassSerializerInterceptor)
+    @UseGuards(new RoleGuard([AccountRoleEnum.STAFF, AccountRoleEnum.CUSTOMER]))
+    @UseGuards(AuthGuard)
+    UpdateInforAccount(@Lang() lang: string, @CurrentAccount() currentAccount: Account, @Body() updateAccount: AccountUpdateDto) {
+        return this.accountService.updateAccount(lang, currentAccount, updateAccount);
     }
 }
