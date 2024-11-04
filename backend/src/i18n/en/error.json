@@ -21,5 +21,9 @@
     },
     "account": {
         "accountNotFound": "Account with ID '{accountId}' not found in the system"
+    },
+    "voucher": {
+      "voucherNotFound": "Voucher with ID {voucherId} not found.",
+      "voucherOutOfStock": "Voucher with ID {voucherId} is out of stock."
     }
 }

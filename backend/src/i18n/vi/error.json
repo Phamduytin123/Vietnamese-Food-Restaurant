@@ -21,5 +21,9 @@
     },
     "account": {
         "accountNotFound": "Không thể tìm thấy tài khoản vói Id '{accountId}' trong hệ thống"
+    },
+    "voucher": {
+      "voucherNotFound": "Không tìm thấy voucher có ID {voucherId}.",
+      "voucherOutOfStock": "Voucher có ID {voucherId} đã hết hàng."
     }
 }
