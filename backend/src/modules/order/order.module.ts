@@ -9,6 +9,7 @@ import {
     ItemSize,
     Order,
     OrderDetail,
+    Voucher
 } from '../../entities';
 import { AuthGuard } from '../../common/guards/auth.guard';
 import { AccountService } from '../account/account.service';
@@ -22,6 +23,7 @@ import { AccountService } from '../account/account.service';
             Cart,
             Item,
             ItemSize,
+            Voucher
         ]),
     ],
     controllers: [OrderController],

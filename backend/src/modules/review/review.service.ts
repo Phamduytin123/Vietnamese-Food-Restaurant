@@ -35,6 +35,18 @@ export class ReviewService {
             rating: body.rating,
         });
 
+        // Update the item's rating
+        const reviews = await this.reviewRepository.find({
+            where: { itemId: body.itemId },
+        });
+
+        // Calculate the new average rating
+        const totalRatings = reviews.reduce((sum, review) => sum + review.rating, 0);
+        const averageRating = totalRatings / reviews.length;
+
+        item.rating = averageRating;
+        await this.itemRepository.save(item);
+
         return review;
     }
 }

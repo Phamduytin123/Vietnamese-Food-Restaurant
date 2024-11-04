@@ -28,6 +28,7 @@ import { CloudinaryConfig } from './common/config/cloudinary.config';
 import { AdminItemModule } from './modules/admin/item/item.module';
 import { AdminOrderModule } from './modules/admin/order/order.module';
 import { AdminAccountModule } from './modules/admin/account/account.module';
+import { AdminVoucherModule } from './modules/admin/voucher/voucher.module';
 
 @Module({
     imports: [
@@ -63,6 +64,7 @@ import { AdminAccountModule } from './modules/admin/account/account.module';
         AdminItemModule,
         AdminOrderModule,
         AdminAccountModule,
+        AdminVoucherModule,
     ],
     controllers: [AppController],
     providers: [AppService, CloudinaryConfig],

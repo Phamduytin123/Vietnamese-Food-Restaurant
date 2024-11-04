@@ -16,6 +16,7 @@ import {
     ItemSize,
     Order,
     OrderDetail,
+    Voucher,
 } from '../../entities';
 import { OrderService } from '../order/order.service';
 import { MomoPaymentController } from './momo-payment.controller';
@@ -31,6 +32,7 @@ import { ZaloPaymentController } from './zalo-payment.controller';
             Cart,
             Item,
             ItemSize,
+            Voucher
         ]),
     ],
     controllers: [ZaloPaymentController, MomoPaymentController],
