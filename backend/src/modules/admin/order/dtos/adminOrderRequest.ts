@@ -3,12 +3,12 @@ import { i18nValidationMessage } from 'nestjs-i18n';
 import { OrderStatusEnum } from '../../../../common';
 
 export class AdminOrdersRequest {
-    @IsOptional()
-    @IsEnum(OrderStatusEnum, {
-        message: i18nValidationMessage('validation.orderStatusInvalid'),
-    })
-    status: OrderStatusEnum;
+  @IsOptional()
+  @IsEnum(OrderStatusEnum, {
+    message: i18nValidationMessage('validation.orderStatusInvalid'),
+  })
+  status: OrderStatusEnum;
 
-    @IsOptional()
-    date: Date;
+  @IsOptional()
+  date: Date;
 }

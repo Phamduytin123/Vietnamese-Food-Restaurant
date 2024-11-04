@@ -6,8 +6,8 @@ import { Account, Item, LikeItem } from '../../entities';
 import { AccountService } from '../account/account.service';
 
 @Module({
-  imports : [TypeOrmModule.forFeature([LikeItem, Account, Item])],
+  imports: [TypeOrmModule.forFeature([LikeItem, Account, Item])],
   providers: [LikeService, AccountService],
-  controllers: [LikeController]
+  controllers: [LikeController],
 })
 export class LikeModule {}

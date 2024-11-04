@@ -5,17 +5,17 @@ import { DataSource } from 'typeorm';
 const drinkData = require('./drink_data.json');
 
 export default class DrinkSeeder implements Seeder {
-    private dataSource: DataSource;
+  private dataSource: DataSource;
 
-    constructor(dataSource: DataSource) {
-        this.dataSource = dataSource;
-    }
+  constructor(dataSource: DataSource) {
+    this.dataSource = dataSource;
+  }
 
-    public async run(): Promise<void> {
-        const drinkRepo = this.dataSource.getRepository(Item);
+  public async run(): Promise<void> {
+    const drinkRepo = this.dataSource.getRepository(Item);
 
-        await drinkRepo.save(drinkData);
+    await drinkRepo.save(drinkData);
 
-        console.log('Seed data drink created');
-    }
+    console.log('Seed data drink created');
+  }
 }

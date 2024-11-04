@@ -1,11 +1,21 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Account } from '../../../entities';
 import { Like, Repository } from 'typeorm';
-import { AccountRoleEnum, clean, OrTypeOrm } from '../../../common';
+import {
+  AccountRoleEnum,
+  clean,
+  OrTypeOrm,
+  PasswordUtils,
+} from '../../../common';
 import { SearchAccount } from './dtos/searchAccount.request';
 import { UpdateAccount } from './dtos/updateAccount.request';
 import { I18nService } from 'nestjs-i18n';
+import type { CreateAccount } from './dtos/createAccount.request';
 
 @Injectable()
 export class AdminAccountService {
@@ -99,5 +109,51 @@ export class AdminAccountService {
     newAccount = await this.accountRepo.save(newAccount);
 
     return newAccount;
+  }
+
+  async createAccount(body: CreateAccount, avatar: string) {
+    const {
+      email,
+      password,
+      name,
+      displayName,
+      address,
+      tel,
+      gender,
+      isActive,
+      role,
+    } = body;
+    const existingAccount =  await this.accountRepo.findOne({
+      where: { email: email },
+    });
+
+    if (existingAccount) {
+      throw new BadRequestException(
+        this.i18n.t('error.account.emailAlreadyExists', {
+          args: { email: email },
+        })
+      );
+    }
+
+    const newAccount = this.accountRepo.create({
+      name: name,
+      displayName: displayName,
+      address: address,
+      tel: tel,
+      gender: gender,
+      role: role,
+      email: email,
+      isActive: isActive === 'true',
+      password: PasswordUtils.hashPassword(password),
+      avatar: avatar,
+    });
+
+    // Save the new account
+    const savedAccount = await this.accountRepo.save(newAccount);
+
+    // Remove password from the returned account object
+    const { password: _, ...accountWithoutPassword } = savedAccount;
+
+    return accountWithoutPassword;
   }
 }

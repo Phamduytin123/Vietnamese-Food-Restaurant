@@ -4,10 +4,10 @@ import { Controller, Get } from '@nestjs/common';
 
 @Controller('vouchers')
 export class VoucherController {
-    constructor(private readonly voucherService: VoucherService){}
+  constructor(private readonly voucherService: VoucherService) {}
 
-    @Get('/valid/')
-    async validVouchers(@Lang() lang:string){
-        return this.voucherService.getValidVoucher(lang)
-    }
+  @Get('/valid/')
+  async validVouchers(@Lang() lang: string) {
+    return this.voucherService.getValidVoucher(lang);
+  }
 }

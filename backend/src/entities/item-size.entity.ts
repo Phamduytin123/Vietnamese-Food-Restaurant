@@ -1,10 +1,10 @@
 import {
-    Column,
-    Entity,
-    JoinColumn,
-    ManyToOne,
-    OneToMany,
-    PrimaryGeneratedColumn,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Item } from './item.entity';
 import { Cart } from './cart.entity';
@@ -12,34 +12,34 @@ import { OrderDetail } from './order-detail.entity';
 
 @Entity()
 export class ItemSize {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    size_vi: string;
+  @Column()
+  size_vi: string;
 
-    @Column()
-    size_en: string;
+  @Column()
+  size_en: string;
 
-    @Column()
-    price: number;
+  @Column()
+  price: number;
 
-    @Column()
-    itemId: number;
+  @Column()
+  itemId: number;
 
-    @ManyToOne(() => Item, item => item.itemSizes)
-    @JoinColumn({ name: 'itemId' })
-    item: Item;
+  @ManyToOne(() => Item, item => item.itemSizes)
+  @JoinColumn({ name: 'itemId' })
+  item: Item;
 
-    @OneToMany(() => Cart, cart => cart.itemSize)
-    carts: Cart[];
+  @OneToMany(() => Cart, cart => cart.itemSize)
+  carts: Cart[];
 
-    @OneToMany(() => OrderDetail, orderDetail => orderDetail.itemSize)
-    orderDetails: OrderDetail[];
+  @OneToMany(() => OrderDetail, orderDetail => orderDetail.itemSize)
+  orderDetails: OrderDetail[];
 
-    getActualPrice(): number {
-        const discount = this.item.discount ?? 0;
-        const actualPrice = this.price * (1 - discount*0.01);
-        return actualPrice;
-    }
+  getActualPrice(): number {
+    const discount = this.item.discount ?? 0;
+    const actualPrice = this.price * (1 - discount * 0.01);
+    return actualPrice;
+  }
 }

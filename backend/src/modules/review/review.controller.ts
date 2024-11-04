@@ -8,15 +8,15 @@ import { ReviewRequest } from './dtos/ReviewRequest';
 
 @Controller('reviews')
 export class ReviewController {
-    constructor(private readonly reviewService: ReviewService) {}
+  constructor(private readonly reviewService: ReviewService) {}
 
-    @Post('')
-    @UseGuards(new RoleGuard([AccountRoleEnum.CUSTOMER]))
-    @UseGuards(AuthGuard)
-    async createReview(
-        @CurrentAccount() account: Account,
-        @Body() body: ReviewRequest
-    ) {
-        return this.reviewService.createReview(account, body);
-    }
+  @Post('')
+  @UseGuards(new RoleGuard([AccountRoleEnum.CUSTOMER]))
+  @UseGuards(AuthGuard)
+  async createReview(
+    @CurrentAccount() account: Account,
+    @Body() body: ReviewRequest
+  ) {
+    return this.reviewService.createReview(account, body);
+  }
 }

@@ -7,8 +7,8 @@ import { AuthGuard } from '../../../common/guards/auth.guard';
 import { AccountService } from '../../../modules/account/account.service';
 
 @Module({
-  imports : [TypeOrmModule.forFeature([Voucher, Account])],
+  imports: [TypeOrmModule.forFeature([Voucher, Account])],
   providers: [AdminVoucherService, AuthGuard, AccountService],
-  controllers: [AdminVoucherController]
+  controllers: [AdminVoucherController],
 })
 export class AdminVoucherModule {}

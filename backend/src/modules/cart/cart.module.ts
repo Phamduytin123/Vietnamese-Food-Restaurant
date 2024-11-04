@@ -1,8 +1,8 @@
 import {
-    MiddlewareConsumer,
-    Module,
-    NestModule,
-    RequestMethod,
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
 } from '@nestjs/common';
 import { CartController } from './cart.controller';
 import { CartService } from './cart.service';
@@ -13,8 +13,8 @@ import { AuthGuard } from '../../common/guards/auth.guard';
 import { AccountService } from '../account/account.service';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Cart, ItemSize, Account])],
-    controllers: [CartController],
-    providers: [CartService, AuthGuard, AccountService],
+  imports: [TypeOrmModule.forFeature([Cart, ItemSize, Account])],
+  controllers: [CartController],
+  providers: [CartService, AuthGuard, AccountService],
 })
 export class CartModule {}

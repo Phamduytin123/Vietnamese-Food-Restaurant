@@ -8,103 +8,102 @@ import { I18nService } from 'nestjs-i18n';
 
 @Injectable()
 export class AdminOrderService {
-    constructor(
-        @InjectRepository(Order)
-        private readonly orderRepository: Repository<Order>,
-        private readonly i18n: I18nService
-    ) {}
+  constructor(
+    @InjectRepository(Order)
+    private readonly orderRepository: Repository<Order>,
+    private readonly i18n: I18nService
+  ) {}
 
-    async getListOrder(query: AdminOrdersRequest, lang: string) {
-        const { date, status } = query;
+  async getListOrder(query: AdminOrdersRequest, lang: string) {
+    const { date, status } = query;
 
-        const queryBuilder = this.orderRepository.createQueryBuilder('order');
+    const queryBuilder = this.orderRepository.createQueryBuilder('order');
 
-        if (status) {
-            queryBuilder.andWhere('order.status = :status', { status });
-        }
-
-        if (date) {
-            // So sánh chỉ phần ngày của createdAt với ngày từ query
-            queryBuilder.andWhere('DATE(order.createdAt) = :date', { date });
-        }
-
-        // Thêm các quan hệ cần thiết
-        queryBuilder
-            .leftJoinAndSelect('order.account', 'account')
-            .leftJoinAndSelect('order.orderDetails', 'orderDetails')
-            .leftJoinAndSelect('orderDetails.itemSize', 'itemSize')
-            .leftJoinAndSelect('itemSize.item', 'item');
-
-        const listOrderFound = await queryBuilder.getMany();
-
-        const listOrder = listOrderFound.map(order => ({
-            ...order,
-            orderDetails: order.orderDetails.map(orderDetail => {
-                const { size_vi, size_en, ...itemSizeFilter } =
-                    orderDetail.itemSize;
-
-                return {
-                    ...orderDetail,
-                    itemSize: {
-                        ...itemSizeFilter,
-                        size: orderDetail.itemSize[`size_${lang}`], // Lấy kích thước theo ngôn ngữ
-                        item: ItemFilterUtils.filterResponseData(
-                            orderDetail.itemSize.item,
-                            lang
-                        ),
-                    },
-                };
-            }),
-        }));
-
-        return listOrder;
+    if (status) {
+      queryBuilder.andWhere('order.status = :status', { status });
     }
 
-    async getOrderDetail(id: number, lang: string) {
-        const orderFound = await this.orderRepository.findOne({
-            where: { id: id },
-            relations: [
-                'orderDetails',
-                'voucher',
-                'orderDetails.itemSize',
-                'orderDetails.itemSize.item',
-            ],
-        });
+    if (date) {
+      // So sánh chỉ phần ngày của createdAt với ngày từ query
+      queryBuilder.andWhere('DATE(order.createdAt) = :date', { date });
+    }
 
-        if (!orderFound) {
-            return new NotFoundException(
-                this.i18n.t('error.order.orderNotFound', {
-                    args: { orderId: id },
-                })
-            );
-        }
+    // Thêm các quan hệ cần thiết
+    queryBuilder
+      .leftJoinAndSelect('order.account', 'account')
+      .leftJoinAndSelect('order.orderDetails', 'orderDetails')
+      .leftJoinAndSelect('orderDetails.itemSize', 'itemSize')
+      .leftJoinAndSelect('itemSize.item', 'item');
 
-        const { name_vi, name_en, ...voucherFilter } = orderFound.voucher;
+    const listOrderFound = await queryBuilder.getMany();
 
-        const order = {
-            ...orderFound,
-            orderDetails: orderFound.orderDetails.map(orderDetailFound => {
-                const { size_en, size_vi, ...itemSizeFilter } =
-                    orderDetailFound.itemSize;
+    const listOrder = listOrderFound.map(order => ({
+      ...order,
+      orderDetails: order.orderDetails.map(orderDetail => {
+        const { size_vi, size_en, ...itemSizeFilter } = orderDetail.itemSize;
 
-                return {
-                    ...orderDetailFound,
-                    itemSize: {
-                        ...itemSizeFilter,
-                        size: orderDetailFound.itemSize[`size_${lang}`],
-                        item: ItemFilterUtils.filterResponseData(
-                            orderDetailFound.itemSize.item,
-                            lang
-                        ),
-                    },
-                };
-            }),
-            voucher: {
-                ...voucherFilter,
-                name: orderFound.voucher[`name_${lang}`],
-            },
+        return {
+          ...orderDetail,
+          itemSize: {
+            ...itemSizeFilter,
+            size: orderDetail.itemSize[`size_${lang}`], // Lấy kích thước theo ngôn ngữ
+            item: ItemFilterUtils.filterResponseData(
+              orderDetail.itemSize.item,
+              lang
+            ),
+          },
         };
+      }),
+    }));
 
-        return order;
+    return listOrder;
+  }
+
+  async getOrderDetail(id: number, lang: string) {
+    const orderFound = await this.orderRepository.findOne({
+      where: { id: id },
+      relations: [
+        'orderDetails',
+        'voucher',
+        'orderDetails.itemSize',
+        'orderDetails.itemSize.item',
+      ],
+    });
+
+    if (!orderFound) {
+      return new NotFoundException(
+        this.i18n.t('error.order.orderNotFound', {
+          args: { orderId: id },
+        })
+      );
     }
+
+    const { name_vi, name_en, ...voucherFilter } = orderFound.voucher;
+
+    const order = {
+      ...orderFound,
+      orderDetails: orderFound.orderDetails.map(orderDetailFound => {
+        const { size_en, size_vi, ...itemSizeFilter } =
+          orderDetailFound.itemSize;
+
+        return {
+          ...orderDetailFound,
+          itemSize: {
+            ...itemSizeFilter,
+            size: orderDetailFound.itemSize[`size_${lang}`],
+            item: ItemFilterUtils.filterResponseData(
+              orderDetailFound.itemSize.item,
+              lang
+            ),
+          },
+        };
+      }),
+      voucher: {
+        ...voucherFilter,
+        name: orderFound.voucher[`name_${lang}`],
+      },
+    };
+
+    return order;
+  }
 }

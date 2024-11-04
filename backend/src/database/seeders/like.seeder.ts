@@ -3,52 +3,52 @@ import { LikeItem } from '../../entities';
 import { DataSource } from 'typeorm';
 
 const likeDate = [
-    {
-        accountId : 1,
-        itemId: 1,
-    },
-    {
-        accountId : 1,
-        itemId: 2,
-    },
-    {
-        accountId : 1,
-        itemId: 3,
-    },
-    {
-        accountId : 1,
-        itemId: 4,
-    },
-    {
-        accountId : 1,
-        itemId: 5,
-    },
-    {
-        accountId : 2,
-        itemId: 6,
-    },
-    {
-        accountId : 2,
-        itemId: 2,
-    },
-    {
-        accountId : 2,
-        itemId: 3,
-    }
-]
+  {
+    accountId: 1,
+    itemId: 1,
+  },
+  {
+    accountId: 1,
+    itemId: 2,
+  },
+  {
+    accountId: 1,
+    itemId: 3,
+  },
+  {
+    accountId: 1,
+    itemId: 4,
+  },
+  {
+    accountId: 1,
+    itemId: 5,
+  },
+  {
+    accountId: 2,
+    itemId: 6,
+  },
+  {
+    accountId: 2,
+    itemId: 2,
+  },
+  {
+    accountId: 2,
+    itemId: 3,
+  },
+];
 
 export default class LikeSeeder implements Seeder {
-    private dataSource: DataSource;
+  private dataSource: DataSource;
 
-    constructor(dataSource: DataSource) {
-        this.dataSource = dataSource;
-    }
+  constructor(dataSource: DataSource) {
+    this.dataSource = dataSource;
+  }
 
-    public async run(): Promise<void> {
-        const likeRepo = this.dataSource.getRepository(LikeItem);
+  public async run(): Promise<void> {
+    const likeRepo = this.dataSource.getRepository(LikeItem);
 
-        await likeRepo.save(likeDate);
+    await likeRepo.save(likeDate);
 
-        console.log('Seed data like created');
-    }
+    console.log('Seed data like created');
+  }
 }

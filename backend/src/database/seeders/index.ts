@@ -15,37 +15,37 @@ import LikeSeeder from './like.seeder';
 dotenv.config();
 
 async function runSeeders() {
-    const dataSource = new DataSource({
-        type: 'mysql',
-        host: process.env.DB_HOST,
-        port: +process.env.DB_PORT,
-        username: process.env.DB_USERNAME,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME,
-        entities: Object.values(entities),
-    });
+  const dataSource = new DataSource({
+    type: 'mysql',
+    host: process.env.DB_HOST,
+    port: +process.env.DB_PORT,
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    entities: Object.values(entities),
+  });
 
-    await dataSource.initialize();
+  await dataSource.initialize();
 
-    const seeders = [
-        new AccountSeeder(dataSource),
-        new CategorySeeder(dataSource),
-        new FoodSeeder(dataSource),
-        new FoodSizeSeeder(dataSource),
-        new DrinkSeeder(dataSource),
-        new DrinkSizeSeeder(dataSource),
-        new ReviewSeeder(dataSource),
-        new VoucherSeeder(dataSource),
-        new LikeSeeder(dataSource),
-    ];
+  const seeders = [
+    new AccountSeeder(dataSource),
+    new CategorySeeder(dataSource),
+    new FoodSeeder(dataSource),
+    new FoodSizeSeeder(dataSource),
+    new DrinkSeeder(dataSource),
+    new DrinkSizeSeeder(dataSource),
+    new ReviewSeeder(dataSource),
+    new VoucherSeeder(dataSource),
+    new LikeSeeder(dataSource),
+  ];
 
-    for (const seeder of seeders) {
-        await seeder.run();
-    }
+  for (const seeder of seeders) {
+    await seeder.run();
+  }
 
-    // Đóng kết nối
-    await dataSource.destroy();
-    console.log('All seeders completed');
+  // Đóng kết nối
+  await dataSource.destroy();
+  console.log('All seeders completed');
 }
 
 runSeeders().catch(error => console.error(error));

@@ -1,14 +1,14 @@
 import { OrderPaymentMethodEnum, OrderStatusEnum } from '../common';
 
 import {
-    Column,
-    CreateDateColumn,
-    Entity,
-    JoinColumn,
-    ManyToOne,
-    OneToMany,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn,
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Account } from './account.entity';
 import { OrderDetail } from './order-detail.entity';
@@ -16,78 +16,78 @@ import { Voucher } from './voucher.entity';
 
 @Entity()
 export class Order {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    totalPrice: number;
+  @Column()
+  totalPrice: number;
 
-    @Column({
-        length: 10,
-    })
-    phoneNumber: string;
+  @Column({
+    length: 10,
+  })
+  phoneNumber: string;
 
-    @Column()
-    receiver: string;
+  @Column()
+  receiver: string;
 
-    @Column()
-    address: string;
+  @Column()
+  address: string;
 
-    @Column()
-    email: string;
+  @Column()
+  email: string;
 
-    @Column({
-        default: OrderPaymentMethodEnum.CASH,
-    })
-    paymentMethod: OrderPaymentMethodEnum;
+  @Column({
+    default: OrderPaymentMethodEnum.CASH,
+  })
+  paymentMethod: OrderPaymentMethodEnum;
 
-    @Column({
-        default: OrderStatusEnum.WAIT,
-    })
-    status: OrderStatusEnum;
+  @Column({
+    default: OrderStatusEnum.WAIT,
+  })
+  status: OrderStatusEnum;
 
-    @Column({
-        default: ''
-    })
-    reasonCancel: string;
+  @Column({
+    default: '',
+  })
+  reasonCancel: string;
 
-    @Column()
-    note: string;
+  @Column()
+  note: string;
 
-    @Column()
-    accountId: number;
+  @Column()
+  accountId: number;
 
-    @Column({
-        default : false
-    })
-    isPaid: boolean;
+  @Column({
+    default: false,
+  })
+  isPaid: boolean;
 
-    @Column({
-        nullable : true
-    })
-    paymentCode: string;
+  @Column({
+    nullable: true,
+  })
+  paymentCode: string;
 
-    @Column({
-        nullable: true,
-    })
-    voucherId: number;
+  @Column({
+    nullable: true,
+  })
+  voucherId: number;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdateDateColumn({
-        nullable: true,
-    })
-    updatedAt: Date;
+  @UpdateDateColumn({
+    nullable: true,
+  })
+  updatedAt: Date;
 
-    @ManyToOne(() => Account, account => account.orders)
-    @JoinColumn({ name: 'accountId' })
-    account: Account;
+  @ManyToOne(() => Account, account => account.orders)
+  @JoinColumn({ name: 'accountId' })
+  account: Account;
 
-    @OneToMany(() => OrderDetail, orderDetail => orderDetail.order)
-    orderDetails: OrderDetail[];
+  @OneToMany(() => OrderDetail, orderDetail => orderDetail.order)
+  orderDetails: OrderDetail[];
 
-    @ManyToOne(() => Voucher, voucher => voucher.orders)
-    @JoinColumn({ name: 'voucherId' })
-    voucher: Voucher;
+  @ManyToOne(() => Voucher, voucher => voucher.orders)
+  @JoinColumn({ name: 'voucherId' })
+  voucher: Voucher;
 }

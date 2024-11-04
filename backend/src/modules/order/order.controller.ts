@@ -1,13 +1,13 @@
 import { OrderService } from './order.service';
 import {
-    Body,
-    Controller,
-    Get,
-    Param,
-    Post,
-    Query,
-    UseFilters,
-    UseGuards,
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseFilters,
+  UseGuards,
 } from '@nestjs/common';
 import { AccountRoleEnum, CurrentAccount, Lang } from '../../common';
 import { AuthGuard } from '../../common/guards/auth.guard';
@@ -20,63 +20,61 @@ import { UpdateStatusDto } from './dtos/updateStatusDto';
 
 @Controller('/orders')
 export class OrderController {
-    constructor(private readonly orderService: OrderService) { }
+  constructor(private readonly orderService: OrderService) {}
 
-    @Post()
-    @UseGuards(new RoleGuard([AccountRoleEnum.CUSTOMER]))
-    @UseGuards(AuthGuard)
-    async createOrder(
-        @Lang() lang: string,
-        @CurrentAccount() account: Account,
-        @Body() orderReq: OrderRequest
-    ) {
-        return this.orderService.createOrder(lang, account, orderReq);
-    }
+  @Post()
+  @UseGuards(new RoleGuard([AccountRoleEnum.CUSTOMER]))
+  @UseGuards(AuthGuard)
+  async createOrder(
+    @Lang() lang: string,
+    @CurrentAccount() account: Account,
+    @Body() orderReq: OrderRequest
+  ) {
+    return this.orderService.createOrder(lang, account, orderReq);
+  }
 
-    @Get()
-    @UseGuards(new RoleGuard([AccountRoleEnum.CUSTOMER]))
-    @UseGuards(AuthGuard)
-    async getOrder(
-        @Lang() lang: string,
-        @CurrentAccount() account: Account,
-        @Query() query: OrdersRequest
-    ) {
-        return this.orderService.getOrders(lang, account, query);
-    }
+  @Get()
+  @UseGuards(new RoleGuard([AccountRoleEnum.CUSTOMER]))
+  @UseGuards(AuthGuard)
+  async getOrder(
+    @Lang() lang: string,
+    @CurrentAccount() account: Account,
+    @Query() query: OrdersRequest
+  ) {
+    return this.orderService.getOrders(lang, account, query);
+  }
 
-    @Get('/:id')
-    @UseGuards(new RoleGuard([AccountRoleEnum.CUSTOMER]))
-    @UseGuards(AuthGuard)
-    async getOrderDetail(
-        @Lang() lang: string,
-        @Param('id') id: number,
-        @CurrentAccount() account: Account,
-    ) {
-        return this.orderService.getOrderDetail(lang, id, account);
-    }
+  @Get('/:id')
+  @UseGuards(new RoleGuard([AccountRoleEnum.CUSTOMER]))
+  @UseGuards(AuthGuard)
+  async getOrderDetail(
+    @Lang() lang: string,
+    @Param('id') id: number,
+    @CurrentAccount() account: Account
+  ) {
+    return this.orderService.getOrderDetail(lang, id, account);
+  }
 
-    @Post('/updateStatus')
-    @UseGuards(new RoleGuard([AccountRoleEnum.STAFF, AccountRoleEnum.ADMIN]))
-    @UseGuards(AuthGuard)
-    async UpdateStatus(
-        @Lang() lang: string,
-        @Body() updateStatusRequest: UpdateStatusDto,
-    ) {
-        console.log(updateStatusRequest);
+  @Post('/updateStatus')
+  @UseGuards(new RoleGuard([AccountRoleEnum.STAFF, AccountRoleEnum.ADMIN]))
+  @UseGuards(AuthGuard)
+  async UpdateStatus(
+    @Lang() lang: string,
+    @Body() updateStatusRequest: UpdateStatusDto
+  ) {
+    console.log(updateStatusRequest);
 
-        return this.orderService.updateStatusOrder(lang, updateStatusRequest)
-    }
+    return this.orderService.updateStatusOrder(lang, updateStatusRequest);
+  }
 
-    @Post('/cancel')
-    @UseGuards(new RoleGuard([AccountRoleEnum.CUSTOMER]))
-    @UseGuards(AuthGuard)
-    async cancelOrder(
-        @Lang() lang: string,
-        @Body() cusCancelRequest: CusCancelRequest,
-        @CurrentAccount() account: Account,
-    ) {
-        return this.orderService.CancelOrderById(lang, cusCancelRequest, account)
-    }
-
-
+  @Post('/cancel')
+  @UseGuards(new RoleGuard([AccountRoleEnum.CUSTOMER]))
+  @UseGuards(AuthGuard)
+  async cancelOrder(
+    @Lang() lang: string,
+    @Body() cusCancelRequest: CusCancelRequest,
+    @CurrentAccount() account: Account
+  ) {
+    return this.orderService.CancelOrderById(lang, cusCancelRequest, account);
+  }
 }

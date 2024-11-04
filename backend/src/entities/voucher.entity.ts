@@ -1,52 +1,52 @@
 import {
-    Column,
-    CreateDateColumn,
-    Entity,
-    OneToMany,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn,
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Order } from './order.entity';
 
 @Entity()
 export class Voucher {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    name_vi: string;
+  @Column()
+  name_vi: string;
 
-    @Column()
-    name_en: string;
+  @Column()
+  name_en: string;
 
-    @Column()
-    code: string;
+  @Column()
+  code: string;
 
-    @Column()
-    discount: number;
+  @Column()
+  discount: number;
 
-    @Column()
-    minPrice: number;
+  @Column()
+  minPrice: number;
 
-    @Column()
-    startAt: Date;
+  @Column()
+  startAt: Date;
 
-    @Column()
-    endAt: Date;
+  @Column()
+  endAt: Date;
 
-    @Column({
-        default: 0,
-    })
-    count: number;
+  @Column({
+    default: 0,
+  })
+  count: number;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdateDateColumn({
-        nullable: true,
-    })
-    updatedAt: Date;
+  @UpdateDateColumn({
+    nullable: true,
+  })
+  updatedAt: Date;
 
-    @OneToMany(() => Order, order => order.voucher)
-    orders: Order[];
+  @OneToMany(() => Order, order => order.voucher)
+  orders: Order[];
 }
