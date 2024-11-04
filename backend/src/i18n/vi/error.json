@@ -25,6 +25,9 @@
   },
   "voucher": {
     "voucherNotFound": "Không tìm thấy voucher có ID {voucherId}.",
-    "voucherOutOfStock": "Voucher có ID {voucherId} đã hết hàng."
+    "voucherOutOfStock": "Voucher có ID {voucherId} đã hết hàng.",
+    "startAtMustBeLessThanEndAt" : "Ngày bắt đầu phải nhỏ hơn ngày kết thúc.",
+    "minPriceExceeded": "Tổng giá trị đơn hàng phải ít nhất {minPrice} để sử dụng voucher có ID {voucherId}.",
+    "voucherNotValid": "Voucher có ID {voucherId} không hợp lệ tại thời điểm này."
   }
 }

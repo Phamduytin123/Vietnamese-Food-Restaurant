@@ -25,6 +25,9 @@
   },
   "voucher": {
     "voucherNotFound": "Voucher with ID {voucherId} not found.",
-    "voucherOutOfStock": "Voucher with ID {voucherId} is out of stock."
+    "voucherOutOfStock": "Voucher with ID {voucherId} is out of stock.",
+    "startAtMustBeLessThanEndAt" : "The start date must be less than the end date.",
+    "minPriceExceeded": "The total price must be at least {minPrice} to use voucher with ID {voucherId}.",
+    "voucherNotValid": "Voucher with ID {voucherId} is not valid at this time."
   }
 }
