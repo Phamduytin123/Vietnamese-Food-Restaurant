@@ -56,6 +56,11 @@ export class Account {
     })
     role: AccountRoleEnum;
 
+    @Column({
+        default : false,
+    })
+    isActive : boolean;
+
     @CreateDateColumn()
     createdAt: Date;
 

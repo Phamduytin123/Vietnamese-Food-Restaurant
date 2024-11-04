@@ -41,6 +41,11 @@ export class AuthService {
         if (!isMatchPassword) {
             throw new BadRequestException('Invalid Credentials!');
         }
+
+        // check active
+        if (!accountByEmail.isActive) {
+            throw new BadRequestException('Account is inactive!');
+        }
         //generate jwt token
         const payload = {
             id: accountByEmail.id,
