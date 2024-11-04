@@ -8,11 +8,11 @@ import { I18nValidationExceptionFilter } from './common/filters/validation-excep
 dotenv.config();
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
-    app.useGlobalFilters(new I18nValidationExceptionFilter());
-    app.useGlobalPipes(new I18nValidationPipe());
-    app.useGlobalPipes(new ValidationPipe());
-    app.enableCors();
-    await app.listen(process.env.PORT);
+  const app = await NestFactory.create(AppModule);
+  app.useGlobalFilters(new I18nValidationExceptionFilter());
+  app.useGlobalPipes(new I18nValidationPipe());
+  app.useGlobalPipes(new ValidationPipe());
+  app.enableCors();
+  await app.listen(process.env.PORT);
 }
 bootstrap();

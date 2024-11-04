@@ -1,12 +1,12 @@
 import { DEFAULT_AVA, AccountGenderEnum, AccountRoleEnum } from '../common';
 
 import {
-    Column,
-    CreateDateColumn,
-    Entity,
-    OneToMany,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn,
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Cart } from './cart.entity';
 import { Order } from './order.entity';
@@ -16,68 +16,68 @@ import { Exclude } from 'class-transformer';
 
 @Entity()
 export class Account {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @Column({ nullable: true })
-    displayName: string;
+  @Column({ nullable: true })
+  displayName: string;
 
-    @Column({ nullable: true })
-    address: string;
+  @Column({ nullable: true })
+  address: string;
 
-    @Column()
-    email: string;
+  @Column()
+  email: string;
 
-    @Column({
-        length: 10,
-        nullable: true
-    })
-    tel: string;
+  @Column({
+    length: 10,
+    nullable: true,
+  })
+  tel: string;
 
-    @Column({
-        default: DEFAULT_AVA,
-    })
-    avatar: string;
+  @Column({
+    default: DEFAULT_AVA,
+  })
+  avatar: string;
 
-    @Column({
-        default: AccountGenderEnum.MALE,
-    })
-    gender: AccountGenderEnum;
+  @Column({
+    default: AccountGenderEnum.MALE,
+  })
+  gender: AccountGenderEnum;
 
-    @Exclude()
-    @Column()
-    password: string;
+  @Exclude()
+  @Column()
+  password: string;
 
-    @Column({
-        default: AccountRoleEnum.CUSTOMER,
-    })
-    role: AccountRoleEnum;
+  @Column({
+    default: AccountRoleEnum.CUSTOMER,
+  })
+  role: AccountRoleEnum;
 
-    @Column({
-        default : false,
-    })
-    isActive : boolean;
+  @Column({
+    default: false,
+  })
+  isActive: boolean;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdateDateColumn({
-        nullable: true,
-    })
-    updatedAt: Date;
+  @UpdateDateColumn({
+    nullable: true,
+  })
+  updatedAt: Date;
 
-    @OneToMany(() => Cart, cart => cart.account)
-    carts: Cart[];
+  @OneToMany(() => Cart, cart => cart.account)
+  carts: Cart[];
 
-    @OneToMany(() => Order, order => order.account)
-    orders: Order[];
+  @OneToMany(() => Order, order => order.account)
+  orders: Order[];
 
-    @OneToMany(() => LikeItem, like => like.account)
-    likes: LikeItem[];
+  @OneToMany(() => LikeItem, like => like.account)
+  likes: LikeItem[];
 
-    @OneToMany(() => Review, review => review.account)
-    reviews: Review[];
+  @OneToMany(() => Review, review => review.account)
+  reviews: Review[];
 }

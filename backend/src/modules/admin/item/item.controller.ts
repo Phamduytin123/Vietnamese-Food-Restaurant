@@ -1,10 +1,10 @@
 import {
-    Body,
-    Controller,
-    Post,
-    UploadedFiles,
-    UseGuards,
-    UseInterceptors,
+  Body,
+  Controller,
+  Post,
+  UploadedFiles,
+  UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AdminItemService } from './item.service';
 import { AuthGuard } from '../../../common/guards/auth.guard';
@@ -16,27 +16,27 @@ import { CreateItemReq } from './dtos/createItemReq';
 
 @Controller('/admin/items')
 export class AdminItemController {
-    constructor(
-        private readonly adminItemService: AdminItemService,
-        private readonly uploadService: UploadService
-    ) {}
+  constructor(
+    private readonly adminItemService: AdminItemService,
+    private readonly uploadService: UploadService
+  ) {}
 
-    @Post()
-    @UseGuards(new RoleGuard([AccountRoleEnum.ADMIN, AccountRoleEnum.STAFF]))
-    @UseGuards(AuthGuard)
-    @UseInterceptors(FilesInterceptor('images', 3))
-    async createItem(
-        @UploadedFiles() files: Express.Multer.File[],
-        @Body() body: CreateItemReq
-    ) {
-        const imagesLink = [];
+  @Post()
+  @UseGuards(new RoleGuard([AccountRoleEnum.ADMIN, AccountRoleEnum.STAFF]))
+  @UseGuards(AuthGuard)
+  @UseInterceptors(FilesInterceptor('images', 3))
+  async createItem(
+    @UploadedFiles() files: Express.Multer.File[],
+    @Body() body: CreateItemReq
+  ) {
+    const imagesLink = [];
 
-        // Duyệt qua từng file và upload
-        for (const file of files) {
-            const result = await this.uploadService.uploadImage(file);
-            imagesLink.push(result.url);
-        }
-
-        return this.adminItemService.createItem(imagesLink, body);
+    // Duyệt qua từng file và upload
+    for (const file of files) {
+      const result = await this.uploadService.uploadImage(file);
+      imagesLink.push(result.url);
     }
+
+    return this.adminItemService.createItem(imagesLink, body);
+  }
 }

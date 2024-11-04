@@ -3,31 +3,31 @@ import { OrderController } from './order.controller';
 import { OrderService } from './order.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
-    Account,
-    Cart,
-    Item,
-    ItemSize,
-    Order,
-    OrderDetail,
-    Voucher
+  Account,
+  Cart,
+  Item,
+  ItemSize,
+  Order,
+  OrderDetail,
+  Voucher,
 } from '../../entities';
 import { AuthGuard } from '../../common/guards/auth.guard';
 import { AccountService } from '../account/account.service';
 
 @Module({
-    imports: [
-        TypeOrmModule.forFeature([
-            Order,
-            OrderDetail,
-            Account,
-            Cart,
-            Item,
-            ItemSize,
-            Voucher
-        ]),
-    ],
-    controllers: [OrderController],
-    providers: [OrderService, AuthGuard, AccountService],
-    exports: [OrderService],
+  imports: [
+    TypeOrmModule.forFeature([
+      Order,
+      OrderDetail,
+      Account,
+      Cart,
+      Item,
+      ItemSize,
+      Voucher,
+    ]),
+  ],
+  controllers: [OrderController],
+  providers: [OrderService, AuthGuard, AccountService],
+  exports: [OrderService],
 })
 export class OrderModule {}

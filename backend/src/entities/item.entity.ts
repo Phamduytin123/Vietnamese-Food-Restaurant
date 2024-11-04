@@ -1,13 +1,13 @@
 import { ItemAvailabilityEnum } from '../common';
 import {
-    Column,
-    CreateDateColumn,
-    Entity,
-    JoinColumn,
-    ManyToOne,
-    OneToMany,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn,
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { ItemSize } from './item-size.entity';
 import { Category } from './category.entity';
@@ -16,139 +16,139 @@ import { Review } from './review.entity';
 
 @Entity()
 export class Item {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    name_vi: string;
+  @Column()
+  name_vi: string;
 
-    @Column()
-    name_en: string;
+  @Column()
+  name_en: string;
 
-    @Column({
-        default: 0,
-    })
-    discount: number;
+  @Column({
+    default: 0,
+  })
+  discount: number;
 
-    @Column({
-        nullable: true,
-    })
-    calories: number;
+  @Column({
+    nullable: true,
+  })
+  calories: number;
 
-    @Column({
-        nullable: true,
-    })
-    fat: number;
+  @Column({
+    nullable: true,
+  })
+  fat: number;
 
-    @Column({
-        nullable: true,
-    })
-    carbohydrates: number;
+  @Column({
+    nullable: true,
+  })
+  carbohydrates: number;
 
-    @Column({
-        nullable: true,
-    })
-    protein: number;
+  @Column({
+    nullable: true,
+  })
+  protein: number;
 
-    @Column({
-        nullable: true,
-    })
-    cholesterol: number;
+  @Column({
+    nullable: true,
+  })
+  cholesterol: number;
 
-    @Column({
-        nullable: true,
-    })
-    sodium: number;
+  @Column({
+    nullable: true,
+  })
+  sodium: number;
 
-    @Column({
-        nullable: true,
-    })
-    fiber: number;
+  @Column({
+    nullable: true,
+  })
+  fiber: number;
 
-    @Column()
-    description_vi: string;
+  @Column()
+  description_vi: string;
 
-    @Column()
-    description_en: string;
+  @Column()
+  description_en: string;
 
-    @Column({
-        default: ItemAvailabilityEnum.IN_STOCK,
-    })
-    availability: ItemAvailabilityEnum;
+  @Column({
+    default: ItemAvailabilityEnum.IN_STOCK,
+  })
+  availability: ItemAvailabilityEnum;
 
-    @Column({
-        type: 'float',
-        default: 5.0,
-    })
-    rating: number;
+  @Column({
+    type: 'float',
+    default: 5.0,
+  })
+  rating: number;
 
-    @Column({
-        type: 'varchar',
-        default: '[]',
-        length: 1000,
-    })
-    ingredients_vi: string;
+  @Column({
+    type: 'varchar',
+    default: '[]',
+    length: 1000,
+  })
+  ingredients_vi: string;
 
-    @Column({
-        type: 'varchar',
-        default: '[]',
-        length: 1000,
-    })
-    ingredients_en: string;
+  @Column({
+    type: 'varchar',
+    default: '[]',
+    length: 1000,
+  })
+  ingredients_en: string;
 
-    @Column()
-    unit_vi: string;
+  @Column()
+  unit_vi: string;
 
-    @Column()
-    unit_en: string;
+  @Column()
+  unit_en: string;
 
-    @Column({
-        type: 'varchar',
-        length: 1000,
-    })
-    images: string;
+  @Column({
+    type: 'varchar',
+    length: 1000,
+  })
+  images: string;
 
-    @Column({
-        nullable: true,
-    })
-    regional_vi: string;
+  @Column({
+    nullable: true,
+  })
+  regional_vi: string;
 
-    @Column({
-        nullable: true,
-    })
-    regional_en: string;
+  @Column({
+    nullable: true,
+  })
+  regional_en: string;
 
-    @Column({
-        default: true,
-    })
-    isFood: boolean;
+  @Column({
+    default: true,
+  })
+  isFood: boolean;
 
-    @Column({
-        default: false,
-    })
-    isDeleted: boolean;
+  @Column({
+    default: false,
+  })
+  isDeleted: boolean;
 
-    @Column()
-    categoryId: number;
+  @Column()
+  categoryId: number;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdateDateColumn({
-        nullable: true,
-    })
-    updatedAt: Date;
+  @UpdateDateColumn({
+    nullable: true,
+  })
+  updatedAt: Date;
 
-    @ManyToOne(() => Category, category => category.items)
-    @JoinColumn({ name: 'categoryId' })
-    category: Category;
+  @ManyToOne(() => Category, category => category.items)
+  @JoinColumn({ name: 'categoryId' })
+  category: Category;
 
-    @OneToMany(() => ItemSize, itemSize => itemSize.item)
-    itemSizes: ItemSize[];
+  @OneToMany(() => ItemSize, itemSize => itemSize.item)
+  itemSizes: ItemSize[];
 
-    @OneToMany(() => LikeItem, like => like.item)
-    likes: LikeItem[];
+  @OneToMany(() => LikeItem, like => like.item)
+  likes: LikeItem[];
 
-    @OneToMany(() => Review, review => review.item)
-    reviews: Review[];
+  @OneToMany(() => Review, review => review.item)
+  reviews: Review[];
 }

@@ -1,29 +1,30 @@
 {
-    "cart": {
-        "cartNotFound": "The '{cartId}' cart is not found in your cart",
-        "itemStatusIsNotInStock": "The item with {itemId} id is {itemStatus}, please choose another one"
-    },
-    "item": {
-        "itemSizeNotFound": "The '{itemId}' item size is not found in the system",
-        "itemNotFound": "The '{itemId}' item is not found in the system"
-    },
-    "order": {
-        "orderNotFound": "The '{orderId}' order is not found in the system",
-        "orderCannotBeCancelled": "The order with ID '{orderId}' cannot be canceled since the shop has already accepted it. Please contact support for further assistance if needed.",
-        "orderStatusCannotBeUpdated": "The order with ID '{orderId}' cannot be updated since the customer has already cancelled it. Please contact again with customer.",
-        "invalidOrderStatusTransition": "The order with ID '{orderId}' cannot be updated due to an invalid status update sequence."
-    },
-    "auth": {
-        "accountPermissionDenied": "You do not have permission to access the order with ID '{orderId}'"
-    },
-    "category": {
-        "categoryNotFound": "The {categoryId} category is not found in the system"
-    },
-    "account": {
-        "accountNotFound": "Account with ID '{accountId}' not found in the system"
-    },
-    "voucher": {
-      "voucherNotFound": "Voucher with ID {voucherId} not found.",
-      "voucherOutOfStock": "Voucher with ID {voucherId} is out of stock."
-    }
+  "cart": {
+    "cartNotFound": "The '{cartId}' cart is not found in your cart",
+    "itemStatusIsNotInStock": "The item with {itemId} id is {itemStatus}, please choose another one"
+  },
+  "item": {
+    "itemSizeNotFound": "The '{itemId}' item size is not found in the system",
+    "itemNotFound": "The '{itemId}' item is not found in the system"
+  },
+  "order": {
+    "orderNotFound": "The '{orderId}' order is not found in the system",
+    "orderCannotBeCancelled": "The order with ID '{orderId}' cannot be canceled since the shop has already accepted it. Please contact support for further assistance if needed.",
+    "orderStatusCannotBeUpdated": "The order with ID '{orderId}' cannot be updated since the customer has already cancelled it. Please contact again with customer.",
+    "invalidOrderStatusTransition": "The order with ID '{orderId}' cannot be updated due to an invalid status update sequence."
+  },
+  "auth": {
+    "accountPermissionDenied": "You do not have permission to access the order with ID '{orderId}'"
+  },
+  "category": {
+    "categoryNotFound": "The {categoryId} category is not found in the system"
+  },
+  "account": {
+    "accountNotFound": "Account with ID '{accountId}' not found in the system",
+    "emailAlreadyExists" : "This email is already existed in the system."
+  },
+  "voucher": {
+    "voucherNotFound": "Voucher with ID {voucherId} not found.",
+    "voucherOutOfStock": "Voucher with ID {voucherId} is out of stock."
+  }
 }

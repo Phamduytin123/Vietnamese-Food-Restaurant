@@ -35,6 +35,6 @@ import { AuthModule } from '../auth/auth.module';
   ],
   providers: [CustomMailerService],
   controllers: [AuthController],
-  exports: [CustomMailerService]
+  exports: [CustomMailerService],
 })
-export class CustomMailerModule { }
+export class CustomMailerModule {}

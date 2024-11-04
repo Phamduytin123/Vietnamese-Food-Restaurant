@@ -6,8 +6,8 @@ import { Account, Item, Review } from '../../entities';
 import { AccountService } from '../account/account.service';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Review, Account, Item])],
-    controllers: [ReviewController],
-    providers: [ReviewService, AccountService],
+  imports: [TypeOrmModule.forFeature([Review, Account, Item])],
+  controllers: [ReviewController],
+  providers: [ReviewService, AccountService],
 })
 export class ReviewModule {}

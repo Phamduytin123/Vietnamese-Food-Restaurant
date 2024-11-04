@@ -1,4 +1,4 @@
 export enum AccountGenderEnum {
-    MALE = 'male',
-    FEMALE = 'female',
+  MALE = 'male',
+  FEMALE = 'female',
 }

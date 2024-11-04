@@ -1,11 +1,11 @@
 {
-    "cart" : {
-        "removed" : "Delete cart with '{cartId}' id successfully"
-    },
-    "like" : {
-        "create" : {
-            "fail" : "Deleted like successfully",
-            "success" : "Create like successful"
-        }
+  "cart": {
+    "removed": "Delete cart with '{cartId}' id successfully"
+  },
+  "like": {
+    "create": {
+      "fail": "Deleted like successfully",
+      "success": "Create like successful"
     }
+  }
 }

@@ -1,11 +1,11 @@
 {
-    "cart" : {
-        "removed" : "Xóa giỏ hàng có id là '{cartId}' thành công"
-    },
-    "like" : {
-        "create" : {
-            "fail" : "Xóa lượt thích thành công",
-            "success" : "Tạo lượt thích thành công"
-        }
+  "cart": {
+    "removed": "Xóa giỏ hàng có id là '{cartId}' thành công"
+  },
+  "like": {
+    "create": {
+      "fail": "Xóa lượt thích thành công",
+      "success": "Tạo lượt thích thành công"
     }
+  }
 }

@@ -8,17 +8,17 @@ import { CustomMailerService } from '../mailer/mailer.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Account } from '../../entities';
 @Module({
-    imports: [
-        AccountModule,
-        CustomMailerModule,
-        JwtModule.register({
-            global: true,
-            signOptions: { expiresIn: '1d' },
-        }),
-        TypeOrmModule.forFeature([Account])
-    ],
-    providers: [AuthService],
-    controllers: [AuthController],
-    exports: [AuthService],
+  imports: [
+    AccountModule,
+    CustomMailerModule,
+    JwtModule.register({
+      global: true,
+      signOptions: { expiresIn: '1d' },
+    }),
+    TypeOrmModule.forFeature([Account]),
+  ],
+  providers: [AuthService],
+  controllers: [AuthController],
+  exports: [AuthService],
 })
-export class AuthModule { }
+export class AuthModule {}

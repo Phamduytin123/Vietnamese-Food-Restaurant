@@ -6,9 +6,9 @@ import { Account } from '../../entities';
 import { AuthGuard } from '../../common/guards/auth.guard';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Account])],
-    providers: [AuthGuard, AccountService],
-    controllers: [AccountController],
-    exports: [AccountService],
+  imports: [TypeOrmModule.forFeature([Account])],
+  providers: [AuthGuard, AccountService],
+  controllers: [AccountController],
+  exports: [AccountService],
 })
 export class AccountModule {}

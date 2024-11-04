@@ -12,7 +12,7 @@ import {
   ItemSize,
   Order,
   OrderDetail,
-  Voucher
+  Voucher,
 } from '../../entities';
 import { Repository } from 'typeorm';
 import { OrderRequest } from './dtos/orderRequest';

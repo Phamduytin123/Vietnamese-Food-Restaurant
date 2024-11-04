@@ -8,6 +8,6 @@ import { AccountService } from '../account/account.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Account, Order, Review])],
   controllers: [RevenueController],
-  providers: [RevenueService, AccountService]
+  providers: [RevenueService, AccountService],
 })
 export class RevenueModule {}

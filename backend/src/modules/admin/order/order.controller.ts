@@ -7,19 +7,19 @@ import { AdminOrdersRequest } from './dtos/adminOrderRequest';
 
 @Controller('/admin/orders')
 export class AdminOrderController {
-    constructor(private readonly adminOrderSerview: AdminOrderService) {}
+  constructor(private readonly adminOrderSerview: AdminOrderService) {}
 
-    @Get()
-    @UseGuards(new RoleGuard([AccountRoleEnum.ADMIN, AccountRoleEnum.STAFF]))
-    @UseGuards(AuthGuard)
-    getListOrder(@Query() query: AdminOrdersRequest, @Lang() lang: string) {
-        return this.adminOrderSerview.getListOrder(query, lang);
-    }
+  @Get()
+  @UseGuards(new RoleGuard([AccountRoleEnum.ADMIN, AccountRoleEnum.STAFF]))
+  @UseGuards(AuthGuard)
+  getListOrder(@Query() query: AdminOrdersRequest, @Lang() lang: string) {
+    return this.adminOrderSerview.getListOrder(query, lang);
+  }
 
-    @Get('/:id')
-    @UseGuards(new RoleGuard([AccountRoleEnum.ADMIN, AccountRoleEnum.STAFF]))
-    @UseGuards(AuthGuard)
-    getOrderDetail(@Param('id') id: number, @Lang() lang: string) {
-        return this.adminOrderSerview.getOrderDetail(id, lang);
-    }
+  @Get('/:id')
+  @UseGuards(new RoleGuard([AccountRoleEnum.ADMIN, AccountRoleEnum.STAFF]))
+  @UseGuards(AuthGuard)
+  getOrderDetail(@Param('id') id: number, @Lang() lang: string) {
+    return this.adminOrderSerview.getOrderDetail(id, lang);
+  }
 }

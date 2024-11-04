@@ -6,15 +6,12 @@ import { AuthGuard } from '../../common/guards/auth.guard';
 
 @Controller('revenue')
 export class RevenueController {
-    constructor(private readonly revenueService : RevenueService){}
+  constructor(private readonly revenueService: RevenueService) {}
 
-    @Get()
-    @UseGuards(new RoleGuard([AccountRoleEnum.ADMIN]))
-    @UseGuards(AuthGuard)
-    async getOrder(
-        @Lang() lang: string,
-        @Query() query : any
-    ) {
-        return this.revenueService.getRevenue(lang, query);
-    }
+  @Get()
+  @UseGuards(new RoleGuard([AccountRoleEnum.ADMIN]))
+  @UseGuards(AuthGuard)
+  async getOrder(@Lang() lang: string, @Query() query: any) {
+    return this.revenueService.getRevenue(lang, query);
+  }
 }

@@ -8,8 +8,8 @@ import { AuthGuard } from '../../../common/guards/auth.guard';
 import { AccountService } from '../../../modules/account/account.service';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Item, ItemSize, Account, Category])],
-    controllers: [AdminItemController],
-    providers: [AdminItemService, UploadService, AuthGuard, AccountService],
+  imports: [TypeOrmModule.forFeature([Item, ItemSize, Account, Category])],
+  controllers: [AdminItemController],
+  providers: [AdminItemService, UploadService, AuthGuard, AccountService],
 })
 export class AdminItemModule {}
