@@ -40,5 +40,14 @@
     "email_required": "Email is required.",
     "tel_required": "Phone number is required.",
     "password_required": "Password is required."
+  },
+  "voucher": {
+    "discount_min": "Discount must be at least 0.",
+    "discount_max": "Discount can't be greater than 100.",
+    "minPrice_min": "Minimum price must be at least 0.",
+    "startAt_invalid": "Start date must be a valid date.",
+    "endAt_invalid": "End date must be a valid date.",
+    "count_min": "Count must be at least 0.",
+    "voucherId_required" : "VoucherId is required."
   }
 }

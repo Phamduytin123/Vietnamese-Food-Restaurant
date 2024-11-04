@@ -40,5 +40,14 @@
     "email_required": "Email là bắt buộc.",
     "tel_required": "Số điện thoại là bắt buộc.",
     "password_required": "Mật khẩu là bắt buộc."
+  },
+  "voucher": {
+    "discount_min": "Giảm giá phải lớn hơn hoặc bằng 0%.",
+    "discount_max": "Giảm giá không thể lớn hơn 100%.",
+    "minPrice_min": "Giá tối thiểu phải lớn hơn hoặc bằng 0.",
+    "startAt_invalid": "Ngày bắt đầu phải là ngày hợp lệ.",
+    "endAt_invalid": "Ngày kết thúc phải là ngày hợp lệ.",
+    "count_min": "Số lượng phải lớn hơn hoặc bằng 0.",
+    "voucherId_required" : "Yêu cầu phải nhập Id của voucher vào."
   }
 }

@@ -121,6 +121,25 @@ export class OrderService {
           );
         }
 
+        // Check if the voucher's minPrice is less than or equal to the totalPrice
+        if (voucher.minPrice*1000 > totalPrice) {
+            return new BadRequestException(
+              this.i18n.t('error.voucher.minPriceExceeded', {
+                args: { voucherId: voucherId, minPrice: voucher.minPrice },
+              })
+            );
+          }
+  
+          // Check if the current date is within the voucher's startAt and endAt dates
+          const currentDate = new Date();
+          if (currentDate < voucher.startAt || currentDate > voucher.endAt) {
+            return new BadRequestException(
+              this.i18n.t('error.voucher.voucherNotValid', {
+                args: { voucherId: voucherId },
+              })
+            );
+          }
+
         // Decrement the voucher count
         voucher.count -= 1;
         await this.voucherRepository.save(voucher);
