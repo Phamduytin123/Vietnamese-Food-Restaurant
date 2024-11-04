@@ -27,6 +27,8 @@ import { UploadModule } from './modules/upload/upload.module';
 import { CloudinaryConfig } from './common/config/cloudinary.config';
 import { AdminItemModule } from './modules/admin/item/item.module';
 import { AdminOrderModule } from './modules/admin/order/order.module';
+import { AdminAccountModule } from './modules/admin/account/account.module';
+
 @Module({
     imports: [
         DatabaseModule,
@@ -60,6 +62,7 @@ import { AdminOrderModule } from './modules/admin/order/order.module';
         ConfigModule.forRoot(),
         AdminItemModule,
         AdminOrderModule,
+        AdminAccountModule,
     ],
     controllers: [AppController],
     providers: [AppService, CloudinaryConfig],

@@ -17,6 +17,7 @@ const accountData = [
         gender: AccountGenderEnum.MALE,
         password: PasswordUtils.hashPassword('12345678'),
         role: AccountRoleEnum.CUSTOMER,
+        isActive : true,
     },
     {
         name: 'Nguyen Van A',
@@ -27,6 +28,7 @@ const accountData = [
         gender: AccountGenderEnum.MALE,
         password: PasswordUtils.hashPassword('12345678'),
         role: AccountRoleEnum.CUSTOMER,
+        isActive : true,
     },
     {
         name: 'Tran Thi B',
@@ -37,6 +39,7 @@ const accountData = [
         gender: AccountGenderEnum.FEMALE,
         password: PasswordUtils.hashPassword('12345678'),
         role: AccountRoleEnum.CUSTOMER,
+        isActive : true,
     },
     {
         name: 'Le Van C',
@@ -47,6 +50,7 @@ const accountData = [
         gender: AccountGenderEnum.MALE,
         password: PasswordUtils.hashPassword('12345678'),
         role: AccountRoleEnum.CUSTOMER,
+        isActive : true,
     },
     {
         name: 'Le Tuan Nguyen Khoi',
@@ -57,6 +61,7 @@ const accountData = [
         gender: AccountGenderEnum.MALE,
         password: PasswordUtils.hashPassword('12345678'),
         role: AccountRoleEnum.ADMIN,
+        isActive : true,
     },
     {
         name: 'Pham Duy Tin',
@@ -67,6 +72,7 @@ const accountData = [
         gender: AccountGenderEnum.MALE,
         password: PasswordUtils.hashPassword('12345678'),
         role: AccountRoleEnum.STAFF,
+        isActive : true,
     },
     {
         name: 'Nguyen Hoang Nhat Minh',
@@ -77,6 +83,7 @@ const accountData = [
         gender: AccountGenderEnum.MALE,
         password: PasswordUtils.hashPassword('12345678'),
         role: AccountRoleEnum.STAFF,
+        isActive : true,
     },
 ];
 
