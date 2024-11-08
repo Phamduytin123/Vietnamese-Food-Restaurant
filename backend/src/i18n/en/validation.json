@@ -29,7 +29,8 @@
     "regional_vi_required": "Regional information in Vietnamese is required.",
     "regional_en_required": "Regional information in English is required.",
     "itemSizes_required": "Item sizes are required.",
-    "availability_invalid": "Availability of item must be a valid option."
+    "availability_invalid": "Availability of item must be a valid option.",
+    "item_id_required": "Item id is requierd"
   },
   "account": {
     "role_invalid": "Role of account must be a valid option ( customer, admin, staff ).",
@@ -48,6 +49,6 @@
     "startAt_invalid": "Start date must be a valid date.",
     "endAt_invalid": "End date must be a valid date.",
     "count_min": "Count must be at least 0.",
-    "voucherId_required" : "VoucherId is required."
+    "voucherId_required": "VoucherId is required."
   }
 }

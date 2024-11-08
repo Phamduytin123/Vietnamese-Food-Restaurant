@@ -129,7 +129,7 @@ export class AdminVoucherService {
       );
     }
 
-    // Update the voucher properties
+    // Create the voucher properties
     const newVoucher = this.voucherRepository.create(body);
 
     return this.voucherRepository.save(newVoucher);
