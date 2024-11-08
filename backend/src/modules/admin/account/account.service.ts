@@ -23,7 +23,7 @@ export class AdminAccountService {
     @InjectRepository(Account)
     private readonly accountRepo: Repository<Account>,
     private readonly i18n: I18nService
-  ) {}
+  ) { }
 
   async getAccounts(query: SearchAccount) {
     const { page, limit, txtSearch, role } = query;
@@ -123,7 +123,7 @@ export class AdminAccountService {
       isActive,
       role,
     } = body;
-    const existingAccount =  await this.accountRepo.findOne({
+    const existingAccount = await this.accountRepo.findOne({
       where: { email: email },
     });
 
@@ -155,5 +155,11 @@ export class AdminAccountService {
     const { password: _, ...accountWithoutPassword } = savedAccount;
 
     return accountWithoutPassword;
+  }
+  async findById(id: number) {
+    const account = await this.accountRepo.findOne({
+      where: { id: id }
+    });
+    return account;
   }
 }
