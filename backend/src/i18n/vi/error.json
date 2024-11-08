@@ -21,13 +21,14 @@
   },
   "account": {
     "accountNotFound": "Không thể tìm thấy tài khoản vói Id '{accountId}' trong hệ thống",
-    "emailAlreadyExists" : "Email này đã tồn tại trong hệ thống"
+    "emailAlreadyExists": "Email này đã tồn tại trong hệ thống"
   },
   "voucher": {
     "voucherNotFound": "Không tìm thấy voucher có ID {voucherId}.",
     "voucherOutOfStock": "Voucher có ID {voucherId} đã hết hàng.",
-    "startAtMustBeLessThanEndAt" : "Ngày bắt đầu phải nhỏ hơn ngày kết thúc.",
+    "startAtMustBeLessThanEndAt": "Ngày bắt đầu phải nhỏ hơn ngày kết thúc.",
     "minPriceExceeded": "Tổng giá trị đơn hàng phải ít nhất {minPrice} để sử dụng voucher có ID {voucherId}.",
-    "voucherNotValid": "Voucher có ID {voucherId} không hợp lệ tại thời điểm này."
+    "voucherNotValid": "Voucher có ID {voucherId} không hợp lệ tại thời điểm này.",
+    "voucherCodeExisted": "Voucher code {code} này đã tồn tại trong hệ thống"
   }
 }

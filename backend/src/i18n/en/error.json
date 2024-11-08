@@ -21,13 +21,14 @@
   },
   "account": {
     "accountNotFound": "Account with ID '{accountId}' not found in the system",
-    "emailAlreadyExists" : "This email is already existed in the system."
+    "emailAlreadyExists": "This email is already existed in the system."
   },
   "voucher": {
     "voucherNotFound": "Voucher with ID {voucherId} not found.",
     "voucherOutOfStock": "Voucher with ID {voucherId} is out of stock.",
-    "startAtMustBeLessThanEndAt" : "The start date must be less than the end date.",
+    "startAtMustBeLessThanEndAt": "The start date must be less than the end date.",
     "minPriceExceeded": "The total price must be at least {minPrice} to use voucher with ID {voucherId}.",
-    "voucherNotValid": "Voucher with ID {voucherId} is not valid at this time."
+    "voucherNotValid": "Voucher with ID {voucherId} is not valid at this time.",
+    "voucherCodeExisted": "This voucher code {code} was already existed in the system."
   }
 }

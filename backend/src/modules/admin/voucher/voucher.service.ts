@@ -5,6 +5,7 @@ import { Like, Repository } from 'typeorm';
 import { clean, OrTypeOrm } from '../../../common';
 import { UpdateVoucherDto } from './dtos/updateVoucher.request';
 import { I18nService } from 'nestjs-i18n';
+import { CreateVoucherDto } from './dtos/createVoucher.request';
 
 @Injectable()
 export class AdminVoucherService {
@@ -12,7 +13,7 @@ export class AdminVoucherService {
     @InjectRepository(Voucher)
     private readonly voucherRepository: Repository<Voucher>,
     private readonly i18n: I18nService
-  ) {}
+  ) { }
 
   async getVoucher(query: any, lang: string) {
     const { txtSearch } = query;
@@ -100,5 +101,37 @@ export class AdminVoucherService {
       ...restVoucher,
       name: updatedVoucher[`name_${lang}`],
     };
+  }
+  async createVoucher(body: CreateVoucherDto, lang: string) {
+    const {
+      code,
+      startAt,
+      endAt,
+    } = body;
+    // Find the existing voucher by code
+    const existingVoucher = await this.voucherRepository.findOne({
+      where: { code: code },
+    });
+
+    if (existingVoucher) {
+      throw new NotFoundException(
+        this.i18n.t('error.voucher.voucherCodeExisted', {
+          args: { code: code },
+        })
+      );
+    }
+
+    if (startAt && endAt && startAt >= endAt) {
+      throw new BadRequestException(
+        this.i18n.t('error.voucher.startAtMustBeLessThanEndAt', {
+          args: { voucherId: 999 },
+        })
+      );
+    }
+
+    // Update the voucher properties
+    const newVoucher = this.voucherRepository.create(body);
+
+    return this.voucherRepository.save(newVoucher);
   }
 }
