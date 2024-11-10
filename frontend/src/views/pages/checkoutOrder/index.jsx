@@ -25,19 +25,32 @@ const CheckoutOrder = () => {
   const [formValid, setFormValid] = useState(false);
   const [loading, setLoading] = useState(false);
   const location = useLocation();
-  const { cart } = location.state || {};
+  const { cart, voucher } = location.state || {};
 
-  const totalPrice = cart ? cart.reduce((acc, product) => acc + product.itemSize.price * product.quantity, 0) : 0;
+  const itemSizePrices = cart.map((product) => {
+    const itemSize = product.itemSize.item.itemSizes.find((itemSize) => product.itemSizeId === itemSize.id);
+    if (itemSize) {
+      const priceString = itemSize.price.replace(/[^0-9.]+/g, ''); // Loại bỏ các ký tự không phải số và dấu chấm
+      return parseFloat(priceString); // Chuyển đổi chuỗi thành số
+    }
+    return 0;
+  });
+
+  const totalPrice = cart ? cart.reduce((acc, product, index) => acc + itemSizePrices[index] * product.quantity, 0) : 0;
 
   const discount = cart
     ? cart.reduce(
-        (acc, product) => acc + product.itemSize.price * product.quantity * (product.itemSize.item.discount / 100),
+        (acc, product, index) =>
+          acc + itemSizePrices[index] * product.quantity * (product.itemSize.item.discount / 100),
         0,
       )
     : 0;
 
   // Tính tổng tiền cuối cùng
-  const finalTotal = totalPrice - discount;
+  let finalTotal = totalPrice - discount;
+  if (voucher) {
+    finalTotal *= 1 - voucher.discount / 100;
+  }
 
   useEffect(() => {
     // Lấy danh sách tỉnh thành
@@ -368,7 +381,7 @@ const CheckoutOrder = () => {
                       <div className="product-name">{product.itemSize.item.name}</div>
                       <div className="product-order">
                         <span className="count">{product.quantity} x </span>
-                        <span className="cost">{(1000 * product.itemSize.price).toLocaleString()}₫</span>
+                        <span className="cost">{(1000 * itemSizePrices).toLocaleString()}₫</span>
                       </div>
                     </div>
                   </div>
@@ -387,6 +400,15 @@ const CheckoutOrder = () => {
                 <div className="item-des">Giảm giá: </div>
                 <div className="item-val">{(1000 * discount).toLocaleString()}₫</div>
               </div>
+              {voucher && (
+                <div className="total-items">
+                  <div className="item-des">Voucher: </div>
+                  <div className="item-val">
+                    -{((1000 * (totalPrice - discount) * voucher.discount) / 100).toLocaleString()}₫({voucher.discount}
+                    %Off)
+                  </div>
+                </div>
+              )}
               <hr />
               <div className="grand-total">
                 <div className="item-des">Tổng tiền: </div>

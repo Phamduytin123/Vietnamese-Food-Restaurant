@@ -14,6 +14,10 @@ const cartAPI = {
         const url = `/carts/${id}`;
         return axiosClient.application.put(url, data);
     },
+    addCart: (data) => {
+        const url = '/carts';
+        return axiosClient.application.post(url, data);
+    },
 }
 
 export default cartAPI;

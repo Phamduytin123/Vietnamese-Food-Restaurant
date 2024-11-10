@@ -18,13 +18,13 @@ const ItemCarousel = ({ foodItems }) => {
   };
 
   return (
-    <div className="food-carousel">
+    <div className="food-carousel-wish">
       <button onClick={prevItems}>
         <img src={ICONS.arrow_left} alt="arrow left" />
       </button>
-      <div className="items-container">
+      <div className="items-container-wish">
         {foodItems.slice(currentIndex, currentIndex + itemsToShow).map((item, index) => (
-          <div className="food-item" key={index}>
+          <div className="food-item-wish" key={index}>
             <img src={item.image} alt={item.name} />
             <h5>{item.name}</h5>
             <p>{item.description}</p>

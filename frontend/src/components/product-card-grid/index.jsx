@@ -1,12 +1,33 @@
 import StarRatingComponent from 'react-star-rating-component';
 import { IMAGES } from '../../constants/images';
 import { ICONS } from '../../constants/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './index.scss';
 import { Link } from 'react-router-dom';
+import { useCart } from '../../contexts/CartContext';
+import wishlistAPI from '../../api/wishlistAPI';
+import LoadingOverlay from '../../components/loading_overlay';
+import { MdQuestionAnswer } from 'react-icons/md';
+import { set } from 'lodash';
 const ProductCardGrid = (props) => {
+  const { addToCart } = useCart();
   const { product } = props;
   const [isFavorite, setIsFavorite] = useState(false);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setIsFavorite(product.isLike);
+  }, [product]);
+  const setWish = async (data) => {
+    try {
+      setLoading(true);
+      const response = await wishlistAPI.setWish(data);
+      console.log('Set wish successfully: ', response);
+    } catch (error) {
+      console.log('Failed to set wish: ', error);
+    } finally {
+      setLoading(false);
+    }
+  };
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
     if (!isFavorite) {
@@ -22,8 +43,45 @@ const ProductCardGrid = (props) => {
     const formattedPrice = discountedPrice.toLocaleString('vi-VN') + ' VND';
     return formattedPrice;
   };
+
+  const handleAddToCart = async (event, product) => {
+    event.preventDefault();
+    const itemSize = product.itemSizes.map((itemSize) => itemSize.id)[0];
+    const data = {
+      itemSizes: [
+        {
+          itemSizeId: itemSize,
+          quantity: 1,
+        },
+      ],
+    };
+    const parent = event.currentTarget.closest('.product-card');
+    const src = parent.querySelector('.product-image').src;
+    const cart = document.querySelector('.cart-icon');
+
+    const parTop = parent.getBoundingClientRect().top + window.scrollY;
+    const parLeft = parent.getBoundingClientRect().left;
+
+    const img = document.createElement('img');
+    img.classList.add('img-product-fly');
+    img.src = src;
+    img.style.top = `${parTop}px`;
+    img.style.left = `${parLeft + parent.offsetWidth - 50}px`;
+    document.body.appendChild(img);
+
+    setTimeout(() => {
+      img.style.top = `${cart.getBoundingClientRect().top}px`;
+      img.style.left = `${cart.getBoundingClientRect().left}px`;
+
+      setTimeout(() => {
+        img.remove();
+        addToCart(data);
+      }, 1000);
+    }, 500);
+  };
   return (
     <div className="product-card">
+      <LoadingOverlay loading={loading} />
       <div className="label">
         <img src={IMAGES.label_hot} alt="Hot" className="label-background" />
         <span>HOT</span>
@@ -88,10 +146,10 @@ const ProductCardGrid = (props) => {
       </div>
       <div className="actions">
         <div className="icon-wrapper">
-          <img src={ICONS.cart_2} alt="Add to Cart" />
+          <img src={ICONS.cart_2} alt="Add to Cart" onClick={(event) => handleAddToCart(event, product)} />
         </div>
         <div className="icon-wrapper" onClick={toggleFavorite}>
-          <img src={isFavorite ? ICONS.fill_heart : ICONS.hearts} alt="Wishlist" />
+          <img src={isFavorite ? ICONS.fill_heart : ICONS.hearts} alt="Wishlist" onClick={() => setWish(product.id)} />
         </div>
       </div>
     </div>

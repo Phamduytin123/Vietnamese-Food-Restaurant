@@ -14,11 +14,14 @@ import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { IoLocationSharp } from 'react-icons/io5';
 import { IoMdPerson } from 'react-icons/io';
+import { Link } from 'react-router-dom';
 import './index.scss';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../contexts/CartContext';
 import { HistoryOutlined } from '@ant-design/icons';
 
 const Header = ({ userInfo }) => {
+  const { cartCount } = useCart();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profile, setProfile] = useState(null);
   const navigage = useNavigate();
@@ -46,7 +49,7 @@ const Header = ({ userInfo }) => {
     <div className="container-header">
       <Navbar expand="lg">
         <Container>
-          <Navbar.Brand href="#" className="logo-text">
+          <Navbar.Brand as={Link} to="/" className="logo-text">
             <img className="logo-header" src={ICONS.logo} alt="logo" />
             Vietnamese Cusine
           </Navbar.Brand>
@@ -57,7 +60,13 @@ const Header = ({ userInfo }) => {
                 <p className="deliver">Deliver to:</p>
                 <IoLocationSharp className="location-icon" />
                 <p className="cur-location">Current Location</p>
-                <a href="#">172/3 Nguyễn Lương Bằng - Liên Chiểu - Đà Nẵng</a>
+                <a
+                  href="https://www.google.com/maps/place/74+%C4%90.+Ng.+S%C4%A9+Li%C3%AAn,+Ho%C3%A0+Minh,+Li%C3%AAn+Chi%E1%BB%83u,+%C4%90%C3%A0+N%E1%BA%B5ng+50000,+Vi%E1%BB%87t+Nam/@16.075226,108.153784,17z/data=!3m1!4b1!4m6!3m5!1s0x314218d98afc036b:0x3c21d7bc0132950a!8m2!3d16.0752209!4d108.1563589!16s%2Fg%2F11mvq3jn29?hl=vi-VN&entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  172/3 Nguyễn Lương Bằng - Liên Chiểu - Đà Nẵng
+                </a>
               </Navbar.Text>
             </Nav>
             {/* Điều kiện hiển thị */}
@@ -81,7 +90,7 @@ const Header = ({ userInfo }) => {
                 {/* Cart icon */}
                 <div className="cart-icon position-relative me-3" style={{ cursor: 'pointer' }}>
                   <span className="cart-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    2
+                    {cartCount}
                   </span>
 
                   <IoCartOutline

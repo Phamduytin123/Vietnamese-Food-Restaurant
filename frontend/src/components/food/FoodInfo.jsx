@@ -7,40 +7,6 @@ import { columns } from './constant';
 import { ICONS } from '../../constants/icons';
 import ButtonPrimary from '../button/ButtonPrimary';
 import ItemCarousel from './ItemCarousel';
-const props = {
-  id: 1,
-  name_vi: 'Gà Rán',
-  name_en: 'Fried Chicken',
-  discount: 10,
-  calories: 250,
-  price: 30000,
-  fat: 15,
-  carbohydrates: 10,
-  protein: 20,
-  cholesterol: 70,
-  sodium: 500,
-  fiber: 2,
-  categoryId: 1,
-  description: `
-    Gà rán giòn tan, thơm ngon. Gà rán giòn tan, thơm ngon. Gà rán giòn tan, thơm ngon.
-    Gà rán giòn tan, thơm ngon. Gà rán giòn tan, thơm ngon. Gà rán giòn tan, thơm ngon.
-    Gà rán giòn tan, thơm ngon. Gà rán giòn tan, thơm ngon. Gà rán giòn tan, thơm ngon.
-    Gà rán giòn tan, thơm ngon. Gà rán giòn tan, thơm ngon. Gà rán giòn
-    `,
-  description: 'Crispy and delicious fried chicken.',
-  availability: 'AVAILABLE', // Assuming ItemAvailabilityEnum has values like AVAILABLE, UNAVAILABLE, etc.
-  rating: 4.5,
-  ingredients: ['gà', 'bột mì', 'gia vị'],
-  ingredients_en: JSON.stringify(['chicken', 'flour', 'spices']),
-  unit: 'phần',
-  unit_en: 'serving',
-  images: JSON.stringify(['image1.jpg', 'image2.jpg']),
-  regional: 'Miền Nam', // Assuming regional refers to the geographic region
-  isFood: true,
-  isDeleted: false,
-  createdAt: new Date(),
-  updatedAt: new Date(),
-};
 
 const foodItems = [
   {
@@ -147,7 +113,7 @@ const FoodInfo = ({ food }) => {
         <button
           className={`border-0  ${value <= 1 ? 'opacity-50' : ''}`}
           onClick={handleDecrease}
-          disabled={value <= 0}
+          disabled={value <= 1}
         >
           <img src={ICONS.minus} />
         </button>
@@ -160,7 +126,7 @@ const FoodInfo = ({ food }) => {
         </ButtonPrimary>
         <ButtonPrimary style={{ width: '35%' }} isActive={true}>
           Thêm vào giỏ hàng
-          <img style={{ marginLeft: '10px' }} src={ICONS.cart} />
+          <img style={{ marginLeft: '10px' }} src={ICONS.cart_2} />
         </ButtonPrimary>
       </div>
       <div class="d-flex flex-row align-items-center" style={{ marginTop: '14px' }}>

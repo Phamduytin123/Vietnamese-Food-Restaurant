@@ -14,7 +14,11 @@ const productAPI = {
       isDiscount,
       categoryId,
     };
-    return axiosClient.applicationNoAuth.get(url, { params });
+    return axiosClient.application.get(url, { params });
+  },
+  getItem: (id) => {
+    const url = `/items/${id}`;
+    return axiosClient.application.get(url);
   },
 };
 
