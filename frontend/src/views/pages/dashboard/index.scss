@@ -1,0 +1,97 @@
+.dashboard{
+  margin: 100px 0;
+  .dashboard-container {
+    margin-left: 20px;
+    width: 60%;
+    .dashboard-desc{
+      width: 50%;
+      margin-bottom: 20px;
+      span {
+        color: #2DAFF3;
+        white-space: nowrap;
+      }
+    }
+    .dashboard-item{
+      border: 1px solid #E4E7E9;
+      width: 33%;
+      min-height: 280px;
+      padding-bottom: 50px;
+      .dashboard-item--title {
+        border-bottom: 1px solid #E4E7E9;
+        font-size: 17px;
+        font-weight: 600;
+        color: #000000;
+      }
+      .dashboard-item--btn {
+        width: 80%;
+        position: absolute;
+        margin-top: 16px;
+        background-color: #fff;
+        color: #2DA5F3;
+        border: 2px solid #a1d8fd;
+        font-weight: 600;
+        padding: 12px;
+        bottom: 16px;
+        left: 16px;
+        border-radius: 2px;
+        &:hover {
+          background-color: #2DA5F3; /* Change background color on hover */
+          color: #fff; /* Change text color to white */
+          border: 2px solid #2DA5F3; /* Update border color on hover */
+        }
+      }
+
+      .userInfo-img{
+        width: 50px;
+        border-radius: 30px;
+      }
+    }
+    .dashboard-order{
+      border: 1px solid #E4E7E9;
+      width: 33%;
+      min-height: 280px;
+      .order-status{
+        display: flex;
+        align-items: center;
+        margin-top: 0;
+        padding: 10px;
+        &.total1{
+          display: flex;
+          background-color: rgb(90, 188, 253, 0.4);
+          margin-bottom: 0;
+        }
+        &.delivering{
+          margin-top: 12px;
+          background-color: rgba(252, 178, 153, 0.4);
+        }
+        &.finished{
+          margin-top: 12px;
+          background-color: rgb(109, 243, 100, 0.4);
+        }
+        .order-status--icon {
+          padding: 8px;
+          font-size: 50px;
+          border-radius: 4px;
+          background-color: #fff;
+          margin-right: 12px;
+          &.total1{
+            color: #2DA5F3; /* Thay đổi màu sắc theo nhu cầu */
+          }
+          &.delivering{
+            color: rgba(252, 178, 153);
+          }
+          &.finished{
+            color: #2DB224;
+          }
+        }
+      }
+    }
+  }
+}
+
+.text-gray{
+  color: #5F6C72;
+}
+.text-black{
+  color: #000000;
+}

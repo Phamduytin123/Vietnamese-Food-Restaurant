@@ -5,7 +5,7 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartCount, setCartCount] = useState(0);
 
-    const getCart = async () => {
+  const getCart = async () => {
     try {
       const response = await cartAPI.getCart();
       const totalQuantity = response.data.reduce((total, item) => total + item.quantity, 0);
@@ -29,13 +29,12 @@ export const CartProvider = ({ children }) => {
   const addToCart = async (data, countItemCart) => {
     setCartCount(cartCount + countItemCart);
     try {
-      // Gọi API để thêm sản phẩm vào giỏ hàng
       const response = await cartAPI.addCart(data);
       if (response.success) {
-        console.log("Add to cart successfully");
+        console.log('Add to cart successfully');
       }
     } catch (error) {
-      console.error("Error adding to cart:", error);
+      console.error('Error adding to cart:', error);
     }
   };
 

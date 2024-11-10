@@ -4,16 +4,19 @@ import Modal from 'react-modal';
 import { IMAGES } from '../../constants/images';
 import ButtonPrimary from '../button/ButtonPrimary';
 import ClipLoader from 'react-spinners/ClipLoader'; // Import spinner
-import modalStyles from './constant';
+import modalStyles, { modalInfoStyle } from './constant';
 import { ICONS } from '../../constants/icons';
+import modelAPI from '../../api/modelAPI';
+import ProductCardGrid from '../product-card-grid';
 
 const UploadModal = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
+  const [modalInfo, setModalInfo] = useState(false);
   const [imageURL, setImageURL] = useState(IMAGES.upload_image);
 
   const [loading, setLoading] = useState(false); // Thêm trạng thái loading
-
+  const [foodInfo, setFoodInfo] = useState();
   const fileUploadRef = useRef();
 
   const handleImageUpload = (event) => {
@@ -34,6 +37,30 @@ const UploadModal = () => {
       }, 1000);
     } else {
       alert('Please upload a valid image file (PNG, JPG, JPEG, WEBP).');
+    }
+  };
+
+  const fetchDetectAPI = async () => {
+    const file = fileUploadRef.current.files[0];
+    const formData = new FormData();
+    console.log(file);
+    formData.append('file', file);
+    if (!file) return;
+
+    setLoading(true);
+
+    try {
+      const response = await modelAPI.recognize(formData);
+      setFoodInfo(response.data);
+      // Xử lý phản hồi từ API
+      console.log(response);
+      setModalInfo(true);
+      // Đóng modal sau khi tải lên thành công
+      // closeModal();
+    } catch (error) {
+      console.error('Upload failed:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -127,13 +154,27 @@ const UploadModal = () => {
               style={{ marginRight: '0' }}
               isDisable={imageURL === IMAGES.upload_image}
               isActive={true}
-              onClick={closeModal}
+              onClick={fetchDetectAPI}
             >
               Done
             </ButtonPrimary>
           </div>
         </div>
       </Modal>
+      {modalInfo && (
+        <Modal
+          isOpen={modalInfo}
+          onRequestClose={() => {
+            setModalInfo(false);
+          }}
+          style={modalInfoStyle}
+          contentLabel="Example Modal"
+          overlayClassName="overlay"
+        >
+          <p className="modal-title">Món ăn được nhận diện: </p>
+          <ProductCardGrid product={foodInfo} />
+        </Modal>
+      )}
     </div>
   );
 };

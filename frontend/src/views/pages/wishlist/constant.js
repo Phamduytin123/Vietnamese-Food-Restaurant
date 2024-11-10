@@ -1,7 +1,8 @@
 import { IoIosRemoveCircleOutline } from 'react-icons/io';
 import { IoCartOutline } from 'react-icons/io5';
+import { Select } from 'antd';
 
-export const tableColumns = [
+export const tableColumns = (handleSizeChange, handleAddToCart, selectedSizes) => [
   {
     title: 'Tên',
     dataIndex: 'name',
@@ -9,7 +10,20 @@ export const tableColumns = [
     render: (text, record) => (
       <div className="d-flex align-items-center">
         <img src={record.image} className="wishlist-item-image" alt={text} />
-        <span className="wishlist-item-text">{text}</span>
+        <div className="d-flex flex-column align-items-start">
+          <span className="wishlist-item-text">{text}</span>
+          <Select
+            defaultValue={record.itemSizes[0]?.size}
+            style={{ width: 70, marginTop: 5, height: 20 }}
+            onChange={(value) => handleSizeChange(value, record.itemId)}
+          >
+            {record.itemSizes.map((size) => (
+              <Select.Option key={size.id} value={size.id}>
+                {size.size}
+              </Select.Option>
+            ))}
+          </Select>
+        </div>
       </div>
     ),
   },
@@ -49,14 +63,15 @@ export const tableColumns = [
     align: 'center',
     render: (text, record) => (
       <div className="d-flex justify-content-center align-items-center">
-        <btn
+        <button
           className={`d-flex justify-content-center align-items-center add-cart-btn ${
             record.availability === 'IN STOCK' ? '' : 'unactived'
           }`}
+          onClick={() => handleAddToCart(record.itemId, selectedSizes[record.itemId] || record.itemSizes[0]?.id)}
         >
           <p>ADD TO CART</p>
           <IoCartOutline className="sidebar-icon" />
-        </btn>
+        </button>
         <IoIosRemoveCircleOutline className="remove-btn" />
       </div>
     ),
