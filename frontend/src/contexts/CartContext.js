@@ -26,8 +26,8 @@ export const CartProvider = ({ children }) => {
       console.log('Failed to fetch cart: ', error);
     }
   };
-  const addToCart = async (data) => {
-    setCartCount(cartCount + 1);
+  const addToCart = async (data, countItemCart) => {
+    setCartCount(cartCount + countItemCart);
     try {
       // Gọi API để thêm sản phẩm vào giỏ hàng
       const response = await cartAPI.addCart(data);

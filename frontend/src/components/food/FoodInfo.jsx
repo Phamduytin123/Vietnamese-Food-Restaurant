@@ -7,7 +7,9 @@ import { columns } from './constant';
 import { ICONS } from '../../constants/icons';
 import ButtonPrimary from '../button/ButtonPrimary';
 import ItemCarousel from './ItemCarousel';
-
+import { toast } from 'react-toastify';
+import { useCart } from '../../contexts/CartContext';
+import { useNavigate } from 'react-router-dom';
 const foodItems = [
   {
     name: 'Mì Quảng',
@@ -42,10 +44,10 @@ const foodItems = [
   // Thêm các món ăn khác
 ];
 const FoodInfo = ({ food }) => {
-  console.log('Food Info:', food);
+  const { addToCart } = useCart();
   const [activeButton, setActiveButton] = useState(null); // State to track active button
   const [price, setPrice] = useState(food.minPrice);
-
+  const navigate = useNavigate();
   const handleClick = (size) => {
     setActiveButton(size);
     setPrice(food.itemSizes[size].price);
@@ -72,7 +74,77 @@ const FoodInfo = ({ food }) => {
       setValue(1);
     }
   };
+  const handleAddToCart = async (event) => {
+    event.preventDefault();
 
+    if (activeButton === null) {
+      toast.warning('Vui lòng chọn kích thước trước khi thêm vào giỏ hàng.');
+      return;
+    }
+
+    if (value < 1) {
+      toast.warning('Vui lòng chọn số lượng hợp lệ trước khi thêm vào giỏ hàng.');
+      return;
+    }
+
+    const itemSize = food.itemSizes[activeButton].id;
+
+    const data = {
+      itemSizes: [
+        {
+          itemSizeId: itemSize,
+          quantity: value,
+        },
+      ],
+    };
+
+    // Tiếp tục với quá trình thêm vào giỏ hàng
+    const parent = event.currentTarget.closest('.action-center');
+    const src = parent.querySelector('.hidden-image').src;
+    const cart = document.querySelector('.cart-icon');
+
+    const parTop = parent.getBoundingClientRect().top + window.scrollY;
+    const parLeft = parent.getBoundingClientRect().left;
+
+    const img = document.createElement('img');
+    img.classList.add('img-product-fly');
+    img.src = src;
+    img.style.top = `${parTop}px`;
+    img.style.left = `${parLeft + parent.offsetWidth - 50}px`;
+    document.body.appendChild(img);
+
+    setTimeout(() => {
+      img.style.top = `${cart.getBoundingClientRect().top}px`;
+      img.style.left = `${cart.getBoundingClientRect().left}px`;
+
+      setTimeout(() => {
+        img.remove();
+        addToCart(data, value);
+      }, 1000);
+    }, 500);
+  };
+
+  const handleBuy = () => {
+    if (activeButton === null) {
+      toast.warning('Vui lòng chọn kích thước trước khi mua.');
+      return;
+    }
+    if (value < 1) {
+      toast.warning('Vui lòng chọn số lượng hợp lệ trước khi mua.');
+      return;
+    }
+    const itemSize = food.itemSizes[activeButton].id;
+    const data = {
+      itemSizes: [
+        {
+          itemSizeId: itemSize,
+          quantity: value,
+        },
+      ],
+    };
+    addToCart(data, value);
+    navigate('/cart');
+  };
   return (
     <div className="container-info">
       <div class="d-flex justify-content-between align-items-center">
@@ -109,7 +181,7 @@ const FoodInfo = ({ food }) => {
           ))}
         </div>
       </div>
-      <div class="d-flex flex-row align-items-center" style={{ marginTop: '12px' }}>
+      <div class="d-flex flex-row align-items-center action-center" style={{ marginTop: '12px' }}>
         <button
           className={`border-0  ${value <= 1 ? 'opacity-50' : ''}`}
           onClick={handleDecrease}
@@ -121,12 +193,20 @@ const FoodInfo = ({ food }) => {
         <button className="border-0" onClick={handleIncrease}>
           <img src={ICONS.plus} />
         </button>
-        <ButtonPrimary style={{ marginLeft: '10px' }} className="" isActive={true}>
+        <ButtonPrimary style={{ marginLeft: '10px' }} className="" isActive={true} onClick={(event) => handleBuy()}>
           Mua
         </ButtonPrimary>
-        <ButtonPrimary style={{ width: '35%' }} isActive={true}>
+        <ButtonPrimary
+          className="add-cart"
+          style={{ width: '35%' }}
+          isActive={true}
+          onClick={(event) => handleAddToCart(event)}
+        >
           Thêm vào giỏ hàng
           <img style={{ marginLeft: '10px' }} src={ICONS.cart_2} />
+          <div style={{ display: 'none' }}>
+            <img src={food.images[0]} className="hidden-image" />
+          </div>
         </ButtonPrimary>
       </div>
       <div class="d-flex flex-row align-items-center" style={{ marginTop: '14px' }}>

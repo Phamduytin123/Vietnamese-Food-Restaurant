@@ -78,7 +78,7 @@ const ProductCardList = (props) => {
 
       setTimeout(() => {
         img.remove();
-        addToCart(data);
+        addToCart(data, 1);
       }, 1000);
     }, 500);
   };
