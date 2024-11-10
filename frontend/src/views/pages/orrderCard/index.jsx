@@ -31,9 +31,16 @@ const ShoppingCart = (props) => {
   const getCart = async () => {
     try {
       setLoading(true);
-      const response = await cartAPI.getCart();
-      console.log('Cart: ', response.data);
-      setCart(response.data);
+      const delay = 3000;
+
+      const timeoutPromise = new Promise((resolve) => setTimeout(resolve, delay));
+
+      const apiPromise = cartAPI.getCart().then((response) => {
+        console.log('Cart: ', response.data);
+        setCart(response.data);
+      });
+
+      await Promise.all([timeoutPromise, apiPromise]);
     } catch (error) {
       console.log('Failed to fetch cart: ', error);
     } finally {
@@ -189,7 +196,9 @@ const ShoppingCart = (props) => {
       setLoading(false);
     }
   };
-
+  const handleBack = () => {
+    navigate('/items');
+  };
   return (
     <div className="shopping-cart-container">
       <LoadingOverlay loading={loading} />
@@ -250,7 +259,7 @@ const ShoppingCart = (props) => {
           </div>
         ))}
         <div className="cart-footer">
-          <button className="back-button">
+          <button className="back-button" onClick={handleBack}>
             <FaArrowLeft />
             Trở lại
           </button>

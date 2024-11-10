@@ -35,7 +35,7 @@ const FoodDetail = () => {
             <FoodInfo food={product} />
           </div>
           <div className="d-flex justify-content-center">
-            <Reviews />
+            <Reviews reviews={product.reviews} />
           </div>
         </div>
       )}
