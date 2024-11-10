@@ -60,7 +60,7 @@
   }
 
   .sub-cost{
-    margin-right: 68px;
+    margin-right: 67px;
   }
 
   .sub-count{
@@ -81,16 +81,27 @@
   border-top: 1px solid #e4e7e9ff;
 
   .product{
-    min-width: 152px;
+    min-width: 139px;
   }
   .cost{
-    min-width: 100px;
+    min-width: 89px;
   }
   .size{
-    min-width: 52px;
+    min-width: 68px;
+    select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Thêm một số kiểu để select trông tốt hơn */
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+  }
   }
   .total{
-    min-width: 82px;
+    min-width: 100px;
   }
   .delete-product{
     width: 24px;
@@ -103,7 +114,6 @@
 .cart-item img {
   width: 71px;
   height: 63px;
-  object-fit: none;
 }
 
 .quantity-control {
@@ -254,6 +264,13 @@
         &:hover {
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Thêm đổ bóng khi hover
         }
+      }
+      select {
+        padding: 10px 14px !important;
+        margin-top: 12px !important;
+        margin-bottom: 8px !important;
+        width: 100% !important;
+        border: solid 1px #ccc !important;
       }
     }
   }

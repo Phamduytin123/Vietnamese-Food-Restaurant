@@ -12,6 +12,7 @@ import LoadableComponent from '../../components/loadable-components/loadable-com
 import CheckoutOrder from '../pages/checkoutOrder';
 import CheckoutSuccess from '../pages/checkoutSuccess';
 import ShoppingCart from '../pages/orrderCard';
+import { CartProvider } from '../../contexts/CartContext';
 const UserHomePage = LoadableComponent(() => import('../pages/homepage/index'));
 
 const ProductsPage = LoadableComponent(() => import('../pages/product-list/index'));
@@ -25,6 +26,7 @@ const AllRoutes = () => {
     });
   }, []);
   return (
+    <CartProvider>
     <Routes>
       {/* <Route path="/" element={<Navigate to={"/introduce"} />} /> */}
       {/* // public route  */}
@@ -40,6 +42,7 @@ const AllRoutes = () => {
         <Route path="/wishlist" element={<MainLayout component={Wishlist} />} />
       </Route>
     </Routes>
+    </CartProvider>
   );
 };
 

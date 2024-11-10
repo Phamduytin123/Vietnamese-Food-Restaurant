@@ -13,6 +13,11 @@
     background-color: #FA8232;
     color: #FFFFFF;
   }
+  &.actived:hover{
+    background-color: #e85a0d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
   &.disabled{
     background-color: #DEB7AA;
     border: solid 1px #DEB7AA;

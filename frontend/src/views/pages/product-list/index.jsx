@@ -105,6 +105,18 @@ const ProductList = () => {
       setCurrentPage(newPage);
     }
   };
+  const totalNumberOfFood = categories.reduce((total, categorie) => total + categorie.numberOfFood, 0);
+  const totalNumberOfHotDeal = hotdeals.reduce((total, hotdeal) => total + hotdeal.numberOfFood, 0);
+  const handleAllHotDealClick = (event) => {
+    setCurrentPage(1);
+    setCategoryId(null);
+    setIsDiscount(true);
+  };
+  const handleAllCategoryClick = (event) => {
+    setCurrentPage(1);
+    setCategoryId(null);
+    setIsDiscount(false);
+  };
   const handleCategoryClick = (event, categoryId) => {
     setCurrentPage(1);
     setCategoryId(categoryId);
@@ -164,6 +176,10 @@ const ProductList = () => {
         <div className="box">
           <h3>Hot Deals</h3>
           <ul>
+            <li onClick={(event) => handleAllHotDealClick(event)}>
+              Tất cả
+              <span className="count special">{totalNumberOfHotDeal}</span>
+            </li>
             {hotdeals.map((hotdeal) => (
               <li key={hotdeal.id} onClick={(event) => handleHotDealClick(event, hotdeal.id)}>
                 {hotdeal.name}
@@ -176,6 +192,10 @@ const ProductList = () => {
         <div className="box">
           <h3>Category</h3>
           <ul>
+            <li onClick={(event) => handleAllCategoryClick(event)}>
+              Tất cả
+              <span className="count special">{totalNumberOfFood}</span>
+            </li>
             {categories.map((categorie) => (
               <li onClick={(event) => handleCategoryClick(event, categorie.id)}>
                 {categorie.name}{' '}
