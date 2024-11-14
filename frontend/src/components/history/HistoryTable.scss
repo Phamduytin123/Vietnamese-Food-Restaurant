@@ -1,0 +1,24 @@
+.history-container{
+  border: 1px solid #E4E7E9;
+  .history-title{
+    margin-bottom: 0;
+    font-size: 16px;
+    padding: 16px;
+    font-weight: 550;
+    color: #000000;
+  }
+  .history-table {
+    .ant-table {
+      .ant-table-thead th,
+      .ant-table-tbody td {
+        border-radius: 0 !important;
+      }
+
+      .ant-table-thead th {
+        background-color: #F2F4F5;
+        color: #475156;
+      }
+    }
+  }
+
+}

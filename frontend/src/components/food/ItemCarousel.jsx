@@ -25,8 +25,10 @@ const ItemCarousel = ({ foodItems }) => {
       <div className="items-container-wish">
         {foodItems.slice(currentIndex, currentIndex + itemsToShow).map((item, index) => (
           <div className="food-item-wish" key={index}>
-            <img src={item.image} alt={item.name} />
-            <h5>{item.name}</h5>
+            <div className="d-flex flex-column align-items-center">
+              <img src={item.image} alt={item.name} style={{ width: '200px', height: '150px' }} />
+              <span className="fw-normal">{item.name}</span>
+            </div>
             <p>{item.description}</p>
           </div>
         ))}

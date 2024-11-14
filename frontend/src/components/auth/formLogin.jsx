@@ -22,6 +22,9 @@ const FormLogin = () => {
         displayName: res.data.displayName,
         address: res.data.address,
         avatar: res.data.avatar,
+        tel: res.data.tel,
+        gender: res.data.gender,
+        email: res.data.email,
       };
       if (accessToken) {
         localStorage.setItem('access_token', accessToken);
