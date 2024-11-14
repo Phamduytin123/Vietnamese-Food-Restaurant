@@ -36,6 +36,7 @@ export class ItemFilterUtils {
     }
 
     return clean<any>({
+      ...restItem,
       name: item[nameField],
       images: StringUtils.toArray(item.images),
       description: item[descriptionField],
@@ -47,7 +48,6 @@ export class ItemFilterUtils {
         : null,
       minPrice: item.itemSizes ? StringUtils.toMoneyString(min) : null,
       maxPrice: item.itemSizes ? StringUtils.toMoneyString(max) : null,
-      ...restItem,
       category: item.category
         ? {
             id: item.category.id,

@@ -202,12 +202,13 @@ export class OrderService {
   }
 
   async getOrders(lang: string, account: Account, query: OrdersRequest) {
+
     const conditions = clean({
       status: query.status,
-      isPaid: query.isPaid === 'true',
+      isPaid: query.isPaid ? query.isPaid === 'true' : null,
       accountId: account.id,
     });
-
+  
     const ordersFound = await this.orderRepository.find({
       where: conditions,
       relations: [
@@ -221,37 +222,41 @@ export class OrderService {
         createdAt: 'DESC',
       },
     });
-
+  
     const orders = ordersFound.map(orderFound => {
-      const { name_vi, name_en, ...voucherFilter } = orderFound.voucher;
-
+      // Only destructure voucher if it is not null
+      const voucher = orderFound.voucher
+        ? {
+            ...orderFound.voucher,
+            name: orderFound.voucher[`name_${lang}`],
+          }
+        : null;
+  
       return {
         ...orderFound,
         orderDetails: orderFound.orderDetails.map(orderDetailFound => {
-          const { size_en, size_vi, ...itemSizeFilter } =
-            orderDetailFound.itemSize;
-
+          const itemSize = orderDetailFound.itemSize
+            ? {
+                ...orderDetailFound.itemSize,
+                size: orderDetailFound.itemSize[`size_${lang}`],
+                item: ItemFilterUtils.filterResponseData(
+                  orderDetailFound.itemSize.item,
+                  lang
+                ),
+              }
+            : null;
+  
           return {
             ...orderDetailFound,
-            itemSize: {
-              ...itemSizeFilter,
-              size: orderDetailFound.itemSize[`size_${lang}`],
-              item: ItemFilterUtils.filterResponseData(
-                orderDetailFound.itemSize.item,
-                lang
-              ),
-            },
+            itemSize,
           };
         }),
-        voucher: {
-          ...voucherFilter,
-          name: orderFound.voucher[`name_${lang}`],
-        },
+        voucher,
       };
     });
-
+  
     return orders;
-  }
+  }  
 
   async getOrderDetail(lang: string, id: number, account: Account) {
     const orderFound = await this.orderRepository.findOne({

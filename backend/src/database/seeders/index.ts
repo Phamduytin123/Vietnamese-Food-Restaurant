@@ -11,6 +11,8 @@ import DrinkSizeSeeder from './drink-size.seeder';
 import ReviewSeeder from './review.seeder';
 import VoucherSeeder from './voucher.seeder';
 import LikeSeeder from './like.seeder';
+import OrderSeeder from './order.seeder';
+import OrderDetailSeeder from './order-detail.seeder';
 
 dotenv.config();
 
@@ -37,6 +39,8 @@ async function runSeeders() {
     new ReviewSeeder(dataSource),
     new VoucherSeeder(dataSource),
     new LikeSeeder(dataSource),
+    new OrderSeeder(dataSource),
+    new OrderDetailSeeder(dataSource),
   ];
 
   for (const seeder of seeders) {

@@ -29,6 +29,7 @@ import { AdminItemModule } from './modules/admin/item/item.module';
 import { AdminOrderModule } from './modules/admin/order/order.module';
 import { AdminAccountModule } from './modules/admin/account/account.module';
 import { AdminVoucherModule } from './modules/admin/voucher/voucher.module';
+import { HotItemModule } from './modules/hot-item/hot-item.module';
 
 @Module({
   imports: [
@@ -65,6 +66,7 @@ import { AdminVoucherModule } from './modules/admin/voucher/voucher.module';
     AdminOrderModule,
     AdminAccountModule,
     AdminVoucherModule,
+    HotItemModule,
   ],
   controllers: [AppController],
   providers: [AppService, CloudinaryConfig],
