@@ -39,7 +39,7 @@ export class ItemSize {
 
   getActualPrice(): number {
     const discount = this.item.discount ?? 0;
-    const actualPrice = this.price * (1 - discount * 0.01);
+    const actualPrice = this.price * (1 - discount * 0.01) * 1000;
     return actualPrice;
   }
 }

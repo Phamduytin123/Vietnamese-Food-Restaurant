@@ -47,11 +47,13 @@ export class Order {
   status: OrderStatusEnum;
 
   @Column({
-    default: '',
+    nullable: true,
   })
   reasonCancel: string;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   note: string;
 
   @Column()
