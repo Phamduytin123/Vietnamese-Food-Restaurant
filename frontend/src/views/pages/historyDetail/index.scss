@@ -1,0 +1,73 @@
+.history-detail{
+  margin: 100px 0;
+  .history-detail-container {
+    margin-left: 20px;
+    width: 60%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Đổ bóng */
+    transition: box-shadow 0.3s ease;
+    border-radius: 8px;
+    .history-title-box {
+      display: flex;
+      border: 1px solid #E4E7E9;
+      align-items: center;
+      .history-title{
+        margin-bottom: 0;
+        font-size: 16px;
+        padding: 16px;
+        font-weight: 550;
+        color: #000000;
+      }
+    }
+    .history-info {
+      .history-preview {
+        padding: 20px;
+        .history-preview-container{
+          padding: 20px;
+          background-color: rgb(247, 233, 158, 0.5);
+          display: flex;
+          justify-content: space-between;
+          border: solid 1px rgb(250, 130, 50, 0.3);
+          border-radius: 4px;
+          align-items: center;
+          .history-price {
+            display: flex;
+            align-items: center;
+            &.origin {
+              color: #9e9d9d; /* Màu xám trung bình */
+              text-decoration: line-through;
+              margin-right: 14px;
+            }
+            &.final {
+              font-size: 26px;
+              color: #FA8232;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+      .history-progress {
+        padding: 0 50px;
+        padding-bottom: 80px;
+      }
+      .history-products {
+      }
+    }
+    .history-item {
+      border-top: 1px solid #E4E7E9;
+      padding: 20px;
+      min-height: 200px;
+      width: 50%;
+
+      .history-item--title {
+        margin-bottom: 20px;
+        font-size: 17px;
+        font-weight: 600;
+        color: #000000;
+      }
+    }
+    .history-item:first-child {
+      border-right: 1px solid #E4E7E9;
+    }
+
+  }
+}

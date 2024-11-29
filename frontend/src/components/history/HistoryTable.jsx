@@ -3,13 +3,21 @@ import { Table, Button } from 'antd';
 import { format } from 'date-fns';
 import { FaArrowRight } from 'react-icons/fa';
 import './HistoryTable.scss';
+import { useNavigate } from 'react-router-dom';
 
-const columns = [
+const columns = (navigate) => [
   {
     title: 'Đơn hàng',
     key: 'product',
     render: (_, record) => (
-      <div className="d-flex align-items-center">
+      <div
+        className="d-flex align-items-center"
+        style={{
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis', // Thêm dấu "..." nếu văn bản quá dài
+        }}
+      >
         <img
           src={record.orderDetails[0].itemSize.item.images[0]}
           style={{ height: '40px', marginRight: '8px', borderRadius: '3px' }}
@@ -30,11 +38,11 @@ const columns = [
       switch (status) {
         case 'wait':
           displayText = 'Đang chờ';
-          textClass = 'text-warning';
+          textClass = 'text-muted';
           break;
         case 'packaging':
           displayText = 'Đóng gói';
-          textClass = 'text-primary';
+          textClass = 'text-warning';
           break;
         case 'cancel':
           displayText = 'Đã hủy';
@@ -50,7 +58,7 @@ const columns = [
           break;
         case 'done':
           displayText = 'Hoàn thành';
-          textClass = 'text-muted';
+          textClass = 'text-primary';
           break;
         default:
           displayText = status;
@@ -89,18 +97,20 @@ const columns = [
     key: 'action',
     align: 'center',
     render: (_, record) => (
-      <Button type="link" onClick={() => handleAction(record)}>
+      <Button type="link" onClick={() => handleAction(record, navigate)}>
         Xem chi tiết <FaArrowRight />
       </Button>
     ),
   },
 ];
 
-const handleAction = (record) => {
-  console.log('Chi tiết đơn hàng:', record);
+const handleAction = (record, navigate) => {
+  navigate(`/history/${record.id}`);
 };
 
 const HistoryTable = ({ dataSource }) => {
+  const navigate = useNavigate();
+
   const [currentPage, setCurrentPage] = useState(1);
 
   return (
@@ -109,7 +119,7 @@ const HistoryTable = ({ dataSource }) => {
       <Table
         className="history-table"
         dataSource={dataSource}
-        columns={columns}
+        columns={columns(navigate)}
         pagination={{
           current: currentPage,
           pageSize: 6,
