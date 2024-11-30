@@ -1,0 +1,10 @@
+.dashboard-history{
+  margin: 100px 0;
+  .dashboard-container {
+    margin-left: 20px;
+    width: 60%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Đổ bóng */
+    transition: box-shadow 0.3s ease;
+    border-radius: 8px;
+  }
+}

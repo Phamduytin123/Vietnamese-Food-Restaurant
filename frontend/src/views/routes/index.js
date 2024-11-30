@@ -14,6 +14,8 @@ import CheckoutSuccess from '../pages/checkoutSuccess';
 import ShoppingCart from '../pages/orrderCard';
 import { CartProvider } from '../../contexts/CartContext';
 import Dashboard from '../pages/dashboard';
+import History from '../pages/history';
+import HistoryDetail from '../pages/historyDetail';
 const UserHomePage = LoadableComponent(() => import('../pages/homepage/index'));
 
 const ProductsPage = LoadableComponent(() => import('../pages/product-list/index'));
@@ -42,6 +44,8 @@ const AllRoutes = () => {
           <Route path="/cart" element={<MainLayout component={ShoppingCart} />} />
           <Route path="/wishlist" element={<MainLayout component={Wishlist} />} />
           <Route path="/dashboard" element={<MainLayout component={Dashboard} />} />
+          <Route path="/history" element={<MainLayout component={History} />} />
+          <Route path="/history/:id" element={<MainLayout component={HistoryDetail} />} />
         </Route>
       </Routes>
     </CartProvider>

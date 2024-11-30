@@ -1,0 +1,26 @@
+.wishlist-item-image {
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
+  margin-left: 10px;
+  border-radius: 4px;
+}
+.wishlist-item-text {
+  font-weight: 600;
+  color: #223263;
+  .wishlist-item-size{
+    color: #000000;
+  }
+}
+.orderDetail-title {
+  padding: 20px 16px;
+  border-top: 1px solid #e4e3e3;
+  .orderDetail-text {
+    font-weight: 500;
+    margin: 0;
+  }
+  .orderDetail-length {
+    margin-left: 5px;
+    color: #8d8c8c;
+  }
+}

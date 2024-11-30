@@ -1,5 +1,5 @@
 import UserSidebar from '../../../components/sidebar/UserSidebar';
-import { Table } from 'antd';
+import { Spin, Table } from 'antd';
 import { ToastContainer, toast } from 'react-toastify';
 import { useCart } from '../../../contexts/CartContext';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,9 +14,11 @@ const Wishlist = () => {
   const [dataSource, setDataSource] = useState();
   const { addToCart } = useCart();
   const [selectedSizes, setSelectedSizes] = useState({}); // Trạng thái lưu selectedSizeId cho mỗi itemId
+  const [loading, setLoading] = useState();
   const navigate = useNavigate();
   const fetchWishlist = async () => {
     try {
+      setLoading(true);
       const item = await wishlistAPI.getWishlist();
       let data = item.data;
       setWishlist(
@@ -29,6 +31,7 @@ const Wishlist = () => {
           price: product.item.itemSizes[0]?.price,
         })),
       );
+      setLoading(false);
     } catch (error) {
       console.error('Error fetching Wishlists:', error);
     }
@@ -78,19 +81,23 @@ const Wishlist = () => {
 
   return (
     <div className="wishlist">
-      {wishlist && (
-        <div className="d-flex justify-content-center">
-          <UserSidebar activedLabel={3} />
-          <div className="wishlist-container">
+      <div className="d-flex justify-content-center">
+        <UserSidebar activedLabel={3} />
+        <div className="wishlist-container">
+          {loading ? (
+            <div className="d-flex justify-content-center align-items-center" style={{ height: '300px' }}>
+              <Spin size="large" />
+            </div>
+          ) : (
             <Table
               scroll={{ x: 400 }}
               dataSource={wishlist}
               columns={tableColumns(handleSizeChange, handleAddToCart, selectedSizes)}
               pagination={false}
             />
-          </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };
