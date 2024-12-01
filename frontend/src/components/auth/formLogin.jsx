@@ -25,11 +25,17 @@ const FormLogin = () => {
         tel: res.data.tel,
         gender: res.data.gender,
         email: res.data.email,
+        role: res.data.role,
       };
       if (accessToken) {
         localStorage.setItem('access_token', accessToken);
         localStorage.setItem('user_info', JSON.stringify(userInfo));
-        navigate('/');
+        // console.log(res.data.role !== 'admin' || res.data.role !== 'staff', res.data.role);
+        if (res.data.role === 'customer') {
+          navigate('/');
+        } else {
+          navigate('/admin/dashboard');
+        }
       } else {
         setTextError('* Login failed, no access token received');
       }

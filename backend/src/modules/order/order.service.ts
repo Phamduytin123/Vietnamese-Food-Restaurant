@@ -277,7 +277,12 @@ export class OrderService {
       );
     }
 
-    const { name_vi, name_en, ...voucherFilter } = orderFound.voucher;
+    const voucher = orderFound.voucher
+        ? {
+            ...orderFound.voucher,
+            name: orderFound.voucher[`name_${lang}`],
+          }
+        : null;
 
     const order = {
       ...orderFound,
@@ -297,10 +302,7 @@ export class OrderService {
           },
         };
       }),
-      voucher: {
-        ...voucherFilter,
-        name: orderFound.voucher[`name_${lang}`],
-      },
+      voucher,
     };
 
     return order;

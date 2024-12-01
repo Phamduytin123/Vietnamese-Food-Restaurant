@@ -1,0 +1,30 @@
+@import '../../constants/colors.scss';
+
+.admin-layout-content-container {
+  padding: 0px;
+  // background-color: white !important;
+  .ant-layout-sider-dark {
+    padding: 0px;
+  }
+  .admin-layout-logout-button {
+    background-color: $food-price-color !important;
+    color: $white-color !important;
+  }
+  .admin-layout-logout-button:hover {
+    background-color: $white-color !important;
+    color: $food-price-color !important;
+    border-color: $food-price-color !important;
+  }
+  .admin-layout-logout-button-container {
+    background-color: white;
+    padding-top: 20px;
+  }
+
+  .ant-layout-sider-trigger {
+    background-color: $food-price-color;
+  }
+
+  .admin-layout-slider-container {
+    // padding-top: 10px;
+  }
+}

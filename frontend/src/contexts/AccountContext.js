@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useMemo } from 'react'
+import { createContext, useState, useEffect, useMemo, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axiosClient from '../utils/axiosCustomize'
 import LoginAPI from '../api/LoginAPI'
@@ -49,6 +49,10 @@ export const AuthProvider = ({ children }) => {
             {children}
         </AccountContext.Provider>
     )
+}
+
+export const useAuth = ()=>{
+    return useContext(AccountContext)
 }
 
 export default AccountContext
