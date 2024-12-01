@@ -6,7 +6,6 @@ import { MdOutlineHistory } from 'react-icons/md';
 import { IoSettingsOutline, IoLogOutOutline } from 'react-icons/io5';
 import { useState, useEffect } from 'react';
 import { ICONS } from '../../constants/icons';
-import { IMAGES } from '../../constants/images';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -18,13 +17,14 @@ import { Link } from 'react-router-dom';
 import './index.scss';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../contexts/CartContext';
-import { HistoryOutlined } from '@ant-design/icons';
 
 const Header = ({ userInfo }) => {
   const { cartCount } = useCart();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profile, setProfile] = useState(null);
   const navigage = useNavigate();
+
+  console.log(userInfo);
 
   const handleLogout = () => {
     localStorage.removeItem('access_token');
@@ -49,10 +49,6 @@ const Header = ({ userInfo }) => {
     <div className="container-header">
       <Navbar expand="lg">
         <Container>
-          <Navbar.Brand as={Link} to="/" className="logo-text">
-            <img className="logo-header" src={ICONS.logo} alt="logo" />
-            Vietnamese Cusine
-          </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>

@@ -16,9 +16,14 @@ import { CartProvider } from '../../contexts/CartContext';
 import Dashboard from '../pages/dashboard';
 import History from '../pages/history';
 import HistoryDetail from '../pages/historyDetail';
+import AdminRoute from './admin-route';
+import CustomerRoute from './customer-route';
+import StaffRoute from './staff-route';
 const UserHomePage = LoadableComponent(() => import('../pages/homepage/index'));
-
 const ProductsPage = LoadableComponent(() => import('../pages/product-list/index'));
+const AdminDashBoardPage = LoadableComponent(() => import('../pages/admin-dashboard'));
+const AdminLayout = LoadableComponent(()=>import('../../components/layouts/AdminLayout'))
+
 
 const AllRoutes = () => {
   useEffect(() => {
@@ -47,6 +52,21 @@ const AllRoutes = () => {
           <Route path="/history" element={<MainLayout component={History} />} />
           <Route path="/history/:id" element={<MainLayout component={HistoryDetail} />} />
         </Route>
+
+        {/* // admin route  */}
+        <Route element={<AdminRoute />}>
+          <Route path="/admin/dashboard" element={<AdminLayout component={AdminDashBoardPage} />} />
+        </Route>
+
+        {/* // customer route  */}
+        <Route element={<CustomerRoute />}>
+        </Route>
+
+        {/* // staff route  */}
+        <Route element={<StaffRoute />}>
+          <Route path="/admin/dashboard" element={<AdminLayout component={AdminDashBoardPage} />} />
+        </Route>
+
       </Routes>
     </CartProvider>
   );
