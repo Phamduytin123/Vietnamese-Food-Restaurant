@@ -4,107 +4,20 @@ import { MdKeyboardArrowRight } from 'react-icons/md';
 import { BiFoodMenu } from 'react-icons/bi';
 import { IMAGES } from '../../../constants/images';
 import { ICONS } from '../../../constants/icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './index.scss';
 import Header from '../../../components/headers';
-
+import HotItemsAPI from '../../../api/hotItemAPI';
+import UploadModal from '../../../components/detect_modal/UploadModal';
+import RecommendModal from '../../../components/recommend_modal/RecommendModal';
+import { useNavigate } from 'react-router-dom';
 function HomePage() {
   const [startIndex, setStartIndex] = useState(0);
-
-  const items_popular = [
-    {
-      image: IMAGES.image_slide_test1,
-      name: 'Cheese Burger',
-      category: 'Burger Arena',
-      price: '$3.88',
-    },
-    {
-      image: IMAGES.image_slide_test2,
-      name: 'Toffe’s Cake',
-      category: 'Top Sticks',
-      price: '$4.00',
-    },
-    {
-      image: IMAGES.image_slide_test3,
-      name: 'Dancake',
-      category: 'Cake World',
-      price: '$1.99',
-    },
-    {
-      image: IMAGES.image_slide_test4,
-      name: 'Crispy Sandwitch',
-      category: 'Fastfood Dine',
-      price: '$3.00',
-    },
-    {
-      image: IMAGES.image_slide_test5,
-      name: 'Thai Soup',
-      category: 'Foody man',
-      price: '$2.79',
-    },
-    {
-      image: IMAGES.image_slide_test5,
-      name: 'Thai Soup',
-      category: 'Foody man',
-      price: '$2.79',
-    },
-    {
-      image: IMAGES.image_slide_test4,
-      name: 'Crispy Sandwitch',
-      category: 'Fastfood Dine',
-      price: '$3.00',
-    },
-    {
-      image: IMAGES.image_slide_test2,
-      name: 'Toffe’s Cake',
-      category: 'Top Sticks',
-      price: '$4.00',
-    },
-
-    {
-      image: IMAGES.image_slide_test2,
-      name: 'Toffe’s Cake',
-      category: 'Top Sticks',
-      price: '$4.00',
-    },
-
-    {
-      image: IMAGES.image_slide_test2,
-      name: 'Toffe’s Cake',
-      category: 'Top Sticks',
-      price: '$4.00',
-    },
-
-    {
-      image: IMAGES.image_slide_test2,
-      name: 'Toffe’s Cake',
-      category: 'Top Sticks',
-      price: '$4.00',
-    },
-
-    {
-      image: IMAGES.image_slide_test2,
-      name: 'Toffe’s Cake',
-      category: 'Top Sticks',
-      price: '$4.00',
-    },
-
-    {
-      image: IMAGES.image_slide_test2,
-      name: 'Toffe’s Cake',
-      category: 'Top Sticks',
-      price: '$4.00',
-    },
-
-    {
-      image: IMAGES.image_slide_test2,
-      name: 'Toffe’s Cake',
-      category: 'Top Sticks',
-      price: '$4.00',
-    },
-  ];
+  const [categories, setCategories] = useState([]);
+  const [hotItems, setHotItems] = useState([]);
+  const navigate = useNavigate();
   const foodItems = [
     { image: IMAGES.image_category1, name: 'BÁNH' },
     { image: IMAGES.image_category2, name: 'CÁC LOẠI BÚN' },
@@ -119,9 +32,29 @@ function HomePage() {
     { image: IMAGES.image_category5, name: 'Đồ uống 5' },
     { image: IMAGES.image_category6, name: 'Đồ uống 6' },
   ];
+  const fetchHotItems = async () => {
+    const response = await HotItemsAPI.getHotItems();
+    setHotItems(response.data);
+  };
+  useEffect(() => {
+    fetchHotItems();
+  }, []);
+  const handleOrderNow = (itemId) => {
+    navigate(`/food/${itemId}`);
+  };
+  const handelItems = () => {
+    navigate('/items');
+  };
+  function formatPriceRange(input) {
+    let formattedString = input.replace(' VND - ', ' ~ ');
+
+    formattedString = formattedString.replace(' VND', 'đ');
+
+    return formattedString;
+  }
   //   Slide Food
   const itemsToShow = 5;
-  const maxIndex = items_popular.length - itemsToShow;
+  const maxIndex = hotItems.length - itemsToShow;
   const handleNext = () => {
     if (startIndex < maxIndex) {
       setStartIndex(startIndex + 1);
@@ -237,18 +170,20 @@ function HomePage() {
                   transition: 'transform 0.5s ease-in-out',
                 }}
               >
-                {items_popular.map((item, index) => (
+                {hotItems.map((item, index) => (
                   <div className="card" key={index}>
-                    <img src={item.image} alt={item.name} className="card-image" />
+                    <img src={item.images[0]} alt={item.name} className="card-image" />
                     <div className="card-details">
                       <h3 className="card-name">{item.name}</h3>
                       <div className="card-category">
                         <BiFoodMenu />
-                        <span>{item.category}</span>
+                        <span>{item.regional}</span>
                       </div>
-                      <div className="card-price">{item.price}</div>
+                      <div className="card-price">{formatPriceRange(item.ammount_of_money)}</div>
                     </div>
-                    <button className="order-now-button">Order Now</button>
+                    <button className="order-now-button" onClick={() => handleOrderNow(item.id)}>
+                      Order Now
+                    </button>
                   </div>
                 ))}
               </div>
@@ -322,14 +257,8 @@ function HomePage() {
               khám phá ngay !!!
             </p>
             <div className="button-group">
-              <button className="detect-button">
-                <img src={ICONS.camera} alt="Camera" className="button-icon" />
-                Tìm kiếm bằng hình ảnh
-              </button>
-              <button className="suggest-button">
-                <img src={ICONS.lightbulb} alt="Lightbulb" className="button-icon" />
-                Gợi ý đồ ăn
-              </button>
+              <UploadModal className="detect-button" />
+              <RecommendModal className="suggest-button" />
             </div>
           </div>
         </div>
@@ -343,7 +272,7 @@ function HomePage() {
                     <h2 className="card-title">{item.title}</h2>
                     <p className="card-body">{item.body}</p>
                   </div>
-                  <button className="order-button">
+                  <button className="order-button" onClick={handelItems}>
                     Khám phá ngay <MdKeyboardArrowRight />
                   </button>
                 </div>
@@ -355,7 +284,7 @@ function HomePage() {
                     <h2 className="card-title">{item.title}</h2>
                     <p className="card-body">{item.body}</p>
                   </div>
-                  <button className="order-button">
+                  <button className="order-button" onClick={handelItems}>
                     Khám phá ngay <MdKeyboardArrowRight />
                   </button>
                 </div>

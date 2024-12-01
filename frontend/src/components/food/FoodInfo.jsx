@@ -10,43 +10,14 @@ import ItemCarousel from './ItemCarousel';
 import { toast } from 'react-toastify';
 import { useCart } from '../../contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
-const foodItems = [
-  {
-    name: 'Mì Quảng',
-    image:
-      'https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80',
-    description: 'Món ăn đặc sản của Quảng Nam với nước dùng thơm ngon.',
-  },
-  {
-    name: 'Bánh Dừa',
-    image:
-      'https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80',
-    description: 'Bánh ngọt giòn tan, rất thích hợp làm quà.',
-  },
-  {
-    name: 'Phở',
-    image:
-      'https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80',
-    description: 'Món ăn nổi tiếng của Việt Nam với nước dùng thanh mát.',
-  },
-  {
-    name: 'Bún Chả',
-    image:
-      'https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80',
-    description: 'Món ăn truyền thống Hà Nội với thịt nướng và bún.',
-  },
-  {
-    name: 'Chả Giò',
-    image:
-      'https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80',
-    description: 'Món ăn chiên giòn, rất ngon khi chấm với nước mắm.',
-  },
-  // Thêm các món ăn khác
-];
+import HotItemsAPI from '../../api/hotItemAPI';
+import { set } from 'lodash';
+
 const FoodInfo = ({ food }) => {
   const { addToCart } = useCart();
   const [activeButton, setActiveButton] = useState(null); // State to track active button
   const [price, setPrice] = useState(food.minPrice);
+  const [foodItems, setFoodItems] = useState([]);
   const navigate = useNavigate();
   const handleClick = (size) => {
     setActiveButton(size);
@@ -145,6 +116,13 @@ const FoodInfo = ({ food }) => {
     addToCart(data, value);
     navigate('/cart');
   };
+  useEffect(() => {
+    fetchHotItems();
+  }, []);
+  const fetchHotItems = async () => {
+    const response = await HotItemsAPI.getHotItems();
+    setFoodItems(response.data);
+  };
   return (
     <div className="container-info">
       <div class="d-flex justify-content-between align-items-center">
@@ -210,7 +188,7 @@ const FoodInfo = ({ food }) => {
         </ButtonPrimary>
       </div>
       <div class="d-flex flex-row align-items-center" style={{ marginTop: '14px' }}>
-        <span className="p-2 info-rcm-title">Những món ăn bạn có thể sẽ thích</span>
+        <span className="p-2 info-rcm-title">Những món ăn được ưa chuộng</span>
       </div>
       <div className="slide-container" style={{ margin: '0 12px' }}>
         <div>
