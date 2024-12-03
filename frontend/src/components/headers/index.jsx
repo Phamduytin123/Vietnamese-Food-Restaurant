@@ -5,7 +5,6 @@ import { RiStackLine } from 'react-icons/ri';
 import { MdOutlineHistory } from 'react-icons/md';
 import { IoSettingsOutline, IoLogOutOutline } from 'react-icons/io5';
 import { useState, useEffect } from 'react';
-import { ICONS } from '../../constants/icons';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -13,10 +12,10 @@ import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { IoLocationSharp } from 'react-icons/io5';
 import { IoMdPerson } from 'react-icons/io';
-import { Link } from 'react-router-dom';
 import './index.scss';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../contexts/CartContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Header = ({ userInfo }) => {
   const { cartCount } = useCart();
@@ -24,7 +23,7 @@ const Header = ({ userInfo }) => {
   const [profile, setProfile] = useState(null);
   const navigage = useNavigate();
 
-  console.log(userInfo);
+  // console.log(userInfo);
 
   const handleLogout = () => {
     localStorage.removeItem('access_token');
@@ -46,7 +45,7 @@ const Header = ({ userInfo }) => {
     getProfile();
   }, [localStorage.getItem('access_token')]);
   return (
-    <div className="container-header">
+    <div className="container-header position-sticky sticky-top">
       <Navbar expand="lg">
         <Container>
           <Navbar.Toggle aria-controls="navbarScroll" />
@@ -84,19 +83,22 @@ const Header = ({ userInfo }) => {
               // Nếu đã đăng nhập, hiển thị icon cart và user
               <div className="navbar-icons d-flex align-items-center">
                 {/* Cart icon */}
-                <div className="cart-icon position-relative me-3" style={{ cursor: 'pointer' }}>
-                  <span className="cart-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {cartCount}
-                  </span>
 
-                  <IoCartOutline
-                    className="cart-icon-img"
-                    alt="Cart"
-                    onClick={() => {
-                      navigage('/cart');
-                    }}
-                  />
-                </div>
+                {userInfo.role === 'customer' && (
+                  <div className="cart-icon position-relative me-3" style={{ cursor: 'pointer' }}>
+                    <span className="cart-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      {cartCount}
+                    </span>
+
+                    <IoCartOutline
+                      className="cart-icon-img"
+                      alt="Cart"
+                      onClick={() => {
+                        navigage('/cart');
+                      }}
+                    />
+                  </div>
+                )}
 
                 {/* User icon với Dropdown */}
                 <Dropdown align="end">

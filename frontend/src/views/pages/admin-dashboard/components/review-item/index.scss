@@ -1,0 +1,58 @@
+@import '../../../../../constants/colors.scss';
+
+.admin-dashboard-small-review {
+  &-container{
+    background-color: $white-color;
+    border-radius: 20px;
+    padding: 20px;
+  }
+  &-comment {
+    margin: 10px 0px;
+  }
+  &-star-container {
+    display: flex;
+    margin : 10px 0px;
+  }
+  &-item-container{
+    display: flex;
+    align-items: center;
+  }
+  &-item-image {
+    width: 65%;
+    object-fit: contain;
+    border-radius: 10px;
+  }
+  &-item-info-container {
+    width: 35%;
+    padding-left: 5px;
+  }
+  &-item-name {
+    color : $admin-dashboard-dark-green;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  &-item-regional {
+    color : $admin-dashboard-light-red;
+    font-weight: bold;
+  }
+
+}
+
+.admin-dashboard-small-review-info-user{
+  &-container{
+    display: flex;
+    align-items: center;  
+  }
+  &-avatar {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  &-name-container{
+    margin-left: 10px;
+  }
+  &-name {
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,68 @@
+@import '../../../constants/colors.scss';
+
+.admin-dashboard-container {
+  background-color: $super-light-gray;
+  width: 100%;
+  padding: 10px;
+}
+
+.admin-dashboard-title {
+  font-weight: bold;
+  margin: 20px 5px;
+}
+
+.admin-dashboard-line-chart {
+  height: 400px !important;
+}
+
+.admin-dashboard-chart-title,
+.admin-dashboard-table-title {
+  font-weight: bold;
+}
+
+.admin-dashboard-center-content-container {
+  margin: 20px 0px;
+}
+
+.admin-dashboard-chart-title {
+  color: $admin-dashboard-light-blue;
+}
+
+.admin-dashboard-table-title {
+  color: $admin-dashboard-light-green;
+}
+
+.admin-dashboard-chart-container,
+.admin-dashboard-table-container {
+  padding: 10px;
+}
+
+.admin-dashboard-center-content-item {
+  background-color: $white-color;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.admin-dashboard-review-container {
+  padding : 10px
+}
+
+.admin-dashboard-review-title {
+  font-weight: bold;
+}
+
+.admin-dash-board-review-button {
+  background-color: $white-color !important;
+  color : $admin-dashboard-dark-green !important;
+  border-radius: 50%;
+  margin : 0px 5px;
+}
+
+.admin-dash-board-review-button:hover {
+  background-color: $admin-dashboard-dark-green !important;
+  color : $white-color !important;
+}
+
+.admin-dashboard-review-item-container{
+  padding : 10px
+}

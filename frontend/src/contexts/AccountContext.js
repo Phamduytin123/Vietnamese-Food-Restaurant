@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect, useMemo, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axiosClient from '../utils/axiosCustomize'
-import LoginAPI from '../api/LoginAPI'
 const AccountContext = createContext({})
 
 export const AuthProvider = ({ children }) => {
@@ -17,28 +16,14 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         if ( token !== 'null') {
-            // Set authenticate token to axios
             axiosClient.application.defaults.headers.common[
                 'Authorization'
             ] = `Bearer ${token}`
-
-            LoginAPI.login()
-                .then ((response)=> {
-                    setAccount(response.data)
-                    localStorage.setItem(
-                        'user_info',
-                        JSON.stringify( response.data),
-                    )
-                })
-                .catch((error) => {
-                                console.log(error)
-                })
-
         } else {
             // User logout
             delete axiosClient.application.defaults.headers.common['Authorization'];
 
-            setAccount('null');
+            setAccount(null);
             localStorage.removeItem('access_token')
             localStorage.removeItem('user_info')
         }

@@ -4,11 +4,11 @@ import  {useAuth} from '../../contexts/AccountContext.js';
 
 const AdminRoute = () => {
   const { account } = useAuth();
-
-  if (!account) return <Navigate to='/' />;
-
+  
+  if (!account) return <Navigate to='/' />
+  
   if (account.role !== "admin") return <Navigate to='/' />;
-
+  
   return <Outlet />;
 };
 

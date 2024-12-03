@@ -1,13 +1,23 @@
 $background-overlay-color__orange: (241, 114, 40, 0.5);
-$white-color: #FFFFFF;
+$white-color: #ffffff;
+$super-light-gray: #ebecf1;
+
 //login var
-$text-color__black: #191C1F;
-$text-color__gray: #77878F;
+$text-color__black: #191c1f;
+$text-color__gray: #77878f;
 $form-data-background-color: #f6fafc;
 
 //food
-$food-info-container-border-color: #FF642F;
-$food-name-color: #1B3764;
-$food-info-container-background-color: #EEF1F4;
-$food-price-color: #FF642F;
-$background-color__gray: #EEEEEE;
+$food-info-container-border-color: #ff642f;
+$food-name-color: #1b3764;
+$food-info-container-background-color: #eef1f4;
+$food-price-color: #ff642f;
+$background-color__gray: #eeeeee;
+
+// admin-dashboard
+$admin-dashboard-light-blue: #8280ff;
+$admin-dashboard-light-yellow: #fec53d;
+$admin-dashboard-light-green: #4ad991;
+$admin-dashboard-light-red: #ff9066;
+$admin-dashboard-dark-green: #00B074;
+$admin-dashboard-star-yellow : #F7C604;
