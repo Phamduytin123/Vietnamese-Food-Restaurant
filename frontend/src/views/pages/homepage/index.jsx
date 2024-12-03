@@ -1,4 +1,3 @@
-import Footer from '../../../components/footers';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { BiFoodMenu } from 'react-icons/bi';
@@ -8,14 +7,12 @@ import { useState, useEffect } from 'react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './index.scss';
-import Header from '../../../components/headers';
 import HotItemsAPI from '../../../api/hotItemAPI';
 import UploadModal from '../../../components/detect_modal/UploadModal';
 import RecommendModal from '../../../components/recommend_modal/RecommendModal';
 import { useNavigate } from 'react-router-dom';
 function HomePage() {
   const [startIndex, setStartIndex] = useState(0);
-  const [categories, setCategories] = useState([]);
   const [hotItems, setHotItems] = useState([]);
   const navigate = useNavigate();
   const foodItems = [
@@ -33,8 +30,12 @@ function HomePage() {
     { image: IMAGES.image_category6, name: 'Đồ uống 6' },
   ];
   const fetchHotItems = async () => {
-    const response = await HotItemsAPI.getHotItems();
-    setHotItems(response.data);
+    try {
+      const response = await HotItemsAPI.getHotItems();
+      setHotItems(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     fetchHotItems();

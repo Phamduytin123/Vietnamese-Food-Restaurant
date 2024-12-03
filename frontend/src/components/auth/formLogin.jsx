@@ -1,8 +1,8 @@
-import styles from './FormAuth.scss';
 import { ICONS } from '../../constants/icons';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginAPI from '../../api/LoginAPI';
+import { useAuth } from '../../contexts/AccountContext';
 
 const FormLogin = () => {
   const navigate = useNavigate();
@@ -12,6 +12,8 @@ const FormLogin = () => {
 
   const [email, setEmail] = useState();
   const [textError, setTextError] = useState();
+
+  const { setAccount } = useAuth();
 
   const fetchLogin = async (formData) => {
     try {
@@ -30,7 +32,7 @@ const FormLogin = () => {
       if (accessToken) {
         localStorage.setItem('access_token', accessToken);
         localStorage.setItem('user_info', JSON.stringify(userInfo));
-        // console.log(res.data.role !== 'admin' || res.data.role !== 'staff', res.data.role);
+        setAccount(userInfo);
         if (res.data.role === 'customer') {
           navigate('/');
         } else {
@@ -119,7 +121,7 @@ const FormLogin = () => {
             onClick={handleSubmitLogin}
           >
             SIGN IN
-            <img src={ICONS.arrow_right_login} className="ms-2" />
+            <img src={ICONS.arrow_right_login} alt="icon right" className="ms-2" />
           </button>
         </form>
       </div>

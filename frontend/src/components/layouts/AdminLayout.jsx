@@ -13,9 +13,10 @@ import {
   TeamOutlined,
   TruckOutlined,
 } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AccountContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 function getItem(label, key, icon, children) {
   return {
     key,
@@ -36,26 +37,15 @@ const items = [
 ];
 
 function AdminLayout(props) {
-  const { Component, currentPage = 'dashboard' } = props;
   const [collapsed, setCollapsed] = useState(false);
   const { account } = useAuth();
-
   const navigate = useNavigate();
-
-  const pages_url = {
-    'dashboard': '/admin/dashboard',
-    'products': '/admin/products',
-    'Order Lists': '/admin/order-lists',
-    'Staff account': '/admin/staff-account',
-    'Customer account': '/admin/customer-account',
-    'Vouchers': '/admin/vouchers',
-    'Settings': '/admin/setting',
-  };
+  const location = useLocation();
 
   const onMenuClick = (menuItem) => {
     navigate(menuItem.key);
-    // console.log(menuItem.key);
   };
+
   const handleLogout = () => {
     // logout();
     // navigate('/login');
@@ -65,7 +55,7 @@ function AdminLayout(props) {
   return (
     <Layout>
       <Header userInfo={account} />
-      <Layout className='admin-layout-content-container'>
+      <Layout className="admin-layout-content-container ">
         <Sider
           collapsible
           collapsed={collapsed}
@@ -75,7 +65,7 @@ function AdminLayout(props) {
           <div className="sticky-siderbar-container">
             <Menu
               className="slider-container"
-              defaultSelectedKeys={[pages_url[currentPage]]}
+              defaultSelectedKeys={[location.pathname]}
               mode="inline"
               theme="light"
               items={items}
@@ -83,12 +73,12 @@ function AdminLayout(props) {
             />
             <div className="d-flex justify-content-center admin-layout-logout-button-container">
               <Button className="admin-layout-logout-button" icon={<LogoutOutlined />} onClick={handleLogout}>
-                {!collapsed && 'Đăng xuất'}
+                {!collapsed && 'Logout'}
               </Button>
             </div>
           </div>
         </Sider>
-        <Layout>{Component}</Layout>
+        <props.component />
       </Layout>
     </Layout>
   );

@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import PublicRoute from './public-route';
 import React, { useEffect } from 'react';
 import WebFont from 'webfontloader';
@@ -19,11 +19,14 @@ import HistoryDetail from '../pages/historyDetail';
 import AdminRoute from './admin-route';
 import CustomerRoute from './customer-route';
 import StaffRoute from './staff-route';
+import AdminDashboard from '../pages/admin-dashboard';
+import { useAuth } from '../../contexts/AccountContext';
+
 const UserHomePage = LoadableComponent(() => import('../pages/homepage/index'));
 const ProductsPage = LoadableComponent(() => import('../pages/product-list/index'));
-const AdminDashBoardPage = LoadableComponent(() => import('../pages/admin-dashboard'));
+// const AdminDashBoardPage = LoadableComponent(() => import('../pages/admin-dashboard'));
 const AdminLayout = LoadableComponent(()=>import('../../components/layouts/AdminLayout'))
-
+const AdminOrderLists = LoadableComponent(()=>import('../pages/admin-order-lists'))
 
 const AllRoutes = () => {
   useEffect(() => {
@@ -33,10 +36,13 @@ const AllRoutes = () => {
       },
     });
   }, []);
+
+  const {account} =useAuth();
+
   return (
     <CartProvider>
       <Routes>
-        {/* <Route path="/" element={<Navigate to={"/introduce"} />} /> */}
+        <Route path="/" element={<Navigate to={(account && account.role !== "admin") ? "/" : "/admin/dashboard"} />} />
         {/* // public route  */}
         <Route element={<PublicRoute />}>
           <Route path="/" element={<MainLayout component={UserHomePage} />} />
@@ -55,7 +61,8 @@ const AllRoutes = () => {
 
         {/* // admin route  */}
         <Route element={<AdminRoute />}>
-          <Route path="/admin/dashboard" element={<AdminLayout component={AdminDashBoardPage} />} />
+          <Route path="/admin/dashboard" element={<AdminLayout component={AdminDashboard} />} />
+          <Route path="/admin/order-lists" element={<AdminLayout component={AdminOrderLists} />} />
         </Route>
 
         {/* // customer route  */}
@@ -64,7 +71,8 @@ const AllRoutes = () => {
 
         {/* // staff route  */}
         <Route element={<StaffRoute />}>
-          <Route path="/admin/dashboard" element={<AdminLayout component={AdminDashBoardPage} />} />
+          <Route path="/admin/dashboard" element={<AdminLayout component={AdminDashboard} />} />
+          <Route path="/admin/order-lists" element={<AdminLayout component={AdminOrderLists} />} />
         </Route>
 
       </Routes>
