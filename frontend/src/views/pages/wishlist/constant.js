@@ -1,6 +1,7 @@
 import { IoIosRemoveCircleOutline } from 'react-icons/io';
 import { IoCartOutline } from 'react-icons/io5';
 import { Select } from 'antd';
+import { AVAILABILITY } from '../../../constants/enum';
 
 export const tableColumns = (handleSizeChange, handleAddToCart, selectedSizes) => [
   {
@@ -45,7 +46,7 @@ export const tableColumns = (handleSizeChange, handleAddToCart, selectedSizes) =
               : ''
           }`}
         >
-          {text}
+          {AVAILABILITY[text]}
         </span>
       </div>
     ),

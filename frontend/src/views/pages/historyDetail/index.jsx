@@ -17,16 +17,40 @@ const HistoryDetail = () => {
   const { id } = useParams();
   const [historyDetail, setHistoryDetail] = useState();
   const [loadingHistory, setLoadingHistory] = useState();
+  const [dataSource, setDataSource] = useState([]);
 
   const fetchHistory = async () => {
     try {
       setLoadingHistory(true);
       const item = await orderAPI.orderDetail(id);
       setHistoryDetail(item.data);
+      setDataSource(
+        item.data.orderDetails.map((detail) => ({
+          price: detail.price,
+          name: detail.itemSize.item.name,
+          quantity: detail.quantity,
+          total: detail.price * detail.quantity,
+          image: detail.itemSize.item.images[0],
+          size: detail.itemSize.size,
+          status: item.data.status,
+          orderId: detail.orderId,
+          itemSizeId: detail.itemSize.id,
+          review: detail.itemSize.review,
+        })),
+      );
       setLoadingHistory(false);
     } catch (error) {
       console.error('Error fetching orders:', error);
     }
+  };
+
+  const onUpdateReviewItemSize = ({ itemSizeId, feedback }) => {
+    setDataSource(
+      dataSource.map((data) => {
+        if (data.itemSizeId === itemSizeId) return { ...data, review: feedback };
+        return data;
+      }),
+    );
   };
 
   useEffect(() => {
@@ -82,7 +106,11 @@ const HistoryDetail = () => {
                       <OrderStatusProgress status={historyDetail.status} />
                     </div>
                     <div className="history-products">
-                      <OrderTable dataSource={historyDetail.orderDetails} />
+                      <OrderTable
+                        dataSource={dataSource}
+                        status={historyDetail.status}
+                        onUpdateReviewItemSize={onUpdateReviewItemSize}
+                      />
                     </div>
                   </div>
                   <div className="d-flex">
@@ -106,11 +134,6 @@ const HistoryDetail = () => {
                       <span>{historyDetail.note ? historyDetail.note : 'Không có ghi chú'}</span>
                     </div>
                   </div>
-                  {historyDetail.status === 'done' && (
-                    <div className="d-flex justify-content-center mt-2 mb-2">
-                      <RatingModal />
-                    </div>
-                  )}
                 </div>
               )}
             </div>

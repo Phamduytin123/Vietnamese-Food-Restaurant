@@ -171,7 +171,7 @@ const UploadModal = () => {
           contentLabel="Example Modal"
           overlayClassName="overlay"
         >
-          <p className="modal-title">Món ăn được nhận diện: </p>
+          <p className="modal-title-detect">Món ăn được nhận diện: </p>
           <ProductCardGrid product={foodInfo} />
         </Modal>
       )}

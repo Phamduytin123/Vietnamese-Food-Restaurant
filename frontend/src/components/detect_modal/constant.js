@@ -17,6 +17,22 @@ const modalStyles = {
   },
 };
 
+export const ratingModalStyles = {
+  content: {
+    position: 'absolute',
+    width: '28%',
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    borderRadius: '12px',
+    backgroundColor: '#FFFFFF',
+    padding: '24px 30px',
+    zIndex: '998',
+  },
+};
 export const modalInfoStyle = {
   content: {
     position: 'absolute',
