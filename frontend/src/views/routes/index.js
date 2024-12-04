@@ -25,8 +25,8 @@ import { useAuth } from '../../contexts/AccountContext';
 const UserHomePage = LoadableComponent(() => import('../pages/homepage/index'));
 const ProductsPage = LoadableComponent(() => import('../pages/product-list/index'));
 // const AdminDashBoardPage = LoadableComponent(() => import('../pages/admin-dashboard'));
-const AdminLayout = LoadableComponent(()=>import('../../components/layouts/AdminLayout'))
-const AdminOrderLists = LoadableComponent(()=>import('../pages/admin-order-lists'))
+const AdminLayout = LoadableComponent(() => import('../../components/layouts/AdminLayout'));
+const AdminOrderLists = LoadableComponent(() => import('../pages/admin-order-lists'));
 
 const AllRoutes = () => {
   useEffect(() => {
@@ -37,12 +37,12 @@ const AllRoutes = () => {
     });
   }, []);
 
-  const {account} =useAuth();
+  const { account } = useAuth();
 
   return (
     <CartProvider>
       <Routes>
-        <Route path="/" element={<Navigate to={(account && account.role !== "admin") ? "/" : "/admin/dashboard"} />} />
+        {/* <Route path="/" element={<Navigate to={(account && account.role !== "admin") ? "/" : "/admin/dashboard"} />} /> */}
         {/* // public route  */}
         <Route element={<PublicRoute />}>
           <Route path="/" element={<MainLayout component={UserHomePage} />} />
@@ -66,15 +66,13 @@ const AllRoutes = () => {
         </Route>
 
         {/* // customer route  */}
-        <Route element={<CustomerRoute />}>
-        </Route>
+        <Route element={<CustomerRoute />}></Route>
 
         {/* // staff route  */}
         <Route element={<StaffRoute />}>
           <Route path="/admin/dashboard" element={<AdminLayout component={AdminDashboard} />} />
           <Route path="/admin/order-lists" element={<AdminLayout component={AdminOrderLists} />} />
         </Route>
-
       </Routes>
     </CartProvider>
   );

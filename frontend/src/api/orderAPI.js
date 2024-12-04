@@ -9,6 +9,10 @@ const orderAPI = {
     const url = `/orders/${id}`;
     return axiosClient.application.get(url, id);
   },
-};
 
+  reviewProduct: (formData) => {
+    const url = `/reviews`;
+    return axiosClient.application.post(url, formData);
+  },
+};
 export default orderAPI;
