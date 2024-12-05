@@ -1,0 +1,60 @@
+.cancel-modal {
+  .modal-title {
+    color: #FF8F1F;
+    font-weight: 600;
+    font-size: 24px;
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    background-color: rgb(0, 0, 0, 0.6);
+    .loading {
+      top: 50%;
+      left: 50%;
+      right: auto;
+      bottom: auto;
+      margin-right: 50%;
+      transform: translate(-50%, -50%)
+    }
+  }
+  .form-upload-image{
+    max-width: 100%;
+  }
+  .form-upload-submit {
+    border: 2px dashed rgb(208, 190, 177);
+    border-radius: 12px;
+    width: 100%;
+    background-color: #FFFFFF;
+    min-height: 400px;
+  }
+  .remove-image-btn{
+    top: 4px;
+    right: 4px;
+    background-color: transparent;
+    border: none
+  }
+  .feedback-input {
+    border: 1px solid #797878;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 16px 0;
+  }
+  .rating-item-text {
+    font-weight: 600;
+    color: #223263;
+    .wishlist-item-size{
+      color: #000000;
+    }
+  }
+  .rating-item-image {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px !important;
+    margin: 16px 0;
+    border-radius: 4px;
+  }
+}

@@ -14,5 +14,10 @@ const orderAPI = {
     const url = `/reviews`;
     return axiosClient.application.post(url, formData);
   },
+
+  cancelOrder: (formData) => {
+    const url = `/orders/cancel`;
+    return axiosClient.application.post(url, formData);
+  },
 };
 export default orderAPI;

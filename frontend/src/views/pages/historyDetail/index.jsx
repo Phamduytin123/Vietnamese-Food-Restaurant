@@ -11,6 +11,7 @@ import OrderStatusProgress from '../../../components/history/ProgressBar';
 import OrderTable from '../../../components/history/OrderTable';
 import ButtonPrimary from '../../../components/button/ButtonPrimary';
 import RatingModal from '../../../components/history/RatingModal';
+import CancelModal from '../../../components/history/CancelModal';
 
 const HistoryDetail = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const HistoryDetail = () => {
   const [historyDetail, setHistoryDetail] = useState();
   const [loadingHistory, setLoadingHistory] = useState();
   const [dataSource, setDataSource] = useState([]);
-
+  const [status, setStatus] = useState();
   const fetchHistory = async () => {
     try {
       setLoadingHistory(true);
@@ -38,6 +39,7 @@ const HistoryDetail = () => {
           review: detail.itemSize.review,
         })),
       );
+      setStatus(item.data.status);
       setLoadingHistory(false);
     } catch (error) {
       console.error('Error fetching orders:', error);
@@ -60,7 +62,6 @@ const HistoryDetail = () => {
     <div className="history-detail">
       <div className="d-flex justify-content-center">
         <UserSidebar activedLabel={2} />
-        <div></div>
         <div className="history-detail-container">
           {loadingHistory ? (
             <div className="d-flex justify-content-center align-items-center" style={{ height: '300px' }}>
@@ -69,7 +70,7 @@ const HistoryDetail = () => {
           ) : (
             <div>
               <div className="history-title-box mb-0">
-                <FaArrowLeft className="ms-3" />
+                <FaArrowLeft className="ms-3" onClick={() => navigate(-1)} style={{ cursor: 'pointer' }} />
                 <h5 className="history-title">CHI TIẾT ĐƠN HÀNG</h5>
               </div>
               {historyDetail && (
@@ -103,7 +104,7 @@ const HistoryDetail = () => {
                       </div>
                     </div>
                     <div className="history-progress">
-                      <OrderStatusProgress status={historyDetail.status} />
+                      <OrderStatusProgress status={status} />
                     </div>
                     <div className="history-products">
                       <OrderTable
@@ -134,6 +135,11 @@ const HistoryDetail = () => {
                       <span>{historyDetail.note ? historyDetail.note : 'Không có ghi chú'}</span>
                     </div>
                   </div>
+                  {historyDetail.status === 'wait' && (
+                    <div className="d-flex justify-content-center mt-3 mb-3">
+                      <CancelModal orderId={historyDetail.id} />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
