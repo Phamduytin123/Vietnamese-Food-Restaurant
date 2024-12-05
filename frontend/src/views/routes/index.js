@@ -18,11 +18,19 @@ import History from '../pages/history';
 import HistoryDetail from '../pages/historyDetail';
 import AdminDashboard from '../pages/admin-dashboard';
 import { useAuth } from '../../contexts/AccountContext';
+<<<<<<< HEAD
 import AdminAccount from '../pages/admin-accounts';
 import ProtectedRoute from './protected-route';
 
 const UserHomePage = LoadableComponent(() => import('../pages/homepage/index'));
 const ProductsPage = LoadableComponent(() => import('../pages/product-list/index'));
+=======
+import AdminListItem from '../pages/admin-listItem';
+import { AdminItemDetail } from '../pages/admin-detailitem';
+const UserHomePage = LoadableComponent(() => import('../pages/homepage/index'));
+const ProductsPage = LoadableComponent(() => import('../pages/product-list/index'));
+const AdminDashBoardPage = LoadableComponent(() => import('../pages/admin-dashboard'));
+>>>>>>> 08df162 (Add view admin list item, update item)
 const AdminLayout = LoadableComponent(() => import('../../components/layouts/AdminLayout'));
 const AdminOrderLists = LoadableComponent(() => import('../pages/admin-order-lists'));
 
@@ -58,16 +66,18 @@ const AllRoutes = () => {
           <Route path="/dashboard" element={<MainLayout component={Dashboard} />} />
           <Route path="/history" element={<MainLayout component={History} />} />
           <Route path="/history/:id" element={<MainLayout component={HistoryDetail} />} />
-        </Route>
-
+        </Route HEAD
         {/* // admin, staff route  */}
         <Route element={<ProtectedRoute allowedRoles={['admin', 'staff']} />}>
           <Route path="/admin/dashboard" element={<AdminLayout component={<AdminDashboard/>} />} />
           <Route path="/admin/order-lists" element={<AdminLayout component={<AdminOrderLists/>} />} />
           <Route path="/admin/customer-account" element={<AdminLayout component={<AdminAccount pageRole={"customer"}/>} />} />
+          <Route path="/admin/products" element={<AdminLayout component={AdminListItem}  />} />
+          <Route path="/admin/products/details" element={<AdminLayout component={AdminItemDetail}  />} />
           <Route element={<ProtectedRoute allowedRoles={['admin']}/>}>
             <Route path="/admin/staff-account" element={<AdminLayout component={<AdminAccount pageRole={"staff"}/>} />} />
           </Route>
+
         </Route>
       </Routes>
     </CartProvider>
