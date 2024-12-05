@@ -1,0 +1,48 @@
+@import '../../../../constants/colors.scss';
+
+.admin-order-lists-modal-user-avatar,
+.admin-order-lists-modal-table-food-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.admin-order-lists-modal-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.admin-order-lists-modal-row-item-container {
+  margin: 10px 0px;
+}
+
+.admin-order-lists-modal-row-item-status {
+  font-weight: bold;
+  text-align: center;
+  width: 75%;
+  padding: 5px 0px;
+  border-radius: 10px;
+}
+
+.admin-order-lists-modal-row-item-createdAt {
+  color: $admin-dashboard-dark-green;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.admin-order-lists-modal-total-price {
+  color: $admin-order-dark-red;
+  font-weight: bold;
+  font-size: 22px;
+  width: 100%;
+  text-align: end;
+  margin-top: 10px;
+}
+
+.admin-order-lists-modal-footer-item-button {
+  margin: 0px 5px;
+  font-size: 15px;
+}

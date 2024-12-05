@@ -130,7 +130,6 @@ export class AdminItemService {
       unit_en,
       regional_vi,
       regional_en,
-      isFood,
       categoryId,
     } = body;
 

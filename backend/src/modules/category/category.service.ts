@@ -1,4 +1,4 @@
-import { Body, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from '../../entities';
 import { Repository } from 'typeorm';
@@ -11,22 +11,28 @@ export class CategoryService {
   ) {}
 
   async getListCategory(lang: string, query: any) {
-    var { isFood = true } = query;
+    let { isFood = null } = query;
 
-    isFood = isFood.toLowerCase() === 'true';
+    if (isFood !== null) {
+      isFood = isFood.toLowerCase() === 'true';
+    }
 
-    const [categories, categoriesCount] = await this.categoryRepo.findAndCount({
-      where: {
-        isFood: isFood,
-      },
-      relations: ['items'],
-    });
+    const queryBuilder = this.categoryRepo
+      .createQueryBuilder('category')
+      .leftJoinAndSelect('category.items', 'items');
+
+    if (isFood !== null) {
+      queryBuilder.where('category.isFood = :isFood', { isFood });
+    }
+
+    const [categories, categoriesCount] = await queryBuilder.getManyAndCount();
 
     const filterCategory: any = categories.map(category => ({
       id: category.id,
       isFood: category.isFood,
       name: category[`name_${lang}`],
       numberOfFood: category.items.length,
+      image: category.url,
     }));
 
     const filterHotDeal: any = categories.map(category => ({

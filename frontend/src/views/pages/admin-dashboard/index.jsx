@@ -16,22 +16,8 @@ import { Button, Table } from 'antd';
 import SmallReviewItem from './components/review-item';
 import revenueAPI from '../../../api/revenueAPI';
 import { DATEINAWEEK } from '../../../constants/dateInAWeek';
+import { darkenColor, formatCurrency } from '../../../utils/string';
 Chart.register(...registerables);
-
-function darkenColor(color, amount = 0.5) {
-  let [r, g, b] = color.match(/\w\w/g).map((x) => parseInt(x, 16));
-
-  r = Math.max(0, r - Math.round(255 * amount));
-  g = Math.max(0, g - Math.round(255 * amount));
-  b = Math.max(0, b - Math.round(255 * amount));
-
-  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-}
-
-function formatCurrency(amount) {
-  const formattedAmount = amount.toLocaleString('vi-VN');
-  return `${formattedAmount} đồng`;
-}
 
 function AdminDashboard() {
   const [currentPage, setCurrentPage] = useState(1);

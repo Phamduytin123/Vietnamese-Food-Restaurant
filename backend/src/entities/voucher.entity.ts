@@ -13,10 +13,14 @@ export class Voucher {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   name_vi: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   name_en: string;
 
   @Column()

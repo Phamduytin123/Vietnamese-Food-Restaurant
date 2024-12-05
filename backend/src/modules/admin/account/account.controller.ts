@@ -34,7 +34,6 @@ export class AdminAccountController {
     return this.accountService.getAccounts(query);
   }
 
-
   @Put()
   @UseGuards(new RoleGuard([AccountRoleEnum.ADMIN, AccountRoleEnum.STAFF]))
   @UseGuards(AuthGuard)

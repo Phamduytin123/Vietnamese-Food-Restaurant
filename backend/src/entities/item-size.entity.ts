@@ -16,10 +16,14 @@ export class ItemSize {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   size_vi: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   size_en: string;
 
   @Column()

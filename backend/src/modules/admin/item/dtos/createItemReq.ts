@@ -4,9 +4,10 @@ import { ItemAvailabilityEnum } from '../../../../common';
 import { ItemSize } from '../../../../entities';
 
 export class CreateItemReq {
-  @IsNotEmpty({
-    message: i18nValidationMessage('validation.item.name_en_required'),
-  })
+  @IsOptional()
+  //   {
+  //   message: i18nValidationMessage('validation.item.name_en_required'),
+  // }
   name_en: string;
 
   @IsNotEmpty({
@@ -48,9 +49,10 @@ export class CreateItemReq {
   })
   description_vi: string;
 
-  @IsNotEmpty({
-    message: i18nValidationMessage('validation.item.description_en_required'),
-  })
+  @IsOptional()
+  //   {
+  //   message: i18nValidationMessage('validation.item.description_en_required'),
+  // }
   description_en: string;
 
   @IsOptional()
@@ -64,19 +66,22 @@ export class CreateItemReq {
   })
   ingredients_vi: string;
 
-  @IsNotEmpty({
-    message: i18nValidationMessage('validation.item.ingredients_en_required'),
-  })
+  @IsOptional()
+  //   {
+  //   message: i18nValidationMessage('validation.item.ingredients_en_required'),
+  // }
   ingredients_en: string;
 
-  @IsNotEmpty({
-    message: i18nValidationMessage('validation.item.unit_vi_required'),
-  })
+  @IsOptional()
+  //   {
+  //   message: i18nValidationMessage('validation.item.unit_vi_required'),
+  // }
   unit_vi: string;
 
-  @IsNotEmpty({
-    message: i18nValidationMessage('validation.item.unit_en_required'),
-  })
+  @IsOptional()
+  //   {
+  //   message: i18nValidationMessage('validation.item.unit_en_required'),
+  // }
   unit_en: string;
 
   @IsNotEmpty({
@@ -84,9 +89,10 @@ export class CreateItemReq {
   })
   regional_vi: string;
 
-  @IsNotEmpty({
-    message: i18nValidationMessage('validation.item.regional_en_required'),
-  })
+  @IsOptional()
+  //   {
+  //   message: i18nValidationMessage('validation.item.regional_en_required'),
+  // }
   regional_en: string;
 
   @IsOptional()
