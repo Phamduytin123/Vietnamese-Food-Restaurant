@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Account, Item, LikeItem } from '../../entities';
+import { Account, Item, LikeItem, Review } from '../../entities';
 import { In, Like, MoreThan, Repository } from 'typeorm';
 import { clean, ItemFilterUtils, OrTypeOrm, StringUtils } from '../../common';
 
@@ -13,7 +13,7 @@ export class ItemService {
   constructor(
     @InjectRepository(Item) private readonly itemRepo: Repository<Item>,
     @InjectRepository(LikeItem)
-    private readonly likeRepository: Repository<LikeItem>
+    private readonly likeRepository: Repository<LikeItem>,
   ) {}
 
   async getListItem(account: any, lang: string, query: any) {
@@ -156,11 +156,13 @@ export class ItemService {
 
       const itemDetail = await this.itemRepo.findOne({
         where: { id },
-        relations: ['category', 'itemSizes', 'reviews', 'reviews.account'],
+        relations: ['category', 'itemSizes', 'itemSizes.reviews', 'itemSizes.reviews.account'],
         order: {
-          reviews: {
-            updatedAt: 'DESC',
-            createdAt: 'DESC',
+          itemSizes: {
+            reviews: {
+              updatedAt: 'DESC',
+              createdAt: 'DESC',
+            },
           },
         },
       });
@@ -171,16 +173,20 @@ export class ItemService {
 
       const filterItem = ItemFilterUtils.filterResponseData(itemDetail, lang);
 
-      return {
-        ...filterItem,
-        reviews: itemDetail.reviews.map(review => {
+      // Flatten the reviews to be directly under the item
+      const reviews = itemDetail.itemSizes.flatMap(itemSize =>
+        itemSize.reviews.map(review => {
           const { password, role, ...restAccountReview } = review.account;
-
           return {
             ...review,
             account: restAccountReview,
           };
-        }),
+        })
+      );
+
+      return {
+        ...filterItem,
+        reviews,
       };
     } catch (error: any) {
       return {

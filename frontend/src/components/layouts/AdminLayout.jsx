@@ -27,13 +27,13 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem('Dashboard', '/admin/dashboard', <LineChartOutlined />),
-  getItem('Products', '/admin/products', <InboxOutlined />),
-  getItem('Order Lists', '/admin/order-lists', <TruckOutlined />),
-  getItem('Staff account', '/admin/staff-account', <SolutionOutlined />),
-  getItem('Customer account', '/admin/customer-account', <TeamOutlined />),
-  getItem('Vouchers', '/admin/vouchers', <GiftOutlined />),
-  getItem('Settings', '/admin/setting', <SettingOutlined />),
+  getItem('Trang chủ', '/admin/dashboard', <LineChartOutlined />),
+  getItem('Sản phẩm', '/admin/products', <InboxOutlined />),
+  getItem('Đơn hàng', '/admin/order-lists', <TruckOutlined />),
+  getItem('Nhân viên', '/admin/staff-account', <SolutionOutlined />),
+  getItem('Khách hàng', '/admin/customer-account', <TeamOutlined />),
+  getItem('Phiếu giảm giá', '/admin/vouchers', <GiftOutlined />),
+  getItem('Cài đặt', '/admin/setting', <SettingOutlined />),
 ];
 
 function AdminLayout(props) {
@@ -47,9 +47,10 @@ function AdminLayout(props) {
   };
 
   const handleLogout = () => {
-    // logout();
-    // navigate('/login');
-    console.log('logout');
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('user_info');
+
+    navigate('/');
   };
 
   return (
@@ -62,7 +63,7 @@ function AdminLayout(props) {
           onCollapse={(value) => setCollapsed(value)}
           className="admin-layout-slider-container"
         >
-          <div className="sticky-siderbar-container">
+          <div className="position-fixed" style={{width : collapsed ? 80 : 200}}>
             <Menu
               className="slider-container"
               defaultSelectedKeys={[location.pathname]}
@@ -73,7 +74,7 @@ function AdminLayout(props) {
             />
             <div className="d-flex justify-content-center admin-layout-logout-button-container">
               <Button className="admin-layout-logout-button" icon={<LogoutOutlined />} onClick={handleLogout}>
-                {!collapsed && 'Logout'}
+                {!collapsed && 'Đăng xuất'}
               </Button>
             </div>
           </div>

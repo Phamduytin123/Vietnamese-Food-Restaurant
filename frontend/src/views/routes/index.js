@@ -39,13 +39,16 @@ const AllRoutes = () => {
 
   const { account } = useAuth();
 
+  // console.log(account)
+  // console.log((account && (account.role === "admin" || account.role === "staff")) ? "/admin/dashboard" : "/homepage")
+
   return (
     <CartProvider>
       <Routes>
-        {/* <Route path="/" element={<Navigate to={(account && account.role !== "admin") ? "/" : "/admin/dashboard"} />} /> */}
+        <Route path="/" element={<Navigate to={(account && (account.role === "admin" || account.role === "staff")) ? "/admin/dashboard" : "/homepage"} />} />
         {/* // public route  */}
         <Route element={<PublicRoute />}>
-          <Route path="/" element={<MainLayout component={UserHomePage} />} />
+          <Route path="/homepage" element={<MainLayout component={UserHomePage} />} />
           <Route path="/items" element={<MainLayout component={ProductsPage} />} />
           <Route path="/auth/login" element={<MainLayout component={Login} />} />
           <Route path="/auth/register" element={<MainLayout component={Register} />} />

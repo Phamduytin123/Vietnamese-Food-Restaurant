@@ -122,23 +122,23 @@ export class OrderService {
         }
 
         // Check if the voucher's minPrice is less than or equal to the totalPrice
-        if (voucher.minPrice*1000 > totalPrice) {
-            return new BadRequestException(
-              this.i18n.t('error.voucher.minPriceExceeded', {
-                args: { voucherId: voucherId, minPrice: voucher.minPrice },
-              })
-            );
-          }
-  
-          // Check if the current date is within the voucher's startAt and endAt dates
-          const currentDate = new Date();
-          if (currentDate < voucher.startAt || currentDate > voucher.endAt) {
-            return new BadRequestException(
-              this.i18n.t('error.voucher.voucherNotValid', {
-                args: { voucherId: voucherId },
-              })
-            );
-          }
+        if (voucher.minPrice * 1000 > totalPrice) {
+          return new BadRequestException(
+            this.i18n.t('error.voucher.minPriceExceeded', {
+              args: { voucherId: voucherId, minPrice: voucher.minPrice },
+            })
+          );
+        }
+
+        // Check if the current date is within the voucher's startAt and endAt dates
+        const currentDate = new Date();
+        if (currentDate < voucher.startAt || currentDate > voucher.endAt) {
+          return new BadRequestException(
+            this.i18n.t('error.voucher.voucherNotValid', {
+              args: { voucherId: voucherId },
+            })
+          );
+        }
 
         // Decrement the voucher count
         voucher.count -= 1;
@@ -202,13 +202,12 @@ export class OrderService {
   }
 
   async getOrders(lang: string, account: Account, query: OrdersRequest) {
-
     const conditions = clean({
       status: query.status,
       isPaid: query.isPaid ? query.isPaid === 'true' : null,
       accountId: account.id,
     });
-  
+
     const ordersFound = await this.orderRepository.find({
       where: conditions,
       relations: [
@@ -222,7 +221,7 @@ export class OrderService {
         createdAt: 'DESC',
       },
     });
-  
+
     const orders = ordersFound.map(orderFound => {
       // Only destructure voucher if it is not null
       const voucher = orderFound.voucher
@@ -231,7 +230,7 @@ export class OrderService {
             name: orderFound.voucher[`name_${lang}`],
           }
         : null;
-  
+
       return {
         ...orderFound,
         orderDetails: orderFound.orderDetails.map(orderDetailFound => {
@@ -245,7 +244,7 @@ export class OrderService {
                 ),
               }
             : null;
-  
+
           return {
             ...orderDetailFound,
             itemSize,
@@ -254,9 +253,9 @@ export class OrderService {
         voucher,
       };
     });
-  
+
     return orders;
-  }  
+  }
 
   async getOrderDetail(lang: string, id: number, account: Account) {
     const orderFound = await this.orderRepository.findOne({
@@ -264,6 +263,7 @@ export class OrderService {
       relations: [
         'orderDetails',
         'voucher',
+        'reviews',
         'orderDetails.itemSize',
         'orderDetails.itemSize.item',
       ],
@@ -278,11 +278,11 @@ export class OrderService {
     }
 
     const voucher = orderFound.voucher
-        ? {
-            ...orderFound.voucher,
-            name: orderFound.voucher[`name_${lang}`],
-          }
-        : null;
+      ? {
+          ...orderFound.voucher,
+          name: orderFound.voucher[`name_${lang}`],
+        }
+      : null;
 
     const order = {
       ...orderFound,
@@ -294,6 +294,9 @@ export class OrderService {
           ...orderDetailFound,
           itemSize: {
             ...itemSizeFilter,
+            review: orderFound.reviews.find(
+              review => review.itemSizeId === itemSizeFilter.id
+            ),
             size: orderDetailFound.itemSize[`size_${lang}`],
             item: ItemFilterUtils.filterResponseData(
               orderDetailFound.itemSize.item,

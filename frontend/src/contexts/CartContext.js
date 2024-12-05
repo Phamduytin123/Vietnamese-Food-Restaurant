@@ -1,11 +1,19 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import cartAPI from '../api/cartAPI';
+import { useAuth } from './AccountContext';
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartCount, setCartCount] = useState(0);
 
+  const {account} = useAuth();
+
+
   const getCart = async () => {
+    if(!account) return;
+    
+    if(account.role !== "customer") return;
+
     try {
       const response = await cartAPI.getCart();
       const totalQuantity = response.data.reduce((total, item) => total + item.quantity, 0);

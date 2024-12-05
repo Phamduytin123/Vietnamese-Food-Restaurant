@@ -16,20 +16,23 @@ import './index.scss';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../contexts/CartContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useAuth } from '../../contexts/AccountContext';
 
 const Header = ({ userInfo }) => {
   const { cartCount } = useCart();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profile, setProfile] = useState(null);
-  const navigage = useNavigate();
+  const navigate = useNavigate();
+
+  const {setAccount} = useAuth();
 
   // console.log(userInfo);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('user_info');
-
-    navigage('/');
+    setAccount(null)
+    navigate('/');
   };
 
   const getProfile = () => {
@@ -70,7 +73,7 @@ const Header = ({ userInfo }) => {
                 <Button
                   className="btn-login"
                   onClick={() => {
-                    navigage('/auth/login');
+                    navigate('/auth/login');
                   }}
                 >
                   <IoMdPerson className="login-icon" />
@@ -94,7 +97,7 @@ const Header = ({ userInfo }) => {
                       className="cart-icon-img"
                       alt="Cart"
                       onClick={() => {
-                        navigage('/cart');
+                        navigate('/cart');
                       }}
                     />
                   </div>
@@ -123,7 +126,7 @@ const Header = ({ userInfo }) => {
                     </Dropdown.Item>
                     <Dropdown.Item
                       onClick={() => {
-                        navigage('/wishlist');
+                        navigate('/wishlist');
                       }}
                     >
                       <IoMdHeartEmpty className="dropdown-icon" />
@@ -134,7 +137,7 @@ const Header = ({ userInfo }) => {
                       Cài đặt
                     </Dropdown.Item>
                     <Dropdown.Divider className="dropdown-icon" />
-                    <Dropdown.Item href="#/logout" onClick={handleLogout}>
+                    <Dropdown.Item onClick={handleLogout}>
                       <IoLogOutOutline className="dropdown-icon" />
                       Log-out
                     </Dropdown.Item>
