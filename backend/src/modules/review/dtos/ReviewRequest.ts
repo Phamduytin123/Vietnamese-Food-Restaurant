@@ -12,5 +12,8 @@ export class ReviewRequest {
   rating: number;
 
   @IsNotEmpty({ message: i18nValidationMessage('validation.itemIdRequired') })
-  itemId: number;
+  itemSizeId: number;
+
+  @IsNotEmpty({ message: i18nValidationMessage('validation.orderIdRequired') })
+  orderId: number;
 }

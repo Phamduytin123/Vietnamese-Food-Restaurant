@@ -11,4 +11,10 @@ export class AdminOrdersRequest {
 
   @IsOptional()
   date: Date;
+
+  @IsOptional()
+  page: number;
+
+  @IsOptional()
+  limit: number;
 }

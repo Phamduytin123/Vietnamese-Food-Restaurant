@@ -13,6 +13,7 @@ import {
 import { Account } from './account.entity';
 import { OrderDetail } from './order-detail.entity';
 import { Voucher } from './voucher.entity';
+import { Review } from './review.entity';
 
 @Entity()
 export class Order {
@@ -88,6 +89,9 @@ export class Order {
 
   @OneToMany(() => OrderDetail, orderDetail => orderDetail.order)
   orderDetails: OrderDetail[];
+
+  @OneToMany(() => Review, review => review.order)
+  reviews: Review[];
 
   @ManyToOne(() => Voucher, voucher => voucher.orders)
   @JoinColumn({ name: 'voucherId' })

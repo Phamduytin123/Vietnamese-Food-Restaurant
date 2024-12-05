@@ -61,6 +61,10 @@ export class RevenueService {
     return revenueArray.sort((a, b) => moment(a.date).diff(moment(b.date)));
   }
 
+  async countReviews() {
+    return this.reviewRepository.count();
+  }
+
   async getRevenue(lang: string, query: any) {
     const { page = 1, limit = 3 } = query;
 
@@ -78,7 +82,7 @@ export class RevenueService {
         updatedAt: 'DESC',
         createdAt: 'DESC',
       },
-      relations: ['account', 'item'],
+      relations: ['account', 'itemSize', 'itemSize.item'],
       skip: skip,
       take: limit,
     });
@@ -99,15 +103,19 @@ export class RevenueService {
       0
     );
 
+    const totalReviews = await this.countReviews();
+    const totalPages = Math.ceil(totalReviews / limit);
+
     return {
       totalUser: userAccountCount,
       totalOrder: ordersFound.length,
       totalRevenue: totalRevenue,
       totalPendingOrder: totalPendingOrder,
       revenueFor7Days: revenueFor7Days,
+      totalPages: totalPages,
       reviews: reviewsFound.map(reviewFound => ({
         ...reviewFound,
-        item: ItemFilterUtils.filterResponseData(reviewFound.item, lang),
+        item: ItemFilterUtils.filterResponseData(reviewFound.itemSize.item, lang),
       })),
     };
   }

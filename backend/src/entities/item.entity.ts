@@ -148,7 +148,4 @@ export class Item {
 
   @OneToMany(() => LikeItem, like => like.item)
   likes: LikeItem[];
-
-  @OneToMany(() => Review, review => review.item)
-  reviews: Review[];
 }

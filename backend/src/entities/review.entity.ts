@@ -9,6 +9,8 @@ import {
 } from 'typeorm';
 import { Item } from './item.entity';
 import { Account } from './account.entity';
+import { ItemSize } from './item-size.entity';
+import { Order } from './order.entity';
 
 @Entity()
 export class Review {
@@ -25,7 +27,10 @@ export class Review {
   comment: string;
 
   @Column()
-  itemId: number;
+  itemSizeId: number;
+
+  @Column()
+  orderId: number;  
 
   @Column()
   accountId: number;
@@ -38,9 +43,13 @@ export class Review {
   })
   updatedAt: Date;
 
-  @ManyToOne(() => Item, item => item.reviews)
-  @JoinColumn({ name: 'itemId' })
-  item: Item;
+  @ManyToOne(() => ItemSize, itemSize => itemSize.reviews)
+  @JoinColumn({ name: 'itemSizeId' })
+  itemSize: ItemSize;
+
+  @ManyToOne(() => Order, order => order.reviews)
+  @JoinColumn({ name: 'orderId' })
+  order: Order;
 
   @ManyToOne(() => Account, account => account.reviews)
   @JoinColumn({ name: 'accountId' })

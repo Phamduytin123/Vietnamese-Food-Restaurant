@@ -15,13 +15,11 @@ export class ItemController {
   getListItem(@Lang() lang: string, @Query() query: any, @Req() req: any) {
     const authHeader = req.headers.authorization;
     let currentAccount = null;
-
     // Kiểm tra xem header có tồn tại và định dạng có đúng không
-    if (authHeader && authHeader.startsWith('Bearer ')) {
+    if (authHeader && authHeader.startsWith('Bearer ') && authHeader.split(' ')[1] != "null") {
       const token = authHeader.split(' ')[1];
       currentAccount = this.getAccountFromToken(token);
     }
-
     return this.itemService.getListItem(currentAccount, lang, query);
   }
 

@@ -15,7 +15,7 @@ export class AdminOrderService {
   ) {}
 
   async getListOrder(query: AdminOrdersRequest, lang: string) {
-    const { date, status } = query;
+    const { date, status, page = 1, limit = 10 } = query;
 
     const queryBuilder = this.orderRepository.createQueryBuilder('order');
 
@@ -35,7 +35,10 @@ export class AdminOrderService {
       .leftJoinAndSelect('orderDetails.itemSize', 'itemSize')
       .leftJoinAndSelect('itemSize.item', 'item');
 
-    const listOrderFound = await queryBuilder.getMany();
+    // Thực hiện phân trang
+    queryBuilder.skip((page - 1) * limit).take(limit);
+
+    const [listOrderFound, total] = await queryBuilder.getManyAndCount();
 
     const listOrder = listOrderFound.map(order => ({
       ...order,
@@ -56,7 +59,12 @@ export class AdminOrderService {
       }),
     }));
 
-    return listOrder;
+    return {
+      data: listOrder,
+      total,
+      page,
+      limit,
+    };
   }
 
   async getOrderDetail(id: number, lang: string) {

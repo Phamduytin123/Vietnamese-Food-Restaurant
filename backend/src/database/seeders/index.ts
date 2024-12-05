@@ -36,11 +36,11 @@ async function runSeeders() {
     new FoodSizeSeeder(dataSource),
     new DrinkSeeder(dataSource),
     new DrinkSizeSeeder(dataSource),
-    new ReviewSeeder(dataSource),
     new VoucherSeeder(dataSource),
-    new LikeSeeder(dataSource),
     new OrderSeeder(dataSource),
+    new LikeSeeder(dataSource),
     new OrderDetailSeeder(dataSource),
+    new ReviewSeeder(dataSource),
   ];
 
   for (const seeder of seeders) {

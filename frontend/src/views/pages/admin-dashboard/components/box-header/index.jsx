@@ -14,8 +14,6 @@ function darkenColor(color, amount = 0.5) {
 function BoxHeader(props) {
   const { data } = props;
 
-  console.log(data);
-
   return (
     <div className="admin-dashboard-box-header-container">
       <div className='admin-dashboard-box-header-content-container'>

@@ -6,9 +6,11 @@
   .ant-layout-sider {
     background-color: white;
     padding-top: 20px !important;
+    transition: width 0.3s ease;
   }
   .ant-layout-sider-dark {
     padding: 0px;
+    transition: width 0.3s ease;
   }
   .admin-layout-logout-button {
     background-color: $food-price-color !important;
@@ -22,6 +24,7 @@
   .admin-layout-logout-button-container {
     background-color: white;
     padding-top: 20px;
+    position: relative;
   }
   .ant-layout-sider-trigger {
     background-color: $food-price-color;
@@ -30,15 +33,7 @@
     color: $white-color !important;
     background-color: $food-price-color !important;
   }
-}
-
-.admin-layout-slider-container {
-  overflow: hidden;
-  position: fixed;
-  height: 100%;
-}
-
-.sticky-siderbar-container {
-  height: 100vh;
-  overflow: hidden;
+  .position-fixed {
+    transition: width 0.3s ease;
+  }
 }

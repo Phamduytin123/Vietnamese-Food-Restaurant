@@ -1,2 +1,42 @@
 @import '../../../constants/colors.scss';
 
+.admin-order-container {
+  width: 100%;
+  padding : 10px;
+}
+
+.admin-order-table-item-status{
+  text-align: center;
+  width: 100%;
+}
+
+.admin-order-title {
+  font-weight: bold;
+  color : $admin-dashboard-dark-green;
+}
+
+.admin-order-table-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.admin-order-table-item-status-select-container {
+  width: 100%;
+  text-align: center;
+  padding : 8px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.admin-order-table-item-status-select-item{
+  padding : 0px;
+  margin : 0px;
+  width: 100%;
+  text-align: center;
+}
+
+.admin-order-table-item-status-select-item:hover {
+  background-color: transparent !important;
+}

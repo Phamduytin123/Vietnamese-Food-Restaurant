@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -14,6 +14,8 @@ import { Line } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 import { Button, Table } from 'antd';
 import SmallReviewItem from './components/review-item';
+import revenueAPI from '../../../api/revenueAPI';
+import { DATEINAWEEK } from '../../../constants/dateInAWeek';
 Chart.register(...registerables);
 
 function darkenColor(color, amount = 0.5) {
@@ -26,78 +28,65 @@ function darkenColor(color, amount = 0.5) {
   return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
 }
 
-function AdminDashboard() {
-  const boxHeaderData = [
-    {
-      name: 'Số khách hàng',
-      icon: <TeamOutlined style={{ color: darkenColor('#8280FF') }} />,
-      number: 4,
-      color: '#8280FF',
-    },
-    {
-      name: 'Số đơn hàng',
-      icon: <InboxOutlined style={{ color: darkenColor('#FEC53D') }} />,
-      number: 21,
-      color: '#FEC53D',
-    },
-    {
-      name: 'Tổng doanh thu',
-      icon: <LineChartOutlined style={{ color: darkenColor('#4AD991') }} />,
-      number: 21,
-      color: '#4AD991',
-    },
-    {
-      name: 'Số đơn đang chờ',
-      icon: <HistoryOutlined style={{ color: darkenColor('#FF9066') }} />,
-      number: 18,
-      color: '#FF9066',
-    },
-  ];
+function formatCurrency(amount) {
+  const formattedAmount = amount.toLocaleString('vi-VN');
+  return `${formattedAmount} đồng`;
+}
 
-  const chartData = [
-    {
-      date: '2024-12-02',
-      orderCount: 0,
-      totalRevenue: 0,
-      dayOfWeek: 'Monday',
-    },
-    {
-      date: '2024-12-03',
-      orderCount: 0,
-      totalRevenue: 0,
-      dayOfWeek: 'Tuesday',
-    },
-    {
-      date: '2024-12-04',
-      orderCount: 0,
-      totalRevenue: 2000,
-      dayOfWeek: 'Wednesday',
-    },
-    {
-      date: '2024-12-05',
-      orderCount: 0,
-      totalRevenue: 0,
-      dayOfWeek: 'Thursday',
-    },
-    {
-      date: '2024-12-06',
-      orderCount: 0,
-      totalRevenue: 0,
-      dayOfWeek: 'Friday',
-    },
-    {
-      date: '2024-12-07',
-      orderCount: 0,
-      totalRevenue: 0,
-      dayOfWeek: 'Saturday',
-    },
-    {
-      date: '2024-12-08',
-      orderCount: 0,
-      totalRevenue: 0,
-      dayOfWeek: 'Sunday',
-    },
-  ];
+function AdminDashboard() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [boxHeaderData, setBoxHeaderData] = useState([]);
+  const [chartData, setChartData] = useState([]);
+  const [reviews, setReviews] = useState([]);
+  const [maxPage, setMaxPage] = useState(10);
+
+  const callAPI = async () => {
+    try {
+      const res = await revenueAPI.getRevenue(currentPage, 4);
+      // console.log(res.data);
+
+      setBoxHeaderData([
+        {
+          name: 'Số khách hàng',
+          icon: <TeamOutlined style={{ color: darkenColor('#8280FF') }} />,
+          number: res.data.totalUser,
+          color: '#8280FF',
+        },
+        {
+          name: 'Số đơn hàng',
+          icon: <InboxOutlined style={{ color: darkenColor('#FEC53D') }} />,
+          number: res.data.totalOrder,
+          color: '#FEC53D',
+        },
+        {
+          name: 'Tổng doanh thu',
+          icon: <LineChartOutlined style={{ color: darkenColor('#4AD991') }} />,
+          number: formatCurrency(res.data.totalRevenue),
+          color: '#4AD991',
+        },
+        {
+          name: 'Số đơn đang chờ',
+          icon: <HistoryOutlined style={{ color: darkenColor('#FF9066') }} />,
+          number: res.data.totalPendingOrder,
+          color: '#FF9066',
+        },
+      ]);
+
+      setChartData(
+        res.data.revenueFor7Days.map((revenue) => ({ ...revenue, dayOfWeek: DATEINAWEEK[revenue.dayOfWeek] })),
+      );
+
+      setReviews(res.data.reviews);
+
+      setMaxPage(res.data.totalPages);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    callAPI();
+  }, [currentPage]);
 
   const data = {
     datasets: [
@@ -172,239 +161,15 @@ function AdminDashboard() {
     },
   ];
 
-  const reviews = [
-    {
-      id: 5,
-      rating: 4,
-      comment:
-        'Amitto error viduo callide acidus tempora abundans cenaculum theatrum comis. Eveniet a praesentium pectus vetus complectus. Absum caput non adulatio. Tardus talus adulatio voluptate thermae venustas aegrotatio verumtamen thermae.',
-      itemId: 1,
-      accountId: 1,
-      createdAt: '2024-11-14T15:14:00.000Z',
-      updatedAt: '2024-11-14T15:14:00.000Z',
-      account: {
-        id: 1,
-        name: 'Nguyen Van Dung',
-        displayName: 'NVDung',
-        address: '111 Phan Thanh, Thac Gian, Thanh Khe, Da Nang',
-        email: 'dung@gmail.com',
-        tel: '1234567890',
-        avatar:
-          'https://res.cloudinary.com/deei5izfg/image/upload/f_auto,q_auto/v1/VietnameseFoodRestaurant/skohr4qgffuyanefqy91',
-        gender: 'male',
-        password: '$2b$10$IHvnNax2OMgPgMLSw.LAMOEe4uV94ibA6P9hmyCHS4tP9ee36jRWa',
-        role: 'customer',
-        isActive: true,
-        createdAt: '2024-11-14T15:14:00.000Z',
-        updatedAt: '2024-11-14T15:14:00.000Z',
-      },
-      item: {
-        id: 1,
-        discount: 10,
-        calories: 120,
-        fat: 5,
-        carbohydrates: 18,
-        protein: 3,
-        cholesterol: 10,
-        sodium: 200,
-        fiber: 1,
-        availability: 'in stock',
-        rating: 5,
-        isFood: true,
-        isDeleted: false,
-        categoryId: 1,
-        createdAt: '2024-11-14T15:14:00.000Z',
-        updatedAt: '2024-11-14T15:14:00.000Z',
-        name: 'Banh Beo',
-        images: [
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077384/VietnameseFoodRestaurant/Food/banh_beo/vgmg2pc2bxlgocctobrp.jpg',
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077385/VietnameseFoodRestaurant/Food/banh_beo/xi5kxjvj2ffsf26phdev.jpg',
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077386/VietnameseFoodRestaurant/Food/banh_beo/e2tymgxdhfpeoi3ai1sp.jpg',
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077386/VietnameseFoodRestaurant/Food/banh_beo/ha4uy5uculwkoztnyzz6.jpg',
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077387/VietnameseFoodRestaurant/Food/banh_beo/qqlktgj2wolhww0adfj8.jpg',
-        ],
-        description: 'Traditional Hue rice cake with dried shrimp, scallion oil and soft rice flour cake.',
-        ingredients: ['rice flour', 'dried shrimp', 'scallion oil', 'fried onions', 'fish sauce', 'tapioca starch'],
-        unit: 'Plate',
-        regional: 'Hue',
-      },
-    },
-    {
-      id: 6,
-      rating: 1,
-      comment:
-        'Atrocitas esse vitae decens vitae talus aestivus bardus. Tui consequatur desolo trucido amplus. Contabesco vilis architecto defendo tunc.',
-      itemId: 1,
-      accountId: 1,
-      createdAt: '2024-11-14T15:14:00.000Z',
-      updatedAt: '2024-11-14T15:14:00.000Z',
-      account: {
-        id: 1,
-        name: 'Nguyen Van Dung',
-        displayName: 'NVDung',
-        address: '111 Phan Thanh, Thac Gian, Thanh Khe, Da Nang',
-        email: 'dung@gmail.com',
-        tel: '1234567890',
-        avatar:
-          'https://res.cloudinary.com/deei5izfg/image/upload/f_auto,q_auto/v1/VietnameseFoodRestaurant/skohr4qgffuyanefqy91',
-        gender: 'male',
-        password: '$2b$10$IHvnNax2OMgPgMLSw.LAMOEe4uV94ibA6P9hmyCHS4tP9ee36jRWa',
-        role: 'customer',
-        isActive: true,
-        createdAt: '2024-11-14T15:14:00.000Z',
-        updatedAt: '2024-11-14T15:14:00.000Z',
-      },
-      item: {
-        id: 1,
-        discount: 10,
-        calories: 120,
-        fat: 5,
-        carbohydrates: 18,
-        protein: 3,
-        cholesterol: 10,
-        sodium: 200,
-        fiber: 1,
-        availability: 'in stock',
-        rating: 5,
-        isFood: true,
-        isDeleted: false,
-        categoryId: 1,
-        createdAt: '2024-11-14T15:14:00.000Z',
-        updatedAt: '2024-11-14T15:14:00.000Z',
-        name: 'Banh Beo',
-        images: [
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077384/VietnameseFoodRestaurant/Food/banh_beo/vgmg2pc2bxlgocctobrp.jpg',
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077385/VietnameseFoodRestaurant/Food/banh_beo/xi5kxjvj2ffsf26phdev.jpg',
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077386/VietnameseFoodRestaurant/Food/banh_beo/e2tymgxdhfpeoi3ai1sp.jpg',
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077386/VietnameseFoodRestaurant/Food/banh_beo/ha4uy5uculwkoztnyzz6.jpg',
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077387/VietnameseFoodRestaurant/Food/banh_beo/qqlktgj2wolhww0adfj8.jpg',
-        ],
-        description: 'Traditional Hue rice cake with dried shrimp, scallion oil and soft rice flour cake.',
-        ingredients: ['rice flour', 'dried shrimp', 'scallion oil', 'fried onions', 'fish sauce', 'tapioca starch'],
-        unit: 'Plate',
-        regional: 'Hue',
-      },
-    },
-    {
-      id: 7,
-      rating: 1,
-      comment:
-        'Amor tabgo tollo capillus veritas cimentarius comprehendo illum carcer. Spes verbera tum velut pecto. Ex fuga sol conqueror delibero maxime adipisci condico eius arbustum. Conqueror inflammatio expedita bellicus avaritia blandior concido. Amor truculente',
-      itemId: 1,
-      accountId: 3,
-      createdAt: '2024-11-14T15:14:00.000Z',
-      updatedAt: '2024-11-14T15:14:00.000Z',
-      account: {
-        id: 3,
-        name: 'Tran Thi B',
-        displayName: 'TTB',
-        address: '333 Nguyen Van Troi, Thanh Khe, Da Nang',
-        email: 'ttb@gmail.com',
-        tel: '0912345678',
-        avatar:
-          'https://res.cloudinary.com/deei5izfg/image/upload/f_auto,q_auto/v1/VietnameseFoodRestaurant/skohr4qgffuyanefqy91',
-        gender: 'female',
-        password: '$2b$10$5HUjH2lXcfv7yeqtqdRfwOvOyN0spIJFUknvmEQ0SDfrCjFDcKH46',
-        role: 'customer',
-        isActive: true,
-        createdAt: '2024-11-14T15:14:00.000Z',
-        updatedAt: '2024-11-14T15:14:00.000Z',
-      },
-      item: {
-        id: 1,
-        discount: 10,
-        calories: 120,
-        fat: 5,
-        carbohydrates: 18,
-        protein: 3,
-        cholesterol: 10,
-        sodium: 200,
-        fiber: 1,
-        availability: 'in stock',
-        rating: 5,
-        isFood: true,
-        isDeleted: false,
-        categoryId: 1,
-        createdAt: '2024-11-14T15:14:00.000Z',
-        updatedAt: '2024-11-14T15:14:00.000Z',
-        name: 'Banh Beo',
-        images: [
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077384/VietnameseFoodRestaurant/Food/banh_beo/vgmg2pc2bxlgocctobrp.jpg',
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077385/VietnameseFoodRestaurant/Food/banh_beo/xi5kxjvj2ffsf26phdev.jpg',
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077386/VietnameseFoodRestaurant/Food/banh_beo/e2tymgxdhfpeoi3ai1sp.jpg',
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077386/VietnameseFoodRestaurant/Food/banh_beo/ha4uy5uculwkoztnyzz6.jpg',
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077387/VietnameseFoodRestaurant/Food/banh_beo/qqlktgj2wolhww0adfj8.jpg',
-        ],
-        description: 'Traditional Hue rice cake with dried shrimp, scallion oil and soft rice flour cake.',
-        ingredients: ['rice flour', 'dried shrimp', 'scallion oil', 'fried onions', 'fish sauce', 'tapioca starch'],
-        unit: 'Plate',
-        regional: 'Hue',
-      },
-    },
-    {
-      id: 8,
-      rating: 5,
-      comment:
-        'Varius terra corrigo cuius. Culpa comitatus quo. Capitulus arbor sopor tyrannus conservo centum velut. Verecundia laboriosam desidero textilis exercitationem volutabrum commemoro sumptus certe eveniet. Ascit cognatus vomica ancilla viridis toties tergo v',
-      itemId: 1,
-      accountId: 2,
-      createdAt: '2024-11-14T15:14:00.000Z',
-      updatedAt: '2024-11-14T15:14:00.000Z',
-      account: {
-        id: 2,
-        name: 'Nguyen Van A',
-        displayName: 'NVA',
-        address: '222 Le Duan, Hai Chau, Da Nang',
-        email: 'nva@gmail.com',
-        tel: '0987654321',
-        avatar:
-          'https://res.cloudinary.com/deei5izfg/image/upload/f_auto,q_auto/v1/VietnameseFoodRestaurant/skohr4qgffuyanefqy91',
-        gender: 'male',
-        password: '$2b$10$hRGJzS3XjXYuGtJV8qtQDOfOuboH5CS4JuK77lZ3gVkXfeKdp/EjG',
-        role: 'customer',
-        isActive: true,
-        createdAt: '2024-11-14T15:14:00.000Z',
-        updatedAt: '2024-11-14T15:14:00.000Z',
-      },
-      item: {
-        id: 1,
-        discount: 10,
-        calories: 120,
-        fat: 5,
-        carbohydrates: 18,
-        protein: 3,
-        cholesterol: 10,
-        sodium: 200,
-        fiber: 1,
-        availability: 'in stock',
-        rating: 5,
-        isFood: true,
-        isDeleted: false,
-        categoryId: 1,
-        createdAt: '2024-11-14T15:14:00.000Z',
-        updatedAt: '2024-11-14T15:14:00.000Z',
-        name: 'Banh Beo',
-        images: [
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077384/VietnameseFoodRestaurant/Food/banh_beo/vgmg2pc2bxlgocctobrp.jpg',
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077385/VietnameseFoodRestaurant/Food/banh_beo/xi5kxjvj2ffsf26phdev.jpg',
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077386/VietnameseFoodRestaurant/Food/banh_beo/e2tymgxdhfpeoi3ai1sp.jpg',
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077386/VietnameseFoodRestaurant/Food/banh_beo/ha4uy5uculwkoztnyzz6.jpg',
-          'https://res.cloudinary.com/deei5izfg/image/upload/v1727077387/VietnameseFoodRestaurant/Food/banh_beo/qqlktgj2wolhww0adfj8.jpg',
-        ],
-        description: 'Traditional Hue rice cake with dried shrimp, scallion oil and soft rice flour cake.',
-        ingredients: ['rice flour', 'dried shrimp', 'scallion oil', 'fried onions', 'fish sauce', 'tapioca starch'],
-        unit: 'Plate',
-        regional: 'Hue',
-      },
-    },
-  ];
-
   const onBackReview = () => {
-    console.log('back');
+    // console.log('back');
+    if (currentPage === 1) return;
+    setCurrentPage(currentPage - 1);
   };
 
   const onNextReview = () => {
-    console.log('next');
+    if (currentPage === maxPage) return;
+    setCurrentPage(currentPage + 1);
   };
 
   return (
