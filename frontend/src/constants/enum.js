@@ -21,3 +21,10 @@ export const ORDERSTATUSCOLOR = {
   received : '#F1D4FF',
   done : '#CCF0EB',
 }
+
+export const ORDERPAYMENTMETHOD = {
+  momo : 'Momo',
+  zalopay : 'Zalopay',
+  cash: 'Tiền mặt',
+}
+

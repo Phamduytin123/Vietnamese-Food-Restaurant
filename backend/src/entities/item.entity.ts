@@ -19,10 +19,14 @@ export class Item {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   name_vi: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   name_en: string;
 
   @Column({
@@ -65,10 +69,14 @@ export class Item {
   })
   fiber: number;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   description_vi: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   description_en: string;
 
   @Column({
@@ -86,6 +94,7 @@ export class Item {
     type: 'varchar',
     default: '[]',
     length: 1000,
+    nullable: true,
   })
   ingredients_vi: string;
 
@@ -93,13 +102,18 @@ export class Item {
     type: 'varchar',
     default: '[]',
     length: 1000,
+    nullable: true,
   })
   ingredients_en: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   unit_vi: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   unit_en: string;
 
   @Column({

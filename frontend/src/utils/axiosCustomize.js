@@ -7,6 +7,7 @@ const axiosClient = {
 
     headers: {
       'content-type': 'application/json',
+      'Accept-Language': 'vi',
     },
     paramsSerializer: (params) => queryString.stringify(params),
   }),
@@ -16,6 +17,7 @@ const axiosClient = {
 
     headers: {
       'content-type': 'application/json',
+      'Accept-Language': 'vi',
     },
     paramsSerializer: (params) => queryString.stringify(params),
   }),
@@ -25,6 +27,7 @@ const axiosClient = {
 
     headers: {
       'content-type': 'multipart/form-data',
+      'Accept-Language': 'vi',
     },
   }),
 };

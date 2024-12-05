@@ -359,7 +359,6 @@ export class OrderService {
         'orderDetails.itemSize.item',
       ],
     });
-    console.log(orderFound);
 
     if (!orderFound) {
       return new NotFoundException(
@@ -377,6 +376,7 @@ export class OrderService {
     }
 
     if (
+      updateStatusRequest.status !== OrderStatusEnum.CANCEL &&
       !OrderStatusUtils.isNextStatusValid(
         orderFound.status,
         updateStatusRequest.status
@@ -390,6 +390,10 @@ export class OrderService {
     }
 
     orderFound.status = updateStatusRequest.status;
+    if(updateStatusRequest.status === OrderStatusEnum.CANCEL)
+    {
+      orderFound.reasonCancel = "Cửa hàng hủy đơn";  
+    }
     return this.orderRepository.save(orderFound);
   }
 }
