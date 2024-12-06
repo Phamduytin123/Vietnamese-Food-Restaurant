@@ -29,7 +29,7 @@ const FormRegister = () => {
           navigate('/auth/login');
         }}
       >
-        Sign In
+        Đăng nhập
       </button>
       <button className="tab_button actived">Sign Up</button>
       <form className="form-data p-4">

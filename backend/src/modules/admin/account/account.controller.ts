@@ -20,8 +20,10 @@ import { UpdateAccount } from './dtos/updateAccount.request';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadService } from '../../../modules/upload/upload.service';
 import { CreateAccount } from './dtos/createAccount.request';
+import { LoggingInterceptor } from '../../../common/interceptors';
 
 @Controller('admin/accounts')
+@UseInterceptors(LoggingInterceptor)
 export class AdminAccountController {
   constructor(
     private readonly accountService: AdminAccountService,

@@ -1,9 +1,11 @@
-import { Controller, Get, Param, Query, Req } from '@nestjs/common';
+import { Controller, Get, Param, Query, Req, UseInterceptors } from '@nestjs/common';
 import { ItemService } from './item.service';
 import { Lang } from '../../common';
 import * as jwt from 'jsonwebtoken';
+import { LoggingInterceptor } from '../../common/interceptors';
 
 @Controller('/items')
+@UseInterceptors(LoggingInterceptor)
 export class ItemController {
   constructor(private readonly itemService: ItemService) {}
 

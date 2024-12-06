@@ -16,15 +16,13 @@ import { CartProvider } from '../../contexts/CartContext';
 import Dashboard from '../pages/dashboard';
 import History from '../pages/history';
 import HistoryDetail from '../pages/historyDetail';
-import AdminRoute from './admin-route';
-import CustomerRoute from './customer-route';
-import StaffRoute from './staff-route';
 import AdminDashboard from '../pages/admin-dashboard';
 import { useAuth } from '../../contexts/AccountContext';
+import AdminAccount from '../pages/admin-accounts';
+import ProtectedRoute from './protected-route';
 
 const UserHomePage = LoadableComponent(() => import('../pages/homepage/index'));
 const ProductsPage = LoadableComponent(() => import('../pages/product-list/index'));
-// const AdminDashBoardPage = LoadableComponent(() => import('../pages/admin-dashboard'));
 const AdminLayout = LoadableComponent(() => import('../../components/layouts/AdminLayout'));
 const AdminOrderLists = LoadableComponent(() => import('../pages/admin-order-lists'));
 
@@ -62,19 +60,14 @@ const AllRoutes = () => {
           <Route path="/history/:id" element={<MainLayout component={HistoryDetail} />} />
         </Route>
 
-        {/* // admin route  */}
-        <Route element={<AdminRoute />}>
-          <Route path="/admin/dashboard" element={<AdminLayout component={AdminDashboard} />} />
-          <Route path="/admin/order-lists" element={<AdminLayout component={AdminOrderLists} />} />
-        </Route>
-
-        {/* // customer route  */}
-        <Route element={<CustomerRoute />}></Route>
-
-        {/* // staff route  */}
-        <Route element={<StaffRoute />}>
-          <Route path="/admin/dashboard" element={<AdminLayout component={AdminDashboard} />} />
-          <Route path="/admin/order-lists" element={<AdminLayout component={AdminOrderLists} />} />
+        {/* // admin, staff route  */}
+        <Route element={<ProtectedRoute allowedRoles={['admin', 'staff']} />}>
+          <Route path="/admin/dashboard" element={<AdminLayout component={<AdminDashboard/>} />} />
+          <Route path="/admin/order-lists" element={<AdminLayout component={<AdminOrderLists/>} />} />
+          <Route path="/admin/customer-account" element={<AdminLayout component={<AdminAccount pageRole={"customer"}/>} />} />
+          <Route element={<ProtectedRoute allowedRoles={['admin']}/>}>
+            <Route path="/admin/staff-account" element={<AdminLayout component={<AdminAccount pageRole={"staff"}/>} />} />
+          </Route>
         </Route>
       </Routes>
     </CartProvider>

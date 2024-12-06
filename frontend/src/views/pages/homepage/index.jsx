@@ -127,7 +127,7 @@ function HomePage() {
               </p>
             </div>
             <Link to="/items" className="show-shop">
-              SHOP NOW
+              ĐẶT NGAY
             </Link>
           </div>
           <div className="header-image">
@@ -183,7 +183,7 @@ function HomePage() {
                       <div className="card-price">{formatPriceRange(item.ammount_of_money)}</div>
                     </div>
                     <button className="order-now-button" onClick={() => handleOrderNow(item.id)}>
-                      Order Now
+                      Đặt ngay
                     </button>
                   </div>
                 ))}

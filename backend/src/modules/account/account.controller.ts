@@ -10,12 +10,18 @@ import {
 import { Account } from '../../entities';
 import { AccountService } from './account.service';
 // import { CurrentAccount } from '../../common/decorator/currentAccount.decorator';
-import { AccountRoleEnum, CurrentAccount, Lang } from '../../common';
+import {
+  AccountRoleEnum,
+  CurrentAccount,
+  Lang,
+} from '../../common';
 import { RoleGuard } from '../../common/guards/role.guard';
 import { AuthGuard } from '../../common/guards/auth.guard';
 import { AccountUpdateDto } from './dtos/accountUpdateDto';
+import { LoggingInterceptor } from '../../common/interceptors';
 
 @Controller('accounts')
+@UseInterceptors(LoggingInterceptor)
 export class AccountController {
   constructor(private readonly accountService: AccountService) {}
 

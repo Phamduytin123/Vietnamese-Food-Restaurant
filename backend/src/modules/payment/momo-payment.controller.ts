@@ -1,11 +1,20 @@
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Req,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { MomoPaymentService } from './momo-payment.service';
 import { AccountRoleEnum, CurrentAccount, Lang } from '../../common';
 import { OrderRequest } from '../order/dtos/orderRequest';
 import { Account } from '../../entities';
 import { AuthGuard } from '../../common/guards/auth.guard';
+import { LoggingInterceptor } from '../../common/interceptors';
 
 @Controller('momo-payment')
+@UseInterceptors(LoggingInterceptor)
 export class MomoPaymentController {
   constructor(private momoService: MomoPaymentService) {}
   @Post('/payment')

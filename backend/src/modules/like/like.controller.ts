@@ -2,10 +2,12 @@ import { RoleGuard } from '../../common/guards/role.guard';
 import { AccountRoleEnum, CurrentAccount, Lang } from '../../common';
 import { Account } from '../../entities';
 import { LikeService } from './like.service';
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthGuard } from '../../common/guards/auth.guard';
+import { LoggingInterceptor } from '../../common/interceptors';
 
 @Controller('likes')
+@UseInterceptors(LoggingInterceptor)
 export class LikeController {
   constructor(private readonly likeService: LikeService) {}
 
