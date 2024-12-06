@@ -1,12 +1,14 @@
-import { Body, Controller, Get, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Put, Query, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AdminVoucherService } from './voucher.service';
 import { AuthGuard } from '../../../common/guards/auth.guard';
 import { RoleGuard } from '../../../common/guards/role.guard';
 import { AccountRoleEnum, Lang } from '../../../common';
 import type { UpdateVoucherDto } from './dtos/updateVoucher.request';
 import { CreateVoucherDto } from './dtos/createVoucher.request';
+import { LoggingInterceptor } from '../../../common/interceptors';
 
 @Controller('/admin/vouchers')
+@UseInterceptors(LoggingInterceptor)
 export class AdminVoucherController {
   constructor(private readonly voucherService: AdminVoucherService) { }
 

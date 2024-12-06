@@ -8,8 +8,10 @@ import {
 import { RecipeService } from './recipe.service';
 import { Lang } from '../../common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { LoggingInterceptor } from '../../common/interceptors';
 
 @Controller('recipes')
+@UseInterceptors(LoggingInterceptor)
 export class RecipeController {
   constructor(private readonly recipeService: RecipeService) {}
 

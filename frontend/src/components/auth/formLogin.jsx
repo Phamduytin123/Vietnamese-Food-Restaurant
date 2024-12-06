@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginAPI from '../../api/LoginAPI';
 import { useAuth } from '../../contexts/AccountContext';
+import { ArrowRightOutlined } from '@ant-design/icons';
 
 const FormLogin = () => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const FormLogin = () => {
   const [email, setEmail] = useState();
   const [textError, setTextError] = useState();
 
-  const { setAccount } = useAuth();
+  const { setAccount, account } = useAuth();
 
   const fetchLogin = async (formData) => {
     try {
@@ -36,6 +37,7 @@ const FormLogin = () => {
         if (res.data.role === 'customer') {
           navigate('/');
         } else {
+          console.log(res.data.role);
           navigate('/admin/dashboard');
         }
       } else {
@@ -69,14 +71,14 @@ const FormLogin = () => {
   return (
     <div className="justify-content-center form-login">
       <div>
-        <button className="tab_button actived">Sign In</button>
+        <button className="tab_button actived">Đăng nhập</button>
         <button
           className="tab_button"
           onClick={() => {
             navigate('/auth/register');
           }}
         >
-          Sign Up
+          Đăng ký
         </button>
         <form className="form-data p-4">
           <div className="form-group mb-3">
@@ -95,7 +97,7 @@ const FormLogin = () => {
           </div>
           <div className="form-group mb-3">
             <label htmlFor="password" className="form-label text-color__black">
-              Password
+              Mật khẩu
             </label>
             <div className="position-relative">
               <input
@@ -120,8 +122,8 @@ const FormLogin = () => {
             type="submit"
             onClick={handleSubmitLogin}
           >
-            SIGN IN
-            <img src={ICONS.arrow_right_login} alt="icon right" className="ms-2" />
+            ĐĂNG NHẬP
+            <ArrowRightOutlined className="ms-2" />
           </button>
         </form>
       </div>

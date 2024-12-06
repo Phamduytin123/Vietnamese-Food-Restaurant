@@ -7,14 +7,17 @@ import {
   Post,
   Req,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AccountRoleEnum, CurrentAccount, Lang } from '../../common';
 import { AuthGuard } from '../../common/guards/auth.guard';
 import { RoleGuard } from '../../common/guards/role.guard';
 import { OrderRequest } from '../order/dtos/orderRequest';
 import { Account } from '../../entities';
+import { LoggingInterceptor } from '../../common/interceptors';
 
 @Controller('zalo-payment')
+@UseInterceptors(LoggingInterceptor)
 export class ZaloPaymentController {
   constructor(private readonly ZaloPaymentService: ZaloPaymentService) {}
 

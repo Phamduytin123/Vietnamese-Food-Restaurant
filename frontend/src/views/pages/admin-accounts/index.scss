@@ -1,0 +1,12 @@
+@import '../../../constants/colors.scss';
+
+.admin-account-button-create-account {
+  background-color: $food-price-color !important;
+  color: $white-color !important;
+  border: 1px solid $food-price-color;
+}
+
+.admin-account-button-create-account:hover {
+  color: $food-price-color !important;
+  background-color: $white-color !important;
+}

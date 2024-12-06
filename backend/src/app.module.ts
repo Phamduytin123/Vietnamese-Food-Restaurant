@@ -30,6 +30,8 @@ import { AdminOrderModule } from './modules/admin/order/order.module';
 import { AdminAccountModule } from './modules/admin/account/account.module';
 import { AdminVoucherModule } from './modules/admin/voucher/voucher.module';
 import { HotItemModule } from './modules/hot-item/hot-item.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { LoggingInterceptor } from './common/interceptors';
 
 @Module({
   imports: [
@@ -69,7 +71,14 @@ import { HotItemModule } from './modules/hot-item/hot-item.module';
     HotItemModule,
   ],
   controllers: [AppController],
-  providers: [AppService, CloudinaryConfig],
+  providers: [
+    AppService,
+    CloudinaryConfig,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggingInterceptor,
+    },
+  ],
   exports: [CloudinaryConfig],
 })
 export class AppModule {}

@@ -1,11 +1,13 @@
-import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Query, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AdminOrderService } from './order.service';
 import { AuthGuard } from '../../../common/guards/auth.guard';
 import { RoleGuard } from '../../../common/guards/role.guard';
 import { AccountRoleEnum, Lang } from '../../../common';
 import { AdminOrdersRequest } from './dtos/adminOrderRequest';
+import { LoggingInterceptor } from '../../../common/interceptors';
 
 @Controller('/admin/orders')
+@UseInterceptors(LoggingInterceptor)
 export class AdminOrderController {
   constructor(private readonly adminOrderSerview: AdminOrderService) {}
 

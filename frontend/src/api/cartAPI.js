@@ -1,4 +1,3 @@
-import { get, update } from 'lodash';
 import axiosClient from '../utils/axiosCustomize';
 
 const cartAPI = {

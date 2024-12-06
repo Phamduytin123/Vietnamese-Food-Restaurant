@@ -26,21 +26,21 @@ function getItem(label, key, icon, children) {
   };
 }
 
-const items = [
-  getItem('Trang chủ', '/admin/dashboard', <LineChartOutlined />),
-  getItem('Sản phẩm', '/admin/products', <InboxOutlined />),
-  getItem('Đơn hàng', '/admin/order-lists', <TruckOutlined />),
-  getItem('Nhân viên', '/admin/staff-account', <SolutionOutlined />),
-  getItem('Khách hàng', '/admin/customer-account', <TeamOutlined />),
-  getItem('Phiếu giảm giá', '/admin/vouchers', <GiftOutlined />),
-  getItem('Cài đặt', '/admin/setting', <SettingOutlined />),
-];
-
 function AdminLayout(props) {
   const [collapsed, setCollapsed] = useState(false);
   const { account } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const items = [
+    getItem('Trang chủ', '/admin/dashboard', <LineChartOutlined />),
+    getItem('Sản phẩm', '/admin/products', <InboxOutlined />),
+    getItem('Đơn hàng', '/admin/order-lists', <TruckOutlined />),
+    ...(account.role === 'admin' ? [getItem('Nhân viên', '/admin/staff-account', <SolutionOutlined />)] : []),
+    getItem('Khách hàng', '/admin/customer-account', <TeamOutlined />),
+    getItem('Phiếu giảm giá', '/admin/vouchers', <GiftOutlined />),
+    getItem('Cài đặt', '/admin/setting', <SettingOutlined />),
+  ];
 
   const onMenuClick = (menuItem) => {
     navigate(menuItem.key);
@@ -63,7 +63,7 @@ function AdminLayout(props) {
           onCollapse={(value) => setCollapsed(value)}
           className="admin-layout-slider-container"
         >
-          <div className="position-fixed" style={{width : collapsed ? 80 : 200}}>
+          <div className="position-fixed" style={{ width: collapsed ? 80 : 200 }}>
             <Menu
               className="slider-container"
               defaultSelectedKeys={[location.pathname]}
@@ -79,7 +79,7 @@ function AdminLayout(props) {
             </div>
           </div>
         </Sider>
-        <props.component />
+        {props.component}
       </Layout>
     </Layout>
   );

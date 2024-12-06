@@ -15,13 +15,15 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { UploadService } from '../../../modules/upload/upload.service';
 import { CreateItemReq } from './dtos/createItemReq';
 import { UpdateItemReq } from './dtos/updateItem.request';
+import { LoggingInterceptor } from '../../../common/interceptors';
 
 @Controller('/admin/items')
+@UseInterceptors(LoggingInterceptor)
 export class AdminItemController {
   constructor(
     private readonly adminItemService: AdminItemService,
     private readonly uploadService: UploadService
-  ) { }
+  ) {}
   @Put()
   @UseGuards(new RoleGuard([AccountRoleEnum.ADMIN, AccountRoleEnum.STAFF]))
   @UseGuards(AuthGuard)

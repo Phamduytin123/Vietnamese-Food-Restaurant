@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv';
 import { ValidationPipe } from '@nestjs/common';
 import { I18nValidationPipe } from 'nestjs-i18n';
 import { I18nValidationExceptionFilter } from './common/filters/validation-exception.filter';
+import { LoggingInterceptor } from './common/interceptors';
 
 dotenv.config();
 
@@ -14,5 +15,6 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors();
   await app.listen(process.env.PORT);
+  app.useGlobalInterceptors(new LoggingInterceptor());
 }
 bootstrap();

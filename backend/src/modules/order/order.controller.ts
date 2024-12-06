@@ -8,6 +8,7 @@ import {
   Query,
   UseFilters,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AccountRoleEnum, CurrentAccount, Lang } from '../../common';
 import { AuthGuard } from '../../common/guards/auth.guard';
@@ -17,8 +18,10 @@ import { OrderRequest } from './dtos/orderRequest';
 import { OrdersRequest } from './dtos/ordersRequest';
 import { CusCancelRequest } from './dtos/cusCancelRequest';
 import { UpdateStatusDto } from './dtos/updateStatusDto';
+import { LoggingInterceptor } from '../../common/interceptors';
 
 @Controller('/orders')
+@UseInterceptors(LoggingInterceptor)
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 

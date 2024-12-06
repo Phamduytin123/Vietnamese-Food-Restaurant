@@ -118,7 +118,7 @@ const Header = ({ userInfo }) => {
                   <Dropdown.Menu className="custom-dropdown-menu">
                     <Dropdown.Item href="#/dashboard">
                       <RiStackLine className="dropdown-icon" />
-                      Homepage
+                      Trang chủ
                     </Dropdown.Item>
                     <Dropdown.Item href="#/order-history">
                       <MdOutlineHistory className="dropdown-icon" />
@@ -139,7 +139,7 @@ const Header = ({ userInfo }) => {
                     <Dropdown.Divider className="dropdown-icon" />
                     <Dropdown.Item onClick={handleLogout}>
                       <IoLogOutOutline className="dropdown-icon" />
-                      Log-out
+                      Đăng xuất
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

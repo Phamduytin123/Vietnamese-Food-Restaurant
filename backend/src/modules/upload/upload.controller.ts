@@ -7,8 +7,10 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { UploadService } from './upload.service';
+import { LoggingInterceptor } from '../../common/interceptors';
 
 @Controller('uploads')
+@UseInterceptors(LoggingInterceptor)
 export class UploadController {
   constructor(private readonly uploadService: UploadService) {}
   @Post('/image')

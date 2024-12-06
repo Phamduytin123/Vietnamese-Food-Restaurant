@@ -38,4 +38,6 @@ export const ICONS = {
   icon_back_home: require('../assets/icons/icon_back_home.png'),
   icon_xproduct: require('../assets/icons/XProduct.png'),
   remove: require('../assets/icons/remove.png'),
+  male: require('../assets/icons/male.png'),
+  female: require('../assets/icons/female.png'),
 };

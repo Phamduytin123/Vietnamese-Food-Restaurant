@@ -93,7 +93,7 @@ export class AuthService {
     const payload = await this.jwtService.verifyAsync(token, {
       secret: process.env.JWT_SECRET,
     });
-    console.log(payload.newAccount.email);
+    // console.log(payload.newAccount.email);
 
     const user = await this.accountService.create(payload.newAccount);
     if (!user) {

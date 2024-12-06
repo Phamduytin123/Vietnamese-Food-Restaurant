@@ -8,14 +8,17 @@ import {
   Put,
   Req,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CartService } from './cart.service';
 import { RoleGuard } from '../../common/guards/role.guard';
 import { AccountRoleEnum, CurrentAccount, Lang } from '../../common';
 import { AuthGuard } from '../../common/guards/auth.guard';
 import { Account } from '../../entities';
+import { LoggingInterceptor } from '../../common/interceptors';
 
 @Controller('/carts')
+@UseInterceptors(LoggingInterceptor)
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
