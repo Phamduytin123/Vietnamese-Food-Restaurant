@@ -9,14 +9,10 @@ export class AccountUpdateDto {
   displayName: string;
   @Optional()
   address: string;
-  @IsEmail()
+  @Optional()
   email: string;
   @Optional()
   tel: string;
-  @IsNotEmpty()
-  avatar: string;
-  @IsNotEmpty()
+  @Optional()
   gender: AccountGenderEnum;
-  @IsNotEmpty()
-  password: string;
 }

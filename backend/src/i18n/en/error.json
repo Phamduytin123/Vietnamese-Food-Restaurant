@@ -21,7 +21,9 @@
   },
   "account": {
     "accountNotFound": "Account with ID '{accountId}' not found in the system",
-    "emailAlreadyExists": "This email is already existed in the system."
+    "emailAlreadyExists": "This email is already existed in the system.",
+    "invalidPassword": "Current password is invalid",
+    "invalidConfirmPassword": "Confirm password is invalid"
   },
   "voucher": {
     "voucherNotFound": "Voucher with ID {voucherId} not found.",
