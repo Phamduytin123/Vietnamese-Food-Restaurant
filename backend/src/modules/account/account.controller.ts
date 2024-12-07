@@ -4,6 +4,8 @@ import {
   Controller,
   Get,
   Post,
+  Put,
+  UploadedFiles,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
@@ -19,11 +21,16 @@ import { RoleGuard } from '../../common/guards/role.guard';
 import { AuthGuard } from '../../common/guards/auth.guard';
 import { AccountUpdateDto } from './dtos/accountUpdateDto';
 import { LoggingInterceptor } from '../../common/interceptors';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { UploadService } from '../upload/upload.service';
+import { PasswordUpdateDto } from './dtos/passwordUpdateDto';
 
 @Controller('accounts')
 @UseInterceptors(LoggingInterceptor)
 export class AccountController {
-  constructor(private readonly accountService: AccountService) {}
+  constructor(private readonly accountService: AccountService,
+    private readonly uploadService: UploadService
+  ) { }
 
   @Post()
   async create(@Body() requestBody: any): Promise<Account> {
@@ -45,7 +52,8 @@ export class AccountController {
   GetInforAccount(@CurrentAccount() account: Account) {
     return account;
   }
-  @Post('/update')
+  @Put('/update')
+  @UseInterceptors(FilesInterceptor('images', 3))
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(
     new RoleGuard([
@@ -55,15 +63,31 @@ export class AccountController {
     ])
   )
   @UseGuards(AuthGuard)
-  UpdateInforAccount(
+  async UpdateInforAccount(
     @Lang() lang: string,
+    @UploadedFiles() files: Express.Multer.File[],
     @CurrentAccount() currentAccount: Account,
     @Body() updateAccount: AccountUpdateDto
   ) {
+    const imagesLink = [];
+    for (const file of files) {
+      const result = await this.uploadService.uploadImage(file);
+      imagesLink.push(result.url);
+    }
+
     return this.accountService.updateAccount(
       lang,
       currentAccount,
-      updateAccount
+      updateAccount,
+      imagesLink
     );
+  }
+
+  @Put('/changePassword')
+  @UseGuards(AuthGuard)
+  async changePassword(@CurrentAccount() currentAccount: Account, @Body() passwordRequest: PasswordUpdateDto, @Lang() lang: string) {
+    console.log(passwordRequest.currentPassword);
+
+    return this.accountService.updatePassword(currentAccount, passwordRequest, lang);
   }
 }

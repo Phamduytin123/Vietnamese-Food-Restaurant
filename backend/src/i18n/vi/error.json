@@ -21,7 +21,9 @@
   },
   "account": {
     "accountNotFound": "Không thể tìm thấy tài khoản vói Id '{accountId}' trong hệ thống",
-    "emailAlreadyExists": "Email này đã tồn tại trong hệ thống"
+    "emailAlreadyExists": "Email này đã tồn tại trong hệ thống",
+    "invalidPassword": "Mật khẩu hiện tại không chính xác",
+    "invalidConfirmPassword": "Xác thực mật khẩu không chính xác"
   },
   "voucher": {
     "voucherNotFound": "Không tìm thấy voucher có ID {voucherId}.",
