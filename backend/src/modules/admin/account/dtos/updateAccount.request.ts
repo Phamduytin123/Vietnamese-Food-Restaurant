@@ -40,7 +40,7 @@ export class UpdateAccount {
   gender: AccountGenderEnum;
 
   @IsOptional()
-  isActive: string;
+  isActive: boolean;
 
   @IsOptional()
   @IsEnum(AccountRoleEnum, {

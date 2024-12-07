@@ -19,7 +19,7 @@ export class AdminItemService {
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>,
     private readonly i18n: I18nService
-  ) { }
+  ) {}
 
   async createItem(images: any, body: CreateItemReq) {
     const {
@@ -183,30 +183,37 @@ export class AdminItemService {
     const newItem = {
       ...existingItem,
       ...filterItem,
-    }
+    };
 
     const updateItem = await this.itemRepository.save(newItem);
 
     const newItemSizes = [];
 
-    for (const itemSize of itemSizesParse) {
+    console.log(itemSizesParse);
 
+    for (const itemSize of itemSizesParse) {
       const { id, size_en, size_vi, price } = itemSize;
       let savedItemSize: any;
-      if (!id) {
+      if (id) {
+        const findItemSize = await this.itemSizeRepository.findOneBy({ id });
+        if (!findItemSize) {
+          return new NotFoundException(
+            this.i18n.t('error.item.itemSizeNotFound', {
+              args: { itemId: id },
+            })
+          );
+        }
+        findItemSize.size_en = size_en ? size_en : findItemSize.size_en;
+        findItemSize.size_vi = size_vi ? size_vi : findItemSize.size_vi;
+        findItemSize.price = price ?? findItemSize.price;
+        savedItemSize = await this.itemSizeRepository.save(findItemSize);
+      } else {
         savedItemSize = await this.itemSizeRepository.save({
           size_en: size_en,
           size_vi: size_vi,
           price: price,
-          itemId: (await existingItem).id,
+          itemId: existingItem.id,
         });
-      }
-      else {
-        const findItemSize = await this.itemSizeRepository.findOneBy({ id });
-        findItemSize.size_en = size_en ?? findItemSize.size_en;
-        findItemSize.size_vi = size_vi ?? findItemSize.size_vi;
-        findItemSize.price = price ?? findItemSize.price
-        savedItemSize = await this.itemSizeRepository.save(findItemSize);
       }
 
       newItemSizes.push(savedItemSize);

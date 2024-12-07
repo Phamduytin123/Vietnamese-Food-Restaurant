@@ -1,0 +1,49 @@
+@import '../../../../../constants/colors.scss';
+
+.admin-account-detail-modal-avatar {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.admin-account-detail-modal-item-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin : 10px 0px;
+  .col-lg-6, .col-sm-12 {
+    padding : 0px !important;
+  }
+}
+
+.admin-account-detail-modal-item {
+  display: flex;
+  align-items: center;
+}
+
+.admin-account-detail-modal-display-name {
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 8px;
+}
+
+.admin-account-detail-modal-item-role {
+  text-align: center;
+  width: 70%;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.admin-account-detail-modal-item-title {
+  font-weight: bold;
+  margin-bottom: 1px;
+}
+
+.admin-account-detail-modal-exist-button {
+  background-color: $light-gray !important;
+  color : black !important;
+}
+
+.admin-account-detail-modal-exist-button:hover {
+  border: 1px solid black !important;  
+}
