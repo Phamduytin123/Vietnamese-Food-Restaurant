@@ -8,7 +8,7 @@ export class UpdateItemReq {
     message: i18nValidationMessage('validation.item.item_id_required'),
   })
   id: number;
-  @IsNotEmpty()
+  @IsOptional()
   //     {
   //     message: i18nValidationMessage('validation.item.name_en_required'),
   // }
@@ -76,9 +76,11 @@ export class UpdateItemReq {
   //   }
   ingredients_en: string;
 
-  @IsNotEmpty({
-    message: i18nValidationMessage('validation.item.unit_vi_required'),
-  })
+  @IsOptional(
+    // {
+    //   message: i18nValidationMessage('validation.item.unit_vi_required'),
+    // }
+  )
   unit_vi: string;
 
   @IsOptional()

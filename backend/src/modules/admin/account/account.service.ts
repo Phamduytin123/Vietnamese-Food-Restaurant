@@ -23,7 +23,7 @@ export class AdminAccountService {
     @InjectRepository(Account)
     private readonly accountRepo: Repository<Account>,
     private readonly i18n: I18nService
-  ) { }
+  ) {}
 
   async getAccounts(query: SearchAccount) {
     const { page, limit, txtSearch, role } = query;
@@ -98,7 +98,7 @@ export class AdminAccountService {
       tel: tel,
       gender: gender,
       role: role,
-      isActive: isActive == 'true',
+      isActive: isActive,
     });
 
     newAccount = {
@@ -158,7 +158,7 @@ export class AdminAccountService {
   }
   async findById(id: number) {
     const account = await this.accountRepo.findOne({
-      where: { id: id }
+      where: { id: id },
     });
     return account;
   }

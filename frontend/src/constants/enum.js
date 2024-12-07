@@ -28,3 +28,14 @@ export const ORDERPAYMENTMETHOD = {
   cash: 'Tiền mặt',
 }
 
+export const ACCOUNTROLE = {
+  admin : 'Chủ cửa hàng',
+  staff : 'Nhân viên',
+  customer: 'Khách hàng',
+}
+
+export const ACCOUNTROLECOLOR = {
+  admin : '#56ECEA',
+  staff : '#EB883D',
+  customer: '#56EC72',
+}
