@@ -1,21 +1,18 @@
 import UserSidebar from '../../../components/sidebar/UserSidebar';
 import { Spin, Table } from 'antd';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useCart } from '../../../contexts/CartContext';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.scss';
 import wishlistAPI from '../../../api/wishlistAPI';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { tableColumns } from './constant';
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState();
-  const [dataSource, setDataSource] = useState();
   const { addToCart } = useCart();
   const [selectedSizes, setSelectedSizes] = useState({}); // Trạng thái lưu selectedSizeId cho mỗi itemId
   const [loading, setLoading] = useState();
-  const navigate = useNavigate();
   const fetchWishlist = async () => {
     try {
       setLoading(true);
@@ -55,7 +52,6 @@ const Wishlist = () => {
       ),
     );
   };
-  const notify = () => toast('Wow so easy!');
   const handleAddToCart = async (itemId, sizeId) => {
     const selectedItem = wishlist.find((item) => item.itemId === itemId);
     const selectedSize = selectedItem?.itemSizes.find((size) => size.id === sizeId);

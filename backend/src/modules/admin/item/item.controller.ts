@@ -27,38 +27,22 @@ export class AdminItemController {
   @Put()
   @UseGuards(new RoleGuard([AccountRoleEnum.ADMIN, AccountRoleEnum.STAFF]))
   @UseGuards(AuthGuard)
-  @UseInterceptors(FilesInterceptor('images', 3))
+  @UseInterceptors(FilesInterceptor('formData', 5))
   async updateItem(
     @UploadedFiles() files: Express.Multer.File[],
     @Body() body: UpdateItemReq
   ) {
-    const imagesLink = [];
-
-    // Duyệt qua từng file và upload
-    for (const file of files) {
-      const result = await this.uploadService.uploadImage(file);
-      imagesLink.push(result.url);
-    }
-
-    return this.adminItemService.updateItem(imagesLink, body);
+    return this.adminItemService.updateItem(body);
   }
 
   @Post()
   @UseGuards(new RoleGuard([AccountRoleEnum.ADMIN, AccountRoleEnum.STAFF]))
   @UseGuards(AuthGuard)
-  @UseInterceptors(FilesInterceptor('images', 3))
+  @UseInterceptors(FilesInterceptor('formData', 5))
   async createItem(
     @UploadedFiles() files: Express.Multer.File[],
     @Body() body: CreateItemReq
   ) {
-    const imagesLink = [];
-
-    // Duyệt qua từng file và upload
-    for (const file of files) {
-      const result = await this.uploadService.uploadImage(file);
-      imagesLink.push(result.url);
-    }
-
-    return this.adminItemService.createItem(imagesLink, body);
+    return this.adminItemService.createItem(body);
   }
 }

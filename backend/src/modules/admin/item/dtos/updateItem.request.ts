@@ -23,6 +23,9 @@ export class UpdateItemReq {
   discount: number = 0;
 
   @IsOptional()
+  images: string;
+
+  @IsOptional()
   calories: number = 0;
 
   @IsOptional()

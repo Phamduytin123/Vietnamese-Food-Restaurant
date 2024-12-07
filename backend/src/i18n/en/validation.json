@@ -30,7 +30,8 @@
     "regional_en_required": "Regional information in English is required.",
     "itemSizes_required": "Item sizes are required.",
     "availability_invalid": "Availability of item must be a valid option.",
-    "item_id_required": "Item id is requierd"
+    "item_id_required": "Item id is required.",
+    "images_required": "Images of item are required."
   },
   "account": {
     "role_invalid": "Role of account must be a valid option ( customer, admin, staff ).",

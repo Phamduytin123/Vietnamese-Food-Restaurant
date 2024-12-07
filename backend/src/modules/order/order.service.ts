@@ -122,7 +122,7 @@ export class OrderService {
         }
 
         // Check if the voucher's minPrice is less than or equal to the totalPrice
-        if (voucher.minPrice * 1000 > totalPrice) {
+        if (voucher.minPrice > totalPrice) {
           return new BadRequestException(
             this.i18n.t('error.voucher.minPriceExceeded', {
               args: { voucherId: voucherId, minPrice: voucher.minPrice },

@@ -8,7 +8,7 @@ export class StringUtils {
   }
 
   static toMoneyString(price: number): string {
-    const formattedPrice = (price * 1000).toLocaleString('vi-VN');
+    const formattedPrice = (price).toLocaleString('vi-VN');
     return `${formattedPrice} VND`;
   }
 }

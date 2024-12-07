@@ -13,7 +13,7 @@ export class ItemService {
   constructor(
     @InjectRepository(Item) private readonly itemRepo: Repository<Item>,
     @InjectRepository(LikeItem)
-    private readonly likeRepository: Repository<LikeItem>,
+    private readonly likeRepository: Repository<LikeItem>
   ) {}
 
   async getListItem(account: any, lang: string, query: any) {
@@ -26,7 +26,7 @@ export class ItemService {
       isFood = 'true',
       sortBy = 'name',
       sortOrder = 'ASC',
-      isDiscount = 'false',
+      isDiscount,
       categoryId,
     } = query;
 
@@ -35,7 +35,6 @@ export class ItemService {
     minPrice = minPrice ? parseFloat(minPrice) : undefined;
     maxPrice = maxPrice ? parseFloat(maxPrice) : undefined;
     isFood = isFood.toLowerCase() === 'true';
-    isDiscount = isDiscount.toLowerCase() === 'true';
 
     // Paging
     const skip = (page - 1) * limit;
@@ -56,7 +55,9 @@ export class ItemService {
       categoryId: categoryId,
       isFood: isFood,
       isDeleted: false,
-      discount: isDiscount && MoreThan(0),
+      discount: isDiscount
+        ? (isDiscount.toLowerCase() === 'true' && MoreThan(0))
+        : null,
     });
 
     if (txtSearch) {
@@ -94,8 +95,8 @@ export class ItemService {
         );
 
         return (
-          (!minPrice || itemMinPrice / 1000 >= minPrice) &&
-          (!maxPrice || itemMaxPrice / 1000 <= maxPrice)
+          (!minPrice || itemMinPrice >= minPrice) &&
+          (!maxPrice || itemMaxPrice <= maxPrice)
         );
       });
     }
@@ -156,7 +157,12 @@ export class ItemService {
 
       const itemDetail = await this.itemRepo.findOne({
         where: { id },
-        relations: ['category', 'itemSizes', 'itemSizes.reviews', 'itemSizes.reviews.account'],
+        relations: [
+          'category',
+          'itemSizes',
+          'itemSizes.reviews',
+          'itemSizes.reviews.account',
+        ],
         order: {
           itemSizes: {
             reviews: {
