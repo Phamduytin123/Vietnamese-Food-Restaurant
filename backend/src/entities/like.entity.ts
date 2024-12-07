@@ -29,11 +29,17 @@ export class LikeItem {
   })
   updatedAt: Date;
 
-  @ManyToOne(() => Account, account => account.likes)
+  @ManyToOne(() => Account, account => account.likes, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'accountId' })
   account: Account;
 
-  @ManyToOne(() => Item, item => item.likes)
+  @ManyToOne(() => Item, item => item.likes, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'itemId' })
   item: Item;
 }

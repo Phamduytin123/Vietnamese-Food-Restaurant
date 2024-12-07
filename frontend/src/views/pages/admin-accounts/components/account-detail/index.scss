@@ -1,8 +1,8 @@
 @import '../../../../../constants/colors.scss';
 
 .admin-account-detail-modal-avatar {
-  width: 100px;
-  height: 100px;
+  width: 200px !important;
+  height: 200px !important;
   object-fit: cover;
 }
 
@@ -13,6 +13,9 @@
   margin : 10px 0px;
   .col-lg-6, .col-sm-12 {
     padding : 0px !important;
+  };
+  p {
+    padding : 0px;
   }
 }
 

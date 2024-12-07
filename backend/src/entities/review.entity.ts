@@ -30,7 +30,7 @@ export class Review {
   itemSizeId: number;
 
   @Column()
-  orderId: number;  
+  orderId: number;
 
   @Column()
   accountId: number;
@@ -43,15 +43,24 @@ export class Review {
   })
   updatedAt: Date;
 
-  @ManyToOne(() => ItemSize, itemSize => itemSize.reviews)
+  @ManyToOne(() => ItemSize, itemSize => itemSize.reviews, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'itemSizeId' })
   itemSize: ItemSize;
 
-  @ManyToOne(() => Order, order => order.reviews)
+  @ManyToOne(() => Order, order => order.reviews, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'orderId' })
   order: Order;
 
-  @ManyToOne(() => Account, account => account.reviews)
+  @ManyToOne(() => Account, account => account.reviews, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'accountId' })
   account: Account;
 }

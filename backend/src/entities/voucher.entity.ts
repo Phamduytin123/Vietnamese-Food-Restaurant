@@ -51,6 +51,9 @@ export class Voucher {
   })
   updatedAt: Date;
 
-  @OneToMany(() => Order, order => order.voucher)
+  @OneToMany(() => Order, order => order.voucher, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   orders: Order[];
 }

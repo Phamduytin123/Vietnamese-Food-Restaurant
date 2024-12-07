@@ -43,6 +43,9 @@ export class UpdateAccount {
   isActive: boolean;
 
   @IsOptional()
+  avatar: string;
+
+  @IsOptional()
   @IsEnum(AccountRoleEnum, {
     message: i18nValidationMessage('validation.account.role_invalid'),
   })

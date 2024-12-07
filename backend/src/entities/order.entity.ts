@@ -53,7 +53,7 @@ export class Order {
   reasonCancel: string;
 
   @Column({
-    nullable: true
+    nullable: true,
   })
   note: string;
 
@@ -83,17 +83,29 @@ export class Order {
   })
   updatedAt: Date;
 
-  @ManyToOne(() => Account, account => account.orders)
+  @ManyToOne(() => Account, account => account.orders, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'accountId' })
   account: Account;
 
-  @OneToMany(() => OrderDetail, orderDetail => orderDetail.order)
+  @OneToMany(() => OrderDetail, orderDetail => orderDetail.order, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   orderDetails: OrderDetail[];
 
-  @OneToMany(() => Review, review => review.order)
+  @OneToMany(() => Review, review => review.order, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   reviews: Review[];
 
-  @ManyToOne(() => Voucher, voucher => voucher.orders)
+  @ManyToOne(() => Voucher, voucher => voucher.orders, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'voucherId' })
   voucher: Voucher;
 }

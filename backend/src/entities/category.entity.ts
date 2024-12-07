@@ -25,6 +25,9 @@ export class Category {
   @Column()
   isFood: boolean;
 
-  @OneToMany(() => Item, item => item.category)
+  @OneToMany(() => Item, item => item.category, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   items: Item[];
 }

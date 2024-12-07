@@ -167,7 +167,7 @@ const AdminAccount = (props) => {
       render: (isActive, record) => (
         <div className="admin-account-table-center-item">
           <Switch
-            size="small"
+            size="big"
             value={isActive}
             onClick={(status) => onActiveAccount(status, record)}
             style={{ background: isActive ? 'green' : 'gray' }}

@@ -137,14 +137,14 @@ export class AdminItemService {
     const existingItem = await this.itemRepository.findOneBy({ id });
 
     if (!existingItem) {
-      throw new NotFoundException(
+      return new NotFoundException(
         this.i18n.t('error.item.itemNotFound', {
           args: { itemId: id },
         })
       );
     }
 
-    const categoryFound = this.categoryRepository.findOne({
+    const categoryFound = await this.categoryRepository.findOne({
       where: { id: categoryId },
     });
 
@@ -187,10 +187,19 @@ export class AdminItemService {
 
     const updateItem = await this.itemRepository.save(newItem);
 
+    // Lấy danh sách `itemSizes` hiện tại từ cơ sở dữ liệu
+    const existingItemSizes = await this.itemSizeRepository.find({
+      where: { itemId: existingItem.id },
+    });
+
     const newItemSizes = [];
+    const itemSizeIdsToKeep = itemSizesParse.map(
+      (itemSize: any) => itemSize.id
+    );
 
-    console.log(itemSizesParse);
+    console.log(itemSizeIdsToKeep);
 
+    // Xử lý cập nhật hoặc tạo mới các `itemSizes`
     for (const itemSize of itemSizesParse) {
       const { id, size_en, size_vi, price } = itemSize;
       let savedItemSize: any;
@@ -218,6 +227,14 @@ export class AdminItemService {
 
       newItemSizes.push(savedItemSize);
     }
+
+    // Xóa các `itemSizes` không tồn tại trong danh sách được truyền vào
+    for (const existingSize of existingItemSizes) {
+      if (!itemSizeIdsToKeep.includes(existingSize.id.toString())) {
+        await this.itemSizeRepository.remove(existingSize);
+      }
+    }
+
     return {
       ...updateItem,
       itemSizes: newItemSizes,

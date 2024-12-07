@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.scss';
-import { Button, Modal, Switch } from 'antd';
+import { Button, Image, Modal, Switch } from 'antd';
 import { FormOutlined } from '@ant-design/icons';
 import { ICONS } from '../../../../../constants/icons';
 import { darkenColor, formatDateNormal } from '../../../../../utils/string';
@@ -29,7 +29,7 @@ const AccountDetailModal = (props) => {
     >
       <div className="admin-account-detail-modal-item-container">
         <div className="admin-account-detail-modal-item">
-          <img
+          <Image
             alt={`tài khoản người dùng ${data.id}`}
             className="admin-account-detail-modal-avatar"
             src={data.avatar}
@@ -41,25 +41,12 @@ const AccountDetailModal = (props) => {
         </div>
       </div>
       <div className="row align-items-center admin-account-detail-modal-item-container">
-        <div className="col-lg-6 col-sm-12">
-          <p className="admin-account-detail-modal-item-title">Tên đầy đủ : </p>
-          <p>{data.name}</p>
-        </div>
-        <div className="col-lg-6 col-sm-12">
-          <p className="admin-account-detail-modal-item-title">Kích hoạt : </p>
-          <Switch
-            size="small"
-            value={data.isActive}
-            onClick={(status) => onActiveAccount(status, data)}
-            style={{ background: data.isActive ? 'green' : 'gray' }}
-          />
-        </div>
+        <p className="admin-account-detail-modal-item-title">Tên đầy đủ : </p>
+        <p>{data.name}</p>
       </div>
       <div className="row align-items-center admin-account-detail-modal-item-container">
-        <div className="col-12">
-          <p className="admin-account-detail-modal-item-title">Địa chỉ : </p>
-          <p>{data.address}</p>
-        </div>
+        <p className="admin-account-detail-modal-item-title">Địa chỉ : </p>
+        <p>{data.address}</p>
       </div>
       <div className="row align-items-center admin-account-detail-modal-item-container">
         <div className="col-lg-6 col-sm-12">
@@ -73,8 +60,13 @@ const AccountDetailModal = (props) => {
       </div>
       <div className="row align-items-center admin-account-detail-modal-item-container">
         <div className="col-lg-6 col-sm-12">
-          <p className="admin-account-detail-modal-item-title">Email : </p>
-          <p>{data.email}</p>
+          <p className="admin-account-detail-modal-item-title">Kích hoạt : </p>
+          <Switch
+            size="big"
+            value={data.isActive}
+            onClick={(status) => onActiveAccount(status, data)}
+            style={{ background: data.isActive ? 'green' : 'gray' }}
+          />
         </div>
         <div className="col-lg-6 col-sm-12">
           <p className="admin-account-detail-modal-item-title">Giới tính : </p>

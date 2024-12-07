@@ -32,11 +32,17 @@ export class Cart {
   })
   updatedAt: Date;
 
-  @ManyToOne(() => Account, account => account.carts)
+  @ManyToOne(() => Account, account => account.carts, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'accountId' })
   account: Account;
 
-  @ManyToOne(() => ItemSize, itemSize => itemSize.carts)
+  @ManyToOne(() => ItemSize, itemSize => itemSize.carts, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'itemSizeId' })
   itemSize: ItemSize;
 }

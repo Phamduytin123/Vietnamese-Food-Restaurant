@@ -76,6 +76,7 @@ export class AdminAccountService {
       gender,
       role,
       isActive,
+      avatar,
     } = body;
 
     const accountFound = await this.accountRepo.findOne({
@@ -99,6 +100,7 @@ export class AdminAccountService {
       gender: gender,
       role: role,
       isActive: isActive,
+      avatar: avatar,
     });
 
     newAccount = {
