@@ -123,7 +123,7 @@ export class ZaloPaymentService {
       app_time: Date.now(),
       item: JSON.stringify(items),
       embed_data: JSON.stringify(embed_data),
-      amount: totalPrice * 1000,
+      amount: totalPrice,
       description: `Product - Payment for the order #${transID}`,
       bank_code: '',
       callback_url: `${deployedLink}/zalo-payment/callback`,

@@ -10,6 +10,7 @@ import './index.scss';
 import AccountDetailModal from './components/account-detail';
 import AccountUpdateModal from './components/account-update';
 import AccountCreateModal from './components/account-create';
+import { toast } from 'react-toastify';
 
 const AdminAccount = (props) => {
   const { pageRole } = props;
@@ -40,10 +41,6 @@ const AdminAccount = (props) => {
   useEffect(() => {
     callAPI();
   }, []);
-
-  useEffect(() => {
-    setFilterData(data);
-  }, [data]);
 
   useEffect(() => {
     if (search.length !== 0) {
@@ -114,6 +111,16 @@ const AdminAccount = (props) => {
     setIsModalVisible(false);
     setSelectedAccount(null);
     setTypeModel(null);
+  };
+
+  const onUpdateAccount = async (account) => {
+    setData(
+      data.map((accountMap) => {
+        if (accountMap.id === account.id) return account;
+        return accountMap;
+      }),
+    );
+    toast.success('Thay đổi tài khoản thành công');
   };
 
   const columns = [
@@ -199,7 +206,12 @@ const AdminAccount = (props) => {
         />
       )}
       {typeModel === 'update' && selectedAccount && isModalVisible && (
-        <AccountUpdateModal isModalVisible={isModalVisible} closeModal={closeModal} data={selectedAccount} />
+        <AccountUpdateModal
+          isModalVisible={isModalVisible}
+          closeModal={closeModal}
+          data={selectedAccount}
+          onUpdateAccount={onUpdateAccount}
+        />
       )}
       {typeModel === 'create' && isModalVisible && (
         <AccountCreateModal isModalVisible={isModalVisible} closeModal={closeModal} />

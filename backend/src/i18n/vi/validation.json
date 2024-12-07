@@ -30,7 +30,8 @@
     "regional_en_required": "Thông tin khu vực bằng tiếng Anh là bắt buộc.",
     "itemSizes_required": "Kích thước sản phẩm là bắt buộc.",
     "availability_invalid": "Trạng thái của sản phẩm phải là tùy chọn hợp lệ.",
-    "item_id_required": "Id sản phẩm là bắt buộc."
+    "item_id_required": "Id sản phẩm là bắt buộc.",
+    "images_required": "Hình ảnh sản phẩm là bắt buộc."
   },
   "account": {
     "role_invalid": "Vai trò không hợp lệ. Vui lòng chọn vai trò hợp lệ (khách hàng, quản trị viên, nhân viên).",

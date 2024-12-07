@@ -73,7 +73,7 @@ export class MomoPaymentService {
     const items = foundCarts.map(cart => {
       const itemName = cart.itemSize.item.name_en;
       const quantity = cart.quantity;
-      const price = cart.itemSize.price * cart.quantity * 1000; // Giả sử giá được nhân với 1000 để ra VND
+      const price = cart.itemSize.price * cart.quantity ; // Giả sử giá được nhân với 1000 để ra VND
       return {
         imageUrl: null, // Bạn có thể thêm link hình ảnh sản phẩm thực nếu cần
         name: itemName,
@@ -81,7 +81,6 @@ export class MomoPaymentService {
         price: price,
       };
     });
-    console.log(items);
 
     const accessKey = process.env.MOMO_ACCESS_KEY;
     const secretKey = process.env.MOMO_SECRET_KEY;

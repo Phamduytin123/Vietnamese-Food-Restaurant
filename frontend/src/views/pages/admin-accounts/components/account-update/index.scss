@@ -1,0 +1,43 @@
+@import '../../../../../constants/colors.scss';
+
+.admin-account-update-modal-button-update-avatar {
+  margin: 10px 0px;
+  background-color: $food-price-color !important;
+  color: $white-color !important;
+  border: 1px solid $food-price-color !important;
+}
+.admin-account-update-modal-button-update-avatar:hover {
+  color: $food-price-color !important;
+  background-color: $white-color !important;
+}
+
+.admin-update-modal-update-btn {
+  background-color: green !important;
+  color: $white-color !important;
+  border: 1px solid green !important;
+  margin-left: 10px;
+}
+
+.admin-update-modal-update-btn:hover {
+  color: green !important;
+  background-color: $white-color !important;
+}
+
+.admin-update-modal-cancel-btn {
+  background-color: red !important;
+  color: $white-color !important;
+  border: 1px solid red !important;
+}
+
+.admin-update-modal-cancel-btn:hover {
+  color: red !important;
+  background-color: $white-color !important;
+}
+
+.admin-update-modal-item-left {
+  padding-right : 5px !important;
+}
+
+.admin-update-modal-item-right {
+  padding-left : 5px !important;
+}

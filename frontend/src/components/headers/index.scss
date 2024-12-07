@@ -1,9 +1,12 @@
-*,p {
+@import '../../constants/colors.scss';
+
+*,
+p {
   box-sizing: border-box;
   font-family: 'Nunito Sans', sans-serif;
 }
 
-.navbar{
+.navbar {
   padding: 0 !important;
 }
 
@@ -15,18 +18,16 @@ body {
 /* Container for the entire page */
 .container-header {
   width: 100%;
-  padding : 10px 0px;
+  padding: 10px 0px;
   background-color: white;
 
-  box-shadow:
-    0px 5px 10px rgba(255, 174, 0, 0.26),
-    0px 20px 40px rgba(255, 174, 0, 0.29);
+  box-shadow: 0px 5px 10px rgba(255, 174, 0, 0.26), 0px 20px 40px rgba(255, 174, 0, 0.29);
   z-index: 1000;
-  .container{
+  .container {
     margin-left: 45px;
     margin-right: 45px;
   }
-  .cart-icon-img{
+  .cart-icon-img {
     width: 32px;
     height: 32px;
   }
@@ -49,7 +50,6 @@ body {
   }
 }
 
-
 .deliver-address {
   display: flex;
   align-items: center;
@@ -60,24 +60,23 @@ body {
   align-items: center;
   font-size: 12px;
   margin-left: 12px;
-    a{
-      text-decoration: none;
-      font-weight: 800;
-      color: rgba(0,0,0,0.65);
-      &:hover,
-      &:focus,
-      &:active {
-        color: rgba(0,0,0,0.65) !important; /* Loại bỏ màu hover */
-      }
+  a {
+    text-decoration: none;
+    font-weight: 800;
+    color: rgba(0, 0, 0, 0.65);
+    &:hover,
+    &:focus,
+    &:active {
+      color: rgba(0, 0, 0, 0.65) !important; /* Loại bỏ màu hover */
     }
-    .deliver{
-      font-weight: 800;
-      margin-right: 6px;
-    }
-    .cur-location{
-      margin-right: 5px;
-    }
-
+  }
+  .deliver {
+    font-weight: 800;
+    margin-right: 6px;
+  }
+  .cur-location {
+    margin-right: 5px;
+  }
 }
 
 .location-icon {
@@ -94,16 +93,11 @@ body {
   background: #ffffff;
   border-radius: 8px;
   padding: 14px 24px;
-  margin-left: 30px;
   border: none;
-  box-shadow:
-    0px 5px 10px rgba(255, 174, 0, 0.26),
-    0px 20px 40px rgba(255, 174, 0, 0.29);
+  box-shadow: 0px 5px 10px rgba(255, 174, 0, 0.26), 0px 20px 40px rgba(255, 174, 0, 0.29);
   transition: all 0.3s ease;
   &:hover {
-    box-shadow:
-      0px 10px 20px rgba(255, 174, 0, 0.6),
-      0px 30px 50px rgba(255, 174, 0, 0.4);
+    box-shadow: 0px 10px 20px rgba(255, 174, 0, 0.6), 0px 30px 50px rgba(255, 174, 0, 0.4);
     background: #ffffff !important;
     color: #ffffff !important;
   }
@@ -114,7 +108,7 @@ body {
   font-weight: 900;
   font-style: normal;
   font-size: 18px;
-  color: rgba(255,138,0,1);
+  color: rgba(255, 138, 0, 1);
   margin-right: 10px;
 }
 
@@ -122,13 +116,13 @@ body {
   font-size: 18px;
   font-weight: 700;
   line-height: 100%;
-  background: linear-gradient(92.84deg, rgba(255,184,0,1) 47.7%, rgba(255,138,0,1) 136.8%);
+  background: linear-gradient(92.84deg, rgba(255, 184, 0, 1) 47.7%, rgba(255, 138, 0, 1) 136.8%);
   -webkit-background-clip: text;
   color: transparent;
 }
 
 .dropdown-toggle::after {
-  display: none;         /* Ẩn mũi tên của dropdown */
+  display: none; /* Ẩn mũi tên của dropdown */
 }
 
 .custom-dropdown-menu {
@@ -162,7 +156,6 @@ body {
   }
 }
 
-
 .user-dropdown-toggle {
   text-decoration: none;
   color: #000000;
@@ -171,4 +164,43 @@ body {
   .user-name {
     margin-left: 20px;
   }
+}
+
+.header-container {
+  width: 100%;
+  margin: 0px !important;
+}
+
+.header-logo {
+  width: 55px;
+  height: 55px;
+  cursor: pointer;
+}
+
+.header-title-hover {
+  display: inline-block;
+  color: $food-price-color;
+  font-size: 16px;
+  margin: 0 15px;
+  position: relative;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out;
+  font-weight: bold;
+}
+
+.header-title-hover::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background-color: $food-price-color;
+  transition: width 0.3s ease-in-out;
+}
+
+.header-title-hover:hover::after,
+.header-title-selected::after {
+  width: 100%;
 }

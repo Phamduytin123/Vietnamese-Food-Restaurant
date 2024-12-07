@@ -10,28 +10,30 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { IoLocationSharp } from 'react-icons/io5';
 import { IoMdPerson } from 'react-icons/io';
 import './index.scss';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../../contexts/CartContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useAuth } from '../../contexts/AccountContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ICONS } from '../../constants/icons';
 
 const Header = ({ userInfo }) => {
   const { cartCount } = useCart();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const {setAccount} = useAuth();
-
-  // console.log(userInfo);
+  const { setAccount, account } = useAuth();
+  const isAdmin = account && (account.role === 'admin' || account.role === 'customer');
 
   const handleLogout = async () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('user_info');
-    setAccount(null)
+    setAccount(null);
     navigate('/');
   };
 
@@ -49,13 +51,55 @@ const Header = ({ userInfo }) => {
   }, [localStorage.getItem('access_token')]);
   return (
     <div className="container-header position-sticky sticky-top">
-      <Navbar expand="lg">
-        <Container>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        closeOnClick={true}
+        pauseOnHover={true}
+        draggable={true}
+        progress={undefined}
+        theme="colored"
+      />
+      <Navbar expand="lg d-flex justify-content-center w-100">
+        <Container className="header-container">
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
               <Navbar.Text className="location">
-                <p className="deliver">Deliver to:</p>
+                <img
+                  alt="website logo"
+                  src={ICONS.logo}
+                  className="header-logo"
+                  onClick={() => {
+                    if (isAdmin) {
+                      navigate('/admin/dashboard');
+                      return;
+                    }
+                    navigate('/items');
+                  }}
+                />
+                {!isAdmin && (
+                  <div>
+                    <p
+                      className={`header-title-hover ${location.pathname === '/homepage' && 'header-title-selected'}`}
+                      onClick={() => {
+                        navigate('/homepage');
+                      }}
+                    >
+                      Trang chủ
+                    </p>
+                    <p
+                      className={`header-title-hover ${location.pathname === '/items' && 'header-title-selected'}`}
+                      onClick={() => {
+                        navigate('/items');
+                      }}
+                    >
+                      Sản phẩm
+                    </p>
+                  </div>
+                )}
+                {/* <p className="deliver">Deliver to:</p>
                 <IoLocationSharp className="location-icon" />
                 <p className="cur-location">Current Location</p>
                 <a
@@ -64,12 +108,12 @@ const Header = ({ userInfo }) => {
                   rel="noopener noreferrer"
                 >
                   172/3 Nguyễn Lương Bằng - Liên Chiểu - Đà Nẵng
-                </a>
+                </a> */}
               </Navbar.Text>
             </Nav>
             {/* Điều kiện hiển thị */}
             {!isLoggedIn ? (
-              <div>
+              <div className="d-flex">
                 <Button
                   className="btn-login"
                   onClick={() => {
@@ -77,7 +121,16 @@ const Header = ({ userInfo }) => {
                   }}
                 >
                   <IoMdPerson className="login-icon" />
-                  <div className="login-text">Login</div>
+                  <div className="login-text">Đăng nhập</div>
+                </Button>
+                <Button
+                  className="btn-login"
+                  onClick={() => {
+                    navigate('/auth/register');
+                  }}
+                >
+                  <IoMdPerson className="login-icon" />
+                  <div className="login-text">Đăng kí</div>
                 </Button>
               </div>
             ) : (

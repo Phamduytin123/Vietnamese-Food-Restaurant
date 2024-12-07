@@ -21,7 +21,7 @@ export class AdminItemService {
     private readonly i18n: I18nService
   ) {}
 
-  async createItem(images: any, body: CreateItemReq) {
+  async createItem(body: CreateItemReq) {
     const {
       name_en,
       name_vi,
@@ -45,6 +45,7 @@ export class AdminItemService {
       regional_en,
       isFood,
       categoryId,
+      images,
     } = body;
 
     const itemSizesParse = JSON.parse(itemSizes);
@@ -80,7 +81,7 @@ export class AdminItemService {
       ingredients_en: ingredients_en,
       unit_vi: unit_vi,
       unit_en: unit_en,
-      images: JSON.stringify(images),
+      images: images,
       regional_vi: regional_vi,
       regional_en: regional_en,
       isFood: isFood === 'true',
@@ -107,7 +108,7 @@ export class AdminItemService {
       itemSizes: newItemSizes,
     };
   }
-  async updateItem(images: any, body: UpdateItemReq) {
+  async updateItem(body: UpdateItemReq) {
     const {
       id,
       name_en,
@@ -131,6 +132,7 @@ export class AdminItemService {
       regional_vi,
       regional_en,
       categoryId,
+      images,
     } = body;
 
     const itemSizesParse = JSON.parse(itemSizes);
@@ -174,7 +176,7 @@ export class AdminItemService {
       ingredients_en,
       unit_vi,
       unit_en,
-      images: JSON.stringify(images),
+      images: images,
       regional_vi,
       regional_en,
       categoryId,
@@ -230,7 +232,7 @@ export class AdminItemService {
 
     // Xóa các `itemSizes` không tồn tại trong danh sách được truyền vào
     for (const existingSize of existingItemSizes) {
-      if (!itemSizeIdsToKeep.includes(existingSize.id.toString())) {
+      if (!itemSizeIdsToKeep.includes(existingSize.id)) {
         await this.itemSizeRepository.remove(existingSize);
       }
     }

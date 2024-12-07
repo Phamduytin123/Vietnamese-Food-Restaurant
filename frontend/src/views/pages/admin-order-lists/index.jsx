@@ -10,8 +10,7 @@ import { formatCurrency, TruncateText } from '../../../utils/string';
 import { FilterOutlined, ReloadOutlined } from '@ant-design/icons';
 import orderAPI from '../../../api/orderAPI';
 import ModalOrder from './modalOrder';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import {} from 'date-fns';
 
 function formatTime(dateString) {
@@ -254,16 +253,6 @@ function AdminOrderLists() {
 
   return (
     <div className="admin-order-container">
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        closeOnClick={true}
-        pauseOnHover={true}
-        draggable={true}
-        progress={undefined}
-        theme="colored"
-      />
       <h3 className="admin-order-title">Danh sách đơn hàng</h3>
       {closeModal && selectedOrder && (
         <ModalOrder

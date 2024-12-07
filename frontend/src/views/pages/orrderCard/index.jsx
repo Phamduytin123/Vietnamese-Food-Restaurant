@@ -87,14 +87,14 @@ const ShoppingCart = (props) => {
         }
       });
 
-      setTotalPrice(total * 1000);
-      setDiscount(discountAmount * 1000);
+      setTotalPrice(total);
+      setDiscount(discountAmount);
 
       let finalTotalAmount = total - discountAmount;
       if (appliedVoucher) {
         finalTotalAmount *= 1 - appliedVoucher.discount / 100;
       }
-      setFinalTotal(finalTotalAmount * 1000);
+      setFinalTotal(finalTotalAmount);
     }
   }, [quantities, checkedItems, prices, , appliedVoucher]);
 
@@ -229,7 +229,7 @@ const ShoppingCart = (props) => {
             />
             <img src={product.itemSize.item.images[0]} alt={product.itemSize.item.name} />
             <span className="product">{product.itemSize.item.name}</span>
-            <span className="cost">{(prices[index] * 1000).toLocaleString()}₫</span>
+            <span className="cost">{(prices[index]).toLocaleString()}₫</span>
             <div className="quantity-control-container">
               <div className="quantity-control">
                 <button onClick={() => handleQuantityChange(index, -1)}>-</button>

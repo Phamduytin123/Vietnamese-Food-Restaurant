@@ -18,6 +18,11 @@ export class CreateItemReq {
   @IsOptional()
   discount: number = 0;
 
+  @IsNotEmpty({
+    message: i18nValidationMessage('validation.item.images_required'),
+  })
+  images: string;
+
   @IsOptional()
   calories: number = 0;
 

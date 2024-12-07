@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import AllRoutes from "./views/routes/index";
 import { AuthProvider } from "./contexts/AccountContext";
 import { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
 function App() {
   useEffect(() => {
       // Setup local storage

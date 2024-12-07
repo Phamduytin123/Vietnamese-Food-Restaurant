@@ -13,6 +13,6 @@ const accountAPI = {
   adminUpdateAccount : (accountId, account)=>{
     const url = '/admin/accounts';
     return axiosClient.application.put(url, {accountId : accountId, ...account})
-  }
+  },
 };
 export default accountAPI;

@@ -28,7 +28,7 @@ function getItem(label, key, icon, children) {
 
 function AdminLayout(props) {
   const [collapsed, setCollapsed] = useState(false);
-  const { account } = useAuth();
+  const { account, setAccount } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -49,7 +49,7 @@ function AdminLayout(props) {
   const handleLogout = () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('user_info');
-
+    setAccount(null);
     navigate('/');
   };
 
