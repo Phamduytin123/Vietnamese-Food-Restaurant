@@ -13,9 +13,7 @@ const ImageUploader = ({ imageSrc, onImageChange }) => {
   };
 
   useEffect(() => {
-    console.log('imageSrc changed:', imageSrc); // Kiểm tra xem imageSrc có thay đổi hay không
-
-    if (!imageSrc || imageSrc.trim() === '') {
+    if (!imageSrc) {
       setIsValidImageSrc(false);
       return;
     }
@@ -63,11 +61,11 @@ const ImageUploader = ({ imageSrc, onImageChange }) => {
             alignItems: 'center',
             backgroundColor: '#f0f0f0',
             borderRadius: '8px',
-            minHeight: '160px',
-            minWidth: '145px',
-            maxHeight: '160px',
+            minHeight: '170px',
+            minWidth: '150px',
+            maxHeight: '180px',
             objectFit: 'cover',
-            maxWidth: '145px',
+            maxWidth: '150px',
             border: 'solid 1px #ccc',
             cursor: 'pointer',
           }}

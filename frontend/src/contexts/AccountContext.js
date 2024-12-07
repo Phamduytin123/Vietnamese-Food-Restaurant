@@ -19,9 +19,13 @@ export const AuthProvider = ({ children }) => {
             axiosClient.application.defaults.headers.common[
                 'Authorization'
             ] = `Bearer ${token}`
+            axiosClient.formData.defaults.headers.common[
+                'Authorization'
+            ] = `Bearer ${token}`
         } else {
             // User logout
             delete axiosClient.application.defaults.headers.common['Authorization'];
+            delete axiosClient.formData.defaults.headers.common['Authorization'];
 
             setAccount(null);
             localStorage.removeItem('access_token')

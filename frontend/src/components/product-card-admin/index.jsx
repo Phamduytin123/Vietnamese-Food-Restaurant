@@ -14,12 +14,12 @@ const ProductCardAdmin = (props) => {
     setIsFavorite(product.isLike);
   }, [product]);
   const handleClickEdit = () => {
-    navigate(`/food/${product.id}`);
+    navigate(`/admin/products/details/${product.id}`);
   };
   return (
     <div className="product-card">
       <LoadingOverlay loading={loading} />
-      <Link to={`/food/${product.id}`}>
+      <Link to={`/admin/products/details/${product.id}`}>
         <img
           src={product.images && product.images.length > 0 ? product.images[0] : IMAGES.img_product}
           alt={product.name}

@@ -75,6 +75,7 @@ const AdminListItem = () => {
   return (
     <div className="shop-page">
       <div className="product-filter">
+        <h2 style={{ marginBottom: '12px' }}>Product</h2>
         <div className="search-filter-components">
           <div className="search-bar">
             <IoIosSearch />
@@ -91,6 +92,9 @@ const AdminListItem = () => {
               onClick={() => setIsFood(false)}
             >
               DRINK
+            </Link>
+            <Link to="/admin/products/details" className="create-item" onClick={() => setIsFood(false)}>
+              CREATE
             </Link>
           </nav>
         </div>
