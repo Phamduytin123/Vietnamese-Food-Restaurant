@@ -153,13 +153,22 @@ export class Item {
   })
   updatedAt: Date;
 
-  @ManyToOne(() => Category, category => category.items)
+  @ManyToOne(() => Category, category => category.items, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'categoryId' })
   category: Category;
 
-  @OneToMany(() => ItemSize, itemSize => itemSize.item)
+  @OneToMany(() => ItemSize, itemSize => itemSize.item, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   itemSizes: ItemSize[];
 
-  @OneToMany(() => LikeItem, like => like.item)
+  @OneToMany(() => LikeItem, like => like.item, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   likes: LikeItem[];
 }

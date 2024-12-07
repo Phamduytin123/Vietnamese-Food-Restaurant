@@ -25,11 +25,17 @@ export class OrderDetail {
   @Column()
   orderId: number;
 
-  @ManyToOne(() => Order, order => order.orderDetails)
+  @ManyToOne(() => Order, order => order.orderDetails, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'orderId' })
   order: Order;
 
-  @ManyToOne(() => ItemSize, itemSize => itemSize.orderDetails)
+  @ManyToOne(() => ItemSize, itemSize => itemSize.orderDetails, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'itemSizeId' })
   itemSize: ItemSize;
 }

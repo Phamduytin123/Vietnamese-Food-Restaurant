@@ -69,15 +69,27 @@ export class Account {
   })
   updatedAt: Date;
 
-  @OneToMany(() => Cart, cart => cart.account)
+  @OneToMany(() => Cart, cart => cart.account, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   carts: Cart[];
 
-  @OneToMany(() => Order, order => order.account)
+  @OneToMany(() => Order, order => order.account, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   orders: Order[];
 
-  @OneToMany(() => LikeItem, like => like.account)
+  @OneToMany(() => LikeItem, like => like.account, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   likes: LikeItem[];
 
-  @OneToMany(() => Review, review => review.account)
+  @OneToMany(() => Review, review => review.account, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   reviews: Review[];
 }
