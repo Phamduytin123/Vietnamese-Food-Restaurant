@@ -18,5 +18,9 @@ const accountAPI = {
     const url = '/accounts/update';
     return axiosClient.formData.put(url, formData);
   },
+  adminCreateStaffAccount: (formData) => {
+    const url = '/admin/accounts';
+    return axiosClient.formDataAuth.post(url, formData);
+  },
 };
 export default accountAPI;

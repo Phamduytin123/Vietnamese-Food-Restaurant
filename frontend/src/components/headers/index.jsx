@@ -1,5 +1,5 @@
 import React from 'react';
-import { IoCartOutline } from 'react-icons/io5';
+import { IoCartOutline, IoLocationSharp } from 'react-icons/io5';
 import { IoMdHeartEmpty } from 'react-icons/io';
 import { RiStackLine } from 'react-icons/ri';
 import { MdOutlineHistory } from 'react-icons/md';
@@ -99,16 +99,20 @@ const Header = ({ userInfo }) => {
                     </p>
                   </div>
                 )}
-                {/* <p className="deliver">Deliver to:</p>
-                <IoLocationSharp className="location-icon" />
-                <p className="cur-location">Current Location</p>
-                <a
-                  href="https://www.google.com/maps/place/74+%C4%90.+Ng.+S%C4%A9+Li%C3%AAn,+Ho%C3%A0+Minh,+Li%C3%AAn+Chi%E1%BB%83u,+%C4%90%C3%A0+N%E1%BA%B5ng+50000,+Vi%E1%BB%87t+Nam/@16.075226,108.153784,17z/data=!3m1!4b1!4m6!3m5!1s0x314218d98afc036b:0x3c21d7bc0132950a!8m2!3d16.0752209!4d108.1563589!16s%2Fg%2F11mvq3jn29?hl=vi-VN&entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  172/3 Nguyễn Lương Bằng - Liên Chiểu - Đà Nẵng
-                </a> */}
+                {isAdmin && (
+                  <div className="d-flex">
+                    <p className="deliver">Deliver to:</p>
+                    <IoLocationSharp className="location-icon" />
+                    <p className="cur-location">Current Location</p>
+                    <a
+                      href="https://www.google.com/maps/place/74+%C4%90.+Ng.+S%C4%A9+Li%C3%AAn,+Ho%C3%A0+Minh,+Li%C3%AAn+Chi%E1%BB%83u,+%C4%90%C3%A0+N%E1%BA%B5ng+50000,+Vi%E1%BB%87t+Nam/@16.075226,108.153784,17z/data=!3m1!4b1!4m6!3m5!1s0x314218d98afc036b:0x3c21d7bc0132950a!8m2!3d16.0752209!4d108.1563589!16s%2Fg%2F11mvq3jn29?hl=vi-VN&entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      172/3 Nguyễn Lương Bằng - Liên Chiểu - Đà Nẵng
+                    </a>
+                  </div>
+                )}
               </Navbar.Text>
             </Nav>
             {/* Điều kiện hiển thị */}
