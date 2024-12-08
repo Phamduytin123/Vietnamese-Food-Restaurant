@@ -22,7 +22,7 @@ import AdminAccount from '../pages/admin-accounts';
 import ProtectedRoute from './protected-route';
 import AdminListItem from '../pages/admin-listItem';
 import { AdminItemDetail } from '../pages/admin-detailitem';
-import VoucherModal from '../pages/voucher-modal';
+import VoucherPage from '../pages/admin-voucher';
 import AccountDetail from '../pages/account-detail';
 
 const UserHomePage = LoadableComponent(() => import('../pages/homepage/index'));
@@ -88,8 +88,8 @@ const AllRoutes = () => {
               element={<AdminLayout component={<AdminAccount pageRole={'staff'} />} />}
             />
           </Route>
-          <Route path="/admin/products/details/:id" element={<AdminLayout component={<AdminItemDetail />} />} />
-          <Route path="/admin/voucher" element={<AdminLayout component={<VoucherModal />} />} />
+          <Route path="/admin/products/details/:id" element={<AdminLayout component={<AdminItemDetail />}  />} />
+          <Route path="/admin/vouchers" element={<AdminLayout component={<VoucherPage />}  />} />
         </Route>
       </Routes>
     </CartProvider>
