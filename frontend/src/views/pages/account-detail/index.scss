@@ -1,0 +1,34 @@
+.account-detail{
+  margin: 100px 0;
+  .account-detail-container {
+    margin-left: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Đổ bóng */
+    transition: box-shadow 0.3s ease;
+    border-radius: 8px;
+    .account-detail--title {
+      border-bottom: 1px solid #e9e8e8;
+      h5 {
+        margin: 0;
+        padding: 20px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+    .account-detail-info {
+      padding: 20px;
+      .account-detail--img{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .account-detail--item {
+        width: 45%;
+        input {
+          border: 1px solid #ccc;
+          padding: 8px;
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+}

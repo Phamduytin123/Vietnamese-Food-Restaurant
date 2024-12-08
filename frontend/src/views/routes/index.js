@@ -23,7 +23,7 @@ import ProtectedRoute from './protected-route';
 import AdminListItem from '../pages/admin-listItem';
 import { AdminItemDetail } from '../pages/admin-detailitem';
 import VoucherModal from '../pages/voucher-modal';
-
+import AccountDetail from '../pages/account-detail';
 
 const UserHomePage = LoadableComponent(() => import('../pages/homepage/index'));
 const ProductsPage = LoadableComponent(() => import('../pages/product-list/index'));
@@ -48,7 +48,14 @@ const AllRoutes = () => {
   return (
     <CartProvider>
       <Routes>
-        <Route path="/" element={<Navigate to={(account && (account.role === "admin" || account.role === "staff")) ? "/admin/dashboard" : "/homepage"} />} />
+        <Route
+          path="/"
+          element={
+            <Navigate
+              to={account && (account.role === 'admin' || account.role === 'staff') ? '/admin/dashboard' : '/homepage'}
+            />
+          }
+        />
         {/* // public route  */}
         <Route element={<PublicRoute />}>
           <Route path="/homepage" element={<MainLayout component={UserHomePage} />} />
@@ -63,19 +70,26 @@ const AllRoutes = () => {
           <Route path="/dashboard" element={<MainLayout component={Dashboard} />} />
           <Route path="/history" element={<MainLayout component={History} />} />
           <Route path="/history/:id" element={<MainLayout component={HistoryDetail} />} />
+          <Route path="/setting" element={<MainLayout component={AccountDetail} />} />
         </Route>
         {/* // admin, staff route  */}
         <Route element={<ProtectedRoute allowedRoles={['admin', 'staff']} />}>
-          <Route path="/admin/dashboard" element={<AdminLayout component={<AdminDashboard/>} />} />
-          <Route path="/admin/order-lists" element={<AdminLayout component={<AdminOrderLists/>} />} />
-          <Route path="/admin/customer-account" element={<AdminLayout component={<AdminAccount pageRole={"customer"}/>} />} />
-          <Route path="/admin/products" element={<AdminLayout component={<AdminListItem />}  />} />
-          <Route path="/admin/products/details" element={<AdminLayout component={<AdminItemDetail />}  />} />
-          <Route element={<ProtectedRoute allowedRoles={['admin']}/>}>
-            <Route path="/admin/staff-account" element={<AdminLayout component={<AdminAccount pageRole={"staff"}/>} />} />
+          <Route path="/admin/dashboard" element={<AdminLayout component={<AdminDashboard />} />} />
+          <Route path="/admin/order-lists" element={<AdminLayout component={<AdminOrderLists />} />} />
+          <Route
+            path="/admin/customer-account"
+            element={<AdminLayout component={<AdminAccount pageRole={'customer'} />} />}
+          />
+          <Route path="/admin/products" element={<AdminLayout component={<AdminListItem />} />} />
+          <Route path="/admin/products/details" element={<AdminLayout component={<AdminItemDetail />} />} />
+          <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+            <Route
+              path="/admin/staff-account"
+              element={<AdminLayout component={<AdminAccount pageRole={'staff'} />} />}
+            />
           </Route>
-          <Route path="/admin/products/details/:id" element={<AdminLayout component={<AdminItemDetail />}  />} />
-          <Route path="/admin/voucher" element={<AdminLayout component={<VoucherModal />}  />} />
+          <Route path="/admin/products/details/:id" element={<AdminLayout component={<AdminItemDetail />} />} />
+          <Route path="/admin/voucher" element={<AdminLayout component={<VoucherModal />} />} />
         </Route>
       </Routes>
     </CartProvider>
