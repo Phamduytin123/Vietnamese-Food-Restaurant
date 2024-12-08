@@ -8,6 +8,10 @@ const CategorieAPI = {
         };
         return axiosClient.applicationNoAuth.get(url, { params });
     },
+    getAllListCategories: () => {
+        const url = '/categories';
+        return axiosClient.applicationNoAuth.get(url);
+    },
 }
 
 export default CategorieAPI;

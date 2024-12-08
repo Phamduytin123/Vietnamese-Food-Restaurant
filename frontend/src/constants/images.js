@@ -32,4 +32,5 @@ export const IMAGES = {
     img_test_checkout: require('../assets/images/img_test_checkout.png'),
     img_checkout_success: require('../assets/images/img_checkout_success.png'),
     img_card_test: require('../assets/images/img_card_test.png'),
+    img_item_details: require('../assets/images/img-item-details.png'),
 };    

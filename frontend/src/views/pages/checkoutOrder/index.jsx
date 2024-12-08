@@ -229,7 +229,9 @@ const CheckoutOrder = () => {
     emailError,
     phoneError,
   ]);
-
+  const parseFormattedPrice = (formattedPrice) => {
+    return parseInt(String(formattedPrice).replace(/\./g, '').replace(/ VND/g, ''), 10) || 0;
+  };
   return (
     <div className="checkout-page">
       <LoadingOverlay loading={loading} />
@@ -374,18 +376,24 @@ const CheckoutOrder = () => {
             <h2 className="section-title">Tổng đơn hàng</h2>
             <div className="order-items">
               {cart &&
-                cart.map((product) => (
-                  <div key={product.id} className="item">
-                    <img src={product.itemSize.item.images[0]} alt={product.itemSize.item.name} />
-                    <div className="item-details">
-                      <div className="product-name">{product.itemSize.item.name}</div>
-                      <div className="product-order">
-                        <span className="count">{product.quantity} x </span>
-                        <span className="cost">{(1000 * itemSizePrices).toLocaleString()}₫</span>
+                cart.map((product) => {
+                  const itemSize = product.itemSize.item.itemSizes.find(
+                    (itemSize) => product.itemSizeId === itemSize.id,
+                  );
+                  const price = itemSize ? parseFloat(itemSize.price.replace(/[^0-9.]+/g, '')) : 0; // Lấy giá của itemSize hoặc 0 nếu không tìm thấy
+                  return (
+                    <div key={product.id} className="item">
+                      <img src={product.itemSize.item.images[0]} alt={product.itemSize.item.name} />
+                      <div className="item-details">
+                        <div className="product-name">{product.itemSize.item.name}</div>
+                        <div className="product-order">
+                          <span className="count">{product.quantity} x </span>
+                          <span className="cost">{(1000 * price).toLocaleString()}₫</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
             </div>
             <div className="total">
               <div className="total-items">

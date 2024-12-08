@@ -3,6 +3,7 @@ import './AdminLayout.scss';
 import { Button, Layout, Menu } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import Header from '../headers';
+import { ToastContainer } from 'react-toastify';
 import {
   GiftOutlined,
   InboxOutlined,
@@ -81,6 +82,18 @@ function AdminLayout(props) {
         </Sider>
         {props.component}
       </Layout>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        newestOnTop={false}
+        hideProgressBar={false}
+        rtl={false}
+        closeOnClick
+        draggable
+        pauseOnFocusLoss
+        theme="light"
+        pauseOnHover
+      />
     </Layout>
   );
 }
