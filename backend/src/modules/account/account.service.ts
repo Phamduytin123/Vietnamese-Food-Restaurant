@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Account } from '../../entities';
@@ -14,7 +18,7 @@ export class AccountService {
     @InjectRepository(Account)
     private readonly accountRepo: Repository<Account>,
     private readonly i18n: I18nService
-  ) { }
+  ) {}
 
   async findAll(): Promise<Account[]> {
     return this.accountRepo.find();
@@ -42,10 +46,9 @@ export class AccountService {
   }
 
   async updateAccount(
-    lang: string,
     currentAccount: Account,
     updateAccount: AccountUpdateDto,
-    avatarLinks: any
+    avatarLink: any
   ) {
     const accountFound = await this.findById(currentAccount.id);
     if (!accountFound) {
@@ -55,47 +58,42 @@ export class AccountService {
         })
       );
     }
-    // Cập nhật thông tin tài khoản từ DTO
-    // accountFound.name = updateAccount.name ?? accountFound.name;
-    // accountFound.displayName =
-    // updateAccount.displayName ?? accountFound.displayName;
-    // accountFound.email = updateAccount.email ?? accountFound.email;
-    // accountFound.tel = updateAccount.tel ?? accountFound.tel;
-    // accountFound.address = updateAccount.address ?? accountFound.address;
-    // accountFound.gender = updateAccount.gender ?? accountFound.gender;
-    // accountFound.avatar = updateAccount.avatar ?? accountFound.avatar;
-    const { name,
-      displayName,
-      email,
-      tel,
-      address,
-      gender,
-    } = updateAccount;
+    const { name, displayName, tel, address, gender } = updateAccount;
     const filterAccount = clean({
       name,
       displayName,
-      email,
       tel,
       address,
       gender,
-      avatar: JSON.stringify(avatarLinks),
-    })
+      avatar: avatarLink,
+    });
     const newAccount = {
       ...accountFound,
-      ...filterAccount
-    }
+      ...filterAccount,
+    };
     return await this.accountRepo.save(newAccount);
   }
-  async updatePassword(currentAccount: Account, requestBody: PasswordUpdateDto, lang: string) {
-    if (!PasswordUtils.checkPassword(requestBody.currentPassword, currentAccount.password))
+  async updatePassword(
+    currentAccount: Account,
+    requestBody: PasswordUpdateDto,
+    lang: string
+  ) {
+    if (
+      !PasswordUtils.checkPassword(
+        requestBody.currentPassword,
+        currentAccount.password
+      )
+    )
       throw new BadRequestException(
-        this.i18n.t('error.account.invalidPassword'))
+        this.i18n.t('error.account.invalidPassword')
+      );
     if (requestBody.newPassword !== requestBody.confirmPassword) {
       throw new BadRequestException(
-        this.i18n.t('error.account.invalidConfirmPassword'))
+        this.i18n.t('error.account.invalidConfirmPassword')
+      );
     }
     let accountFound = await this.findById(currentAccount.id);
-    accountFound.password = PasswordUtils.hashPassword(requestBody.newPassword)
+    accountFound.password = PasswordUtils.hashPassword(requestBody.newPassword);
     return this.accountRepo.save(accountFound);
   }
 }

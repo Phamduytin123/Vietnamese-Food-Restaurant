@@ -3,7 +3,7 @@ import axiosClient from '../utils/axiosCustomize';
 const modelAPI = {
   recognize: (formData) => {
     const url = `/recipes/recognize`;
-    return axiosClient.formData.post(url, formData);
+    return axiosClient.formDataNoAuth.post(url, formData);
   },
   recommend: (formData) => {
     const url = `/recipes/recommend`;
