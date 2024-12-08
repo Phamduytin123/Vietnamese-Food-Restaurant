@@ -272,20 +272,33 @@ export const AdminItemDetail = () => {
       ],
     });
   };
-  const validateForm = async () => {
-    // Kiểm tra tên sản phẩm
+  const validateAndParse = (field, fieldName) => {
+    if (field == null || field === '') {
+      toast.warning(`${fieldName} không được để trống.`);
+      return false;
+    } else if (isNaN(parseFloat(field)) || parseFloat(field) <= 0) {
+      toast.warning(`${fieldName} phải là số và lớn hơn 0.`);
+      return false;
+    }
+    return true; // Thêm dòng này để trả về true khi mọi thứ hợp lệ
+  };
+
+  const validateForm = () => {
+    if (!productForm.images || productForm.images.length !== 5) {
+      toast.warning('Danh sách hình ảnh phải có đúng 5 hình ảnh.');
+      return false;
+    }
+
     if (!productForm.name_vi.trim()) {
       toast.warning('Tên sản phẩm không được để trống.');
       return false;
     }
 
-    // Kiểm tra mô tả sản phẩm
     if (!productForm.description_vi.trim()) {
       toast.warning('Mô tả sản phẩm không được để trống.');
       return false;
     }
 
-    // Kiểm tra danh mục
     if (!selectedCategory) {
       toast.warning('Vui lòng chọn danh mục.');
       return false;
@@ -301,13 +314,11 @@ export const AdminItemDetail = () => {
       return false;
     }
 
-    // Kiểm tra giảm giá
     if (productForm.discount < 0 || productForm.discount > 100) {
       toast.warning('Giảm giá phải nằm trong khoảng từ 0% đến 100%.');
       return false;
     }
 
-    // Kiểm tra các size
     if (productForm.itemSizes.some((size) => !size.size_vi.trim())) {
       toast.warning('Tất cả các size phải có tên.');
       return false;
@@ -317,33 +328,24 @@ export const AdminItemDetail = () => {
       return false;
     }
 
-    // Kiểm tra các trường dinh dưỡng
-    const validateAndParse = (field, fieldName) => {
-      if (field == null || field === '') {
-        toast.warning(`${fieldName} không được để trống.`);
-        return false;
-      } else if (isNaN(parseFloat(field)) || parseFloat(field) <= 0) {
-        toast.warning(`${fieldName} phải là số và lớn hơn 0.`);
-        return false;
+    // Kiểm tra các trường khác (nếu bất kỳ trường nào không hợp lệ, trả về false)
+    const fields = [
+      { field: productForm.calories, name: 'Calories' },
+      { field: productForm.fat, name: 'Fat' },
+      { field: productForm.carbohydrates, name: 'Carbohydrates' },
+      { field: productForm.protein, name: 'Protein' },
+      { field: productForm.cholesterol, name: 'Cholesterol' },
+      { field: productForm.sodium, name: 'Sodium' },
+      { field: productForm.fiber, name: 'Fiber' },
+    ];
+
+    for (const { field, name } of fields) {
+      if (!validateAndParse(field, name)) {
+        return false; // Dừng kiểm tra nếu bất kỳ trường nào không hợp lệ
       }
-    };
-
-    await Promise.all([
-      validateAndParse(productForm.calories, 'Calories'),
-      validateAndParse(productForm.fat, 'Fat'),
-      validateAndParse(productForm.carbohydrates, 'Carbohydrates'),
-      validateAndParse(productForm.protein, 'Protein'),
-      validateAndParse(productForm.cholesterol, 'Cholesterol'),
-      validateAndParse(productForm.sodium, 'Sodium'),
-      validateAndParse(productForm.fiber, 'Fiber'),
-    ]);
-
-    if (!productForm.images || productForm.images.length !== 5) {
-      toast.warning('Danh sách hình ảnh phải có đúng 5 hình ảnh.');
-      return false;
     }
 
-    return true;
+    return true; // Tất cả đều hợp lệ
   };
 
   const handleSave = async () => {

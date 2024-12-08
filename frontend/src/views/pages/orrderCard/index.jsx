@@ -196,6 +196,9 @@ const ShoppingCart = (props) => {
       setLoading(false);
     }
   };
+  const parseFormattedPrice = (formattedPrice) => {
+    return parseInt(String(formattedPrice).replace(/\./g, '').replace(/ VND/g, ''), 10) || 0;
+  };
   const handleBack = () => {
     navigate('/items');
   };
@@ -229,7 +232,7 @@ const ShoppingCart = (props) => {
             />
             <img src={product.itemSize.item.images[0]} alt={product.itemSize.item.name} />
             <span className="product">{product.itemSize.item.name}</span>
-            <span className="cost">{(prices[index]).toLocaleString()}₫</span>
+            <span className="cost">{parseFormattedPrice(prices[index]).toLocaleString()}₫</span>
             <div className="quantity-control-container">
               <div className="quantity-control">
                 <button onClick={() => handleQuantityChange(index, -1)}>-</button>
@@ -249,7 +252,7 @@ const ShoppingCart = (props) => {
                 ))}
               </select>
             </span>
-            <span className="total">{(prices[index] * quantities[index]).toLocaleString()}.000₫</span>
+            <span className="total">{parseFormattedPrice(prices[index] * quantities[index]).toLocaleString()}₫</span>
             <img
               src={ICONS.icon_xproduct}
               alt=""
@@ -272,7 +275,7 @@ const ShoppingCart = (props) => {
           <div className="total-info">
             <div className="info-row">
               <span className="item-title">Tổng tiền món ăn</span>
-              <span className="item-val">{totalPrice.toLocaleString()}₫</span>
+              <span className="item-val">{parseFormattedPrice(totalPrice).toLocaleString()}₫</span>
             </div>
             <div className="info-row">
               <span className="item-title">Shipping</span>
@@ -280,13 +283,13 @@ const ShoppingCart = (props) => {
             </div>
             <div className="info-row">
               <span className="item-title">Giảm giá</span>
-              <span className="item-val">{discount.toLocaleString()}₫</span>
+              <span className="item-val">{parseFormattedPrice(discount).toLocaleString()}₫</span>
             </div>
             {appliedVoucher && (
               <div className="info-row">
                 <span className="item-title">Voucher</span>
                 <span className="item-val">
-                  -{(((totalPrice - discount) * appliedVoucher.discount) / 100).toLocaleString()}₫(
+                  -{parseFormattedPrice(((totalPrice - discount) * appliedVoucher.discount) / 100).toLocaleString()}₫(
                   {appliedVoucher.discount}%Off)
                 </span>
               </div>
@@ -294,7 +297,7 @@ const ShoppingCart = (props) => {
             <div className="total-line" />
             <div className="info-row total-row">
               <span className="total-title">Total</span>
-              <span className="total-val">{finalTotal.toLocaleString()}₫</span>
+              <span className="total-val">{parseFormattedPrice(finalTotal).toLocaleString()}₫</span>
             </div>
             <div className="button-checkout">
               <button className="checkout-btn" onClick={handleCheckout}>
