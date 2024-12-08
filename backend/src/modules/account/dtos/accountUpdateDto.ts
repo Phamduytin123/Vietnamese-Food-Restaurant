@@ -10,8 +10,6 @@ export class AccountUpdateDto {
   @Optional()
   address: string;
   @Optional()
-  email: string;
-  @Optional()
   tel: string;
   @Optional()
   gender: AccountGenderEnum;

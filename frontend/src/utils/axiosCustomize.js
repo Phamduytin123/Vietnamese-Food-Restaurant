@@ -30,6 +30,15 @@ const axiosClient = {
       'Accept-Language': 'vi',
     },
   }),
+
+  formDataNoAuth: axios.create({
+    baseURL: process.env.REACT_APP_API_URL,
+
+    headers: {
+      'content-type': 'multipart/form-data',
+      'Accept-Language': 'vi',
+    },
+  }),
 };
 
 export default axiosClient;
