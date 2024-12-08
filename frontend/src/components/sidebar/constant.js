@@ -3,6 +3,8 @@ import { MdOutlineHistory } from 'react-icons/md';
 import { IoSettingsOutline, IoLogOutOutline } from 'react-icons/io5';
 
 import { IoMdHeartEmpty } from 'react-icons/io';
+import { useAuth } from '../../contexts/AccountContext';
+import { useNavigate } from 'react-router-dom';
 
 const sidebarItems = [
   {
@@ -31,6 +33,7 @@ const sidebarItems = [
     icon: <IoSettingsOutline className="sidebar-icon" />,
     icon_actived: <IoSettingsOutline className="sidebar-icon actived" />,
     label: 'Cài đặt',
+    route: '/setting',
   },
   {
     id: 5,

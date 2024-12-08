@@ -169,11 +169,19 @@ const Header = ({ userInfo }) => {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu className="custom-dropdown-menu">
-                    <Dropdown.Item href="#/dashboard">
+                    <Dropdown.Item
+                      onClick={() => {
+                        navigate('/dashboard');
+                      }}
+                    >
                       <RiStackLine className="dropdown-icon" />
                       Trang chủ
                     </Dropdown.Item>
-                    <Dropdown.Item href="#/order-history">
+                    <Dropdown.Item
+                      onClick={() => {
+                        navigate('/history');
+                      }}
+                    >
                       <MdOutlineHistory className="dropdown-icon" />
                       Lịch sử đơn hàng
                     </Dropdown.Item>
@@ -185,7 +193,11 @@ const Header = ({ userInfo }) => {
                       <IoMdHeartEmpty className="dropdown-icon" />
                       Danh sách món ăn đã thích
                     </Dropdown.Item>
-                    <Dropdown.Item href="#/settings">
+                    <Dropdown.Item
+                      onClick={() => {
+                        navigate('/setting');
+                      }}
+                    >
                       <IoSettingsOutline className="dropdown-icon" />
                       Cài đặt
                     </Dropdown.Item>
