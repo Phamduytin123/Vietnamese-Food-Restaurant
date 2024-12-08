@@ -9,4 +9,7 @@ export class RegisterDto {
 
   @IsNotEmpty()
   password: string;
+
+  @IsNotEmpty()
+  confirmPassword: string;
 }
