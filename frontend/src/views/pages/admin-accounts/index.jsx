@@ -43,7 +43,7 @@ const AdminAccount = (props) => {
   }, []);
 
   useEffect(() => {
-    if (search.length !== 0) {
+    if (search !== '') {
       setFilterData(
         data.filter(
           (account) =>
@@ -214,7 +214,7 @@ const AdminAccount = (props) => {
         />
       )}
       {typeModel === 'create' && isModalVisible && (
-        <AccountCreateModal isModalVisible={isModalVisible} closeModal={closeModal} />
+        <AccountCreateModal isModalVisible={isModalVisible} closeModal={closeModal} callAPI={callAPI} />
       )}
       <div className="d-flex justify-content-between align-items-center admin-account-header-container">
         <h3 className="admin-account-title" style={{ color: darkenColor('#8280ff') }}>
