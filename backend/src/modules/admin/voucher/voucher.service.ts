@@ -58,10 +58,18 @@ export class AdminVoucherService {
       endAt,
       count,
     } = body;
-    // Find the existing voucher by code
 
+    // Parse and adjust dates
     const parsedStartAt = startAt ? new Date(startAt) : null;
     const parsedEndAt = endAt ? new Date(endAt) : null;
+
+    if (parsedStartAt) {
+      parsedStartAt.setDate(parsedStartAt.getDate() + 1); // +1 day
+    }
+
+    if (parsedEndAt) {
+      parsedEndAt.setDate(parsedEndAt.getDate() + 1); // +1 day
+    }
 
     const existingVoucher = await this.voucherRepository.findOne({
       where: { id: voucherId },
@@ -114,6 +122,7 @@ export class AdminVoucherService {
       name: updatedVoucher[`name_${lang}`],
     };
   }
+
   async createVoucher(body: CreateVoucherDto, lang: string) {
     const { code, startAt, endAt } = body;
     // Find the existing voucher by code
@@ -129,7 +138,10 @@ export class AdminVoucherService {
       );
     }
 
-    if (startAt && endAt && startAt >= endAt) {
+    const parsedStartAt = startAt ? new Date(startAt) : null;
+    const parsedEndAt = endAt ? new Date(endAt) : null;
+
+    if (startAt && endAt && parsedStartAt >= parsedEndAt) {
       throw new BadRequestException(
         this.i18n.t('error.voucher.startAtMustBeLessThanEndAt', {
           args: { voucherId: 999 },
