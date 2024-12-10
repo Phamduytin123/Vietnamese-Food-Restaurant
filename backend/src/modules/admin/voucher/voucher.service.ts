@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Voucher } from '../../../entities';
 import { Like, Repository } from 'typeorm';
@@ -13,7 +17,7 @@ export class AdminVoucherService {
     @InjectRepository(Voucher)
     private readonly voucherRepository: Repository<Voucher>,
     private readonly i18n: I18nService
-  ) { }
+  ) {}
 
   async getVoucher(query: any, lang: string) {
     const { txtSearch } = query;
@@ -55,6 +59,10 @@ export class AdminVoucherService {
       count,
     } = body;
     // Find the existing voucher by code
+
+    const parsedStartAt = startAt ? new Date(startAt) : null;
+    const parsedEndAt = endAt ? new Date(endAt) : null;
+
     const existingVoucher = await this.voucherRepository.findOne({
       where: { id: voucherId },
     });
@@ -72,9 +80,9 @@ export class AdminVoucherService {
       name_vi: name_vi,
       name_en: name_en,
       discount: discount,
-      minPirce: minPrice,
-      startAt: startAt,
-      endAt: endAt,
+      minPrice: minPrice,
+      startAt: parsedStartAt,
+      endAt: parsedEndAt,
       count: count,
       code: code,
     });
@@ -82,9 +90,13 @@ export class AdminVoucherService {
     const newVoucher = {
       ...existingVoucher,
       ...filterVoucher,
-    }
+    };
 
-    if (newVoucher.startAt && newVoucher.endAt && newVoucher.startAt >= newVoucher.endAt) {
+    if (
+      newVoucher.startAt &&
+      newVoucher.endAt &&
+      newVoucher.startAt >= newVoucher.endAt
+    ) {
       throw new BadRequestException(
         this.i18n.t('error.voucher.startAtMustBeLessThanEndAt', {
           args: { voucherId: voucherId },
@@ -103,11 +115,7 @@ export class AdminVoucherService {
     };
   }
   async createVoucher(body: CreateVoucherDto, lang: string) {
-    const {
-      code,
-      startAt,
-      endAt,
-    } = body;
+    const { code, startAt, endAt } = body;
     // Find the existing voucher by code
     const existingVoucher = await this.voucherRepository.findOne({
       where: { code: code },
