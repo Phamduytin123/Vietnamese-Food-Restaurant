@@ -74,14 +74,25 @@ export class AuthService {
   }
 
   async registerAccount(accountData: RegisterDto) {
+    const accountFound = await this.accountService.findByEmail(accountData.email);
+    console.log(accountFound);
+
+    if (accountFound) {
+      throw new BadRequestException('The email already exists in the system')
+    }
     if (accountData.password !== accountData.confirmPassword) {
       throw new BadRequestException('Confirm password invalid')
     }
     accountData.password = PasswordUtils.hashPassword(accountData.password);
     // const newAccount = await this.accountService.create(accountData);
+    const newAccount = {
+      ...accountData,
+      isActive: true
+    }
+    console.log(newAccount);
 
     const verificationToken = await this.jwtService.signAsync(
-      { newAccount: accountData },
+      { newAccount: newAccount },
       { secret: process.env.JWT_SECRET, expiresIn: '1d' }
     );
 
@@ -96,13 +107,13 @@ export class AuthService {
     const payload = await this.jwtService.verifyAsync(token, {
       secret: process.env.JWT_SECRET,
     });
-    // console.log(payload.newAccount.email);
-
-    const user = await this.accountService.create(payload.newAccount);
+    console.log(payload.newAccount.isActive);
+    let user: Account = await this.accountRepo.save(payload.newAccount);
     if (!user) {
       return new UnauthorizedException('User not found');
     }
-
+    user.isActive = true;
+    await this.accountRepo.create(payload.newAccount);
     // // Cập nhật trạng thái xác minh của người dùng
     // user.isVerified = true; // Hoặc trường tương ứng trong mô hình của bạn
     // await this.userService.update(user.id, user); // Cập nhật thông tin người dùng

@@ -1,13 +1,15 @@
 import { ICONS } from '../../constants/icons';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import LoginAPI from '../../api/LoginAPI';
 import { useAuth } from '../../contexts/AccountContext';
 import { ArrowRightOutlined } from '@ant-design/icons';
+import { toast } from 'react-toastify';
 
 const FormLogin = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [hasShownMessage, setHasShownMessage] = useState(false);
 
   const [password, setPassword] = useState();
 
@@ -15,7 +17,7 @@ const FormLogin = () => {
   const [textError, setTextError] = useState();
 
   const { setAccount, account } = useAuth();
-
+  const location = useLocation();
   const fetchLogin = async (formData) => {
     try {
       const res = await LoginAPI.login(formData);
@@ -67,7 +69,14 @@ const FormLogin = () => {
 
     fetchLogin(formData);
   };
-
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const message = params.get('message');
+    if (message && !hasShownMessage) {
+      toast.success(message);
+      setHasShownMessage(true);
+    }
+  }, [location]);
   return (
     <div className="justify-content-center form-login">
       <div>
@@ -115,6 +124,11 @@ const FormLogin = () => {
                 onClick={handleHidePassword}
               />
             </div>
+          </div>
+          <div className="text-end mt-3">
+            <a href="/auth/reset-password" className="forgot-password-link">
+              Quên mật khẩu?
+            </a>
           </div>
           <button
             className="btn btn-primary border-0 w-100 mt-2"
