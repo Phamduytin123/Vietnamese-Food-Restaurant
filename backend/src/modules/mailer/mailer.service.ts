@@ -19,11 +19,18 @@ export class CustomMailerService {
     });
   }
 
-  async sendPasswordResetEmail(email: string, resetLink: string) {
+  async sendVerificationPasswordResetEmail(email: string, resetLink: string) {
     await this.mailerService.sendMail({
       to: email,
       subject: 'Reset Your Password',
       text: `You can get your reset password by clicking the following link: ${resetLink}`,
+    });
+  }
+  async sendPasswordReset(email: string) {
+    await this.mailerService.sendMail({
+      to: email,
+      subject: 'Reset Your Password',
+      text: "Your password has been reset to 88888888",
     });
   }
 }

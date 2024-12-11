@@ -22,5 +22,9 @@ const accountAPI = {
     const url = '/admin/accounts';
     return axiosClient.formDataAuth.post(url, formData);
   },
+  changePassword: (formData) => {
+    const url = '/accounts/changePassword';
+    return axiosClient.application.put(url, formData);
+  },
 };
 export default accountAPI;
