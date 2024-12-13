@@ -87,7 +87,7 @@ export class CartService {
     });
 
     if (!foundCart) {
-      return new NotFoundException(
+      throw new NotFoundException(
         this.i18n.t('error.cart.cartNotFound', {
           args: { cartId: id },
         })
@@ -99,8 +99,7 @@ export class CartService {
       quantity: foundCart.quantity,
       itemSizeId: foundCart.itemSizeId,
     };
-
-    if (quantity) {
+    if (quantity !== undefined) {
       if (quantity <= 0) {
         await this.cartRepository.remove(foundCart);
         return {
@@ -120,7 +119,7 @@ export class CartService {
       });
 
       if (!foundItemSizeId) {
-        return new NotFoundException(
+        throw new NotFoundException(
           this.i18n.t('error.item.itemSizeNotFound', {
             args: { itemId: itemSizeId },
           })
@@ -140,7 +139,7 @@ export class CartService {
     });
 
     if (!foundCart) {
-      return new NotFoundException(
+      throw new NotFoundException(
         this.i18n.t('error.cart.cartNotFound', {
           args: { cartId: id },
         })

@@ -73,6 +73,7 @@ export class AccountService {
     };
     return await this.accountRepo.save(newAccount);
   }
+  
   async updatePassword(
     currentAccount: Account,
     requestBody: PasswordUpdateDto,
@@ -94,6 +95,6 @@ export class AccountService {
     }
     let accountFound = await this.findById(currentAccount.id);
     accountFound.password = PasswordUtils.hashPassword(requestBody.newPassword);
-    return this.accountRepo.save(accountFound);
+    return await this.accountRepo.save(accountFound);
   }
 }

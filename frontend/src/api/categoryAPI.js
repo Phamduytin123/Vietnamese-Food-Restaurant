@@ -1,11 +1,14 @@
 import axiosClient from "../utils/axiosCustomize";
 
-const CategorieAPI = {
+const CategoryAPI = {
     getListCategories: (isFood) => {
         const url = '/categories';
-        const params = {
-            isFood
-        };
+        let params = {}
+        if(isFood !== null){
+            params = {
+                isFood : isFood
+            }
+        }
         return axiosClient.applicationNoAuth.get(url, { params });
     },
     getAllListCategories: () => {
@@ -14,4 +17,4 @@ const CategorieAPI = {
     },
 }
 
-export default CategorieAPI;
+export default CategoryAPI;

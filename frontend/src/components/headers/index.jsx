@@ -28,7 +28,9 @@ const Header = ({ userInfo }) => {
   const location = useLocation();
 
   const { setAccount, account } = useAuth();
-  const isAdmin = account && (account.role === 'admin' || account.role === 'customer');
+  const isAdmin = account && (account.role === 'admin' || account.role === 'staff');
+
+  console.log(isAdmin)
 
   const handleLogout = async () => {
     localStorage.removeItem('access_token');
@@ -76,7 +78,7 @@ const Header = ({ userInfo }) => {
                       navigate('/admin/dashboard');
                       return;
                     }
-                    navigate('/items');
+                    navigate('/items?isFood=true');
                   }}
                 />
                 {!isAdmin && (
@@ -92,7 +94,7 @@ const Header = ({ userInfo }) => {
                     <p
                       className={`header-title-hover ${location.pathname === '/items' && 'header-title-selected'}`}
                       onClick={() => {
-                        navigate('/items');
+                        navigate('/items?isFood=true');
                       }}
                     >
                       Sản phẩm
@@ -100,7 +102,7 @@ const Header = ({ userInfo }) => {
                   </div>
                 )}
                 {isAdmin && (
-                  <div className="d-flex">
+                  <div className='d-flex align-items-center'>
                     <p className="deliver">Deliver to:</p>
                     <IoLocationSharp className="location-icon" />
                     <p className="cur-location">Current Location</p>

@@ -75,7 +75,7 @@ export class OrderService {
         });
 
         if (!foundCart) {
-          return new NotFoundException(
+          throw new NotFoundException(
             this.i18n.t('error.cart.cartNotFound', {
               args: { cartId: cart.id },
             })
@@ -90,7 +90,7 @@ export class OrderService {
         });
 
         if (!itemSize) {
-          return new NotFoundException(
+          throw new NotFoundException(
             this.i18n.t('error.item.itemSizeNotFound', {
               args: { itemId: cart.itemSizeId },
             })
@@ -106,7 +106,7 @@ export class OrderService {
         });
 
         if (!voucher) {
-          return new NotFoundException(
+          throw new NotFoundException(
             this.i18n.t('error.voucher.voucherNotFound', {
               args: { voucherId: voucherId },
             })
@@ -114,7 +114,7 @@ export class OrderService {
         }
 
         if (voucher.count <= 0) {
-          return new BadRequestException(
+          throw new BadRequestException(
             this.i18n.t('error.voucher.voucherOutOfStock', {
               args: { voucherId: voucherId },
             })
@@ -123,7 +123,7 @@ export class OrderService {
 
         // Check if the voucher's minPrice is less than or equal to the totalPrice
         if (voucher.minPrice > totalPrice) {
-          return new BadRequestException(
+          throw new BadRequestException(
             this.i18n.t('error.voucher.minPriceExceeded', {
               args: { voucherId: voucherId, minPrice: voucher.minPrice },
             })
@@ -133,7 +133,7 @@ export class OrderService {
         // Check if the current date is within the voucher's startAt and endAt dates
         const currentDate = new Date();
         if (currentDate < voucher.startAt || currentDate > voucher.endAt) {
-          return new BadRequestException(
+          throw new BadRequestException(
             this.i18n.t('error.voucher.voucherNotValid', {
               args: { voucherId: voucherId },
             })
@@ -148,7 +148,7 @@ export class OrderService {
       if (
         foundCart.itemSize.item.availability !== ItemAvailabilityEnum.IN_STOCK
       ) {
-        return new ForbiddenException(
+        throw new ForbiddenException(
           this.i18n.t('error.cart.itemStatusIsNotInStock', {
             args: {
               itemId: foundCart.itemSize.item.id,
@@ -200,7 +200,6 @@ export class OrderService {
 
     return order;
   }
-
   async getOrders(lang: string, account: Account, query: OrdersRequest) {
     const conditions = clean({
       status: query.status,
@@ -256,7 +255,6 @@ export class OrderService {
 
     return orders;
   }
-
   async getOrderDetail(lang: string, id: number, account: Account) {
     const orderFound = await this.orderRepository.findOne({
       where: { id: id, accountId: account.id },
@@ -325,21 +323,21 @@ export class OrderService {
       ],
     });
     if (!orderFound) {
-      return new NotFoundException(
+      throw new NotFoundException(
         this.i18n.t('error.order.orderNotFound', {
           args: { orderId: cusCancelRequest.id },
         })
       );
     }
     if (account.id !== orderFound.account.id) {
-      return new BadRequestException(
+      throw new BadRequestException(
         this.i18n.t('error.auth.accountPermissionDenied', {
           args: { orderId: cusCancelRequest.id },
         })
       );
     }
     if (orderFound.status !== OrderStatusEnum.WAIT) {
-      return new BadRequestException(
+      throw new BadRequestException(
         this.i18n.t('error.order.orderCannotBeCancelled', {
           args: { orderId: cusCancelRequest.id },
         })
@@ -361,14 +359,14 @@ export class OrderService {
     });
 
     if (!orderFound) {
-      return new NotFoundException(
+      throw new NotFoundException(
         this.i18n.t('error.order.orderNotFound', {
           args: { orderId: updateStatusRequest.id },
         })
       );
     }
     if (orderFound.status === OrderStatusEnum.CANCEL) {
-      return new BadRequestException(
+      throw new BadRequestException(
         this.i18n.t('error.order.orderStatusCannotBeUpdated', {
           args: { orderId: updateStatusRequest.id },
         })

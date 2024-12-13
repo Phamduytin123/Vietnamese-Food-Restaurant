@@ -51,7 +51,7 @@ export class LikeService {
       });
 
       if (!foundItem) {
-        return new NotFoundException(
+        throw new NotFoundException(
           this.i18n.t('error.item.itemNotFound', {
             args: { itemId: itemId },
           })
