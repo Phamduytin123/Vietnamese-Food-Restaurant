@@ -26,7 +26,7 @@ export class ReviewService {
     });
 
     if (!itemSize) {
-      return new NotFoundException(
+      throw new NotFoundException(
         this.i18n.t('error.item.itemSizeNotFound', {
           args: { itemId: body.itemSizeId },
         })
@@ -38,7 +38,7 @@ export class ReviewService {
     });
 
     if (!order) {
-      return new NotFoundException(
+      throw new NotFoundException(
         this.i18n.t('error.order.orderNotFound', {
           args: { itemId: body.orderId },
         })

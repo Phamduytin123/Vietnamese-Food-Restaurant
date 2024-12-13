@@ -1,26 +1,27 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.scss';
 import { IMAGES } from '../../../constants/images';
-import { ICONS } from '../../../constants/icons';
-import { BsGrid3X3Gap } from 'react-icons/bs';
-import { BsList } from 'react-icons/bs';
+import { BsGrid3X3Gap, BsList } from 'react-icons/bs';
 import Form from 'react-bootstrap/Form';
 import { IoIosSearch } from 'react-icons/io';
-import { FiArrowRight } from 'react-icons/fi';
-import { FiArrowLeft } from 'react-icons/fi';
+import { FiArrowRight, FiArrowLeft } from 'react-icons/fi';
 import ProductCardList from '../../../components/product-card-list';
 import ProductCardGrid from '../../../components/product-card-grid';
 import productAPI from '../../../api/productAPI';
 import UploadModal from '../../../components/detect_modal/UploadModal';
 import RecommendModal from '../../../components/recommend_modal/RecommendModal';
 import categoryAPI from '../../../api/categoryAPI';
-import { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { set } from 'lodash';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 const ProductList = () => {
   const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const categoryParam = searchParams.get('category');
+  const minPriceParam = searchParams.get('minPrice');
+  const maxPriceParam = searchParams.get('maxPrice');
+  const hotDealParam = searchParams.get('hotDeal');
+  const isFoodParam = searchParams.get('isFood');
+
   const [viewMode, setViewMode] = useState('grid');
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -37,57 +38,120 @@ const ProductList = () => {
   const [isDiscount, setIsDiscount] = useState(false);
   const [categoryId, setCategoryId] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (categoryParam) {
+      setCategoryId(categoryParam);
+    } else {
+      setCategoryId(null);
+    }
+
+    if (minPriceParam) {
+      setMinPrice(Number(minPriceParam));
+    } else {
+      setMinPrice(null);
+    }
+
+    if (maxPriceParam) {
+      setMaxPrice(Number(maxPriceParam));
+    } else {
+      setMaxPrice(null);
+    }
+
+    if (hotDealParam) {
+      setIsDiscount(true);
+      setCategoryId(hotDealParam);
+    } else {
+      setIsDiscount(false);
+    }
+
+    if (isFoodParam) {
+      setIsFood(isFoodParam === 'true');
+    } else {
+      setIsFood(false);
+    }
+  }, [categoryParam, minPriceParam, maxPriceParam, hotDealParam, isFoodParam]);
+
   useEffect(() => {
     setTxtSearch('');
   }, [location]);
+
   const handleInputChange = (event) => {
     setCurrentPage(1);
     setTxtSearch(event.target.value);
   };
+
   const handleLimitChange = (event) => {
     setCurrentPage(1);
     setLimit(Number(event.target.value));
   };
+
   const handleShowByChange = (event) => {
     setCurrentPage(1);
     setShowBy(event.target.value);
   };
+
   const handlePriceChange = (event) => {
     const value = event.target.value;
     switch (value) {
       case 'all':
         setMinPrice(null);
         setMaxPrice(null);
+        searchParams.delete('minPrice');
+        searchParams.delete('maxPrice');
+        setSearchParams(searchParams);
         break;
       case 'under30':
         setMinPrice(0);
-        setMaxPrice(30);
+        setMaxPrice(30000);
+        searchParams.set('minPrice', 0);
+        searchParams.set('maxPrice', 30000);
+        setSearchParams(searchParams);
         break;
       case '30to60':
-        setMinPrice(30);
-        setMaxPrice(60);
+        setMinPrice(30000);
+        setMaxPrice(60000);
+        searchParams.set('minPrice', 30000);
+        searchParams.set('maxPrice', 60000);
+        setSearchParams(searchParams);
         break;
       case '60to90':
-        setMinPrice(60);
-        setMaxPrice(90);
+        setMinPrice(60000);
+        setMaxPrice(90000);
+        searchParams.set('minPrice', 60000);
+        searchParams.set('maxPrice', 90000);
+        setSearchParams(searchParams);
         break;
       case '90to120':
-        setMinPrice(90);
-        setMaxPrice(120);
+        setMinPrice(90000);
+        setMaxPrice(120000);
+        searchParams.set('minPrice', 90000);
+        searchParams.set('maxPrice', 120000);
+        setSearchParams(searchParams);
         break;
       case '120to150':
-        setMinPrice(120);
-        setMaxPrice(150);
+        setMinPrice(120000);
+        setMaxPrice(150000);
+        searchParams.set('minPrice', 120000);
+        searchParams.set('maxPrice', 150000);
+        setSearchParams(searchParams);
         break;
       case 'over150':
-        setMinPrice(150);
+        setMinPrice(150000);
         setMaxPrice(null);
+        searchParams.set('minPrice', 150000);
+        searchParams.delete('maxPrice');
+        setSearchParams(searchParams);
         break;
       default:
         setMinPrice(null);
         setMaxPrice(null);
+        searchParams.delete('minPrice');
+        searchParams.delete('maxPrice');
+        setSearchParams(searchParams);
     }
   };
+
   const handlePageClick = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -105,30 +169,40 @@ const ProductList = () => {
       setCurrentPage(newPage);
     }
   };
+
   const totalNumberOfFood = categories.reduce((total, categorie) => total + categorie.numberOfFood, 0);
   const totalNumberOfHotDeal = hotdeals.reduce((total, hotdeal) => total + hotdeal.numberOfFood, 0);
+
   const handleAllHotDealClick = (event) => {
     setCurrentPage(1);
     setCategoryId(null);
     setIsDiscount(true);
+    searchParams.delete('hotDeal');
+    setSearchParams(searchParams);
   };
+
   const handleAllCategoryClick = (event) => {
     setCurrentPage(1);
     setCategoryId(null);
     setIsDiscount(false);
+    searchParams.delete('category');
+    setSearchParams(searchParams);
   };
+
   const handleCategoryClick = (event, categoryId) => {
     setCurrentPage(1);
     setCategoryId(categoryId);
     setIsDiscount(false);
+    setSearchParams({ category: categoryId });
   };
 
   const handleHotDealClick = (event, hotDealId) => {
     setCurrentPage(1);
     setCategoryId(hotDealId);
     setIsDiscount(true);
+    searchParams.set('hotDeal', hotDealId);
+    setSearchParams(searchParams);
   };
-
   const fetchProducts = async () => {
     try {
       setLoading(true);
@@ -151,6 +225,7 @@ const ProductList = () => {
       setLoading(false);
     }
   };
+
   const fetchCategories = async () => {
     try {
       setLoading(true);
@@ -174,15 +249,19 @@ const ProductList = () => {
     <div className="shop-page">
       <div className="sidebar">
         <div className="box">
-          <h3>Hot Deals</h3>
+          <h3>Ưu đãi giảm giá</h3>
           <ul>
-            <li onClick={(event) => handleAllHotDealClick(event)}>
-              Tất cả
+            <li onClick={handleAllHotDealClick}>
+              <span className={`${hotDealParam === null ? 'hot-deals-item-li-active' : ''}`}>Tất cả</span>
               <span className="count special">{totalNumberOfHotDeal}</span>
             </li>
             {hotdeals.map((hotdeal) => (
               <li key={hotdeal.id} onClick={(event) => handleHotDealClick(event, hotdeal.id)}>
-                {hotdeal.name}
+                <span
+                  className={`${hotDealParam && hotDealParam === hotdeal.id + '' ? 'hot-deals-item-li-active' : ''}`}
+                >
+                  {hotdeal.name}
+                </span>
                 <span className={hotdeal.numberOfFood > 0 ? 'count special' : 'count'}>{hotdeal.numberOfFood}</span>
               </li>
             ))}
@@ -190,15 +269,19 @@ const ProductList = () => {
         </div>
 
         <div className="box">
-          <h3>Category</h3>
+          <h3>Phân loại đồ ăn</h3>
           <ul>
-            <li onClick={(event) => handleAllCategoryClick(event)}>
-              Tất cả
+            <li onClick={handleAllCategoryClick}>
+              <span className={`${categoryParam === null ? 'category-item-li-active' : ''}`}>Tất cả</span>
               <span className="count special">{totalNumberOfFood}</span>
             </li>
             {categories.map((categorie) => (
-              <li onClick={(event) => handleCategoryClick(event, categorie.id)}>
-                {categorie.name}{' '}
+              <li key={categorie.id} onClick={(event) => handleCategoryClick(event, categorie.id)}>
+                <span
+                  className={`${categoryParam && categoryParam === categorie.id + '' ? 'category-item-li-active' : ''}`}
+                >
+                  {categorie.name}
+                </span>
                 <span className={categorie.numberOfFood > 0 ? 'count special' : 'count'}>{categorie.numberOfFood}</span>
               </li>
             ))}
@@ -206,73 +289,65 @@ const ProductList = () => {
         </div>
 
         <div className="box">
-          <h3>Price Range</h3>
+          <h3>Mức giá</h3>
           <div className="radio-options">
             <label className="radio-label">
               <input type="radio" name="price" value="all" onChange={handlePriceChange} />
-              <span className="radio-text">All Price</span>
+              <span className="radio-text">Mọi giá</span>
             </label>
 
             <label className="radio-label">
               <input type="radio" name="price" value="under30" onChange={handlePriceChange} />
-              <span className="radio-text">Under 30.000 VND</span>
+              <span className="radio-text">Dưới 30.000 VND</span>
             </label>
 
             <label className="radio-label">
               <input type="radio" name="price" value="30to60" onChange={handlePriceChange} />
-              <span className="radio-text">30.000 to 60.000 VND</span>
+              <span className="radio-text">Từ 30.000 đến 60.000 VND</span>
             </label>
 
             <label className="radio-label">
               <input type="radio" name="price" value="60to90" onChange={handlePriceChange} />
-              <span className="radio-text">60.000 to 90.000 VND</span>
+              <span className="radio-text">Từ 60.000 đến 90.000 VND</span>
             </label>
 
             <label className="radio-label">
               <input type="radio" name="price" value="90to120" onChange={handlePriceChange} />
-              <span className="radio-text">90.000 to 120.000 VND</span>
+              <span className="radio-text">Từ 90.000 đến 120.000 VND</span>
             </label>
 
             <label className="radio-label">
               <input type="radio" name="price" value="120to150" onChange={handlePriceChange} />
-              <span className="radio-text">120.000 to 150.000 VND</span>
+              <span className="radio-text">Từ 120.000 đến 150.000 VND</span>
             </label>
 
             <label className="radio-label">
               <input type="radio" name="price" value="over150" onChange={handlePriceChange} />
-              <span className="radio-text">Over 150.000 VND</span>
+              <span className="radio-text">Trên 150.000 VND</span>
             </label>
           </div>
         </div>
       </div>
       <div className="product-filter">
         <nav className="navbar-product">
+          <Link to="/homepage" className="nav-item">
+            TRANG CHỦ
+          </Link>
+          <Link to="/items?isFood=true" className={`nav-item ${isFoodParam === 'true' ? 'active' : ''}`}>
+            ĐỒ ĂN
+          </Link>
+          <Link to="/items?isFood=false" className={`nav-item ${!(isFoodParam === 'true') ? 'active' : ''}`}>
+            ĐỒ UỐNG
+          </Link>
           <Link to="/" className="nav-item">
-            HOME
-          </Link>
-          <Link to="/items" className={`nav-item ${isFood ? 'active' : ''}`} onClick={() => setIsFood(true)}>
-            FOOD
-          </Link>
-          <Link to="/items" className={`nav-item ${!isFood ? 'active' : ''}`} onClick={() => setIsFood(false)}>
-            DRINK
-          </Link>
-          <Link to="/" className="nav-item">
-            CONTACT
+            LIÊN LẠC
           </Link>
         </nav>
         <div className="search-filter-components">
           <div className="search-bar">
             <IoIosSearch />
-            <input type="text" placeholder="Search" value={txtSearch} onChange={handleInputChange} />
+            <input type="text" placeholder="Nhập vào tên sản phẩm" value={txtSearch} onChange={handleInputChange} />
           </div>
-          {/* <div className="option-button">
-            <img src={ICONS.camera} alt="Camera" />
-            <span>Tìm kiếm bằng hình ảnh</span>
-          </div>
-          <div className="option-button">
-            <img src={ICONS.lightbulb} alt="Lightbulb" />
-            <span>Gợi ý đồ ăn</span>
-          </div> */}
           <UploadModal />
           <RecommendModal />
         </div>
@@ -287,9 +362,9 @@ const ProductList = () => {
         </div>
         <div className="filter-container">
           <div className="filter-left">
-            <div className="items-text">{products.length} items</div>
+            <div className="items-text">{products.length} sản phẩm</div>
             <div className="show-container">
-              <span>Show</span>
+              <span style={{ width: '80px' }}>Hiển thị</span>
               <Form.Select
                 aria-label="Default select example"
                 className="select-box"
@@ -306,17 +381,17 @@ const ProductList = () => {
           </div>
           <div className="filter-right">
             <div className="sort-container">
-              <span>Sort By</span>
+              <span style={{ width: '100px' }}>Sắp xếp theo</span>
               <Form.Select
                 aria-label="Default select example"
                 className="select-box"
                 value={showBy}
                 onChange={handleShowByChange}
               >
-                <option value="name">Name</option>
-                <option value="price">Price</option>
-                <option value="rating">Rating</option>
-                <option value="discount">Discount</option>
+                <option value="name">Tên</option>
+                <option value="price">Giá</option>
+                <option value="rating">Đánh giá</option>
+                <option value="discount">Giảm giá</option>
               </Form.Select>
             </div>
             <div className="switches">
