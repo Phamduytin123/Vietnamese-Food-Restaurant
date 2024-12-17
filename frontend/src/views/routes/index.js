@@ -24,6 +24,7 @@ import AdminListItem from '../pages/admin-listItem';
 import { AdminItemDetail } from '../pages/admin-detailitem';
 import VoucherPage from '../pages/admin-voucher';
 import AccountDetail from '../pages/account-detail';
+import ResetPassword from '../pages/reset-password';
 
 const UserHomePage = LoadableComponent(() => import('../pages/homepage/index'));
 const ProductsPage = LoadableComponent(() => import('../pages/product-list/index'));
@@ -61,6 +62,7 @@ const AllRoutes = () => {
           <Route path="/homepage" element={<MainLayout component={UserHomePage} />} />
           <Route path="/items" element={<MainLayout component={ProductsPage} />} />
           <Route path="/auth/login" element={<MainLayout component={Login} />} />
+          <Route path="/auth/reset-password" element={<MainLayout component={ResetPassword} />} />
           <Route path="/auth/register" element={<MainLayout component={Register} />} />
           <Route path="/food/:id" element={<MainLayout component={FoodDetail} />} />
           <Route path="/checkout/order" element={<MainLayout component={CheckoutOrder} />} />

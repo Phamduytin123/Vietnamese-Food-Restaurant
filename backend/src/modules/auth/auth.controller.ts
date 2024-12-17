@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query, Res, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Redirect, Res, UseInterceptors } from '@nestjs/common';
 import { LoginDto } from './dtos/loginDtio';
 import { AuthService } from './auth.service';
 import { CustomMailerService } from '../mailer/mailer.service';
@@ -39,7 +39,7 @@ export class AuthController {
     const result = await this.authService.sendPasswordReset(email);
 
     // Gửi email reset mật khẩu sau khi yêu cầu
-    await this.customMailerService.sendPasswordResetEmail(
+    await this.customMailerService.sendVerificationPasswordResetEmail(
       result.email,
       result.resetLink
     );
@@ -51,20 +51,29 @@ export class AuthController {
   }
 
   @Get('verify')
+  @Redirect()
   async verifyEmail(@Query('token') token: string) {
-    console.log('verify');
-    console.log(token);
-
     try {
-      return await this.authService.verifyEmail(token);
+      const result = await this.authService.verifyEmail(token);
+      return {
+        url: `http://localhost:3000/auth/login?message=${encodeURIComponent(
+          'Tài khoản đã được kích hoạt'
+        )}`,
+      };
     } catch (error) {
       return new Error('Invalid or expired token');
     }
   }
 
   @Get('/get-reset-password')
+  @Redirect()
   async getResetPassword(@Query('token') token: string) {
     const result = await this.authService.resetPassword(token);
-    return result;
+    await this.customMailerService.sendPasswordReset(result.emailreset);
+    return {
+      url: `http://localhost:3000/auth/login?message=${encodeURIComponent(
+        'Yêu cầu tạo mới mật khẩu đã được gửi. Vui lòng kiểm tra email!'
+      )}`,
+    };
   }
 }

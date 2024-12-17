@@ -11,24 +11,12 @@ import HotItemsAPI from '../../../api/hotItemAPI';
 import UploadModal from '../../../components/detect_modal/UploadModal';
 import RecommendModal from '../../../components/recommend_modal/RecommendModal';
 import { useNavigate } from 'react-router-dom';
+import CategoryAPI from '../../../api/categoryAPI';
 function HomePage() {
   const [startIndex, setStartIndex] = useState(0);
   const [hotItems, setHotItems] = useState([]);
   const navigate = useNavigate();
-  const foodItems = [
-    { image: IMAGES.image_category1, name: 'BÁNH' },
-    { image: IMAGES.image_category2, name: 'CÁC LOẠI BÚN' },
-    { image: IMAGES.image_category3, name: 'MỲ' },
-    { image: IMAGES.image_category4, name: 'CƠM' },
-    { image: IMAGES.image_category5, name: 'CHÁO' },
-    { image: IMAGES.image_category6, name: 'MÓN ĂN KÈM' },
-    { image: IMAGES.image_category1, name: 'Đồ uống 1' },
-    { image: IMAGES.image_category2, name: 'Đồ uống 2' },
-    { image: IMAGES.image_category3, name: 'Đồ uống 3' },
-    { image: IMAGES.image_category4, name: 'Đồ uống 4' },
-    { image: IMAGES.image_category5, name: 'Đồ uống 5' },
-    { image: IMAGES.image_category6, name: 'Đồ uống 6' },
-  ];
+  const [foodItems, setFoodItems] = useState([]);
   const fetchHotItems = async () => {
     try {
       const response = await HotItemsAPI.getHotItems();
@@ -37,14 +25,22 @@ function HomePage() {
       console.log(error);
     }
   };
+  const fetchCategory = async () => {
+    try {
+      const response = await CategoryAPI.getListCategories(null);
+      setFoodItems(response.data.categories.categories);
+      console.log(response.data.categories.categories);
+    } catch (error) {}
+  };
   useEffect(() => {
     fetchHotItems();
+    fetchCategory();
   }, []);
   const handleOrderNow = (itemId) => {
     navigate(`/food/${itemId}`);
   };
   const handelItems = () => {
-    navigate('/items');
+    navigate('/items?isFood=true');
   };
   function formatPriceRange(input) {
     let formattedString = input.replace(' VND - ', ' ~ ');
@@ -222,6 +218,7 @@ function HomePage() {
                     transform: `translateX(-${currentIndex * 196 + 32}px)`,
                     transition: 'transform 0.5s ease-in-out',
                   }}
+                  onClick={() => navigate(`/items?category=${item.id}&isFood=${item.isFood}`)}
                 >
                   <img src={item.image} alt={item.name} className="food-photo" />
                   <span className="food-name">{item.name}</span>

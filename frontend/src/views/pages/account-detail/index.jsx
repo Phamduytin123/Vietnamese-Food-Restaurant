@@ -13,7 +13,7 @@ const AccountDetail = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isEditingPassword, setIsEditingPassword] = useState(false);
   const fileInputRef = useRef(null);
-  const [avatar, setAvatar] = useState();
+  const [avatar, setAvatar] = useState(account.avatar);
   const [formData, setFormData] = useState({
     displayName: '',
     name: '',
@@ -24,9 +24,9 @@ const AccountDetail = () => {
   });
 
   const [formUpdatePass, setFormUpdatePass] = useState({
-    current_password: '',
-    new_password: '',
-    confirm_password: '',
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: '',
   });
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
@@ -52,6 +52,20 @@ const AccountDetail = () => {
       setIsEditing(false);
     }
   };
+
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+    try {
+      await accountAPI.changePassword(formUpdatePass);
+      toast.success('Thay đổi mật khẩu thành công!');
+    } catch (error) {
+      toast.error('Đã có lỗi xảy ra xin vui lòng thử lại!');
+    } finally {
+      setIsEditingPassword(false);
+      setFormUpdatePass({ currentPassword: '', newPassword: '', confirmPassword: '' });
+    }
+  };
+
   const uploadImage = async (file) => {
     try {
       const formData = new FormData();
@@ -164,12 +178,23 @@ const AccountDetail = () => {
                   </div>
                   <div className="account-detail--item">
                     <div className="d-flex flex-column mb-3">
-                      <label htmlFor="">Giới tính</label>
-                      <input name="gender" value={formData.gender} onChange={loadFormData} disabled={!isEditing} />
+                      <label htmlFor="gender">Giới tính</label>
+                      <select
+                        name="gender"
+                        value={formData.gender}
+                        onChange={loadFormData}
+                        disabled={!isEditing}
+                        className="form-control"
+                      >
+                        <option value="">-- Chọn giới tính --</option>
+                        <option value="male">Nam</option>
+                        <option value="female">Nữ</option>
+                      </select>
                     </div>
+
                     <div className="d-flex flex-column mb-3">
                       <label htmlFor="">Email</label>
-                      <input name="email" value={formData.email} onChange={loadFormData} disabled={!isEditing} />
+                      <input name="email" value={formData.email} onChange={loadFormData} disabled={true} />
                     </div>
                     <div className="d-flex flex-column mb-3">
                       <label htmlFor="">Số điện thoại</label>
@@ -204,25 +229,25 @@ const AccountDetail = () => {
             </div>
             <div className="p-3">
               <PasswordInput
-                name="current_password"
+                name="currentPassword"
                 label="Mật khẩu hiện tại"
-                value={formUpdatePass.current_password}
+                value={formUpdatePass.currentPassword}
                 onChange={loadFormUpdatePass}
                 disabled={!isEditingPassword}
                 style={{ padding: '8px' }}
               />
               <PasswordInput
-                name="new_password"
+                name="newPassword"
                 label="Mật khẩu mới"
-                value={formUpdatePass.new_password}
+                value={formUpdatePass.newPassword}
                 onChange={loadFormUpdatePass}
                 style={{ padding: '8px' }}
                 disabled={!isEditingPassword}
               />
               <PasswordInput
-                name="confirm_password"
+                name="confirmPassword"
                 label="Nhập lại mật khẩu mới"
-                value={formUpdatePass.confirm_password}
+                value={formUpdatePass.confirmPassword}
                 onChange={loadFormUpdatePass}
                 style={{ padding: '8px' }}
                 disabled={!isEditingPassword}
@@ -230,7 +255,7 @@ const AccountDetail = () => {
               <div className="d-flex justify-content-end ">
                 {isEditingPassword ? (
                   <div>
-                    <ButtonPrimary isActive={true} onClick={() => setIsEditingPassword(false)}>
+                    <ButtonPrimary isActive={true} onClick={handleChangePassword}>
                       Đổi mật khẩu
                     </ButtonPrimary>
                     <ButtonPrimary isActive={true} onClick={() => setIsEditingPassword(false)}>
