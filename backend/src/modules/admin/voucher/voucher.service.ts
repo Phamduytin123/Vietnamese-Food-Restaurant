@@ -154,4 +154,24 @@ export class AdminVoucherService {
 
     return this.voucherRepository.save(newVoucher);
   }
+
+  async deleteVoucher(id: number) {
+    const existingVoucher = await this.voucherRepository.findOne({
+      where: { id: id },
+    });
+
+    if (!existingVoucher) {
+      throw new NotFoundException(
+        this.i18n.t('error.voucher.voucherNotFound', {
+          args: { voucherId: id },
+        })
+      );
+    }
+
+    const deleteVoucher = await this.voucherRepository.delete(id);
+    return {
+      voucher : existingVoucher,
+      message : "Voucher deleted successfully",
+    }
+  }
 }
