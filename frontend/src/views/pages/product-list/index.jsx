@@ -36,7 +36,7 @@ const ProductList = () => {
   const [showBy, setShowBy] = useState('name');
   const [minPrice, setMinPrice] = useState(null);
   const [maxPrice, setMaxPrice] = useState(null);
-  const [isDiscount, setIsDiscount] = useState(false);
+  const [isDiscount, setIsDiscount] = useState(null);
   const [categoryId, setCategoryId] = useState(categoryParam);
   const [loading, setLoading] = useState(false);
 
