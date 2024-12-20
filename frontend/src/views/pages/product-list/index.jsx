@@ -45,8 +45,6 @@ const ProductList = () => {
   useEffect(() => {
     if (categoryParam) {
       setCategoryId(categoryParam);
-    } else {
-      setCategoryId(null);
     }
 
     if (minPriceParam) {
@@ -192,7 +190,7 @@ const ProductList = () => {
   const handleCategoryClick = (event, categoryId) => {
     setCurrentPage(1);
     setCategoryId(categoryId);
-    setIsDiscount(false);
+    setIsDiscount(null);
     searchParams.delete('hotDeal');
     searchParams.set('category', categoryId);
     searchParams.set('isFood', isFood);
