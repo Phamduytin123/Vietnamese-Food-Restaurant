@@ -72,7 +72,7 @@ const RecommendModal = () => {
         overlayClassName="overlay"
       >
         <div>
-          <p className="modal-title">Entering nutritional compositions & ingredients</p>
+          <p className="modal-title-detect">Nhập thành phần dinh dưỡng & nguyên liệu</p>
           <form id="form" className="d-flex justify-content-between" encType="multipart/form-data">
             <div className="form-input-container d-flex flex-column">
               <p>Calories</p>

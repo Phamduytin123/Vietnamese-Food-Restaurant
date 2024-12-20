@@ -21,6 +21,7 @@ const FormLogin = () => {
   const fetchLogin = async (formData) => {
     try {
       const res = await LoginAPI.login(formData);
+      toast.success('Login successfully!');
       const accessToken = res.data.acess_token;
       const userInfo = {
         name: res.data.name,
@@ -37,16 +38,16 @@ const FormLogin = () => {
         localStorage.setItem('user_info', JSON.stringify(userInfo));
         setAccount(userInfo);
         if (res.data.role === 'customer') {
-          navigate('/');
+          setTimeout(() => navigate('/'), 1000);
         } else {
           console.log(res.data.role);
-          navigate('/admin/dashboard');
+          setTimeout(() => navigate('/admin/dashboard'), 1000);
         }
       } else {
         setTextError('* Login failed, no access token received');
       }
     } catch (error) {
-      console.error('Error fetching products:', error);
+      toast.error('Email or password was incorrect, please entry again!');
     }
   };
 
@@ -58,7 +59,7 @@ const FormLogin = () => {
     event.preventDefault();
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     if (!emailPattern.test(email)) {
-      setTextError('* Please enter a valid email address');
+      setTextError('*Vui lòng nhập email hợp lệ');
       return;
     }
 
