@@ -104,7 +104,7 @@ const UploadModal = () => {
         overlayClassName="overlay"
       >
         <div>
-          <p className="modal-title">Upload Image</p>
+          <p className="modal-title-detect">Upload Image</p>
           <form
             id="form"
             className="position-relative"
