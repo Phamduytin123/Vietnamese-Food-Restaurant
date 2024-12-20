@@ -138,8 +138,8 @@ const CheckoutOrder = () => {
         receiver: `${firstName} ${lastName}`,
         address: getFullAddress(),
         note: note,
-        totalPrice: finalTotal,
-        rootRedirectUrl: 'https://4261-171-225-184-76.ngrok-free.app',
+        totalPrice: finalTotal * 1000,
+        rootRedirectUrl: process.env.REACT_APP_REDIRECT_URL,
       };
       console.log('checkoutData: ', checkoutData);
       const response = await paymentAPI.payZalopay(checkoutData);
@@ -165,8 +165,8 @@ const CheckoutOrder = () => {
         receiver: `${firstName} ${lastName}`,
         address: getFullAddress(),
         note: note,
-        totalPrice: finalTotal,
-        rootRedirectUrl: 'https://4261-171-225-184-76.ngrok-free.app',
+        totalPrice: finalTotal * 1000,
+        rootRedirectUrl: process.env.REACT_APP_REDIRECT_URL,
       };
       const response = await paymentAPI.payMomo(checkoutData); // Giả sử bạn có API cho Momo
       if (response.data.return_code === 1) {

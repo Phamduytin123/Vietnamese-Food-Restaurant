@@ -144,7 +144,7 @@ const ShoppingCart = (props) => {
       if (selectedSize) {
         const newPrice = parseFloat(selectedSize.price.replace(/[^0-9.-]+/g, ''));
         const newPrices = [...prices];
-        newPrices[index] = newPrice;
+        newPrices[index] = newPrice * 1000;
         setPrices(newPrices);
       }
     } catch (error) {

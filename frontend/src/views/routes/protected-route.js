@@ -6,11 +6,11 @@ const ProtectedRoute = ({ allowedRoles }) => {
   const { account } = useAuth();
 
   if (!account) {
-    return <Navigate to="/homepage" />;
+    return <Navigate to="/auth/login" replace />;
   }
 
   if (!allowedRoles.includes(account.role)) {
-    return <Navigate to="/homepage" />;
+    return <Navigate to="/auth/login" replace />;
   }
 
   return <Outlet />;
