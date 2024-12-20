@@ -12,6 +12,7 @@ import UploadModal from '../../../components/detect_modal/UploadModal';
 import RecommendModal from '../../../components/recommend_modal/RecommendModal';
 import categoryAPI from '../../../api/categoryAPI';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import wishlistAPI from '../../../api/wishlistAPI';
 
 const ProductList = () => {
   const location = useLocation();
@@ -29,15 +30,17 @@ const ProductList = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [isFood, setIsFood] = useState(true);
+  const [isFood, setIsFood] = useState(isFoodParam);
   const [txtSearch, setTxtSearch] = useState('');
   const [limit, setLimit] = useState(6);
   const [showBy, setShowBy] = useState('name');
   const [minPrice, setMinPrice] = useState(null);
   const [maxPrice, setMaxPrice] = useState(null);
   const [isDiscount, setIsDiscount] = useState(false);
-  const [categoryId, setCategoryId] = useState(null);
+  const [categoryId, setCategoryId] = useState(categoryParam);
   const [loading, setLoading] = useState(false);
+
+  const [favorites, setFavorites] = useState({});
 
   useEffect(() => {
     if (categoryParam) {
@@ -60,9 +63,6 @@ const ProductList = () => {
 
     if (hotDealParam) {
       setIsDiscount(true);
-      setCategoryId(hotDealParam);
-    } else {
-      setIsDiscount(false);
     }
 
     if (isFoodParam) {
@@ -176,15 +176,15 @@ const ProductList = () => {
   const handleAllHotDealClick = (event) => {
     setCurrentPage(1);
     setCategoryId(null);
-    setIsDiscount(true);
     searchParams.delete('hotDeal');
     setSearchParams(searchParams);
+    setIsDiscount(true);
   };
 
   const handleAllCategoryClick = (event) => {
     setCurrentPage(1);
     setCategoryId(null);
-    setIsDiscount(false);
+    setIsDiscount(null);
     searchParams.delete('category');
     setSearchParams(searchParams);
   };
@@ -193,14 +193,19 @@ const ProductList = () => {
     setCurrentPage(1);
     setCategoryId(categoryId);
     setIsDiscount(false);
-    setSearchParams({ category: categoryId });
+    searchParams.delete('hotDeal');
+    searchParams.set('category', categoryId);
+    searchParams.set('isFood', isFood);
+    setSearchParams(searchParams);
   };
 
   const handleHotDealClick = (event, hotDealId) => {
     setCurrentPage(1);
     setCategoryId(hotDealId);
     setIsDiscount(true);
+    searchParams.delete('category');
     searchParams.set('hotDeal', hotDealId);
+    searchParams.set('isFood', isFood);
     setSearchParams(searchParams);
   };
   const fetchProducts = async () => {
@@ -232,7 +237,6 @@ const ProductList = () => {
       const categories = await categoryAPI.getListCategories(isFood);
       setCategories(categories.data.categories.categories);
       setHotdeals(categories.data.hotDeals.hotDeals);
-      console.log('Categories:', categories);
     } catch (error) {
       console.error('Error fetching categories:', error);
     } finally {
@@ -245,6 +249,35 @@ const ProductList = () => {
     fetchCategories();
   }, [isFood, txtSearch, limit, showBy, currentPage, minPrice, maxPrice, isDiscount, categoryId]);
 
+  useEffect(() => {
+    const initialFavorites = {};
+    products.forEach((product) => {
+      initialFavorites[product.id] = product.isLike || false; // Sử dụng giá trị ban đầu từ `isLike`
+    });
+    setFavorites(initialFavorites);
+  }, [products]);
+
+  const toggleFavorite = async (productId) => {
+    // Cập nhật trạng thái cục bộ ngay lập tức
+    setFavorites((prev) => ({
+      ...prev,
+      [productId]: !prev[productId],
+    }));
+
+    // Gửi yêu cầu đến API
+    try {
+      await wishlistAPI.setWish(productId);
+      console.log('Wishlist updated successfully!');
+    } catch (error) {
+      console.error('Failed to update wishlist: ', error);
+
+      // Hoàn tác nếu có lỗi
+      setFavorites((prev) => ({
+        ...prev,
+        [productId]: !prev[productId],
+      }));
+    }
+  };
   return (
     <div className="shop-page">
       <div className="sidebar">
@@ -413,13 +446,23 @@ const ProductList = () => {
                 {viewMode === 'grid' ? (
                   <div className="product-grid">
                     {products.map((product) => (
-                      <ProductCardGrid key={product.id} product={product} />
+                      <ProductCardGrid
+                        key={product.id}
+                        product={product}
+                        isFavorite={favorites[product.id]}
+                        toggleFavorite={() => toggleFavorite(product.id)}
+                      />
                     ))}
                   </div>
                 ) : (
                   <div className="product-list">
                     {products.map((product) => (
-                      <ProductCardList key={product.id} product={product} />
+                      <ProductCardList
+                        key={product.id}
+                        product={product}
+                        isFavorite={favorites[product.id]}
+                        toggleFavorite={() => toggleFavorite(product.id)}
+                      />
                     ))}
                   </div>
                 )}

@@ -122,7 +122,7 @@ function HomePage() {
                 và giao hàng tận nơi một cách nhanh chóng và tiện lợi.
               </p>
             </div>
-            <Link to="/items" className="show-shop">
+            <Link to="/items?isFood=true" className="show-shop">
               ĐẶT NGAY
             </Link>
           </div>
@@ -195,7 +195,7 @@ function HomePage() {
           <div className="search-by-food-title-buttons">
             <h1 className="search-by-food-search-title">Tìm kiếm món ăn của bạn</h1>
             <div className="search-by-food-buttons">
-              <button className="search-by-food-view-all-button">
+              <button className="search-by-food-view-all-button" onClick={handelItems}>
                 View All <MdKeyboardArrowRight />
               </button>
               <div className="search-by-food-slider-buttons">

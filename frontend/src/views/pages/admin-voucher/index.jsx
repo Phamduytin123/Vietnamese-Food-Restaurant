@@ -14,7 +14,17 @@ const VoucherPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [selectedVoucher, setSelectedVoucher] = useState(null);
+  const [selectedVoucher, setSelectedVoucher] = useState({
+    id: null,
+    name: "",
+    code: "",
+    discount: 0,
+    minValue: 0,
+    startDate: "",
+    endDate: "",
+    quantity: 0,
+  });
+
 
   useEffect(() => {
     // Giả lập API call để lấy danh sách voucher
@@ -61,26 +71,43 @@ const VoucherPage = () => {
     setSelectedVoucher(voucher);
     setModalIsOpen(true);
   };
+  const openOpenModal = () => {
+    setSelectedVoucher({
+    id: null,
+    name: "",
+    code: "",
+    discount: 0,
+    minValue: 0,
+    startDate: "",
+    endDate: "",
+    quantity: 0,
+  });
+    setModalIsOpen(true);
+  };
   const convertDateFormat = (dateString) => {
     const [year, month, day] = dateString.split('-');
     return `${month}/${day}/${year}`;
   };
   const validateForm = () => {
     console.log('validateForm');
-    if (!selectedVoucher.name.trim()) {
-      toast.warning('Tên voucher không được để trống');
-      return false;
-    }
     if (!selectedVoucher.code.trim()) {
       toast.warning('Mã voucher không được để trống');
       return false;
     }
-    if (!selectedVoucher.discount) {
-      toast.warning('Giảm giá không được để trống');
+    if (!selectedVoucher.name.trim()) {
+      toast.warning('Tên voucher không được để trống');
       return false;
     }
-    if (!selectedVoucher.minValue) {
-      toast.warning('Giá áp dụng không được để trống');
+    if (!selectedVoucher.discount || selectedVoucher.discount <= 0) {
+      toast.warning('Giảm giá không được để trống và lớn hơn 0');
+      return false;
+    }
+    if (!selectedVoucher.minValue || selectedVoucher.minValue <= 0) {
+      toast.warning('Giá áp dụng không được để trống và lớn hơn 0');
+      return false;
+    }
+    if (!selectedVoucher.quantity || selectedVoucher.quantity <= 0) {
+      toast.warning('Số lượng không được để trống và lớn hơn 0');
       return false;
     }
     if (!selectedVoucher.startDate.trim()) {
@@ -89,10 +116,6 @@ const VoucherPage = () => {
     }
     if (!selectedVoucher.endDate.trim()) {
       toast.warning('Ngày kết thúc không được để trống');
-      return false;
-    }
-    if (!selectedVoucher.quantity) {
-      toast.warning('Số lượng không được để trống');
       return false;
     }
 
@@ -128,6 +151,7 @@ const VoucherPage = () => {
 
   const handleCreateVoucher = async (e) => {
     e.preventDefault();
+    console.log('vào create');
     if (!validateForm()) return;
     setLoading(true);
     console.log(selectedVoucher);
@@ -182,7 +206,7 @@ const VoucherPage = () => {
                 borderRadius: '5px',
                 cursor: 'pointer',
               }}
-              onClick={() => setModalIsOpen(true)}
+              onClick={() => openOpenModal()}
             >
               Thêm Voucher
             </button>
@@ -310,7 +334,7 @@ const VoucherPage = () => {
         <form
           className="voucher-form"
           onSubmit={(e) => {
-            if (!selectedVoucher.id) {
+            if (!selectedVoucher) {
               handleCreateVoucher(e);
             } else {
               handleUpdateVoucher(e);

@@ -60,19 +60,9 @@ const AllRoutes = () => {
         {/* // public route  */}
         <Route element={<PublicRoute />}>
           <Route path="/homepage" element={<MainLayout component={UserHomePage} />} />
-          <Route path="/items" element={<MainLayout component={ProductsPage} />} />
           <Route path="/auth/login" element={<MainLayout component={Login} />} />
           <Route path="/auth/reset-password" element={<MainLayout component={ResetPassword} />} />
           <Route path="/auth/register" element={<MainLayout component={Register} />} />
-          <Route path="/food/:id" element={<MainLayout component={FoodDetail} />} />
-          <Route path="/checkout/order" element={<MainLayout component={CheckoutOrder} />} />
-          <Route path="/checkout/:method/:code" element={<MainLayout component={CheckoutSuccess} />} />
-          <Route path="/cart" element={<MainLayout component={ShoppingCart} />} />
-          <Route path="/wishlist" element={<MainLayout component={Wishlist} />} />
-          <Route path="/dashboard" element={<MainLayout component={Dashboard} />} />
-          <Route path="/history" element={<MainLayout component={History} />} />
-          <Route path="/history/:id" element={<MainLayout component={HistoryDetail} />} />
-          <Route path="/setting" element={<MainLayout component={AccountDetail} />} />
         </Route>
         {/* // admin, staff route  */}
         <Route element={<ProtectedRoute allowedRoles={['admin', 'staff']} />}>
@@ -92,6 +82,19 @@ const AllRoutes = () => {
           </Route>
           <Route path="/admin/products/details/:id" element={<AdminLayout component={<AdminItemDetail />}  />} />
           <Route path="/admin/vouchers" element={<AdminLayout component={<VoucherPage />}  />} />
+        </Route>
+
+        <Route element={<ProtectedRoute allowedRoles={['customer']} />}>
+          <Route path="/food/:id" element={<MainLayout component={FoodDetail} />} />
+          <Route path="/checkout/order" element={<MainLayout component={CheckoutOrder} />} />
+          <Route path="/checkout/:method/:code" element={<MainLayout component={CheckoutSuccess} />} />
+          <Route path="/cart" element={<MainLayout component={ShoppingCart} />} />
+          <Route path="/wishlist" element={<MainLayout component={Wishlist} />} />
+          <Route path="/dashboard" element={<MainLayout component={Dashboard} />} />
+          <Route path="/history" element={<MainLayout component={History} />} />
+          <Route path="/history/:id" element={<MainLayout component={HistoryDetail} />} />
+          <Route path="/setting" element={<MainLayout component={AccountDetail} />} />
+          <Route path="/items" element={<MainLayout component={ProductsPage} />} />
         </Route>
       </Routes>
     </CartProvider>

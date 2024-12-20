@@ -16,9 +16,14 @@ import { IoMail } from "react-icons/io5";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaGooglePlay } from "react-icons/fa";
 import { FaApple } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 import "./index.scss";
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const handelItems = () => {
+    navigate('/items?isFood=true');
+  };
   return (
     <>
       <div className="cta-container">
@@ -32,7 +37,7 @@ const Footer = () => {
             Bạn đã sẵn sàng để đặt hàng những món ăn đầy hương vị truyền thống
             tại cửa hàng của chúng tôi ?
           </h1>
-          <button className="cta-button">
+          <button className="cta-button" onClick={handelItems}>
             Hãy đặt hàng ngay <span className="chevron">▶</span>
           </button>
         </div>

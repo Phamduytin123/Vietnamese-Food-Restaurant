@@ -11,31 +11,9 @@ import { MdQuestionAnswer } from 'react-icons/md';
 import { set } from 'lodash';
 const ProductCardGrid = (props) => {
   const { addToCart } = useCart();
-  const { product } = props;
-  const [isFavorite, setIsFavorite] = useState(false);
+  const { product, isFavorite, toggleFavorite } = props;
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setIsFavorite(product.isLike);
-  }, [product]);
-  const setWish = async (data) => {
-    try {
-      setLoading(true);
-      const response = await wishlistAPI.setWish(data);
-      console.log('Set wish successfully: ', response);
-    } catch (error) {
-      console.log('Failed to set wish: ', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
-    if (!isFavorite) {
-      console.log(`Product ${product.id} added to favorites`);
-    } else {
-      console.log(`Product ${product.id} removed from favorites`);
-    }
-  };
+
   const discountPrice = (price, discount) => {
     const cleanedPrice = price.replace(' VND', '').replace(/\./g, '');
     const minPrice = parseFloat(cleanedPrice);
@@ -149,7 +127,7 @@ const ProductCardGrid = (props) => {
           <img src={ICONS.cart_2} alt="Add to Cart" onClick={(event) => handleAddToCart(event, product)} />
         </div>
         <div className="icon-wrapper" onClick={toggleFavorite}>
-          <img src={isFavorite ? ICONS.fill_heart : ICONS.hearts} alt="Wishlist" onClick={() => setWish(product.id)} />
+          <img src={isFavorite ? ICONS.fill_heart : ICONS.hearts} alt="Wishlist" />
         </div>
       </div>
     </div>
