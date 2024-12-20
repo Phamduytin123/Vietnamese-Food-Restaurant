@@ -4,9 +4,10 @@ import {
   ExecutionContext,
   UnauthorizedException,
   BadRequestException,
+  ForbiddenException,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { JwtService } from '@nestjs/jwt';
+import { JwtService, TokenExpiredError } from '@nestjs/jwt';
 import { Request } from 'express';
 import { AccountService } from '../../modules/account/account.service';
 @Injectable()
@@ -35,7 +36,11 @@ export class AuthGuard implements CanActivate {
         );
       }
       request.currentaccount = account;
-    } catch {
+    } catch (error) {
+      if (error instanceof TokenExpiredError) {
+        throw new ForbiddenException('Token has expired');
+      }
+      
       throw new UnauthorizedException();
     }
     return true;

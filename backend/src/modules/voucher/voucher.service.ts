@@ -12,7 +12,11 @@ export class VoucherService {
 
   async getValidVoucher(lang: string) {
     const validVoucherFound = await this.voucherRepository.find({
-      where: { endAt: MoreThan(new Date()), count: MoreThan(0) },
+      where: {
+        endAt: MoreThan(new Date()),
+        count: MoreThan(0),
+        isDeleted: false,
+      },
     });
 
     const validVouchers = validVoucherFound.map(validVoucher => {

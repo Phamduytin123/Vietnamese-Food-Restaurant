@@ -51,4 +51,7 @@ export class OrderRequest {
 
   @IsOptional()
   voucherId: number;
+
+  @IsOptional()
+  rootRedirectUrl: string;
 }

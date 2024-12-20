@@ -20,23 +20,23 @@ export class AdminVoucherService {
   ) {}
 
   async getVoucher(query: any, lang: string) {
-    const { txtSearch } = query;
-
-    let conditions: any = {};
-
-    if (txtSearch) {
-      const searchConditions = {
-        [`name_${lang}`]: Like(`%${txtSearch}%`),
-        code: Like(`%${txtSearch}%`),
-      };
-
-      conditions = OrTypeOrm(searchConditions, conditions);
-    }
-
+    // const { txtSearch } = query;
+  
+    // let conditions: any[] = [{ isDeleted: false }];
+  
+    // if (txtSearch) {
+    //   const searchConditions = {
+    //     [`name_${lang}`]: Like(`%${txtSearch}%`),
+    //     code: Like(`%${txtSearch}%`),
+    //   };
+  
+    //   conditions = OrTypeOrm(searchConditions, conditions);
+    // }
+  
     const vouchers = await this.voucherRepository.find({
-      where: conditions,
+      where: {isDeleted: false},
     });
-
+  
     return vouchers.map(voucher => {
       const { name_vi, name_en, ...restVoucher } = voucher;
       return {
@@ -168,10 +168,13 @@ export class AdminVoucherService {
       );
     }
 
-    const deleteVoucher = await this.voucherRepository.delete(id);
+    const deleteVoucher = await this.voucherRepository.save({
+      ...existingVoucher,
+      isDeleted: true,
+    });
     return {
-      voucher : existingVoucher,
-      message : "Voucher deleted successfully",
-    }
+      voucher: deleteVoucher,
+      message: 'Voucher deleted successfully',
+    };
   }
 }

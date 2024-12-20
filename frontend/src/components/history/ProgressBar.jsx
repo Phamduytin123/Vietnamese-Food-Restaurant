@@ -6,7 +6,6 @@ import { IoCloudDoneSharp } from 'react-icons/io5';
 import { MdCancel } from 'react-icons/md';
 
 const OrderStatusProgress = ({ status }) => {
-  console.log(status);
   const isCancelled = status === 'cancel';
   const statusList =
     status === 'cancel'

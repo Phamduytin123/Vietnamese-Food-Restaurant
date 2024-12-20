@@ -32,7 +32,7 @@ export class MomoPaymentService {
     body: OrderRequest,
     @CurrentAccount() currentAccount: Account
   ) {
-    const { carts, totalPrice } = body;
+    const { carts, totalPrice, rootRedirectUrl } = body;
 
     const foundCarts = [];
 
@@ -68,7 +68,6 @@ export class MomoPaymentService {
 
     //https://developers.momo.vn/#/docs/en/aiov2/?id=payment-method
     //parameters
-    // console.log(foundCarts);
 
     const items = foundCarts.map(cart => {
       const itemName = cart.itemSize.item.name_en;
@@ -86,7 +85,7 @@ export class MomoPaymentService {
     const secretKey = process.env.MOMO_SECRET_KEY;
     const orderInfo = 'pay with MoMo';
     const partnerCode = 'MOMO';
-    const redirectUrl = process.env.MOMO_REDIRC_URL;
+    const redirectUrl = rootRedirectUrl;
     const ipnUrl = process.env.DEPLOY_SERVICE_LINK + '/momo-payment/callback';
     // const ipnUrl = 'https://dc61-2402-800-629c-1fd3-6186-8883-cf12-7a5c.ngrok-free.app/momo-payment/callback';
     const requestType = 'payWithMethod';
