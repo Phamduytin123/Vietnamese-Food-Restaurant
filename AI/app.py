@@ -58,8 +58,8 @@ else:
 
 # Tải mô hình đã huấn luyện
 # model_path = "model/base_model_trained.h5"
-model_path = "model_from_drive.h5"
-# model_path = "base_model_best.h5"
+# model_path = "model_from_drive.h5"
+model_path = "base_model_best.h5"
 model = tf.keras.models.load_model(model_path)
 
 # Tai du lieu file csv data recommend40Food
@@ -79,6 +79,8 @@ numerical_columns = [
     "cholesterol",
     "sodium",
     "fiber",
+    "calories",
+    "fat",
 ]
 
 # Normalize numerical features
