@@ -2,14 +2,14 @@
 
 .frame_wrapper {
   position: relative;
-  background-size: cover;    /* Ảnh sẽ bao phủ toàn bộ thẻ div */
+  background-size: cover; /* Ảnh sẽ bao phủ toàn bộ thẻ div */
   background-position: center; /* Căn giữa ảnh trong thẻ div */
   background-repeat: no-repeat; /* Không lặp lại ảnh */
   background-image: url('../../../assets/images/backgroundLogin-395.png');
   width: 100%;
   min-height: 800px;
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;

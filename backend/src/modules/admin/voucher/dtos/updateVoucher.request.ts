@@ -11,8 +11,10 @@ import { Type } from 'class-transformer';
 import { i18nValidationMessage } from 'nestjs-i18n';
 
 export class UpdateVoucherDto {
-  @IsNotEmpty({message: i18nValidationMessage('validation.voucher.voucherId_required')})
-  voucherId : number
+  @IsNotEmpty({
+    message: i18nValidationMessage('validation.voucher.voucherId_required'),
+  })
+  voucherId: number;
 
   @IsOptional()
   name_vi?: string;
@@ -25,7 +27,9 @@ export class UpdateVoucherDto {
 
   @IsOptional()
   @Min(0, { message: i18nValidationMessage('validation.voucher.discount_min') })
-  @Max(100, { message: i18nValidationMessage('validation.voucher.discount_max') })
+  @Max(100, {
+    message: i18nValidationMessage('validation.voucher.discount_max'),
+  })
   discount?: number;
 
   @IsOptional()
@@ -34,12 +38,16 @@ export class UpdateVoucherDto {
 
   @IsOptional()
   @Type(() => Date)
-  @IsDate({ message: i18nValidationMessage('validation.voucher.startAt_invalid') })
+  @IsDate({
+    message: i18nValidationMessage('validation.voucher.startAt_invalid'),
+  })
   startAt?: Date;
 
   @IsOptional()
   @Type(() => Date)
-  @IsDate({ message: i18nValidationMessage('validation.voucher.endAt_invalid') })
+  @IsDate({
+    message: i18nValidationMessage('validation.voucher.endAt_invalid'),
+  })
   endAt?: Date;
 
   @IsOptional()

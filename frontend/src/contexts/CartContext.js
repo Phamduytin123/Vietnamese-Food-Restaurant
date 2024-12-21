@@ -6,13 +6,12 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartCount, setCartCount] = useState(0);
 
-  const {account} = useAuth();
-
+  const { account } = useAuth();
 
   const getCart = async () => {
-    if(!account) return;
-    
-    if(account.role !== "customer") return;
+    if (!account) return;
+
+    if (account.role !== 'customer') return;
 
     try {
       const response = await cartAPI.getCart();

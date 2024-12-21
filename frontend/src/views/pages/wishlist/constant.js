@@ -40,10 +40,10 @@ export const tableColumns = (handleSizeChange, handleAddToCart, selectedSizes) =
             text === 'OUT OF STOCK'
               ? 'out-of-stock'
               : text === 'COMMING SOON'
-              ? 'comming-soon'
-              : text === 'NOT TODAY'
-              ? 'not-today'
-              : ''
+                ? 'comming-soon'
+                : text === 'NOT TODAY'
+                  ? 'not-today'
+                  : ''
           }`}
         >
           {AVAILABILITY[text]}

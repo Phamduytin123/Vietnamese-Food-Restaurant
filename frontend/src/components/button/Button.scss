@@ -1,25 +1,25 @@
-@import "../../constants/colors.scss";
+@import '../../constants/colors.scss';
 
 .btn-primary {
   min-width: 100px;
   padding: 10px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #000000;
-  border: solid 1px #FA8232;
+  border: solid 1px #fa8232;
   border-radius: 12px;
   font-weight: 550;
   margin-right: 20px;
-  &.actived{
-    background-color: #FA8232;
-    color: #FFFFFF;
+  &.actived {
+    background-color: #fa8232;
+    color: #ffffff;
   }
-  &.actived:hover{
+  &.actived:hover {
     background-color: #e85a0d;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
-  &.disabled{
-    background-color: #DEB7AA;
-    border: solid 1px #DEB7AA;
+  &.disabled {
+    background-color: #deb7aa;
+    border: solid 1px #deb7aa;
   }
 }

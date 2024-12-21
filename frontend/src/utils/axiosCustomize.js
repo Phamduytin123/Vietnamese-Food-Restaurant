@@ -64,8 +64,8 @@ const handleLogout = (navigate, toast) => {
 
 export const setupInterceptors = (navigate, toast) => {
   axiosClient.application.interceptors.response.use(
-    response => response,
-    error => {
+    (response) => response,
+    (error) => {
       if (error.response) {
         const { status, data } = error.response;
         if (status === 403 && data.message === 'Token has expired') {
@@ -73,12 +73,12 @@ export const setupInterceptors = (navigate, toast) => {
         }
       }
       return Promise.reject(error);
-    }
+    },
   );
 
   axiosClient.formData.interceptors.response.use(
-    response => response,
-    error => {
+    (response) => response,
+    (error) => {
       if (error.response) {
         const { status, data } = error.response;
         if (status === 403 && data.message === 'Token has expired') {
@@ -86,9 +86,8 @@ export const setupInterceptors = (navigate, toast) => {
         }
       }
       return Promise.reject(error);
-    }
+    },
   );
 };
-
 
 export default axiosClient;

@@ -8,7 +8,8 @@ import { In, Repository } from 'typeorm';
 export class HotItemService {
   constructor(
     @InjectRepository(Item) private readonly itemRepository: Repository<Item>,
-    @InjectRepository(Review) private readonly reviewRepository: Repository<Review>
+    @InjectRepository(Review)
+    private readonly reviewRepository: Repository<Review>
   ) {}
 
   async getListHotItem(lang: string) {
@@ -17,28 +18,35 @@ export class HotItemService {
     });
 
     // Map items to include orderDetailNum, reviewNum, and rating
-    const itemsWithCounts = await Promise.all(itemFounds.map(async item => {
-      const orderDetailNum = item.itemSizes.reduce(
-        (count, itemSize) => count + itemSize.orderDetails.length,
-        0
-      );
+    const itemsWithCounts = await Promise.all(
+      itemFounds.map(async item => {
+        const orderDetailNum = item.itemSizes.reduce(
+          (count, itemSize) => count + itemSize.orderDetails.length,
+          0
+        );
 
-      // Fetch reviews for each itemSize
-      const reviews = await this.reviewRepository.find({
-        where: { itemSize: { id: In(item.itemSizes.map(itemSize => itemSize.id)) } },
-      });
+        // Fetch reviews for each itemSize
+        const reviews = await this.reviewRepository.find({
+          where: {
+            itemSize: { id: In(item.itemSizes.map(itemSize => itemSize.id)) },
+          },
+        });
 
-      const reviewNum = reviews.length;
-      const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-      const averageRating = reviewNum > 0 ? totalRating / reviewNum : 0;
+        const reviewNum = reviews.length;
+        const totalRating = reviews.reduce(
+          (sum, review) => sum + review.rating,
+          0
+        );
+        const averageRating = reviewNum > 0 ? totalRating / reviewNum : 0;
 
-      return {
-        ...ItemFilterUtils.filterResponseData(item, lang),
-        orderDetailNum,
-        reviewNum,
-        rating: averageRating,
-      };
-    }));
+        return {
+          ...ItemFilterUtils.filterResponseData(item, lang),
+          orderDetailNum,
+          reviewNum,
+          rating: averageRating,
+        };
+      })
+    );
 
     itemsWithCounts.sort((a, b) => {
       if (b.orderDetailNum !== a.orderDetailNum) {

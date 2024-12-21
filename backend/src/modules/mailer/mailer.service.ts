@@ -30,7 +30,7 @@ export class CustomMailerService {
     await this.mailerService.sendMail({
       to: email,
       subject: 'Reset Your Password',
-      text: "Your password has been reset to 88888888",
+      text: 'Your password has been reset to 88888888',
     });
   }
 }

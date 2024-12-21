@@ -1,4 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards, UseInterceptors } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { AdminVoucherService } from './voucher.service';
 import { AuthGuard } from '../../../common/guards/auth.guard';
 import { RoleGuard } from '../../../common/guards/role.guard';
@@ -10,7 +21,7 @@ import { LoggingInterceptor } from '../../../common/interceptors';
 @Controller('/admin/vouchers')
 @UseInterceptors(LoggingInterceptor)
 export class AdminVoucherController {
-  constructor(private readonly voucherService: AdminVoucherService) { }
+  constructor(private readonly voucherService: AdminVoucherService) {}
 
   @Get()
   @UseGuards(new RoleGuard([AccountRoleEnum.ADMIN, AccountRoleEnum.STAFF]))
@@ -37,7 +48,6 @@ export class AdminVoucherController {
   @UseGuards(new RoleGuard([AccountRoleEnum.ADMIN, AccountRoleEnum.STAFF]))
   @UseGuards(AuthGuard)
   async deleteVoucher(@Param('id') id: number) {
-      return this.voucherService.deleteVoucher(id);
+    return this.voucherService.deleteVoucher(id);
   }
-
 }

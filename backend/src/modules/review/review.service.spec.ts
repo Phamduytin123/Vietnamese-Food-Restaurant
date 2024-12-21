@@ -86,8 +86,8 @@ describe('ReviewService', () => {
       const result = await service.createReview(mockAccount, mockReviewRequest);
 
       expect(result).toBeDefined();
-      expect(result).toHaveProperty('id'); 
-      expect(result.id).toBe(1); 
+      expect(result).toHaveProperty('id');
+      expect(result.id).toBe(1);
       expect(itemRepository.save).toHaveBeenCalledWith({
         id: 1,
         name: 'Test Item',

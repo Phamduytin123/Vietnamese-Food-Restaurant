@@ -15,7 +15,7 @@
   margin-left: 4px;
   height: 100%;
   width: 0%;
-  background-color: #FA8232; /* Màu xanh cho tiến trình */
+  background-color: #fa8232; /* Màu xanh cho tiến trình */
   border-radius: 5px;
   transition: width 0.3s ease-in-out;
 }
@@ -29,7 +29,7 @@
   height: 24px;
   width: 24px;
   border-radius: 50%;
-  border: 2px solid #FA8232;
+  border: 2px solid #fa8232;
   background-color: #fff; /* Màu mặc định cho các trạng thái chưa đến */
   transition: background-color 0.3s;
   .status-item-title {
@@ -41,13 +41,13 @@
     opacity: 0.5;
   }
   &.active {
-    background-color: #FA8232;
+    background-color: #fa8232;
     .status-item-title {
       opacity: 1;
     }
   }
   &.cancel {
-    background-color: #FA8232;
+    background-color: #fa8232;
   }
   .status-item-title {
     margin-top: 30px;
@@ -58,8 +58,18 @@
   }
 }
 
-.status-item:nth-child(1) { left: 0%; }
-.status-item:nth-child(2) { left: 25%; }
-.status-item:nth-child(3) { left: 50%; }
-.status-item:nth-child(4) { left: 75%; }
-.status-item:nth-child(5) { left: 99%; }
+.status-item:nth-child(1) {
+  left: 0%;
+}
+.status-item:nth-child(2) {
+  left: 25%;
+}
+.status-item:nth-child(3) {
+  left: 50%;
+}
+.status-item:nth-child(4) {
+  left: 75%;
+}
+.status-item:nth-child(5) {
+  left: 99%;
+}

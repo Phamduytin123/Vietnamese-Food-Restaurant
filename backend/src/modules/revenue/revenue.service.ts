@@ -115,7 +115,10 @@ export class RevenueService {
       totalPages: totalPages,
       reviews: reviewsFound.map(reviewFound => ({
         ...reviewFound,
-        item: ItemFilterUtils.filterResponseData(reviewFound.itemSize.item, lang),
+        item: ItemFilterUtils.filterResponseData(
+          reviewFound.itemSize.item,
+          lang
+        ),
       })),
     };
   }

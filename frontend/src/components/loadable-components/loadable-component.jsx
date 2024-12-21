@@ -1,5 +1,5 @@
-import React, { lazy, Suspense } from "react";
-import { LoadingOutlined } from "@ant-design/icons";
+import React, { lazy, Suspense } from 'react';
+import { LoadingOutlined } from '@ant-design/icons';
 
 export const Loading = (
   <div className="animation-container">

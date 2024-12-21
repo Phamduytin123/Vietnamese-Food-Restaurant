@@ -1,7 +1,7 @@
 @import '../../../../../constants/colors.scss';
 
 .admin-dashboard-small-review {
-  &-container{
+  &-container {
     background-color: $white-color;
     border-radius: 20px;
     padding: 20px;
@@ -11,9 +11,9 @@
   }
   &-star-container {
     display: flex;
-    margin : 10px 0px;
+    margin: 10px 0px;
   }
-  &-item-container{
+  &-item-container {
     display: flex;
     align-items: center;
   }
@@ -27,21 +27,20 @@
     padding-left: 5px;
   }
   &-item-name {
-    color : $admin-dashboard-dark-green;
+    color: $admin-dashboard-dark-green;
     font-weight: bold;
     font-size: 18px;
   }
   &-item-regional {
-    color : $admin-dashboard-light-red;
+    color: $admin-dashboard-light-red;
     font-weight: bold;
   }
-
 }
 
-.admin-dashboard-small-review-info-user{
-  &-container{
+.admin-dashboard-small-review-info-user {
+  &-container {
     display: flex;
-    align-items: center;  
+    align-items: center;
   }
   &-avatar {
     height: 50px;
@@ -49,7 +48,7 @@
     object-fit: cover;
     border-radius: 50%;
   }
-  &-name-container{
+  &-name-container {
     margin-left: 10px;
   }
   &-name {

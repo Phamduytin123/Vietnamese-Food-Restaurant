@@ -25,7 +25,7 @@ export class LoggingInterceptor implements NestInterceptor {
         console.log(
           `\x1b[31m${end.toLocaleString()}: [END] ${method} ${url} - Duration: ${duration}ms\x1b[0m`
         ); // Màu đỏ
-      }),
+      })
     );
   }
 }

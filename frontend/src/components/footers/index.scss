@@ -35,7 +35,7 @@
   align-items: center;
   gap: 10px;
   padding: 21px 48px;
-  background: linear-gradient(93.41deg, rgba(241,114,40,1) 5.63%, rgba(241,94,40,1) 100.8%);
+  background: linear-gradient(93.41deg, rgba(241, 114, 40, 1) 5.63%, rgba(241, 94, 40, 1) 100.8%);
   border: none;
   border-radius: 8px;
   color: #ffffff;
@@ -52,8 +52,8 @@
 }
 
 .cta-button:active {
-  transform: translateY(0px); 
-  box-shadow: none; 
+  transform: translateY(0px);
+  box-shadow: none;
 }
 
 .chevron {
@@ -63,17 +63,13 @@
   line-height: 1;
 }
 
-
-
-
-
 .footer {
   background-color: #191c1f;
   color: #adb7bc !important;
   width: 100%;
 }
 
-.logo-footer{
+.logo-footer {
   font-family: 'Public Sans', sans-serif;
   font-weight: 700;
   font-size: 32px;
@@ -92,49 +88,52 @@
   margin-right: 10px;
 }
 
-.title-footer{
-    color: #ffffff;
+.title-footer {
+  color: #ffffff;
 }
 
-.col-footer p{
-    a{
-        text-decoration: none;
-    }
+.col-footer p {
+  a {
+    text-decoration: none;
+  }
 
-    &:hover{
-        color: #f17228;
-    }
+  &:hover {
+    color: #f17228;
+  }
 }
 
-.download-app .app-links .google-play, .download-app .app-links .app-store{
+.download-app .app-links .google-play,
+.download-app .app-links .app-store {
   display: flex;
-    align-items: center;
-    background-color: #303639;
-    border-radius: 3px;
-    gap: 12px;
-    padding: 12px 24px;
-    margin-bottom: 24px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+  align-items: center;
+  background-color: #303639;
+  border-radius: 3px;
+  gap: 12px;
+  padding: 12px 24px;
+  margin-bottom: 24px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 
-  .download-content{
+  .download-content {
     display: flex;
     flex-direction: column;
 
-    .get-it{
-        font-size: 12px;
-        opacity: 0.8;
-        margin-bottom: 4px;
+    .get-it {
+      font-size: 12px;
+      opacity: 0.8;
+      margin-bottom: 4px;
     }
-    .app{
-        font-size: 21px;
-        font-weight: 700;
+    .app {
+      font-size: 21px;
+      font-weight: 700;
     }
   }
-  .icon-download{
+  .icon-download {
     font-size: 32px;
   }
 
-  &:hover{
+  &:hover {
     cursor: pointer;
     background-color: #f17228;
     color: #ffffff;

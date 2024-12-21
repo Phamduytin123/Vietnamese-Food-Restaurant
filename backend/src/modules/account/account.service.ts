@@ -73,7 +73,7 @@ export class AccountService {
     };
     return await this.accountRepo.save(newAccount);
   }
-  
+
   async updatePassword(
     currentAccount: Account,
     requestBody: PasswordUpdateDto,

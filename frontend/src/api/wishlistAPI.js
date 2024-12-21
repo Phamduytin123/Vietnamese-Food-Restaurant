@@ -8,7 +8,7 @@ const wishlistAPI = {
   },
   setWish: (data) => {
     const url = '/likes';
-    return axiosClient.application.post(url, {itemId: data});
+    return axiosClient.application.post(url, { itemId: data });
   },
 };
 
