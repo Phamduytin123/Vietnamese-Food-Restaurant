@@ -11,7 +11,9 @@
   z-index: 9999;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
 
   &.active {
     opacity: 1;
@@ -20,7 +22,7 @@
 
   .loading-spinner {
     border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #ff642f;/* Blue */
+    border-top: 16px solid #ff642f; /* Blue */
     border-radius: 50%;
     width: 100px;
     height: 100px;
@@ -31,6 +33,10 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

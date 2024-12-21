@@ -388,9 +388,8 @@ export class OrderService {
     }
 
     orderFound.status = updateStatusRequest.status;
-    if(updateStatusRequest.status === OrderStatusEnum.CANCEL)
-    {
-      orderFound.reasonCancel = "Cửa hàng hủy đơn";  
+    if (updateStatusRequest.status === OrderStatusEnum.CANCEL) {
+      orderFound.reasonCancel = 'Cửa hàng hủy đơn';
     }
     return this.orderRepository.save(orderFound);
   }

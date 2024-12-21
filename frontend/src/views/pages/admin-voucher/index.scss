@@ -35,10 +35,10 @@
 }
 
 .form-group label {
-font-size: 14px;
-        font-weight: bold;
-        margin-bottom: 8px;
-        color: #333;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
 }
 
 .form-group input {
@@ -73,34 +73,34 @@ font-size: 14px;
 .form-group-cost,
 .form-group-count,
 .form-group-startDate,
-.form-group-endDate{
-    display: flex;
-      flex-direction: column;
+.form-group-endDate {
+  display: flex;
+  flex-direction: column;
 
-      label {
-        font-size: 14px;
-        font-weight: bold;
-        margin-bottom: 8px;
-        color: #333;
-      }
+  label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+  }
 
-      input {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 14px;
-        width: 100%;
-      }
+  input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+  }
 }
 
-.form-grid{
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(2, 1fr);
+.form-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
 }
-.button{
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-top: 25px;
+.button {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 25px;
 }

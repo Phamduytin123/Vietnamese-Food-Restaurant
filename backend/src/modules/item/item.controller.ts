@@ -1,4 +1,11 @@
-import { Controller, Get, Param, Query, Req, UseInterceptors } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Query,
+  Req,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ItemService } from './item.service';
 import { Lang } from '../../common';
 import * as jwt from 'jsonwebtoken';
@@ -18,7 +25,11 @@ export class ItemController {
     const authHeader = req.headers.authorization;
     let currentAccount = null;
     // Kiểm tra xem header có tồn tại và định dạng có đúng không
-    if (authHeader && authHeader.startsWith('Bearer ') && authHeader.split(' ')[1] != "null") {
+    if (
+      authHeader &&
+      authHeader.startsWith('Bearer ') &&
+      authHeader.split(' ')[1] != 'null'
+    ) {
       const token = authHeader.split(' ')[1];
       currentAccount = this.getAccountFromToken(token);
     }

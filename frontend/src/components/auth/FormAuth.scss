@@ -1,4 +1,4 @@
-@import "../../constants/colors.scss";
+@import '../../constants/colors.scss';
 
 .form-login {
   width: 30%;
@@ -17,8 +17,8 @@
     padding: 16px 24px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    &.actived{
-      border-bottom: solid 3px #FA8232;
+    &.actived {
+      border-bottom: solid 3px #fa8232;
       color: $text-color__black;
     }
   }
@@ -31,7 +31,7 @@
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  cursor: pointer
+  cursor: pointer;
 }
 .text-color__black {
   color: $text-color__black;

@@ -5,10 +5,10 @@
   background-color: #fff;
 }
 
-.shopping-card, .card-total {
+.shopping-card,
+.card-total {
   flex: 1;
 }
-
 
 .shopping-cart {
   max-width: 756px;
@@ -19,7 +19,7 @@
   height: 100%;
 }
 
-.cart-total-details{
+.cart-total-details {
   border-radius: 4px;
   background-color: #fff;
   box-shadow: 0 0 1px #e4e7e9;
@@ -33,12 +33,13 @@
   font-weight: 400;
   color: #191c1fff;
   border-bottom: 1px solid #e4e7e9ff;
-  h2{
+  h2 {
     font-size: 20px !important;
   }
 }
 
-.cart-sub-header, .cart-item {
+.cart-sub-header,
+.cart-item {
   display: flex;
   align-items: center;
   padding: 10px 24px;
@@ -51,27 +52,27 @@
   text-transform: uppercase;
   color: #475156ff;
   gap: 10px;
-  .sub-checkbox{
+  .sub-checkbox {
     margin-right: 0px;
   }
 
-  .sub-product{
+  .sub-product {
     margin-right: 172px;
   }
 
-  .sub-cost{
+  .sub-cost {
     margin-right: 67px;
   }
 
-  .sub-count{
+  .sub-count {
     margin-right: 42px;
   }
 
-  .sub-size{
+  .sub-size {
     margin-right: 24px;
   }
 
-  .sub-total{
+  .sub-total {
     margin-right: 12px;
   }
 }
@@ -80,30 +81,30 @@
   gap: 12px;
   border-top: 1px solid #e4e7e9ff;
 
-  .product{
+  .product {
     min-width: 139px;
   }
-  .cost{
+  .cost {
     min-width: 89px;
   }
-  .size{
+  .size {
     min-width: 68px;
     select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    /* Thêm một số kiểu để select trông tốt hơn */
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    cursor: pointer;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      /* Thêm một số kiểu để select trông tốt hơn */
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #fff;
+      cursor: pointer;
+    }
   }
-  }
-  .total{
+  .total {
     min-width: 100px;
   }
-  .delete-product{
+  .delete-product {
     width: 24px;
     height: 24px;
     object-fit: none;
@@ -124,19 +125,19 @@
   border: 1px solid #e4e7e9ff;
 }
 
-.quantity-control-container{
+.quantity-control-container {
   max-width: 110px;
 }
 
 .quantity-control button {
   width: 24px;
-    height: 24px;
-    border: 1px solid #e4e7e9;
-    background-color: #fff;
-    border-radius: 3px;
-    cursor: pointer;
-    border: none;
-    margin: 4px;
+  height: 24px;
+  border: 1px solid #e4e7e9;
+  background-color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  border: none;
+  margin: 4px;
 }
 
 .cart-footer {
@@ -161,7 +162,6 @@
   cursor: pointer;
 }
 
-
 .card-total {
   display: flex;
   flex-direction: column;
@@ -185,10 +185,10 @@
     font-size: 16px;
     padding: 6px 24px;
     gap: 192px;
-    .item-title{
+    .item-title {
       opacity: 0.9;
     }
-    .item-val{
+    .item-val {
       font-weight: 800;
     }
   }
@@ -205,11 +205,11 @@
     padding: 0 24px;
   }
 
-  .button-checkout{
+  .button-checkout {
     padding: 0 24px;
   }
 
-  .button-checkout{
+  .button-checkout {
     .checkout-btn {
       background-color: #fa8232;
       color: #fff;
@@ -237,24 +237,24 @@
     box-shadow: 0 0 1px #e4e7e9;
     border: 1px solid #e4e7e9;
 
-    div{
-      font-family: "Source Sans Pro", sans-serif;
+    div {
+      font-family: 'Source Sans Pro', sans-serif;
       font-weight: 400;
       font-size: 20px;
       padding: 20px 24px;
       border-bottom: 1px solid #e4e7e9;
     }
-    .coupon-code-content{
+    .coupon-code-content {
       padding: 0 24px;
-      
-      input{
+
+      input {
         width: 100%;
         padding: 10px 24px;
         margin: 10px 0;
         border: 1px solid #e4e7e9;
       }
 
-      button{
+      button {
         background-color: #ffac1b;
         color: #fff;
         border: none;
@@ -276,8 +276,7 @@
   }
 }
 
-
-input[type="checkbox"].checkbox {
+input[type='checkbox'].checkbox {
   width: 20px;
   height: 20px;
   cursor: pointer;
@@ -287,13 +286,13 @@ input[type="checkbox"].checkbox {
   position: relative;
 }
 
-input[type="checkbox"].checkbox:checked {
-  background-color: #FA8232;
-  border-color: #FA8232;
+input[type='checkbox'].checkbox:checked {
+  background-color: #fa8232;
+  border-color: #fa8232;
 }
 
-input[type="checkbox"].checkbox:checked::after {
-  content: "✔";
+input[type='checkbox'].checkbox:checked::after {
+  content: '✔';
   color: white;
   font-size: 16px;
   position: absolute;
@@ -304,7 +303,7 @@ input[type="checkbox"].checkbox:checked::after {
 /* App.css */
 .loading-spinner {
   border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #ff642f;/* Blue */
+  border-top: 16px solid #ff642f; /* Blue */
   border-radius: 50%;
   width: 100px;
   height: 100px;
@@ -315,6 +314,10 @@ input[type="checkbox"].checkbox:checked::after {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

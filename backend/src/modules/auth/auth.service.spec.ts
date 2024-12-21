@@ -77,10 +77,10 @@ describe('AuthService', () => {
       mockAccountService.findByEmail.mockResolvedValue(null);
 
       await expect(authService.login(mockLoginDto)).rejects.toThrow(
-        BadRequestException,
+        BadRequestException
       );
       expect(mockAccountService.findByEmail).toHaveBeenCalledWith(
-        mockLoginDto.email,
+        mockLoginDto.email
       );
     });
 
@@ -89,10 +89,10 @@ describe('AuthService', () => {
       mockLoginDto.password = 'wrongpassword';
 
       await expect(authService.login(mockLoginDto)).rejects.toThrow(
-        BadRequestException,
+        BadRequestException
       );
       expect(mockAccountService.findByEmail).toHaveBeenCalledWith(
-        mockLoginDto.email,
+        mockLoginDto.email
       );
     });
 
@@ -103,20 +103,23 @@ describe('AuthService', () => {
       });
 
       await expect(authService.login(mockLoginDto)).rejects.toThrow(
-        BadRequestException,
+        BadRequestException
       );
       expect(mockAccountService.findByEmail).toHaveBeenCalledWith(
-        mockLoginDto.email,
+        mockLoginDto.email
       );
     });
 
     it('should return access token and user info if login is successful', async () => {
-      mockLoginDto.password = "password123"
-      
+      mockLoginDto.password = 'password123';
+
       mockAccountService.findByEmail.mockResolvedValue(mockAccount);
       mockJwtService.signAsync.mockResolvedValue('mockAccessToken');
 
-      const isMatch = await bcrypt.compare(mockLoginDto.password, mockAccount.password);
+      const isMatch = await bcrypt.compare(
+        mockLoginDto.password,
+        mockAccount.password
+      );
       expect(isMatch).toBe(true); // Đảm bảo mật khẩu khớp
       const result = await authService.login(mockLoginDto);
 
@@ -133,7 +136,7 @@ describe('AuthService', () => {
         role: mockAccount.role,
       });
       expect(mockAccountService.findByEmail).toHaveBeenCalledWith(
-        mockLoginDto.email,
+        mockLoginDto.email
       );
       expect(mockJwtService.signAsync).toHaveBeenCalled();
     });

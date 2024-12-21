@@ -1,5 +1,5 @@
 // Product List
-  .product-card-list {
+.product-card-list {
   display: flex;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -21,12 +21,14 @@
     position: absolute;
     top: 10px;
 
-    transition: background-color 0.3s ease, transform 0.3s ease; 
+    transition:
+      background-color 0.3s ease,
+      transform 0.3s ease;
     &:hover {
-        background-color: #e85a0d; 
-        transform: scale(1.05); 
+      background-color: #e85a0d;
+      transform: scale(1.05);
     }
-    
+
     img {
       width: 16px; // Adjust image size as needed
       height: 16px;
@@ -54,7 +56,7 @@
     }
   }
 
-  .img-item{
+  .img-item {
     width: 400px;
     display: block;
     height: 300px;
@@ -94,7 +96,6 @@
   }
 }
 
-
 .rating img {
   margin-right: 5px;
 }
@@ -105,29 +106,29 @@
   position: relative;
 }
 
-      .full {
-        color: gold;
-      }
+.full {
+  color: gold;
+}
 
-      .empty {
-        color: lightgray;
-      }
+.empty {
+  color: lightgray;
+}
 
-      .partial {
-        position: relative;
-      }
+.partial {
+  position: relative;
+}
 
-      .partial-star {
-        position: absolute;
-        top: 0;
-        left: 0;
-        color: gold; /* Màu cho phần đã chọn */
-        overflow: hidden;
-      }
+.partial-star {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: gold; /* Màu cho phần đã chọn */
+  overflow: hidden;
+}
 
-      .empty-star {
-        color: lightgray; /* Màu cho phần chưa chọn */
-      }
+.empty-star {
+  color: lightgray; /* Màu cho phần chưa chọn */
+}
 
 .description {
   margin: 10px 0;
@@ -140,7 +141,8 @@
   position: absolute;
   bottom: 12px;
 
-  .btn-view, .btn-cart {
+  .btn-view,
+  .btn-cart {
     display: flex;
     align-items: center;
     padding: 10px 20px;
@@ -149,18 +151,21 @@
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease; 
-      &:hover {
-          background-color: #e85a0d; 
-          transform: scale(1.05); 
-      }
+    transition:
+      background-color 0.3s ease,
+      transform 0.3s ease;
+    &:hover {
+      background-color: #e85a0d;
+      transform: scale(1.05);
+    }
   }
 
-  .btn-view img, .btn-cart img {
+  .btn-view img,
+  .btn-cart img {
     margin-right: 10px;
   }
 
-  .btn-view{
+  .btn-view {
     svg {
       width: 26px;
       height: 26px;
@@ -168,4 +173,3 @@
     }
   }
 }
-

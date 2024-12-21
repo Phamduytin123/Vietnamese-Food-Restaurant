@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post, Query, Redirect, Res, UseInterceptors } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Query,
+  Redirect,
+  Res,
+  UseInterceptors,
+} from '@nestjs/common';
 import { LoginDto } from './dtos/loginDtio';
 import { AuthService } from './auth.service';
 import { CustomMailerService } from '../mailer/mailer.service';

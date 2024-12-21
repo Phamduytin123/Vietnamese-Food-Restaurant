@@ -12,4 +12,4 @@ import { UploadService } from '../upload/upload.service';
   controllers: [AccountController],
   exports: [AccountService],
 })
-export class AccountModule { }
+export class AccountModule {}

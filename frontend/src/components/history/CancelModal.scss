@@ -1,6 +1,6 @@
 .cancel-modal {
   .modal-title {
-    color: #FF8F1F;
+    color: #ff8f1f;
     font-weight: 600;
     font-size: 24px;
   }
@@ -18,24 +18,24 @@
       right: auto;
       bottom: auto;
       margin-right: 50%;
-      transform: translate(-50%, -50%)
+      transform: translate(-50%, -50%);
     }
   }
-  .form-upload-image{
+  .form-upload-image {
     max-width: 100%;
   }
   .form-upload-submit {
     border: 2px dashed rgb(208, 190, 177);
     border-radius: 12px;
     width: 100%;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     min-height: 400px;
   }
-  .remove-image-btn{
+  .remove-image-btn {
     top: 4px;
     right: 4px;
     background-color: transparent;
-    border: none
+    border: none;
   }
   .feedback-input {
     border: 1px solid #797878;
@@ -46,7 +46,7 @@
   .rating-item-text {
     font-weight: 600;
     color: #223263;
-    .wishlist-item-size{
+    .wishlist-item-size {
       color: #000000;
     }
   }

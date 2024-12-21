@@ -22,7 +22,7 @@ export class ReviewService {
   async createReview(account: Account, body: ReviewRequest) {
     const itemSize = await this.itemSizeRepository.findOne({
       where: { id: body.itemSizeId },
-      relations: ["item"] // Load the item associated with the itemSize
+      relations: ['item'], // Load the item associated with the itemSize
     });
 
     if (!itemSize) {
@@ -58,7 +58,7 @@ export class ReviewService {
 
     const reviews = await this.reviewRepository.find({
       where: { itemSize: { item: { id: item.id } } }, // Find reviews for the item
-      relations: ["itemSize.item"]
+      relations: ['itemSize.item'],
     });
 
     // Calculate the new average rating

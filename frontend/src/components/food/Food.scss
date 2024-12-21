@@ -1,4 +1,4 @@
-@import "../../constants/colors.scss";
+@import '../../constants/colors.scss';
 
 .container-info {
   width: 50%;
@@ -77,12 +77,12 @@
 }
 
 .food-carousel-detail .food-item-detail img {
-    border-radius: 14px;
-    min-width: -53px;
-    max-width: 77px;
-    min-height: 95px;
-    cursor: pointer;
-    object-fit: cover;
+  border-radius: 14px;
+  min-width: -53px;
+  max-width: 77px;
+  min-height: 95px;
+  cursor: pointer;
+  object-fit: cover;
 }
 
 .food-carousel-wish {
@@ -103,7 +103,7 @@
     overflow: hidden; // Ẩn phần hình ảnh ngoài vùng nhìn thấy
   }
 
-  .left-arrow-btn{
+  .left-arrow-btn {
     position: absolute;
     top: 100%;
     height: 100px;
@@ -129,15 +129,14 @@
       font-size: 14px;
       color: $text-color__gray;
     }
-}
-
+  }
 }
 
 .food-images {
   width: 30%;
   margin-right: 30px;
   .food-image {
-    border: 2px dashed #8A8585;
+    border: 2px dashed #8a8585;
     background-color: $background-color__gray;
     border-radius: 16px;
     margin-bottom: 30px;
@@ -149,6 +148,6 @@
   }
 }
 
-.height-100{
+.height-100 {
   height: 100px;
 }

@@ -12,7 +12,7 @@ const ProductDetailAPI = {
   createProduct: (formData) => {
     const url = `admin/items`;
     return axiosClient.formData.post(url, formData);
-  }
+  },
 };
 
 export default ProductDetailAPI;

@@ -37,7 +37,16 @@ const columns = (navigate) => [
     align: 'center',
     render: (status) => {
       return (
-        <p className={`fw-bold`} style={{ margin: 0, color: darkenColor(ORDERSTATUSCOLOR[status], 0.5), backgroundColor : ORDERSTATUSCOLOR[status], padding : "5px", borderRadius : "10px" }}>
+        <p
+          className={`fw-bold`}
+          style={{
+            margin: 0,
+            color: darkenColor(ORDERSTATUSCOLOR[status], 0.5),
+            backgroundColor: ORDERSTATUSCOLOR[status],
+            padding: '5px',
+            borderRadius: '10px',
+          }}
+        >
           {ORDERSTATUS[status]}
         </p>
       );
