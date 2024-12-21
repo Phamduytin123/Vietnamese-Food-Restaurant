@@ -12,25 +12,25 @@ export default class OrderDetailSeeder implements Seeder {
   public async run(): Promise<void> {
     const orderDetailRepo = this.dataSource.getRepository(OrderDetail);
 
-    for(var i = 1; i < 19; i++){
+    for (var i = 1; i < 19; i++) {
       await orderDetailRepo.save([
         {
-          itemSizeId : 1,
-          price : 25000,
-          quantity : 2,
-          orderId : i,
+          itemSizeId: 1,
+          price: 25000,
+          quantity: 2,
+          orderId: i,
         },
         {
-          itemSizeId : 4,
-          price : 30000,
-          quantity : 2,
-          orderId : i,
+          itemSizeId: 4,
+          price: 30000,
+          quantity: 2,
+          orderId: i,
         },
         {
-          itemSizeId : 8,
-          price : 40000,
-          quantity : 2,
-          orderId : i,
+          itemSizeId: 8,
+          price: 40000,
+          quantity: 2,
+          orderId: i,
         },
       ]);
     }

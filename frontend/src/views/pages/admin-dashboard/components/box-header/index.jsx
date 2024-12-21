@@ -16,7 +16,7 @@ function BoxHeader(props) {
 
   return (
     <div className="admin-dashboard-box-header-container">
-      <div className='admin-dashboard-box-header-content-container'>
+      <div className="admin-dashboard-box-header-content-container">
         <h5 className="admin-dashboard-box-header-name" style={{ color: darkenColor(data.color) }}>
           {data.name}
         </h5>

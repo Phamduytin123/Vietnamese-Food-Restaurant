@@ -27,14 +27,16 @@ describe('LikeService', () => {
         {
           provide: I18nService,
           useValue: {
-            t: jest.fn().mockImplementation((key) => key),
+            t: jest.fn().mockImplementation(key => key),
           },
         },
       ],
     }).compile();
 
     service = module.get<LikeService>(LikeService);
-    likeRepository = module.get<Repository<LikeItem>>(getRepositoryToken(LikeItem));
+    likeRepository = module.get<Repository<LikeItem>>(
+      getRepositoryToken(LikeItem)
+    );
     itemRepository = module.get<Repository<Item>>(getRepositoryToken(Item));
     i18nService = module.get<I18nService>(I18nService);
   });
@@ -78,7 +80,9 @@ describe('LikeService', () => {
       jest.spyOn(likeRepository, 'findOne').mockResolvedValue(null);
       jest.spyOn(itemRepository, 'findOne').mockResolvedValue(null);
 
-      await expect(service.setLike(mockAccount, mockBody)).rejects.toThrow(NotFoundException);
+      await expect(service.setLike(mockAccount, mockBody)).rejects.toThrow(
+        NotFoundException
+      );
     });
   });
 });

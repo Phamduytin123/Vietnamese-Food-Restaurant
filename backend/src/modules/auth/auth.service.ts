@@ -22,7 +22,7 @@ export class AuthService {
     private accountService: AccountService,
     private jwtService: JwtService,
     private readonly customMailerService: CustomMailerService
-  ) { }
+  ) {}
 
   async login(requestBody: LoginDto) {
     //check email exist
@@ -74,27 +74,31 @@ export class AuthService {
   }
 
   async registerAccount(accountData: RegisterDto) {
-    const accountFound = await this.accountService.findByEmail(accountData.email);
+    const accountFound = await this.accountService.findByEmail(
+      accountData.email
+    );
 
     if (accountFound) {
-      throw new BadRequestException('The email already exists in the system')
+      throw new BadRequestException('The email already exists in the system');
     }
     if (accountData.password !== accountData.confirmPassword) {
-      throw new BadRequestException('Confirm password invalid')
+      throw new BadRequestException('Confirm password invalid');
     }
     accountData.password = PasswordUtils.hashPassword(accountData.password);
     // const newAccount = await this.accountService.create(accountData);
     const newAccount = {
       ...accountData,
-      isActive: true
-    }
+      isActive: true,
+    };
 
     const verificationToken = await this.jwtService.signAsync(
       { newAccount: newAccount },
       { secret: process.env.JWT_SECRET, expiresIn: '1d' }
     );
 
-    const verificationLink = process.env.DEPLOY_SERVICE_LINK + `/auth/verify?token=${verificationToken}`;
+    const verificationLink =
+      process.env.DEPLOY_SERVICE_LINK +
+      `/auth/verify?token=${verificationToken}`;
 
     // Gửi email xác minh qua MailerService
     // await this.customMailerService.sendVerificationEmail(newAccount.email, verificationLink);
@@ -128,7 +132,9 @@ export class AuthService {
       { secret: process.env.JWT_SECRET, expiresIn: '1h' }
     );
 
-    const resetLink = process.env.DEPLOY_SERVICE_LINK + `/auth/get-reset-password?token=${resetToken}`;
+    const resetLink =
+      process.env.DEPLOY_SERVICE_LINK +
+      `/auth/get-reset-password?token=${resetToken}`;
 
     // Gửi email reset mật khẩu qua MailerService
     // await this.customMailerService.sendPasswordResetEmail(account.email, resetLink);

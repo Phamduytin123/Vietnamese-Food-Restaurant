@@ -100,7 +100,7 @@ const Header = ({ userInfo }) => {
                   </div>
                 )}
                 {isAdmin && (
-                  <div className='d-flex align-items-center'>
+                  <div className="d-flex align-items-center">
                     <p className="deliver">Deliver to:</p>
                     <IoLocationSharp className="location-icon" />
                     <p className="cur-location">Current Location</p>

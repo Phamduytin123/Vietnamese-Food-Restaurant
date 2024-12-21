@@ -10,12 +10,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin : 10px 0px;
-  .col-lg-6, .col-sm-12 {
-    padding : 0px !important;
-  };
+  margin: 10px 0px;
+  .col-lg-6,
+  .col-sm-12 {
+    padding: 0px !important;
+  }
   p {
-    padding : 0px;
+    padding: 0px;
   }
 }
 
@@ -44,9 +45,9 @@
 
 .admin-account-detail-modal-exist-button {
   background-color: $light-gray !important;
-  color : black !important;
+  color: black !important;
 }
 
 .admin-account-detail-modal-exist-button:hover {
-  border: 1px solid black !important;  
+  border: 1px solid black !important;
 }

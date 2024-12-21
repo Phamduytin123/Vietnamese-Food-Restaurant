@@ -1,684 +1,615 @@
 {
-    "items": [
+  "items": [
+    {
+      "name": "Banh Bo",
+      "images": [],
+      "description": "Soft and spongy Banh Bo with a mild sweetness and coconut aroma.",
+      "ingredients": ["rice flour", "coconut milk", "sugar", "yeast"],
+      "unit": "Piece",
+      "regional": "Southern Vietnam",
+      "ammount_of_money": "15.000 VND - 25.000 VND",
+      "minPrice": "15.000 VND",
+      "maxPrice": "25.000 VND",
+      "updatedAt": null,
+      "id": 17,
+      "discount": 50,
+      "carbohydrates": 38,
+      "protein": 4,
+      "cholesterol": 0,
+      "sodium": 150,
+      "fiber": 1,
+      "availability": "in stock",
+      "rating": 4.8,
+      "isFood": true,
+      "isDeleted": false,
+      "categoryId": 1,
+      "createdAt": "2024-10-06T11:06:11.000Z",
+      "category": {
+        "id": 1,
+        "name": "Cake",
+        "isFood": true
+      },
+      "itemSizes": [
         {
-            "name": "Banh Bo",
-            "images": [],
-            "description": "Soft and spongy Banh Bo with a mild sweetness and coconut aroma.",
-            "ingredients": [
-                "rice flour",
-                "coconut milk",
-                "sugar",
-                "yeast"
-            ],
-            "unit": "Piece",
-            "regional": "Southern Vietnam",
-            "ammount_of_money": "15.000 VND - 25.000 VND",
-            "minPrice": "15.000 VND",
-            "maxPrice": "25.000 VND",
-            "updatedAt": null,
-            "id": 17,
-            "discount": 50,
-            "carbohydrates": 38,
-            "protein": 4,
-            "cholesterol": 0,
-            "sodium": 150,
-            "fiber": 1,
-            "availability": "in stock",
-            "rating": 4.8,
-            "isFood": true,
-            "isDeleted": false,
-            "categoryId": 1,
-            "createdAt": "2024-10-06T11:06:11.000Z",
-            "category": {
-                "id": 1,
-                "name": "Cake",
-                "isFood": true
-            },
-            "itemSizes": [
-                {
-                    "id": 49,
-                    "size": "Small",
-                    "price": "15.000 VND",
-                    "itemId": 17
-                },
-                {
-                    "id": 50,
-                    "size": "Medium",
-                    "price": "20.000 VND",
-                    "itemId": 17
-                },
-                {
-                    "id": 51,
-                    "size": "Large",
-                    "price": "25.000 VND",
-                    "itemId": 17
-                }
-            ]
+          "id": 49,
+          "size": "Small",
+          "price": "15.000 VND",
+          "itemId": 17
         },
         {
-            "name": "Banh Bot Loc",
-            "images": [],
-            "description": "Ban Bot Loc wrapped in banana leaves, chewy and soft with shrimp and pork filling.",
-            "ingredients": [
-                "tapioca starch",
-                "shrimp",
-                "pork belly",
-                "fish sauce",
-                "green onions",
-                "banana leaves"
-            ],
-            "unit": "Plate",
-            "regional": "Hue",
-            "ammount_of_money": "30.000 VND - 40.000 VND",
-            "minPrice": "30.000 VND",
-            "maxPrice": "40.000 VND",
-            "updatedAt": null,
-            "id": 2,
-            "discount": 0,
-            "carbohydrates": 32,
-            "protein": 6,
-            "cholesterol": 15,
-            "sodium": 250,
-            "fiber": 0,
-            "availability": "in stock",
-            "rating": 5,
-            "isFood": true,
-            "isDeleted": false,
-            "categoryId": 1,
-            "createdAt": "2024-10-06T11:06:02.000Z",
-            "category": {
-                "id": 1,
-                "name": "Cake",
-                "isFood": true
-            },
-            "itemSizes": [
-                {
-                    "id": 4,
-                    "size": "Small",
-                    "price": "30.000 VND",
-                    "itemId": 2
-                },
-                {
-                    "id": 5,
-                    "size": "Medium",
-                    "price": "35.000 VND",
-                    "itemId": 2
-                },
-                {
-                    "id": 6,
-                    "size": "Large",
-                    "price": "40.000 VND",
-                    "itemId": 2
-                }
-            ]
+          "id": 50,
+          "size": "Medium",
+          "price": "20.000 VND",
+          "itemId": 17
         },
         {
-            "name": "Banh Can",
-            "images": [],
-            "description": "Crispy Banh Can served with special dipping sauce and fresh vegetables.",
-            "ingredients": [
-                "rice flour",
-                "dipping sauce",
-                "shrimp",
-                "quail eggs",
-                "raw vegetables",
-                "green onions"
-            ],
-            "unit": "Plate",
-            "regional": "Nha Trang",
-            "ammount_of_money": "20.000 VND - 30.000 VND",
-            "minPrice": "20.000 VND",
-            "maxPrice": "30.000 VND",
-            "updatedAt": null,
-            "id": 3,
-            "discount": 0,
-            "carbohydrates": 40,
-            "protein": 10,
-            "cholesterol": 20,
-            "sodium": 500,
-            "fiber": 2,
-            "availability": "in stock",
-            "rating": 5,
-            "isFood": true,
-            "isDeleted": false,
-            "categoryId": 1,
-            "createdAt": "2024-10-06T11:06:03.000Z",
-            "category": {
-                "id": 1,
-                "name": "Cake",
-                "isFood": true
-            },
-            "itemSizes": [
-                {
-                    "id": 7,
-                    "size": "Small",
-                    "price": "20.000 VND",
-                    "itemId": 3
-                },
-                {
-                    "id": 8,
-                    "size": "Medium",
-                    "price": "25.000 VND",
-                    "itemId": 3
-                },
-                {
-                    "id": 9,
-                    "size": "Large",
-                    "price": "30.000 VND",
-                    "itemId": 3
-                }
-            ]
-        },
-        {
-            "name": "Banh Canh",
-            "images": [],
-            "description": "Hue-style Banh Canh with thick noodles, sweet broth, served with shrimp and pork.",
-            "ingredients": [
-                "rice flour",
-                "broth",
-                "shrimp",
-                "pork",
-                "green onions",
-                "raw vegetables"
-            ],
-            "unit": "Bowl",
-            "regional": "Quang Ngai",
-            "ammount_of_money": "35.000 VND - 45.000 VND",
-            "minPrice": "35.000 VND",
-            "maxPrice": "45.000 VND",
-            "updatedAt": null,
-            "id": 4,
-            "discount": 0,
-            "carbohydrates": 60,
-            "protein": 12,
-            "cholesterol": 25,
-            "sodium": 600,
-            "fiber": 3,
-            "availability": "in stock",
-            "rating": 5,
-            "isFood": true,
-            "isDeleted": false,
-            "categoryId": 2,
-            "createdAt": "2024-10-06T11:06:03.000Z",
-            "category": {
-                "id": 2,
-                "name": "Vermicelli",
-                "isFood": true
-            },
-            "itemSizes": [
-                {
-                    "id": 10,
-                    "size": "Small",
-                    "price": "35.000 VND",
-                    "itemId": 4
-                },
-                {
-                    "id": 11,
-                    "size": "Medium",
-                    "price": "40.000 VND",
-                    "itemId": 4
-                },
-                {
-                    "id": 12,
-                    "size": "Large",
-                    "price": "45.000 VND",
-                    "itemId": 4
-                }
-            ]
-        },
-        {
-            "name": "Banh Chung",
-            "images": [],
-            "description": "Traditional Banh Chung with sticky rice, mung beans, pork, and dong leaves.",
-            "ingredients": [
-                "sticky rice",
-                "mung beans",
-                "pork belly",
-                "shallots",
-                "dong leaves",
-                "salt"
-            ],
-            "unit": "Log",
-            "regional": "Nationwide, especially during Tet",
-            "ammount_of_money": "60.000 VND - 70.000 VND",
-            "minPrice": "60.000 VND",
-            "maxPrice": "70.000 VND",
-            "updatedAt": null,
-            "id": 5,
-            "discount": 0,
-            "carbohydrates": 80,
-            "protein": 12,
-            "cholesterol": 10,
-            "sodium": 300,
-            "fiber": 4,
-            "availability": "in stock",
-            "rating": 5,
-            "isFood": true,
-            "isDeleted": false,
-            "categoryId": 1,
-            "createdAt": "2024-10-06T11:06:04.000Z",
-            "category": {
-                "id": 1,
-                "name": "Cake",
-                "isFood": true
-            },
-            "itemSizes": [
-                {
-                    "id": 13,
-                    "size": "Small",
-                    "price": "60.000 VND",
-                    "itemId": 5
-                },
-                {
-                    "id": 14,
-                    "size": "Medium",
-                    "price": "65.000 VND",
-                    "itemId": 5
-                },
-                {
-                    "id": 15,
-                    "size": "Large",
-                    "price": "70.000 VND",
-                    "itemId": 5
-                }
-            ]
-        },
-        {
-            "name": "Banh Cong",
-            "images": [],
-            "description": "Crispy Banh Cong with mung bean, shrimp, minced pork filling, served with fresh vegetables.",
-            "ingredients": [
-                "rice flour",
-                "mung beans",
-                "shrimp",
-                "minced pork",
-                "fresh vegetables"
-            ],
-            "unit": "Piece",
-            "regional": "Soc Trang",
-            "ammount_of_money": "10.000 VND - 20.000 VND",
-            "minPrice": "10.000 VND",
-            "maxPrice": "20.000 VND",
-            "updatedAt": null,
-            "id": 18,
-            "discount": 0,
-            "carbohydrates": 45,
-            "protein": 8,
-            "cholesterol": 30,
-            "sodium": 400,
-            "fiber": 2,
-            "availability": "in stock",
-            "rating": 5,
-            "isFood": true,
-            "isDeleted": false,
-            "categoryId": 1,
-            "createdAt": "2024-10-06T11:06:11.000Z",
-            "category": {
-                "id": 1,
-                "name": "Cake",
-                "isFood": true
-            },
-            "itemSizes": [
-                {
-                    "id": 52,
-                    "size": "Small",
-                    "price": "10.000 VND",
-                    "itemId": 18
-                },
-                {
-                    "id": 53,
-                    "size": "Medium",
-                    "price": "15.000 VND",
-                    "itemId": 18
-                },
-                {
-                    "id": 54,
-                    "size": "Large",
-                    "price": "20.000 VND",
-                    "itemId": 18
-                }
-            ]
-        },
-        {
-            "name": "Banh Cu Do",
-            "images": [],
-            "description": "Hà Tĩnh specialty, crispy cake with peanuts and molasses filling.",
-            "ingredients": [
-                "peanuts",
-                "molasses",
-                "rice paper",
-                "sugar",
-                "ginger"
-            ],
-            "unit": "Piece",
-            "regional": "Ha Tinh",
-            "ammount_of_money": "10.000 VND - 20.000 VND",
-            "minPrice": "10.000 VND",
-            "maxPrice": "20.000 VND",
-            "updatedAt": null,
-            "id": 6,
-            "discount": 0,
-            "carbohydrates": 75,
-            "protein": 6,
-            "cholesterol": 0,
-            "sodium": 250,
-            "fiber": 2,
-            "availability": "in stock",
-            "rating": 5,
-            "isFood": true,
-            "isDeleted": false,
-            "categoryId": 1,
-            "createdAt": "2024-10-06T11:06:04.000Z",
-            "category": {
-                "id": 1,
-                "name": "Cake",
-                "isFood": true
-            },
-            "itemSizes": [
-                {
-                    "id": 16,
-                    "size": "Small",
-                    "price": "10.000 VND",
-                    "itemId": 6
-                },
-                {
-                    "id": 17,
-                    "size": "Medium",
-                    "price": "15.000 VND",
-                    "itemId": 6
-                },
-                {
-                    "id": 18,
-                    "size": "Large",
-                    "price": "20.000 VND",
-                    "itemId": 6
-                }
-            ]
-        },
-        {
-            "name": "Banh Cuon",
-            "images": [],
-            "description": "Soft Banh Cuon with meat and mushroom filling, served with sausage and fresh vegetables.",
-            "ingredients": [
-                "rice flour",
-                "pork",
-                "mushrooms",
-                "fried onions",
-                "Vietnamese sausage",
-                "raw vegetables",
-                "fish sauce"
-            ],
-            "unit": "Plate",
-            "regional": "Hanoi",
-            "ammount_of_money": "25.000 VND - 35.000 VND",
-            "minPrice": "25.000 VND",
-            "maxPrice": "35.000 VND",
-            "updatedAt": null,
-            "id": 7,
-            "discount": 0,
-            "carbohydrates": 40,
-            "protein": 8,
-            "cholesterol": 10,
-            "sodium": 500,
-            "fiber": 1,
-            "availability": "in stock",
-            "rating": 5,
-            "isFood": true,
-            "isDeleted": false,
-            "categoryId": 1,
-            "createdAt": "2024-10-06T11:06:05.000Z",
-            "category": {
-                "id": 1,
-                "name": "Cake",
-                "isFood": true
-            },
-            "itemSizes": [
-                {
-                    "id": 19,
-                    "size": "Small",
-                    "price": "25.000 VND",
-                    "itemId": 7
-                },
-                {
-                    "id": 20,
-                    "size": "Medium",
-                    "price": "30.000 VND",
-                    "itemId": 7
-                },
-                {
-                    "id": 21,
-                    "size": "Large",
-                    "price": "35.000 VND",
-                    "itemId": 7
-                }
-            ]
-        },
-        {
-            "name": "Banh Dau Xanh",
-            "images": [],
-            "description": "Fragrant green bean cake, Hai Duong specialty, made from pure green beans.",
-            "ingredients": [
-                "green beans",
-                "sugar",
-                "vegetable oil",
-                "rice flour",
-                "vanilla flavor"
-            ],
-            "unit": "Piece",
-            "regional": "Hai Duong",
-            "ammount_of_money": "10.000 VND - 20.000 VND",
-            "minPrice": "10.000 VND",
-            "maxPrice": "20.000 VND",
-            "updatedAt": null,
-            "id": 9,
-            "discount": 0,
-            "carbohydrates": 45,
-            "protein": 7,
-            "cholesterol": 0,
-            "sodium": 150,
-            "fiber": 3,
-            "availability": "in stock",
-            "rating": 5,
-            "isFood": true,
-            "isDeleted": false,
-            "categoryId": 1,
-            "createdAt": "2024-10-06T11:06:06.000Z",
-            "category": {
-                "id": 1,
-                "name": "Cake",
-                "isFood": true
-            },
-            "itemSizes": [
-                {
-                    "id": 25,
-                    "size": "Small",
-                    "price": "10.000 VND",
-                    "itemId": 9
-                },
-                {
-                    "id": 26,
-                    "size": "Medium",
-                    "price": "15.000 VND",
-                    "itemId": 9
-                },
-                {
-                    "id": 27,
-                    "size": "Large",
-                    "price": "20.000 VND",
-                    "itemId": 9
-                }
-            ]
-        },
-        {
-            "name": "Banh Duc",
-            "images": [],
-            "description": "Hot, soft Banh Duc with sweet and sour fish sauce and fried onions.",
-            "ingredients": [
-                "rice flour",
-                "fish sauce",
-                "fried onions",
-                "mung beans"
-            ],
-            "unit": "Plate",
-            "regional": "Northern Vietnam",
-            "ammount_of_money": "15.000 VND - 25.000 VND",
-            "minPrice": "15.000 VND",
-            "maxPrice": "25.000 VND",
-            "updatedAt": null,
-            "id": 8,
-            "discount": 0,
-            "carbohydrates": 30,
-            "protein": 4,
-            "cholesterol": 0,
-            "sodium": 400,
-            "fiber": 1,
-            "availability": "in stock",
-            "rating": 5,
-            "isFood": true,
-            "isDeleted": false,
-            "categoryId": 1,
-            "createdAt": "2024-10-06T11:06:06.000Z",
-            "category": {
-                "id": 1,
-                "name": "Cake",
-                "isFood": true
-            },
-            "itemSizes": [
-                {
-                    "id": 22,
-                    "size": "Small",
-                    "price": "15.000 VND",
-                    "itemId": 8
-                },
-                {
-                    "id": 23,
-                    "size": "Medium",
-                    "price": "20.000 VND",
-                    "itemId": 8
-                },
-                {
-                    "id": 24,
-                    "size": "Large",
-                    "price": "25.000 VND",
-                    "itemId": 8
-                }
-            ]
-        },
-        {
-            "name": "Banh Gio",
-            "images": [],
-            "description": "Banh Gio wrapped in banana leaves, filled with meat and mushrooms, served with dipping sauce.",
-            "ingredients": [
-                "rice flour",
-                "pork",
-                "mushrooms",
-                "onion",
-                "banana leaves"
-            ],
-            "unit": "Piece",
-            "regional": "Northern Vietnam",
-            "ammount_of_money": "20.000 VND - 30.000 VND",
-            "minPrice": "20.000 VND",
-            "maxPrice": "30.000 VND",
-            "updatedAt": null,
-            "id": 10,
-            "discount": 0,
-            "carbohydrates": 40,
-            "protein": 12,
-            "cholesterol": 20,
-            "sodium": 400,
-            "fiber": 2,
-            "availability": "in stock",
-            "rating": 5,
-            "isFood": true,
-            "isDeleted": false,
-            "categoryId": 1,
-            "createdAt": "2024-10-06T11:06:07.000Z",
-            "category": {
-                "id": 1,
-                "name": "Cake",
-                "isFood": true
-            },
-            "itemSizes": [
-                {
-                    "id": 28,
-                    "size": "Small",
-                    "price": "20.000 VND",
-                    "itemId": 10
-                },
-                {
-                    "id": 29,
-                    "size": "Medium",
-                    "price": "25.000 VND",
-                    "itemId": 10
-                },
-                {
-                    "id": 30,
-                    "size": "Large",
-                    "price": "30.000 VND",
-                    "itemId": 10
-                }
-            ]
-        },
-        {
-            "name": "Banh Khot",
-            "images": [],
-            "description": "Crispy Banh Khot with shrimp filling, served with fresh vegetables and sweet-sour fish sauce.",
-            "ingredients": [
-                "rice flour",
-                "shrimp",
-                "fish sauce",
-                "fresh vegetables",
-                "cooking oil",
-                "scallions"
-            ],
-            "unit": "Plate",
-            "regional": "Vung Tau",
-            "ammount_of_money": "25.000 VND - 35.000 VND",
-            "minPrice": "25.000 VND",
-            "maxPrice": "35.000 VND",
-            "updatedAt": null,
-            "id": 11,
-            "discount": 0,
-            "carbohydrates": 32,
-            "protein": 8,
-            "cholesterol": 20,
-            "sodium": 400,
-            "fiber": 2,
-            "availability": "in stock",
-            "rating": 5,
-            "isFood": true,
-            "isDeleted": false,
-            "categoryId": 1,
-            "createdAt": "2024-10-06T11:06:07.000Z",
-            "category": {
-                "id": 1,
-                "name": "Cake",
-                "isFood": true
-            },
-            "itemSizes": [
-                {
-                    "id": 31,
-                    "size": "Small",
-                    "price": "25.000 VND",
-                    "itemId": 11
-                },
-                {
-                    "id": 32,
-                    "size": "Medium",
-                    "price": "30.000 VND",
-                    "itemId": 11
-                },
-                {
-                    "id": 33,
-                    "size": "Large",
-                    "price": "35.000 VND",
-                    "itemId": 11
-                }
-            ]
+          "id": 51,
+          "size": "Large",
+          "price": "25.000 VND",
+          "itemId": 17
         }
-    ],
-    "totalItems": 39,
-    "currentPage": 1,
-    "totalPages": 4
+      ]
+    },
+    {
+      "name": "Banh Bot Loc",
+      "images": [],
+      "description": "Ban Bot Loc wrapped in banana leaves, chewy and soft with shrimp and pork filling.",
+      "ingredients": ["tapioca starch", "shrimp", "pork belly", "fish sauce", "green onions", "banana leaves"],
+      "unit": "Plate",
+      "regional": "Hue",
+      "ammount_of_money": "30.000 VND - 40.000 VND",
+      "minPrice": "30.000 VND",
+      "maxPrice": "40.000 VND",
+      "updatedAt": null,
+      "id": 2,
+      "discount": 0,
+      "carbohydrates": 32,
+      "protein": 6,
+      "cholesterol": 15,
+      "sodium": 250,
+      "fiber": 0,
+      "availability": "in stock",
+      "rating": 5,
+      "isFood": true,
+      "isDeleted": false,
+      "categoryId": 1,
+      "createdAt": "2024-10-06T11:06:02.000Z",
+      "category": {
+        "id": 1,
+        "name": "Cake",
+        "isFood": true
+      },
+      "itemSizes": [
+        {
+          "id": 4,
+          "size": "Small",
+          "price": "30.000 VND",
+          "itemId": 2
+        },
+        {
+          "id": 5,
+          "size": "Medium",
+          "price": "35.000 VND",
+          "itemId": 2
+        },
+        {
+          "id": 6,
+          "size": "Large",
+          "price": "40.000 VND",
+          "itemId": 2
+        }
+      ]
+    },
+    {
+      "name": "Banh Can",
+      "images": [],
+      "description": "Crispy Banh Can served with special dipping sauce and fresh vegetables.",
+      "ingredients": ["rice flour", "dipping sauce", "shrimp", "quail eggs", "raw vegetables", "green onions"],
+      "unit": "Plate",
+      "regional": "Nha Trang",
+      "ammount_of_money": "20.000 VND - 30.000 VND",
+      "minPrice": "20.000 VND",
+      "maxPrice": "30.000 VND",
+      "updatedAt": null,
+      "id": 3,
+      "discount": 0,
+      "carbohydrates": 40,
+      "protein": 10,
+      "cholesterol": 20,
+      "sodium": 500,
+      "fiber": 2,
+      "availability": "in stock",
+      "rating": 5,
+      "isFood": true,
+      "isDeleted": false,
+      "categoryId": 1,
+      "createdAt": "2024-10-06T11:06:03.000Z",
+      "category": {
+        "id": 1,
+        "name": "Cake",
+        "isFood": true
+      },
+      "itemSizes": [
+        {
+          "id": 7,
+          "size": "Small",
+          "price": "20.000 VND",
+          "itemId": 3
+        },
+        {
+          "id": 8,
+          "size": "Medium",
+          "price": "25.000 VND",
+          "itemId": 3
+        },
+        {
+          "id": 9,
+          "size": "Large",
+          "price": "30.000 VND",
+          "itemId": 3
+        }
+      ]
+    },
+    {
+      "name": "Banh Canh",
+      "images": [],
+      "description": "Hue-style Banh Canh with thick noodles, sweet broth, served with shrimp and pork.",
+      "ingredients": ["rice flour", "broth", "shrimp", "pork", "green onions", "raw vegetables"],
+      "unit": "Bowl",
+      "regional": "Quang Ngai",
+      "ammount_of_money": "35.000 VND - 45.000 VND",
+      "minPrice": "35.000 VND",
+      "maxPrice": "45.000 VND",
+      "updatedAt": null,
+      "id": 4,
+      "discount": 0,
+      "carbohydrates": 60,
+      "protein": 12,
+      "cholesterol": 25,
+      "sodium": 600,
+      "fiber": 3,
+      "availability": "in stock",
+      "rating": 5,
+      "isFood": true,
+      "isDeleted": false,
+      "categoryId": 2,
+      "createdAt": "2024-10-06T11:06:03.000Z",
+      "category": {
+        "id": 2,
+        "name": "Vermicelli",
+        "isFood": true
+      },
+      "itemSizes": [
+        {
+          "id": 10,
+          "size": "Small",
+          "price": "35.000 VND",
+          "itemId": 4
+        },
+        {
+          "id": 11,
+          "size": "Medium",
+          "price": "40.000 VND",
+          "itemId": 4
+        },
+        {
+          "id": 12,
+          "size": "Large",
+          "price": "45.000 VND",
+          "itemId": 4
+        }
+      ]
+    },
+    {
+      "name": "Banh Chung",
+      "images": [],
+      "description": "Traditional Banh Chung with sticky rice, mung beans, pork, and dong leaves.",
+      "ingredients": ["sticky rice", "mung beans", "pork belly", "shallots", "dong leaves", "salt"],
+      "unit": "Log",
+      "regional": "Nationwide, especially during Tet",
+      "ammount_of_money": "60.000 VND - 70.000 VND",
+      "minPrice": "60.000 VND",
+      "maxPrice": "70.000 VND",
+      "updatedAt": null,
+      "id": 5,
+      "discount": 0,
+      "carbohydrates": 80,
+      "protein": 12,
+      "cholesterol": 10,
+      "sodium": 300,
+      "fiber": 4,
+      "availability": "in stock",
+      "rating": 5,
+      "isFood": true,
+      "isDeleted": false,
+      "categoryId": 1,
+      "createdAt": "2024-10-06T11:06:04.000Z",
+      "category": {
+        "id": 1,
+        "name": "Cake",
+        "isFood": true
+      },
+      "itemSizes": [
+        {
+          "id": 13,
+          "size": "Small",
+          "price": "60.000 VND",
+          "itemId": 5
+        },
+        {
+          "id": 14,
+          "size": "Medium",
+          "price": "65.000 VND",
+          "itemId": 5
+        },
+        {
+          "id": 15,
+          "size": "Large",
+          "price": "70.000 VND",
+          "itemId": 5
+        }
+      ]
+    },
+    {
+      "name": "Banh Cong",
+      "images": [],
+      "description": "Crispy Banh Cong with mung bean, shrimp, minced pork filling, served with fresh vegetables.",
+      "ingredients": ["rice flour", "mung beans", "shrimp", "minced pork", "fresh vegetables"],
+      "unit": "Piece",
+      "regional": "Soc Trang",
+      "ammount_of_money": "10.000 VND - 20.000 VND",
+      "minPrice": "10.000 VND",
+      "maxPrice": "20.000 VND",
+      "updatedAt": null,
+      "id": 18,
+      "discount": 0,
+      "carbohydrates": 45,
+      "protein": 8,
+      "cholesterol": 30,
+      "sodium": 400,
+      "fiber": 2,
+      "availability": "in stock",
+      "rating": 5,
+      "isFood": true,
+      "isDeleted": false,
+      "categoryId": 1,
+      "createdAt": "2024-10-06T11:06:11.000Z",
+      "category": {
+        "id": 1,
+        "name": "Cake",
+        "isFood": true
+      },
+      "itemSizes": [
+        {
+          "id": 52,
+          "size": "Small",
+          "price": "10.000 VND",
+          "itemId": 18
+        },
+        {
+          "id": 53,
+          "size": "Medium",
+          "price": "15.000 VND",
+          "itemId": 18
+        },
+        {
+          "id": 54,
+          "size": "Large",
+          "price": "20.000 VND",
+          "itemId": 18
+        }
+      ]
+    },
+    {
+      "name": "Banh Cu Do",
+      "images": [],
+      "description": "Hà Tĩnh specialty, crispy cake with peanuts and molasses filling.",
+      "ingredients": ["peanuts", "molasses", "rice paper", "sugar", "ginger"],
+      "unit": "Piece",
+      "regional": "Ha Tinh",
+      "ammount_of_money": "10.000 VND - 20.000 VND",
+      "minPrice": "10.000 VND",
+      "maxPrice": "20.000 VND",
+      "updatedAt": null,
+      "id": 6,
+      "discount": 0,
+      "carbohydrates": 75,
+      "protein": 6,
+      "cholesterol": 0,
+      "sodium": 250,
+      "fiber": 2,
+      "availability": "in stock",
+      "rating": 5,
+      "isFood": true,
+      "isDeleted": false,
+      "categoryId": 1,
+      "createdAt": "2024-10-06T11:06:04.000Z",
+      "category": {
+        "id": 1,
+        "name": "Cake",
+        "isFood": true
+      },
+      "itemSizes": [
+        {
+          "id": 16,
+          "size": "Small",
+          "price": "10.000 VND",
+          "itemId": 6
+        },
+        {
+          "id": 17,
+          "size": "Medium",
+          "price": "15.000 VND",
+          "itemId": 6
+        },
+        {
+          "id": 18,
+          "size": "Large",
+          "price": "20.000 VND",
+          "itemId": 6
+        }
+      ]
+    },
+    {
+      "name": "Banh Cuon",
+      "images": [],
+      "description": "Soft Banh Cuon with meat and mushroom filling, served with sausage and fresh vegetables.",
+      "ingredients": [
+        "rice flour",
+        "pork",
+        "mushrooms",
+        "fried onions",
+        "Vietnamese sausage",
+        "raw vegetables",
+        "fish sauce"
+      ],
+      "unit": "Plate",
+      "regional": "Hanoi",
+      "ammount_of_money": "25.000 VND - 35.000 VND",
+      "minPrice": "25.000 VND",
+      "maxPrice": "35.000 VND",
+      "updatedAt": null,
+      "id": 7,
+      "discount": 0,
+      "carbohydrates": 40,
+      "protein": 8,
+      "cholesterol": 10,
+      "sodium": 500,
+      "fiber": 1,
+      "availability": "in stock",
+      "rating": 5,
+      "isFood": true,
+      "isDeleted": false,
+      "categoryId": 1,
+      "createdAt": "2024-10-06T11:06:05.000Z",
+      "category": {
+        "id": 1,
+        "name": "Cake",
+        "isFood": true
+      },
+      "itemSizes": [
+        {
+          "id": 19,
+          "size": "Small",
+          "price": "25.000 VND",
+          "itemId": 7
+        },
+        {
+          "id": 20,
+          "size": "Medium",
+          "price": "30.000 VND",
+          "itemId": 7
+        },
+        {
+          "id": 21,
+          "size": "Large",
+          "price": "35.000 VND",
+          "itemId": 7
+        }
+      ]
+    },
+    {
+      "name": "Banh Dau Xanh",
+      "images": [],
+      "description": "Fragrant green bean cake, Hai Duong specialty, made from pure green beans.",
+      "ingredients": ["green beans", "sugar", "vegetable oil", "rice flour", "vanilla flavor"],
+      "unit": "Piece",
+      "regional": "Hai Duong",
+      "ammount_of_money": "10.000 VND - 20.000 VND",
+      "minPrice": "10.000 VND",
+      "maxPrice": "20.000 VND",
+      "updatedAt": null,
+      "id": 9,
+      "discount": 0,
+      "carbohydrates": 45,
+      "protein": 7,
+      "cholesterol": 0,
+      "sodium": 150,
+      "fiber": 3,
+      "availability": "in stock",
+      "rating": 5,
+      "isFood": true,
+      "isDeleted": false,
+      "categoryId": 1,
+      "createdAt": "2024-10-06T11:06:06.000Z",
+      "category": {
+        "id": 1,
+        "name": "Cake",
+        "isFood": true
+      },
+      "itemSizes": [
+        {
+          "id": 25,
+          "size": "Small",
+          "price": "10.000 VND",
+          "itemId": 9
+        },
+        {
+          "id": 26,
+          "size": "Medium",
+          "price": "15.000 VND",
+          "itemId": 9
+        },
+        {
+          "id": 27,
+          "size": "Large",
+          "price": "20.000 VND",
+          "itemId": 9
+        }
+      ]
+    },
+    {
+      "name": "Banh Duc",
+      "images": [],
+      "description": "Hot, soft Banh Duc with sweet and sour fish sauce and fried onions.",
+      "ingredients": ["rice flour", "fish sauce", "fried onions", "mung beans"],
+      "unit": "Plate",
+      "regional": "Northern Vietnam",
+      "ammount_of_money": "15.000 VND - 25.000 VND",
+      "minPrice": "15.000 VND",
+      "maxPrice": "25.000 VND",
+      "updatedAt": null,
+      "id": 8,
+      "discount": 0,
+      "carbohydrates": 30,
+      "protein": 4,
+      "cholesterol": 0,
+      "sodium": 400,
+      "fiber": 1,
+      "availability": "in stock",
+      "rating": 5,
+      "isFood": true,
+      "isDeleted": false,
+      "categoryId": 1,
+      "createdAt": "2024-10-06T11:06:06.000Z",
+      "category": {
+        "id": 1,
+        "name": "Cake",
+        "isFood": true
+      },
+      "itemSizes": [
+        {
+          "id": 22,
+          "size": "Small",
+          "price": "15.000 VND",
+          "itemId": 8
+        },
+        {
+          "id": 23,
+          "size": "Medium",
+          "price": "20.000 VND",
+          "itemId": 8
+        },
+        {
+          "id": 24,
+          "size": "Large",
+          "price": "25.000 VND",
+          "itemId": 8
+        }
+      ]
+    },
+    {
+      "name": "Banh Gio",
+      "images": [],
+      "description": "Banh Gio wrapped in banana leaves, filled with meat and mushrooms, served with dipping sauce.",
+      "ingredients": ["rice flour", "pork", "mushrooms", "onion", "banana leaves"],
+      "unit": "Piece",
+      "regional": "Northern Vietnam",
+      "ammount_of_money": "20.000 VND - 30.000 VND",
+      "minPrice": "20.000 VND",
+      "maxPrice": "30.000 VND",
+      "updatedAt": null,
+      "id": 10,
+      "discount": 0,
+      "carbohydrates": 40,
+      "protein": 12,
+      "cholesterol": 20,
+      "sodium": 400,
+      "fiber": 2,
+      "availability": "in stock",
+      "rating": 5,
+      "isFood": true,
+      "isDeleted": false,
+      "categoryId": 1,
+      "createdAt": "2024-10-06T11:06:07.000Z",
+      "category": {
+        "id": 1,
+        "name": "Cake",
+        "isFood": true
+      },
+      "itemSizes": [
+        {
+          "id": 28,
+          "size": "Small",
+          "price": "20.000 VND",
+          "itemId": 10
+        },
+        {
+          "id": 29,
+          "size": "Medium",
+          "price": "25.000 VND",
+          "itemId": 10
+        },
+        {
+          "id": 30,
+          "size": "Large",
+          "price": "30.000 VND",
+          "itemId": 10
+        }
+      ]
+    },
+    {
+      "name": "Banh Khot",
+      "images": [],
+      "description": "Crispy Banh Khot with shrimp filling, served with fresh vegetables and sweet-sour fish sauce.",
+      "ingredients": ["rice flour", "shrimp", "fish sauce", "fresh vegetables", "cooking oil", "scallions"],
+      "unit": "Plate",
+      "regional": "Vung Tau",
+      "ammount_of_money": "25.000 VND - 35.000 VND",
+      "minPrice": "25.000 VND",
+      "maxPrice": "35.000 VND",
+      "updatedAt": null,
+      "id": 11,
+      "discount": 0,
+      "carbohydrates": 32,
+      "protein": 8,
+      "cholesterol": 20,
+      "sodium": 400,
+      "fiber": 2,
+      "availability": "in stock",
+      "rating": 5,
+      "isFood": true,
+      "isDeleted": false,
+      "categoryId": 1,
+      "createdAt": "2024-10-06T11:06:07.000Z",
+      "category": {
+        "id": 1,
+        "name": "Cake",
+        "isFood": true
+      },
+      "itemSizes": [
+        {
+          "id": 31,
+          "size": "Small",
+          "price": "25.000 VND",
+          "itemId": 11
+        },
+        {
+          "id": 32,
+          "size": "Medium",
+          "price": "30.000 VND",
+          "itemId": 11
+        },
+        {
+          "id": 33,
+          "size": "Large",
+          "price": "35.000 VND",
+          "itemId": 11
+        }
+      ]
+    }
+  ],
+  "totalItems": 39,
+  "currentPage": 1,
+  "totalPages": 4
 }

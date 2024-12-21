@@ -63,10 +63,12 @@
   color: #fa8232;
   background-color: transparent;
 
-  transition: background-color 0.3s ease, transform 0.3s ease; 
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
   &:hover {
     border: 2px solid #fa8232;
-    transform: scale(1.05); 
+    transform: scale(1.05);
   }
 }
 
@@ -75,9 +77,11 @@
   color: #fff;
   border: none;
 
-  transition: background-color 0.3s ease, transform 0.3s ease; 
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
   &:hover {
-    background-color: #e85a0d; 
-    transform: scale(1.05); 
+    background-color: #e85a0d;
+    transform: scale(1.05);
   }
 }

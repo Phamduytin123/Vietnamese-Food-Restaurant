@@ -178,7 +178,7 @@ export class ZaloPaymentService {
           orderReq
         );
 
-        console.log("new Order : ", newOrder);
+        console.log('new Order : ', newOrder);
 
         result.return_code = 1;
         result.return_message = 'success';

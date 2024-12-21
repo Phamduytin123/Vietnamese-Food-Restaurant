@@ -21,22 +21,22 @@ export class AdminVoucherService {
 
   async getVoucher(query: any, lang: string) {
     // const { txtSearch } = query;
-  
+
     // let conditions: any[] = [{ isDeleted: false }];
-  
+
     // if (txtSearch) {
     //   const searchConditions = {
     //     [`name_${lang}`]: Like(`%${txtSearch}%`),
     //     code: Like(`%${txtSearch}%`),
     //   };
-  
+
     //   conditions = OrTypeOrm(searchConditions, conditions);
     // }
-  
+
     const vouchers = await this.voucherRepository.find({
-      where: {isDeleted: false},
+      where: { isDeleted: false },
     });
-  
+
     return vouchers.map(voucher => {
       const { name_vi, name_en, ...restVoucher } = voucher;
       return {

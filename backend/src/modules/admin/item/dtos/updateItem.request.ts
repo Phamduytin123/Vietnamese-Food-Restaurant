@@ -79,11 +79,10 @@ export class UpdateItemReq {
   //   }
   ingredients_en: string;
 
-  @IsOptional(
-    // {
-    //   message: i18nValidationMessage('validation.item.unit_vi_required'),
-    // }
-  )
+  @IsOptional()
+  // {
+  //   message: i18nValidationMessage('validation.item.unit_vi_required'),
+  // }
   unit_vi: string;
 
   @IsOptional()

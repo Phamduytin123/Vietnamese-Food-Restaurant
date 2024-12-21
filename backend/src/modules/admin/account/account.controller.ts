@@ -28,7 +28,7 @@ export class AdminAccountController {
   constructor(
     private readonly accountService: AdminAccountService,
     private readonly uploadService: UploadService
-  ) { }
+  ) {}
   @Get()
   @UseGuards(new RoleGuard([AccountRoleEnum.ADMIN, AccountRoleEnum.STAFF]))
   @UseGuards(AuthGuard)

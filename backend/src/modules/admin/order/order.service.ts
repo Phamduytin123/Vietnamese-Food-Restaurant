@@ -35,7 +35,9 @@ export class AdminOrderService {
       .leftJoinAndSelect('orderDetails.itemSize', 'itemSize')
       .leftJoinAndSelect('itemSize.item', 'item');
 
-    queryBuilder.orderBy('order.createdAt', 'DESC').addOrderBy('order.updatedAt', 'DESC');
+    queryBuilder
+      .orderBy('order.createdAt', 'DESC')
+      .addOrderBy('order.updatedAt', 'DESC');
 
     // Thực hiện phân trang
     queryBuilder.skip((page - 1) * limit).take(limit);

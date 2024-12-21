@@ -80,8 +80,8 @@ const AllRoutes = () => {
               element={<AdminLayout component={<AdminAccount pageRole={'staff'} />} />}
             />
           </Route>
-          <Route path="/admin/products/details/:id" element={<AdminLayout component={<AdminItemDetail />}  />} />
-          <Route path="/admin/vouchers" element={<AdminLayout component={<VoucherPage />}  />} />
+          <Route path="/admin/products/details/:id" element={<AdminLayout component={<AdminItemDetail />} />} />
+          <Route path="/admin/vouchers" element={<AdminLayout component={<VoucherPage />} />} />
         </Route>
 
         <Route element={<ProtectedRoute allowedRoles={['customer']} />}>

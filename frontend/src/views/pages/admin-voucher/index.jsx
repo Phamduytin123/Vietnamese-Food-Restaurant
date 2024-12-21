@@ -16,15 +16,14 @@ const VoucherPage = () => {
   const [loading, setLoading] = useState(false);
   const [selectedVoucher, setSelectedVoucher] = useState({
     id: null,
-    name: "",
-    code: "",
+    name: '',
+    code: '',
     discount: 0,
     minValue: 0,
-    startDate: "",
-    endDate: "",
+    startDate: '',
+    endDate: '',
     quantity: 0,
   });
-
 
   useEffect(() => {
     // Giả lập API call để lấy danh sách voucher
@@ -73,15 +72,15 @@ const VoucherPage = () => {
   };
   const openOpenModal = () => {
     setSelectedVoucher({
-    id: null,
-    name: "",
-    code: "",
-    discount: 0,
-    minValue: 0,
-    startDate: "",
-    endDate: "",
-    quantity: 0,
-  });
+      id: null,
+      name: '',
+      code: '',
+      discount: 0,
+      minValue: 0,
+      startDate: '',
+      endDate: '',
+      quantity: 0,
+    });
     setModalIsOpen(true);
   };
   const convertDateFormat = (dateString) => {

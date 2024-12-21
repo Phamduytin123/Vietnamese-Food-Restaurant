@@ -56,7 +56,7 @@ export class ItemService {
       isFood: isFood,
       isDeleted: false,
       discount: isDiscount
-        ? (isDiscount.toLowerCase() === 'true' && MoreThan(0))
+        ? isDiscount.toLowerCase() === 'true' && MoreThan(0)
         : null,
     });
 

@@ -167,7 +167,9 @@ html {
     border: none;
     cursor: pointer;
 
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      transform 0.3s ease;
     &:hover {
       background-color: #e85a0d;
       transform: scale(1.05);

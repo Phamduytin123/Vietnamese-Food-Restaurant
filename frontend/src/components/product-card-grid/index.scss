@@ -3,13 +3,15 @@
   background-color: #fff;
   border-radius: 4px;
   text-align: center;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-    &:hover .icon-wrapper{
-        background-color: #e85a0d;
-        transform: scale(1.05);
-    }
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+  &:hover .icon-wrapper {
+    background-color: #e85a0d;
+    transform: scale(1.05);
+  }
   .label {
     position: absolute;
     top: 5px;
@@ -54,7 +56,7 @@
         color: #223263;
         margin-bottom: 5px;
       }
-      .rating{
+      .rating {
         margin-top: 22px;
       }
       .custom-star {
@@ -88,8 +90,6 @@
       }
     }
 
-
-
     .price {
       display: flex;
       justify-content: space-between;
@@ -120,37 +120,37 @@
   }
 
   .actions {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-
-
-  .icon-wrapper {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: #f17228; // Use your desired background color
+    position: absolute;
+    top: 10px;
+    right: 10px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    gap: 10px;
 
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    &:hover {
+    .icon-wrapper {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #f17228; // Use your desired background color
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      transition:
+        background-color 0.3s ease,
+        transform 0.3s ease;
+      &:hover {
         background-color: #e85a0d;
         transform: scale(1.05);
-    }
+      }
 
-    img {
-      width: 16px; // Adjust image size as needed
-      height: 16px;
-      cursor: pointer;
+      img {
+        width: 16px; // Adjust image size as needed
+        height: 16px;
+        cursor: pointer;
+      }
     }
   }
-}
 }
 
 .cart-badge {
