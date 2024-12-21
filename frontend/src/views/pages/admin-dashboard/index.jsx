@@ -17,6 +17,8 @@ import SmallReviewItem from './components/review-item';
 import revenueAPI from '../../../api/revenueAPI';
 import { DATEINAWEEK } from '../../../constants/dateInAWeek';
 import { darkenColor, formatCurrency } from '../../../utils/string';
+import LoadingOverlay from '../../../components/loading_overlay';
+
 Chart.register(...registerables);
 
 function AdminDashboard() {
@@ -24,13 +26,15 @@ function AdminDashboard() {
   const [boxHeaderData, setBoxHeaderData] = useState([]);
   const [chartData, setChartData] = useState([]);
   const [reviews, setReviews] = useState([]);
-  const [maxPage, setMaxPage] = useState(10);
+  const [maxPage, setMaxPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
-  const callAPI = async () => {
+  const fetchData = async () => {
+    setLoading(true); // Set loading to true before fetching data
     try {
       const res = await revenueAPI.getRevenue(currentPage, 4);
-      // console.log(res.data);
 
+      // Update state with fetched data
       setBoxHeaderData([
         {
           name: 'Số khách hàng',
@@ -59,22 +63,26 @@ function AdminDashboard() {
       ]);
 
       setChartData(
-        res.data.revenueFor7Days.map((revenue) => ({ ...revenue, dayOfWeek: DATEINAWEEK[revenue.dayOfWeek] })),
+        res.data.revenueFor7Days.map((revenue) => ({
+          ...revenue,
+          dayOfWeek: DATEINAWEEK[revenue.dayOfWeek],
+        })),
       );
 
       setReviews(res.data.reviews);
-
       setMaxPage(res.data.totalPages);
     } catch (error) {
-      console.log(error);
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false); // Set loading to false after fetching data
     }
   };
 
   useEffect(() => {
-    callAPI();
+    fetchData();
   }, [currentPage]);
 
-  const data = {
+  const chartConfig = {
     datasets: [
       {
         label: 'Tổng doanh thu trong tuần',
@@ -90,7 +98,7 @@ function AdminDashboard() {
     ],
   };
 
-  const options = {
+  const chartOptions = {
     scales: {
       x: {
         grid: {
@@ -120,7 +128,7 @@ function AdminDashboard() {
     },
   };
 
-  const columns = [
+  const tableColumns = [
     {
       title: 'Ngày',
       dataIndex: 'date',
@@ -132,76 +140,80 @@ function AdminDashboard() {
     {
       title: 'Số đơn hàng',
       dataIndex: 'orderCount',
-      sorter: {
-        compare: (a, b) => a.orderCount - b.orderCount,
-        multiple: 1,
-      },
+      sorter: (a, b) => a.orderCount - b.orderCount,
     },
     {
       title: 'Doanh thu',
       dataIndex: 'totalRevenue',
-      sorter: {
-        compare: (a, b) => a.totalRevenue - b.totalRevenue,
-        multiple: 1,
-      },
+      sorter: (a, b) => a.totalRevenue - b.totalRevenue,
     },
   ];
 
-  const onBackReview = () => {
-    // console.log('back');
-    if (currentPage === 1) return;
-    setCurrentPage(currentPage - 1);
+  const handleBackReview = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
-  const onNextReview = () => {
-    if (currentPage === maxPage) return;
-    setCurrentPage(currentPage + 1);
+  const handleNextReview = () => {
+    if (currentPage < maxPage) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   return (
     <div className="admin-dashboard-container">
+      <LoadingOverlay loading={loading} />
       <h3 className="admin-dashboard-title" style={{ color: darkenColor('#FF9066') }}>
         Thống kê
       </h3>
-      <div className="row">
-        {boxHeaderData.map((data) => (
-          <div className="col-lg-3 col-md-6 col-sm-12 p-0 d-flex justify-content-center">
-            {<BoxHeader data={data} />}
+      {!loading && (
+        <div>
+          <div className="row">
+            {boxHeaderData.map((data, index) => (
+              <div key={index} className="col-lg-3 col-md-6 col-sm-12 p-0 d-flex justify-content-center">
+                <BoxHeader data={data} />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div className="row align-items-center admin-dashboard-center-content-container">
-        <div className="col-lg-6 col-sm-12 admin-dashboard-chart-container">
-          <div className="admin-dashboard-center-content-item">
-            <h4 className="admin-dashboard-chart-title">Doanh thu trong tuần</h4>
-            <Line data={data} options={options} className="admin-dashboard-line-chart" />
-          </div>
-        </div>
-        <div className="col-lg-6 col-sm-12 admin-dashboard-table-container">
-          <div className="admin-dashboard-center-content-item">
-            <h4 className="admin-dashboard-table-title">Doanh thu đơn hàng trong tuần</h4>
-            <Table columns={columns} dataSource={chartData} pagination={false} />
-          </div>
-        </div>
-      </div>
-      <div className="admin-dashboard-review-container">
-        <div className="d-flex justify-content-between">
-          <h4 className="admin-dashboard-review-title" style={{ color: darkenColor('#FEC53D') }}>
-            Đánh giá của khách hàng
-          </h4>
-          <div>
-            <Button className="admin-dash-board-review-button" onClick={onBackReview} icon={<LeftOutlined />} />
-            <Button className="admin-dash-board-review-button" onClick={onNextReview} icon={<RightOutlined />} />
-          </div>
-        </div>
-        <div className="row">
-          {reviews.map((review) => (
-            <div className="col-lg-3 col-md-6 col-sm-12 admin-dashboard-review-item-container">
-              <SmallReviewItem data={review} />
+          <div className="row align-items-center admin-dashboard-center-content-container">
+            <div className="col-lg-6 col-sm-12 admin-dashboard-chart-container">
+              <div className="admin-dashboard-center-content-item">
+                <h4 className="admin-dashboard-chart-title">Doanh thu trong tuần</h4>
+                <Line key={loading} data={chartConfig} options={chartOptions} className="admin-dashboard-line-chart" />
+              </div>
             </div>
-          ))}
+            <div className="col-lg-6 col-sm-12 admin-dashboard-table-container">
+              <div className="admin-dashboard-center-content-item">
+                <h4 className="admin-dashboard-table-title">Doanh thu đơn hàng trong tuần</h4>
+                <Table key={loading} columns={tableColumns} dataSource={chartData} pagination={false} />
+              </div>
+            </div>
+          </div>
+          <div className="admin-dashboard-review-container">
+            <div className="d-flex justify-content-between">
+              <h4 className="admin-dashboard-review-title" style={{ color: darkenColor('#FEC53D') }}>
+                Đánh giá của khách hàng
+              </h4>
+              <div>
+                <Button className="admin-dash-board-review-button" onClick={handleBackReview} icon={<LeftOutlined />} />
+                <Button
+                  className="admin-dash-board-review-button"
+                  onClick={handleNextReview}
+                  icon={<RightOutlined />}
+                />
+              </div>
+            </div>
+            <div className="row">
+              {reviews.map((review, index) => (
+                <div key={index} className="col-lg-3 col-md-6 col-sm-12 admin-dashboard-review-item-container">
+                  <SmallReviewItem data={review} />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

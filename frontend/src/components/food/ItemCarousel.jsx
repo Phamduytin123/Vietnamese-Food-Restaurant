@@ -27,7 +27,7 @@ const ItemCarousel = ({ foodItems }) => {
           return (
             <div className="food-item-wish" key={index}>
               <div className="d-flex flex-column align-items-center">
-                <img src={item.images[index]} alt={item.name} style={{ width: '200px', height: '150px' }} />
+                <img src={item.images[0]} alt={item.name} style={{ width: '200px', height: '150px' }} />
                 <span className="fw-normal">{item.name}</span>
               </div>
               <p>{item.description}</p>

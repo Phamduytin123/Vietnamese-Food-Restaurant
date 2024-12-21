@@ -199,8 +199,6 @@ export class AdminItemService {
       (itemSize: any) => itemSize.id
     );
 
-    console.log(itemSizeIdsToKeep);
-
     // Xử lý cập nhật hoặc tạo mới các `itemSizes`
     for (const itemSize of itemSizesParse) {
       const { id, size_en, size_vi, price } = itemSize;

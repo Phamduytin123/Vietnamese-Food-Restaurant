@@ -4,13 +4,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PasswordInput from '../input/PasswordInput';
 import { toast } from 'react-toastify';
-import Login from '../../views/pages/login';
 import LoginAPI from '../../api/LoginAPI';
 
 const FormRegister = () => {
   const navigate = useNavigate();
 
-  const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
   const [name, setName] = useState();

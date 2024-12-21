@@ -37,12 +37,13 @@ const FormLogin = () => {
         localStorage.setItem('access_token', accessToken);
         localStorage.setItem('user_info', JSON.stringify(userInfo));
         setAccount(userInfo);
-        if (res.data.role === 'customer') {
-          setTimeout(() => navigate('/'), 1000);
-        } else {
-          console.log(res.data.role);
-          setTimeout(() => navigate('/admin/dashboard'), 1000);
-        }
+        setTimeout(() => {
+          if (res.data.role === 'customer') {
+            navigate('/');
+          } else {
+            navigate('/admin/dashboard');
+          }
+        }, 2000);
       } else {
         setTextError('* Login failed, no access token received');
       }

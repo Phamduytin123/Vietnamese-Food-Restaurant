@@ -8,10 +8,10 @@ export const AVAILABILITY = {
 export const ORDERSTATUS = {
   wait : 'Chờ phê duyệt',
   packaging : 'Đóng gói',
-  cancel : 'hủy',
   'on the road' : 'Đang vận chuyển',
   received : 'Đã nhận',
   done : 'Hoàn thành',
+  cancel : 'hủy',
 };
 
 export const ORDERSTATUSCOLOR = {

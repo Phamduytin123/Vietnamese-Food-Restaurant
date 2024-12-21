@@ -65,8 +65,6 @@ export class OrderController {
     @Lang() lang: string,
     @Body() updateStatusRequest: UpdateStatusDto
   ) {
-    console.log(updateStatusRequest);
-
     return this.orderService.updateStatusOrder(lang, updateStatusRequest);
   }
 

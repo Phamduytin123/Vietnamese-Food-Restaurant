@@ -4,9 +4,9 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Account, Item, LikeItem, Review } from '../../entities';
+import { Item, LikeItem } from '../../entities';
 import { In, Like, MoreThan, Repository } from 'typeorm';
-import { clean, ItemFilterUtils, OrTypeOrm, StringUtils } from '../../common';
+import { clean, ItemFilterUtils, OrTypeOrm } from '../../common';
 
 @Injectable()
 export class ItemService {
@@ -123,7 +123,6 @@ export class ItemService {
 
     // nếu có account thì thêm like
     if (account) {
-      console.log(account);
       const likedList = await this.likeRepository.find({
         where: { accountId: account.id },
       });

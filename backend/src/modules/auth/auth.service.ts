@@ -75,7 +75,6 @@ export class AuthService {
 
   async registerAccount(accountData: RegisterDto) {
     const accountFound = await this.accountService.findByEmail(accountData.email);
-    console.log(accountFound);
 
     if (accountFound) {
       throw new BadRequestException('The email already exists in the system')
@@ -89,7 +88,6 @@ export class AuthService {
       ...accountData,
       isActive: true
     }
-    console.log(newAccount);
 
     const verificationToken = await this.jwtService.signAsync(
       { newAccount: newAccount },
@@ -107,7 +105,6 @@ export class AuthService {
     const payload = await this.jwtService.verifyAsync(token, {
       secret: process.env.JWT_SECRET,
     });
-    console.log(payload.newAccount.isActive);
     let user: Account = await this.accountRepo.save(payload.newAccount);
     if (!user) {
       return new UnauthorizedException('User not found');

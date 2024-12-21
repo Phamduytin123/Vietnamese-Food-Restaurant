@@ -43,7 +43,6 @@ const UploadModal = () => {
   const fetchDetectAPI = async () => {
     const file = fileUploadRef.current.files[0];
     const formData = new FormData();
-    console.log(file);
     formData.append('file', file);
     if (!file) return;
 
@@ -53,7 +52,6 @@ const UploadModal = () => {
       const response = await modelAPI.recognize(formData);
       setFoodInfo(response.data);
       // Xử lý phản hồi từ API
-      console.log(response);
       setModalInfo(true);
       // Đóng modal sau khi tải lên thành công
       // closeModal();

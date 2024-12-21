@@ -4,6 +4,8 @@ import { format } from 'date-fns';
 import { FaArrowRight } from 'react-icons/fa';
 import './HistoryTable.scss';
 import { useNavigate } from 'react-router-dom';
+import { ORDERSTATUS, ORDERSTATUSCOLOR } from '../../constants/enum';
+import { darkenColor } from '../../utils/string';
 
 const columns = (navigate) => [
   {
@@ -21,6 +23,7 @@ const columns = (navigate) => [
         <img
           src={record.orderDetails[0].itemSize.item.images[0]}
           style={{ height: '40px', marginRight: '8px', borderRadius: '3px' }}
+          alt="product"
         />
         {record.orderDetails[0].itemSize.item.name}
         <span style={{ marginLeft: '10px' }}>({record.orderDetails.length})</span>
@@ -33,42 +36,9 @@ const columns = (navigate) => [
     key: 'status',
     align: 'center',
     render: (status) => {
-      let displayText = '';
-      let textClass = '';
-      switch (status) {
-        case 'wait':
-          displayText = 'Đang chờ';
-          textClass = 'text-muted';
-          break;
-        case 'packaging':
-          displayText = 'Đóng gói';
-          textClass = 'text-warning';
-          break;
-        case 'cancel':
-          displayText = 'Đã hủy';
-          textClass = 'text-danger';
-          break;
-        case 'on the road':
-          displayText = 'Đang vận chuyển';
-          textClass = 'text-info';
-          break;
-        case 'received':
-          displayText = 'Đã nhận';
-          textClass = 'text-success';
-          break;
-        case 'done':
-          displayText = 'Hoàn thành';
-          textClass = 'text-primary';
-          break;
-        default:
-          displayText = status;
-          textClass = '';
-          break;
-      }
-
       return (
-        <p className={`fw-bold ${textClass}`} style={{ margin: 0 }}>
-          {displayText}
+        <p className={`fw-bold`} style={{ margin: 0, color: darkenColor(ORDERSTATUSCOLOR[status], 0.5), backgroundColor : ORDERSTATUSCOLOR[status], padding : "5px", borderRadius : "10px" }}>
+          {ORDERSTATUS[status]}
         </p>
       );
     },

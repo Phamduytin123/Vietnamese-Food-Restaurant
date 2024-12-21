@@ -19,6 +19,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Cart, ItemSize } from '../../entities';
 import { I18nService } from 'nestjs-i18n';
 import { ItemAvailabilityEnum, OrderPaymentMethodEnum } from '../../common';
+import { ro } from '@faker-js/faker/.';
 
 @Injectable()
 export class ZaloPaymentService {
@@ -33,11 +34,9 @@ export class ZaloPaymentService {
   ) {}
 
   async createPayment(lang: string, body: OrderRequest, account: Account) {
-    const { carts, totalPrice } = body;
+    const { carts, totalPrice, rootRedirectUrl } = body;
 
     const deployedLink = this.configService.get<string>('DEPLOY_SERVICE_LINK');
-
-    console.log(deployedLink);
 
     const config = {
       app_id: this.configService.get<string>('ZALOPAY_APP_ID'),
@@ -47,7 +46,7 @@ export class ZaloPaymentService {
     };
 
     const embed_data = {
-      redirecturl: this.configService.get<string>('ZALOPAY_REDIRC_URL'),
+      redirecturl: rootRedirectUrl,
     };
 
     const transID = Math.floor(Math.random() * 1000000);
@@ -127,7 +126,6 @@ export class ZaloPaymentService {
       description: `Product - Payment for the order #${transID}`,
       bank_code: '',
       callback_url: `${deployedLink}/zalo-payment/callback`,
-      // callback_url: `https://dc61-2402-800-629c-1fd3-6186-8883-cf12-7a5c.ngrok-free.app/payment/zalo/callback`,
     };
 
     const data = `${config.app_id}|${order.app_trans_id}|${order.app_user}|${order.amount}|${order.app_time}|${order.embed_data}|${order.item}`;
@@ -174,15 +172,13 @@ export class ZaloPaymentService {
         const account = new Account();
         account.id = dataJson.app_user;
 
-        console.log(orderReq, lang, account);
-
         const newOrder = await this.orderService.createOrder(
           lang,
           account,
           orderReq
         );
 
-        console.log(newOrder);
+        console.log("new Order : ", newOrder);
 
         result.return_code = 1;
         result.return_message = 'success';

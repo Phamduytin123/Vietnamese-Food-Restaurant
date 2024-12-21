@@ -30,8 +30,6 @@ const Header = ({ userInfo }) => {
   const { setAccount, account } = useAuth();
   const isAdmin = account && (account.role === 'admin' || account.role === 'staff');
 
-  console.log(isAdmin)
-
   const handleLogout = async () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('user_info');

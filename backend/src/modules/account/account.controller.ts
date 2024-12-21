@@ -40,7 +40,6 @@ export class AccountController {
   @UseGuards(AuthGuard)
   getListAccount() {
     // getListAccount(@CurrentAccount() currentAccount: Account) {
-    // console.log(currentAccount);
     return this.accountService.findAll();
   }
 
@@ -86,8 +85,6 @@ export class AccountController {
     @Body() passwordRequest: PasswordUpdateDto,
     @Lang() lang: string
   ) {
-    console.log(passwordRequest.currentPassword);
-
     return this.accountService.updatePassword(
       currentAccount,
       passwordRequest,
