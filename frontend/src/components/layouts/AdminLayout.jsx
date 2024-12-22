@@ -9,7 +9,6 @@ import {
   InboxOutlined,
   LineChartOutlined,
   LogoutOutlined,
-  SettingOutlined,
   SolutionOutlined,
   TeamOutlined,
   TruckOutlined,
@@ -40,7 +39,6 @@ function AdminLayout(props) {
     ...(account.role === 'admin' ? [getItem('Nhân viên', '/admin/staff-account', <SolutionOutlined />)] : []),
     getItem('Khách hàng', '/admin/customer-account', <TeamOutlined />),
     getItem('Phiếu giảm giá', '/admin/vouchers', <GiftOutlined />),
-    getItem('Cài đặt', '/admin/setting', <SettingOutlined />),
   ];
 
   const onMenuClick = (menuItem) => {

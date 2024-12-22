@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Information
 
-## Available Scripts
+![React version](https://img.shields.io/badge/React-18.3.1-blue.svg)
+![React Router version](https://img.shields.io/badge/React%20Router-6.26.2-orange.svg)
+![Ant Design version](https://img.shields.io/badge/Ant%20Design-5.21.3-blue.svg)
+![Bootstrap version](https://img.shields.io/badge/Bootstrap-5.3.3-purple.svg)
 
-In the project directory, you can run:
+## Description
 
-### `npm start`
+This is the frontend application for the Vietnamese Food Restaurant project, built using **React** and **Bootstrap**. It provides a user-friendly interface for customers to browse items, place orders, and interact with the system. The application is designed to work with the backend API and supports features like authentication, cart management, and payment integration.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Before running the frontend, ensure you have the following installed:
 
-### `npm run build`
+- **Node.js** (v16.x or higher)
+- **npm** (v8.x or higher)
+- **Git** (optional, for cloning the repository)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Clone the repository:**
 
-### `npm run eject`
+   ```
+   git clone https://github.com/your-repo/frontend.git
+   cd frontend
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. **Install dependencies:**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```
+   npm install
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. **Configure environment variables:**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   - Copy the `.env.example` file to a new file named `.env`:
 
-## Learn More
+     ```
+     cp .env.example .env
+     ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   - Update the `.env` file with your backend API URL and other configuration settings:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+     ```env
+     REACT_APP_API_URL=your-api-link
+     REACT_APP_REDIRECT_URL=your-deployed-frontend-link
+     ```
 
-### Code Splitting
+4. **Start the application:**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+   - For development mode (with hot-reloading):
 
-### Analyzing the Bundle Size
+     ```
+     npm start
+     ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+   - For production mode:
 
-### Making a Progressive Web App
+     ```
+     npm run build
+     ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- **User Authentication:** Login, register, and manage user profiles.
+- **Item Browsing:** Browse and search for food items.
+- **Cart Management:** Add, remove, and update items in the cart.
+- **Order Placement:** Place orders and make payments using integrated payment gateways.
+- **Admin Dashboard:** Manage items, orders, and users (if applicable).
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## API Integration
 
-### `npm run build` fails to minify
+The frontend application interacts with the backend API to fetch and send data. The API URL is configured in the `.env` file.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
