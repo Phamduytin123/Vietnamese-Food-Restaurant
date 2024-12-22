@@ -16,7 +16,7 @@ const FormLogin = () => {
   const [email, setEmail] = useState();
   const [textError, setTextError] = useState();
 
-  const { setAccount, account } = useAuth();
+  const { setAccount, setToken } = useAuth();
   const location = useLocation();
   const fetchLogin = async (formData) => {
     try {
@@ -36,6 +36,7 @@ const FormLogin = () => {
       if (accessToken) {
         localStorage.setItem('access_token', accessToken);
         localStorage.setItem('user_info', JSON.stringify(userInfo));
+        setToken(accessToken);
         setAccount(userInfo);
         setTimeout(() => {
           if (res.data.role === 'customer') {
