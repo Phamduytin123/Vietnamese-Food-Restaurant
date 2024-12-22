@@ -12,6 +12,7 @@ const vouchers = [
     startAt: new Date('2024-10-20'),
     endAt: new Date('2025-10-20'),
     count: 100,
+    isDeleted: false,
   },
   {
     name_vi: 'Khuyến mãi mùa hè',
@@ -22,6 +23,7 @@ const vouchers = [
     startAt: new Date('2024-06-01'),
     endAt: new Date('2025-08-31'),
     count: 200,
+    isDeleted: false,
   },
   {
     name_vi: 'Mừng năm mới',
@@ -32,6 +34,7 @@ const vouchers = [
     startAt: new Date('2025-01-01'),
     endAt: new Date('2025-01-31'),
     count: 50,
+    isDeleted: false,
   },
   {
     name_vi: 'Ưu đãi mua sắm cuối tuần',
@@ -42,6 +45,7 @@ const vouchers = [
     startAt: new Date('2025-09-01'),
     endAt: new Date('2025-09-30'),
     count: 150,
+    isDeleted: false,
   },
   {
     name_vi: 'Giảm giá sinh nhật',
@@ -52,6 +56,7 @@ const vouchers = [
     startAt: new Date('2024-11-01'),
     endAt: new Date('2025-11-30'),
     count: 75,
+    isDeleted: false,
   },
   {
     name_vi: 'Ưu đãi lễ Quốc Khánh',
@@ -62,6 +67,7 @@ const vouchers = [
     startAt: new Date('2024-09-02'),
     endAt: new Date('2025-10-02'),
     count: 80,
+    isDeleted: false,
   },
 ];
 
