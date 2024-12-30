@@ -169,9 +169,10 @@ const CheckoutOrder = () => {
         rootRedirectUrl: process.env.REACT_APP_REDIRECT_URL,
       };
       const response = await paymentAPI.payMomo(checkoutData); // Giả sử bạn có API cho Momo
-      if (response.data.return_code === 1) {
-        window.location.href = response.data.order_url;
+      if (response.data.resultCode === 0) {
+        window.location.href = response.data.payUrl;
       } else {
+        console.log(response.data);
         toast.error('Đã có lỗi xảy ra khi xử lý thanh toán Momo');
       }
     } catch (error) {
